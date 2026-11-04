@@ -30,9 +30,9 @@ O app é um cliente da API do Prumo (`~/git/prumo`), equivalente à web: mesmas 
 :core:feature         contrato PrumoFeature
 :core:testing         fakes dos repositórios e regras de teste
 :core:database        (Fase 4) Room
-:feature:finance      cada módulo com sua API (Retrofit), DTOs, repositório e telas;
-:feature:garage       na fundação, só o PrumoFeature, o card do Início e uma tela de
-:feature:reading      "em breve" no lugar do módulo
+:feature:garage       cada módulo com sua API (Retrofit), DTOs, modelos, repositório e
+:feature:finance      telas (data/, model/, ui/). Veículos está pronto (Fase 1); Finanças
+:feature:reading      e Livros ainda têm só o PrumoFeature, o card do Início e o "em breve"
 ```
 
 Plugins de convenção (`build-logic/convention`):
@@ -87,10 +87,14 @@ XScreen ◄──────┘                            └── modelo (:c
 - **ViewModel**: um `StateFlow<XUiState>`; eventos são funções públicas. Texto digitado em estado de snapshot.
 - **Repositório**: chama a API por `apiCall { }`, converte DTO em modelo e devolve `Outcome<T>`; dados que a tela observa ficam num `StateFlow`.
 - **Rede**: DTOs `@Serializable` em snake_case (`@SerialName`), Retrofit com `suspend`.
+- **Módulo** (`:feature:<id>`): `data/` tem a interface Retrofit do módulo (`GarageApi`, caminhos relativos `api/v1/garage/…`), os DTOs e o repositório, que chama a API por `ServerCalls.module(GarageApi::class.java) { … }` (sem sessão, falha como `SessionExpired` sem sair do aparelho); `model/` tem os modelos que as telas usam, e `ui/` as telas. DTOs não saem de `data/`.
+- **Destino com argumento**: a chave do Navigation 3 leva os ids (`VehicleDetail(vehicleId)`), e o ViewModel os recebe por injeção assistida (`@HiltViewModel(assistedFactory = …)` e `hiltViewModel<VM, Factory> { it.create(id) }`), testável pelo construtor.
+- **Depois de gravar**: o repositório do módulo avisa `DataChanges` (`:core:data`) a cada gravação que deu certo. As telas abertas do módulo recarregam (o repositório expõe `changes`) e o Início recarrega os resumos, então um abastecimento salvo na folha sobre o Início já muda o card.
 
 ## Rede
 
 - `NetworkJson`: ignora campos desconhecidos, aceita nulos implícitos e enums desconhecidos (`coerceInputValues`). A v1 só cresce, e o app não quebra quando o servidor ganha campos.
+- Corpos de requisição dos módulos vão como `JsonObject` escrito com nulos explícitos (`GarageWriteJson`): no `PATCH`, campo ausente não muda e `null` limpa (`docs/api.md` do servidor), e o `NetworkJson` omitiria o `null`. Enums viajam como texto; valor desconhecido vira um padrão do modelo (`wireOf`).
 - `ApiFactory.create(baseUrl)` monta (e guarda) um `PrumoApi` para o endereço da sessão. O endereço é dinâmico: trocar de servidor é encerrar a sessão e entrar no outro.
 - `AuthInterceptor`: acrescenta `Authorization: Bearer <token>` só a requisições para o servidor da sessão (mesmo esquema, host, porta e caminho base). Um `401` a uma requisição que levou o token (fora de `/auth/login`) avisa a sessão (`SessionGateway.onUnauthorized`), que é encerrada com o motivo "expirada".
 - `apiCall { }` converte o resultado:
@@ -132,7 +136,7 @@ interface PrumoFeature {
     val icon: Int                        // Material Symbol
     val seed: Long                       // seed do ModuleTheme (ARGB)
     val entryKey: NavKey                 // destino inicial do módulo
-    val quickActions: List<QuickAction>  // "Todas as ações" e a toolbar do Início
+    val quickActions: List<QuickAction>  // "Todas as ações" e a toolbar do Início; com sheet, abrem sobre ele
     fun EntryProviderScope<NavKey>.entries(navigator: Navigator)
     @Composable fun HomeCard(summary: JsonObject, hero: Boolean, onOpen: () -> Unit, modifier: Modifier)
 }
@@ -140,7 +144,8 @@ interface PrumoFeature {
 
 - **Montagem** (`ModuleRegistry` no `:app`): a ordem e os ativos vêm do servidor; o app mostra a interseção. Módulo que o servidor tem e o app não conhece é ignorado; módulo que o app conhece e o servidor não tem (ou que o usuário desativou) fica oculto.
 - **Início**: `GET /api/v1/dashboard` devolve um resumo por módulo ativo, na ordem do usuário, como união discriminada por `module`. `:core:network` entrega cada resumo como `JsonObject`; o `PrumoFeature` do módulo decodifica o seu. O primeiro módulo da ordem é o card hero (D08).
-- **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell. Na fundação, cada módulo só tem a tela "em breve" no lugar do conteúdo.
+- **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell, cada uma dentro do `ModuleTheme` do módulo. Finanças e Livros ainda mostram a tela "em breve".
+- **Ações rápidas**: uma `QuickAction` com `sheet` abre a folha do módulo sobre o Início (abastecimento, km); sem `sheet`, abre `target` (manutenção e troca de óleo abrem o formulário). A folha cria o seu ViewModel no destino que a mostra e recomeça vazia a cada abertura (um id de abertura guardado com `rememberSaveable`, que sobrevive à rotação).
 
 ## Navegação
 

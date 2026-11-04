@@ -54,9 +54,10 @@ interface PrumoFeature {
 data class HomeContext(val currency: String, val today: LocalDate)
 
 /**
- * A quick record of a module ("Registrar abastecimento"): a sheet over the current screen once the
- * module has it; until then it opens the module. [labelRes] is the long label (toolbar, accessibility),
- * [shortLabelRes] the one under the icon in "Todas as ações".
+ * A quick record of a module ("Registrar abastecimento"). With a [sheet], it opens over the current
+ * screen (the Home), which closes it through `onDismiss`; without one, it opens [target]. [labelRes]
+ * is the long label (toolbar, accessibility), [shortLabelRes] the one under the icon in "Todas as
+ * ações".
  */
 data class QuickAction(
     val id: String,
@@ -64,6 +65,7 @@ data class QuickAction(
     @param:StringRes val shortLabelRes: Int,
     @param:DrawableRes val icon: Int,
     val target: NavKey,
+    val sheet: (@Composable (onDismiss: () -> Unit) -> Unit)? = null,
 )
 
 /** What a module may ask of the app's navigation. */

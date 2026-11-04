@@ -20,6 +20,7 @@ object Formats {
 
     private const val DEFAULT_CURRENCY = "BRL"
     private const val CENTS_SCALE = 2
+    private const val UNIT_PRICE_SCALE = 3
     private const val ML_PER_LITRE = 1000.0
 
     private val dayMonthYear = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale)
@@ -37,6 +38,26 @@ object Formats {
         format.minimumFractionDigits = CENTS_SCALE
         format.maximumFractionDigits = CENTS_SCALE
         return format.format(BigDecimal.valueOf(cents, CENTS_SCALE))
+    }
+
+    /**
+     * A price per unit with two or three decimals, as the server rounds it (the price per litre,
+     * G7): `R$ 6,351`, `R$ 6,29`.
+     */
+    fun unitPrice(value: Double, currency: String = DEFAULT_CURRENCY): String {
+        val format = NumberFormat.getCurrencyInstance(Locale)
+        format.currency = currencyOf(currency)
+        format.minimumFractionDigits = CENTS_SCALE
+        format.maximumFractionDigits = UNIT_PRICE_SCALE
+        return format.format(value)
+    }
+
+    /** A decimal with up to [maxDecimals] places (a consumption): `40,3`, `39,73`, `1.234,5`. */
+    fun decimal(value: Double, maxDecimals: Int = 2): String {
+        val format = NumberFormat.getNumberInstance(Locale)
+        format.minimumFractionDigits = 0
+        format.maximumFractionDigits = maxDecimals
+        return format.format(value)
     }
 
     /** A whole number with thousands separators: `12.345`. */

@@ -189,7 +189,7 @@ Mesmos endpoints das telas de celular. Detalhe da transação no tablet: `GET /f
 
 ## 8. Conflitos entre o design e `docs/dominio.md`
 
-Listados, não resolvidos.
+Listados aqui; a decisão de cada um fica em `docs/decisoes.md`, na fase do módulo. Resolvidos até agora: C1–C5 e C9 (D15, Veículos).
 
 | # | Design | Regra | Conflito |
 |---|---|---|---|

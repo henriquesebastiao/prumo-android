@@ -27,6 +27,10 @@ object PrumoIcons {
 
     @DrawableRes val Build = R.drawable.ic_build
 
+    @DrawableRes val Calculate = R.drawable.ic_calculate
+
+    @DrawableRes val CalendarMonth = R.drawable.ic_calendar_month
+
     @DrawableRes val Category = R.drawable.ic_category
 
     @DrawableRes val Celebration = R.drawable.ic_celebration
@@ -67,6 +71,8 @@ object PrumoIcons {
 
     @DrawableRes val Dns = R.drawable.ic_dns
 
+    @DrawableRes val DoNotDisturbOn = R.drawable.ic_do_not_disturb_on
+
     @DrawableRes val DragIndicator = R.drawable.ic_drag_indicator
 
     @DrawableRes val Edit = R.drawable.ic_edit
@@ -89,6 +95,8 @@ object PrumoIcons {
 
     @DrawableRes val Info = R.drawable.ic_info
 
+    @DrawableRes val Inventory2 = R.drawable.ic_inventory_2
+
     @DrawableRes val LibraryAdd = R.drawable.ic_library_add
 
     @DrawableRes val LightMode = R.drawable.ic_light_mode
@@ -109,7 +117,11 @@ object PrumoIcons {
 
     @DrawableRes val MoreHoriz = R.drawable.ic_more_horiz
 
+    @DrawableRes val MoreVert = R.drawable.ic_more_vert
+
     @DrawableRes val NetworkCheck = R.drawable.ic_network_check
+
+    @DrawableRes val Notes = R.drawable.ic_notes
 
     @DrawableRes val OilBarrel = R.drawable.ic_oil_barrel
 
@@ -147,6 +159,8 @@ object PrumoIcons {
 
     @DrawableRes val Speed = R.drawable.ic_speed
 
+    @DrawableRes val Storefront = R.drawable.ic_storefront
+
     @DrawableRes val Subscriptions = R.drawable.ic_subscriptions
 
     @DrawableRes val SwapHoriz = R.drawable.ic_swap_horiz
@@ -156,6 +170,8 @@ object PrumoIcons {
     @DrawableRes val Tune = R.drawable.ic_tune
 
     @DrawableRes val TwoWheeler = R.drawable.ic_two_wheeler
+
+    @DrawableRes val Unarchive = R.drawable.ic_unarchive
 
     @DrawableRes val Visibility = R.drawable.ic_visibility
 

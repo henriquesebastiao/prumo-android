@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.data.repository.DashboardRepository
+import com.henriquesebastiao.prumo.core.data.repository.DataChanges
 import com.henriquesebastiao.prumo.core.data.repository.DevicePreferencesRepository
 import com.henriquesebastiao.prumo.core.data.repository.LoadedDashboard
 import com.henriquesebastiao.prumo.core.data.session.SessionRepository
@@ -68,8 +69,14 @@ class HomeViewModel @Inject constructor(
     private val registry: ModuleRegistry,
     sessions: SessionRepository,
     private val clock: Clock,
+    changes: DataChanges,
 ) : ViewModel() {
     private val status = MutableStateFlow(LoadStatus())
+
+    init {
+        // A record saved in a module (a quick action's sheet over the Home) changes its summary.
+        viewModelScope.launch { changes.changes.collect { dashboard.refresh() } }
+    }
 
     val state: StateFlow<HomeUiState> = combine(
         account.preferences,

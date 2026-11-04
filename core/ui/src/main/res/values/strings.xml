@@ -45,4 +45,12 @@
     <string name="ui_session_expired_body">Entre de novo para continuar.</string>
     <string name="ui_session_expired_sign_in">Entrar</string>
     <string name="ui_session_expired_later">Agora não</string>
+
+    <!-- Fields -->
+    <string name="ui_today_at">Hoje, %1$s</string>
+    <string name="ui_date_at">%1$s, %2$s</string>
+    <string name="ui_pick_time">Horário</string>
+    <string name="ui_ok">OK</string>
+    <string name="ui_cancel">Cancelar</string>
+    <string name="ui_clear">Limpar</string>
 </resources>

@@ -45,4 +45,14 @@ class FormatsTest {
         assertEquals("Terça, 17 de novembro", Formats.weekdayAndDate(LocalDate.of(2026, 11, 17)))
         assertEquals("Sábado, 21 de novembro", Formats.weekdayAndDate(LocalDate.of(2026, 11, 21)))
     }
+
+    @Test
+    fun pricesPerLitreAndConsumptionKeepTheServersDecimals() {
+        assertEquals("R\$\u00A06,351", Formats.unitPrice(6.351))
+        assertEquals("R\$\u00A06,29", Formats.unitPrice(6.29))
+        assertEquals("40,3", Formats.decimal(40.3))
+        assertEquals("39,73", Formats.decimal(39.73))
+        assertEquals("1.234,5", Formats.decimal(1234.5))
+        assertEquals("29,7", Formats.decimal(29.66, maxDecimals = 1))
+    }
 }
