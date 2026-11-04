@@ -2,7 +2,7 @@
 
 Texto da tarefa que iniciou este repositório, guardado para quem continuar o trabalho. O design já foi importado para `design/v1/`: não reimporte.
 
-Algumas premissas do texto não se confirmaram na Etapa 1 (o `CLAUDE.md` deste repositório não existia; o do servidor não tem a seção "Servidor e app juntos"). Veja `docs/plano-etapa-1.md`, seção "Achados".
+Algumas premissas do texto não se confirmaram na Etapa 1: o `CLAUDE.md` deste repositório não existia e o do servidor não tinha a seção "Servidor e app juntos". Os dois foram escritos no início da Etapa 2 (D01 em `docs/decisoes.md`). O plano aprovado da Etapa 1 foi distribuído entre o `CLAUDE.md`, `docs/arquitetura.md`, `docs/decisoes.md` e o `ROADMAP.md`.
 
 ---
 

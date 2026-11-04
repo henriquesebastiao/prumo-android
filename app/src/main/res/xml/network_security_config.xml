@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Prumo is self-hosted: the server is wherever the user runs it, usually a plain-http address on
+  the home network (http://192.168.0.10:8000). The network security config can't allow "private
+  addresses only" (it matches host names, not IP ranges), so cleartext is allowed app-wide, and the
+  server screen warns about a public address without HTTPS. User-installed CAs are trusted, so a
+  reverse proxy with a private CA works without turning certificate checks off.
+  docs/decisoes.md, D14.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

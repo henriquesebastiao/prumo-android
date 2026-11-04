@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": "finance",
+      "version": "0.1.0",
+      "enabled": true,
+      "position": 0
+    },
+    {
+      "id": "garage",
+      "version": "0.1.0",
+      "enabled": true,
+      "position": 1
+    },
+    {
+      "id": "reading",
+      "version": "0.1.0",
+      "enabled": true,
+      "position": 2
+    }
+  ]
+}

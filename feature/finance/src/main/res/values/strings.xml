@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="finance_name">Finanças</string>
+    <string name="finance_description">Contas, cartões e transações</string>
+
+    <string name="finance_action_expense">Lançar despesa</string>
+    <string name="finance_action_expense_short">Despesa</string>
+    <string name="finance_action_income">Lançar receita</string>
+    <string name="finance_action_income_short">Receita</string>
+    <string name="finance_action_transfer">Transferência</string>
+    <string name="finance_action_pay_invoice">Pagar fatura</string>
+
+    <string name="finance_card_total_balance">Saldo total</string>
+    <string name="finance_card_month_expenses">Gastos de %1$s</string>
+    <string name="finance_card_invoice">Fatura %1$s</string>
+    <string name="finance_card_no_invoice">Nenhuma fatura aberta</string>
+    <string name="finance_card_open">Abrir Finanças</string>
+</resources>

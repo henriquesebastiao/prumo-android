@@ -1,2 +1,25 @@
+# Gradle and build
+.gradle/
+build/
+.kotlin/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# IDE and OS
+.idea/
+*.iml
+.DS_Store
+
+# Signing
+*.jks
+*.keystore
+keystore.properties
+
+# Python (scripts/)
+__pycache__/
+
+# Local notes
 commit-message.md
 claude-session.md

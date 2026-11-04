@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Errors by code (docs/api.md, "Erros"): the server's message is only for debugging. -->
+    <string name="ui_error_title">Algo deu errado</string>
+    <string name="ui_error_generic">O servidor respondeu com erro %1$d. Tente de novo em instantes; se continuar, confira os logs da instância.</string>
+    <string name="ui_error_unexpected">A resposta não veio no formato do Prumo. Confira se o endereço aponta para a sua instância.</string>
+    <string name="ui_error_validation">Confira os campos destacados.</string>
+    <string name="ui_error_not_found">Não encontramos este registro. Ele pode ter sido apagado em outro aparelho.</string>
+    <string name="ui_error_conflict">Já existe um registro com esses dados.</string>
+    <string name="ui_error_forbidden">Esta ação não é permitida.</string>
+    <string name="ui_error_rate_limited">Muitas tentativas. Espere um pouco e tente de novo.</string>
+    <string name="ui_error_invalid_credentials">Usuário ou senha incorretos</string>
+    <plurals name="ui_error_login_blocked">
+        <item quantity="one">Muitas tentativas. Tente de novo em %1$d minuto.</item>
+        <item quantity="other">Muitas tentativas. Tente de novo em %1$d minutos.</item>
+    </plurals>
+    <string name="ui_error_wrong_password">A senha atual está incorreta.</string>
+    <string name="ui_error_password_too_short">A senha precisa ter pelo menos %1$s caracteres.</string>
+    <string name="ui_error_password_too_long">A senha pode ter no máximo %1$s caracteres.</string>
+    <string name="ui_error_invalid_name">Informe um nome entre 1 e 80 caracteres.</string>
+    <string name="ui_error_session_expired">Sua sessão expirou. Entre de novo para continuar.</string>
+
+    <!-- No answer, by cause: each says what to check. -->
+    <string name="ui_unreachable_title">Não foi possível conectar</string>
+    <string name="ui_unreachable_unknown_host">O nome %1$s não existe no DNS. Confira se digitou certo e se o aparelho está na mesma rede do servidor.</string>
+    <string name="ui_unreachable_timeout">%1$s não respondeu a tempo. Confira se o servidor está ligado e acessível desta rede.</string>
+    <string name="ui_unreachable_refused">%1$s recusou a conexão. Confira a porta e se a API do Prumo está rodando.</string>
+    <string name="ui_unreachable_certificate">O certificado de %1$s não é válido para este aparelho. Confira o HTTPS do proxy ou instale a CA no Android.</string>
+    <string name="ui_unreachable_other">Não houve resposta de %1$s. Confira a conexão do aparelho e o endereço.</string>
+    <string name="ui_unreachable_short_unknown_host">Endereço não encontrado</string>
+    <string name="ui_unreachable_short_timeout">Tempo esgotado</string>
+    <string name="ui_unreachable_short_refused">Conexão recusada</string>
+    <string name="ui_unreachable_short_certificate">Certificado inválido</string>
+    <string name="ui_unreachable_short_other">Sem resposta</string>
+    <string name="ui_this_server">o servidor</string>
+
+    <!-- States -->
+    <string name="ui_loading">Carregando</string>
+    <string name="ui_retry">Tentar novamente</string>
+    <string name="ui_server_unreachable_title">Servidor inacessível</string>
+    <string name="ui_server_unreachable_body">%1$s não respondeu. Confira se o servidor está ligado e acessível desta rede.</string>
+    <string name="ui_no_connection_title">Sem conexão</string>
+    <string name="ui_no_connection_body">O aparelho está sem internet. Os dados voltam quando a conexão voltar.</string>
+    <string name="ui_session_expired_title">Sessão expirada</string>
+    <string name="ui_session_expired_body">Entre de novo para continuar.</string>
+    <string name="ui_session_expired_sign_in">Entrar</string>
+    <string name="ui_session_expired_later">Agora não</string>
+</resources>

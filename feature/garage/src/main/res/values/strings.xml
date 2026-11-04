@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="garage_name">Veículos</string>
+    <string name="garage_description">Km, abastecimentos e manutenções</string>
+
+    <string name="garage_action_fueling">Registrar abastecimento</string>
+    <string name="garage_action_fueling_short">Abastecimento</string>
+    <string name="garage_action_odometer">Atualizar km</string>
+    <string name="garage_action_maintenance">Registrar manutenção</string>
+    <string name="garage_action_maintenance_short">Manutenção</string>
+    <string name="garage_action_oil_change">Registrar troca de óleo</string>
+    <string name="garage_action_oil_change_short">Troca de óleo</string>
+
+    <string name="garage_card_until_oil_change">até a troca de óleo</string>
+    <string name="garage_card_oil_overdue">Troca de óleo atrasada</string>
+    <string name="garage_card_oil_unknown">Sem troca de óleo registrada</string>
+    <string name="garage_card_no_vehicles">Nenhum veículo</string>
+    <string name="garage_card_add_vehicle">Cadastre um veículo para acompanhar km e óleo.</string>
+    <plurals name="garage_card_vehicles">
+        <item quantity="one">%1$d veículo</item>
+        <item quantity="other">%1$d veículos</item>
+    </plurals>
+    <plurals name="garage_card_days">
+        <item quantity="one">%1$d dia</item>
+        <item quantity="other">%1$d dias</item>
+    </plurals>
+    <string name="garage_status_due_soon">Em breve</string>
+    <string name="garage_status_overdue">Atrasada</string>
+</resources>

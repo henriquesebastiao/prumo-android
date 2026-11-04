@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Prumo</string>
+
+    <!-- First run -->
+    <string name="onboarding_step">Etapa %1$d de %2$d</string>
+    <string name="welcome_body">Finanças, veículos e livros em módulos. Os dados ficam no servidor que você hospeda.</string>
+    <string name="welcome_start">Começar</string>
+    <string name="server_title">Onde está o seu Prumo?</string>
+    <string name="server_body">Informe o endereço da sua instância, como você usa no navegador.</string>
+    <string name="server_field">Endereço do servidor</string>
+    <string name="server_field_hint">Fora da sua rede, use https://.</string>
+    <string name="server_test">Testar</string>
+    <string name="server_clear">Limpar endereço</string>
+    <string name="server_test_again">Testar de novo</string>
+    <string name="server_testing">Testando o servidor</string>
+    <string name="server_found">Servidor encontrado</string>
+    <string name="server_version">Versão</string>
+    <string name="server_version_value">Prumo %1$s</string>
+    <string name="server_latency">Resposta</string>
+    <string name="server_latency_value">%1$d ms</string>
+    <string name="server_continue">Continuar</string>
+    <string name="server_invalid_address">Digite um endereço como prumo.minhacasa.net ou 192.168.0.10:8000.</string>
+    <string name="server_not_prumo_title">Este endereço não é um servidor Prumo</string>
+    <string name="server_not_prumo_body">%1$s respondeu, mas não como o Prumo. Confira a porta e se o endereço é o da sua instância.</string>
+    <string name="server_database_down_title">O banco de dados do servidor não respondeu</string>
+    <string name="server_database_down_body">O Prumo %1$s está no ar, mas sem o PostgreSQL. Confira o container do banco e tente de novo.</string>
+    <string name="server_insecure">Este endereço é público e usa http://: a senha e o token viajam sem criptografia. Prefira https://.</string>
+    <string name="server_local_network_denied">Sem a permissão de rede local, o app não alcança servidores na sua rede de casa. Libere em Configurações do Android › Apps › Prumo.</string>
+    <string name="login_title">Entrar</string>
+    <string name="login_change_server">Trocar</string>
+    <string name="login_username">Usuário</string>
+    <string name="login_password">Senha</string>
+    <string name="login_show_password">Mostrar senha</string>
+    <string name="login_hide_password">Ocultar senha</string>
+    <string name="login_submit">Entrar</string>
+
+    <!-- Home -->
+    <string name="home_title" translatable="false">Prumo</string>
+    <string name="home_greeting_morning">Bom dia</string>
+    <string name="home_greeting_afternoon">Boa tarde</string>
+    <string name="home_greeting_night">Boa noite</string>
+    <string name="home_synced">Tudo sincronizado</string>
+    <string name="home_unreachable">Servidor inacessível</string>
+    <string name="home_session_expired">Sessão expirada</string>
+    <string name="home_settings">Configurações</string>
+    <string name="home_organize_modules">Organizar módulos</string>
+    <string name="home_loading">Carregando o Início</string>
+    <string name="home_cached_at">Dados de hoje, %1$s</string>
+    <string name="home_no_modules_title">Nenhum módulo ativo</string>
+    <string name="home_no_modules_body">Ative pelo menos um módulo para ver o resumo dele aqui.</string>
+    <string name="home_quick_actions">Ações rápidas</string>
+    <string name="home_all_actions">Todas as ações</string>
+    <string name="home_edit_actions">Editar</string>
+    <string name="home_done_editing">Concluir</string>
+    <string name="home_edit_actions_hint">Escolha até 4 ações para a barra do Início.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_account_summary">%1$s · nome e senha</string>
+    <string name="settings_appearance">Aparência</string>
+    <string name="settings_appearance_dynamic">%1$s · cor dinâmica</string>
+    <string name="settings_appearance_static">%1$s</string>
+    <string name="settings_theme_system_summary">Tema do sistema</string>
+    <string name="settings_theme_light_summary">Tema claro</string>
+    <string name="settings_theme_dark_summary">Tema escuro</string>
+    <string name="settings_modules">Módulos</string>
+    <plurals name="settings_modules_summary">
+        <item quantity="one">%1$d ativo · %2$s</item>
+        <item quantity="other">%1$d ativos · %2$s</item>
+    </plurals>
+    <string name="settings_modules_none">Nenhum ativo</string>
+    <string name="settings_sessions">Sessões ativas</string>
+    <plurals name="settings_sessions_summary">
+        <item quantity="one">%1$d dispositivo</item>
+        <item quantity="other">%1$d dispositivos</item>
+    </plurals>
+    <string name="settings_server">Servidor</string>
+    <string name="settings_server_connected">%1$s · conectado</string>
+    <string name="settings_server_unreachable">%1$s · inacessível</string>
+    <string name="settings_sign_out">Sair</string>
+    <string name="settings_sign_out_summary">Encerra a sessão neste aparelho</string>
+    <string name="settings_version">Prumo para Android %1$s</string>
+    <string name="sign_out_title">Sair do Prumo?</string>
+    <string name="sign_out_body">Você vai precisar entrar de novo neste aparelho. Nada é apagado do servidor.</string>
+
+    <string name="account_title">Conta</string>
+    <string name="account_profile">Perfil</string>
+    <string name="account_name">Nome</string>
+    <string name="account_username">Usuário</string>
+    <string name="account_username_hint">Definido no servidor; não pode ser alterado.</string>
+    <string name="account_save_name">Salvar nome</string>
+    <string name="account_name_saved">Nome salvo</string>
+    <string name="account_password">Trocar senha</string>
+    <string name="account_current_password">Senha atual</string>
+    <string name="account_new_password">Nova senha</string>
+    <string name="account_new_password_hint">Pelo menos 8 caracteres.</string>
+    <string name="account_confirm_password">Confirmar nova senha</string>
+    <string name="account_passwords_differ">As senhas não conferem.</string>
+    <string name="account_save_password">Salvar nova senha</string>
+    <string name="account_password_saved">Senha trocada. As outras sessões foram encerradas.</string>
+    <string name="account_password_note">Trocar a senha encerra as outras sessões.</string>
+
+    <string name="appearance_title">Aparência</string>
+    <string name="appearance_theme">Tema</string>
+    <string name="appearance_theme_system">Sistema</string>
+    <string name="appearance_theme_light">Claro</string>
+    <string name="appearance_theme_dark">Escuro</string>
+    <string name="appearance_pure_black">Preto puro</string>
+    <string name="appearance_pure_black_summary">No tema escuro, fundo preto para telas OLED.</string>
+    <string name="appearance_dynamic_color">Cor dinâmica</string>
+    <string name="appearance_dynamic_color_summary">Usa as cores do papel de parede (Android 12+). Cada módulo mantém a sua cor.</string>
+    <string name="appearance_dynamic_color_unavailable">Disponível no Android 12 ou mais novo.</string>
+    <string name="appearance_note">O tema vale para a sua conta, na web e nos outros aparelhos. Preto puro e cor dinâmica valem só para este aparelho. O tamanho do texto segue a configuração de fonte do Android.</string>
+
+    <string name="modules_title">Módulos</string>
+    <string name="modules_body">Arraste pela alça para mudar a ordem no Início e em Todas as ações. Desativar esconde o módulo do app; os dados continuam no servidor.</string>
+    <string name="modules_disabled">Desativado · dados mantidos no servidor</string>
+    <string name="modules_enabled">Módulo ativo</string>
+    <string name="modules_drag">Arrastar %1$s</string>
+    <string name="modules_move_up">Mover para cima</string>
+    <string name="modules_move_down">Mover para baixo</string>
+    <string name="modules_not_in_app">Instalado no servidor; chega ao app numa versão futura.</string>
+
+    <string name="sessions_title">Sessões ativas</string>
+    <string name="sessions_this_device">%1$s · este aparelho</string>
+    <string name="sessions_unknown_device">Dispositivo sem nome</string>
+    <string name="sessions_app">App Android</string>
+    <string name="sessions_web">Web</string>
+    <string name="sessions_active_now">%1$s · ativo agora</string>
+    <string name="sessions_last_used">%1$s · %2$s</string>
+    <string name="sessions_today">hoje, %1$s</string>
+    <string name="sessions_revoke">Encerrar sessão</string>
+    <string name="sessions_revoke_title">Encerrar esta sessão?</string>
+    <string name="sessions_revoke_body">%1$s vai precisar entrar de novo.</string>
+    <string name="sessions_revoke_others">Encerrar as outras sessões</string>
+    <string name="sessions_revoke_others_title">Encerrar as outras sessões?</string>
+    <string name="sessions_revoke_others_body">Todos os outros aparelhos e navegadores vão precisar entrar de novo. Este aparelho continua conectado.</string>
+    <string name="sessions_revoked">Sessão encerrada</string>
+
+    <string name="server_settings_title">Servidor</string>
+    <string name="server_settings_connected">Conectado</string>
+    <string name="server_settings_test">Testar conexão</string>
+    <string name="server_settings_change">Trocar servidor</string>
+    <string name="server_settings_change_note">Trocar de servidor encerra a sessão neste aparelho.</string>
+    <string name="server_settings_change_title">Trocar de servidor?</string>
+    <string name="server_settings_change_body">A sessão neste aparelho será encerrada e você vai escolher outro endereço. Nada é apagado do servidor atual.</string>
+</resources>

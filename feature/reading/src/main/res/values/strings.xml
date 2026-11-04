@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reading_name">Livros</string>
+    <string name="reading_description">Estante, leituras e anotações</string>
+
+    <string name="reading_action_progress">Atualizar página do livro</string>
+    <string name="reading_action_progress_short">Atualizar página</string>
+    <string name="reading_action_note">Nova anotação</string>
+    <string name="reading_action_add_book">Adicionar livro</string>
+
+    <string name="reading_card_percent">%1$d%%</string>
+    <string name="reading_card_pages">pág. %1$d de %2$d</string>
+    <string name="reading_card_nothing">Nenhum livro em leitura</string>
+    <plurals name="reading_card_books">
+        <item quantity="one">%1$d livro na estante</item>
+        <item quantity="other">%1$d livros na estante</item>
+    </plurals>
+</resources>

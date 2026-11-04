@@ -1,0 +1,13 @@
+{
+  "theme": "system",
+  "locale": "pt-BR",
+  "timezone": "America/Sao_Paulo",
+  "currency": "BRL",
+  "enabled_modules": [
+    "finance",
+    "garage",
+    "reading"
+  ],
+  "created_at": "2025-11-19T12:00:00.236410Z",
+  "updated_at": "2025-11-19T12:00:00.236422Z"
+}
