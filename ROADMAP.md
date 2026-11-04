@@ -1,20 +1,21 @@
 # Roadmap
 
-> **Proposta da Etapa 1, aguardando aprovação.**
-
 As fases são executadas em ordem e cada uma termina com uma revisão antes da próxima começar. Um item só é marcado quando `./gradlew build detekt spotlessCheck` está verde, a tela foi conferida no emulador contra uma instância de desenvolvimento do servidor e comparada com `design/v1/`, e a documentação afetada foi atualizada. Itens marcados com **(servidor)** são feitos em `~/git/prumo`, seguindo o `CLAUDE.md` de lá.
 
 ## Fase 0 — Fundação
 
 ### Repositório e ferramentas
-- [ ] `design/v1/` com a exportação do Claude Design e `design/README.md` indicando a versão ativa
-- [ ] `CLAUDE.md` do app (stack, módulos, arquitetura, regras, "Servidor e app juntos", resposta final)
-- [ ] `build-logic` com plugins de convenção e `gradle/libs.versions.toml`
-- [ ] Módulos `:core:*`, `:feature:*` (vazios) e `:app`; regra de build que impede `:feature:*` de depender de outro `:feature:*`
-- [ ] detekt (com compose-rules), Spotless (ktlint), Android lint, `.editorconfig`, `.gitignore` com `commit-message.md`
-- [ ] CI no GitHub Actions: Spotless, detekt, build, testes de unidade
-- [ ] `docs/arquitetura.md` e `docs/decisoes.md` do app
-- [ ] **(servidor)** Seção "Servidor e app juntos" no `CLAUDE.md` e `commit-message.md` no `.gitignore`
+- [x] `design/v1/` com a exportação do Claude Design e `design/README.md` indicando a versão ativa
+- [x] `CLAUDE.md` do app (stack, módulos, arquitetura, regras, "Servidor e app juntos", resposta final)
+- [x] `build-logic` com plugins de convenção e `gradle/libs.versions.toml`
+- [x] Módulos `:core:*`, `:feature:*` (vazios) e `:app`; regra de build que impede `:feature:*` de depender de outro `:feature:*`
+- [x] detekt (com compose-rules), Spotless (ktlint), Android lint, `.editorconfig`, `.gitignore` com `commit-message.md`
+- [x] CI no GitHub Actions: Spotless, detekt, build, testes de unidade
+- [x] `docs/arquitetura.md` e `docs/decisoes.md` do app
+- [x] **(servidor)** Seção "Servidor e app juntos" no `CLAUDE.md` e `commit-message.md` no `.gitignore`
+- [x] **(servidor)** `service: "prumo"` no `GET /api/health`, para reconhecer um servidor Prumo (A5)
+
+> **Fundação implementada em 2026-11-04 (sessão na nuvem, sem Android SDK local).** Os itens de tela abaixo estão implementados e passam no CI (build, lint, testes de unidade e Robolectric), mas só são marcados depois da conferência no emulador contra `make dev` e da comparação com `design/v1/`, que ficam com o mantenedor. "Vem aí", "Atividade recente" e a exportação dos dados ainda não foram feitos.
 
 ### Design system (`:core:designsystem`)
 - [ ] Tema: `MaterialExpressiveTheme` + `MotionScheme.expressive()`, esquemas claro, escuro e preto puro do seed do app, cor dinâmica, success/warning harmonizados
@@ -59,6 +60,7 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [ ] Cartões: lista, detalhe com faturas, pagar fatura
 - [ ] Paridade com a web, sem prancha: cartão (cadastro e edição), compra parcelada, ajuste de saldo, detalhe de conta, arquivados, excluir sem uso, série de 6 meses e receitas por categoria
 - [ ] **(servidor)** Totais por dia na lista de transações, se aprovado (A6)
+- [ ] **(servidor)** Decidir percentual com uma casa (A7), origem do registro (A8) e status da fatura na transação (A10)
 - [ ] Card do Início e ações rápidas
 - [ ] Novos componentes: seletor de período, seletor de cor, gráfico por categoria
 - [ ] Revisão visual contra `design/v1/`

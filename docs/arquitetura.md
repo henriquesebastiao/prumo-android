@@ -1,0 +1,175 @@
+# Arquitetura
+
+O app é um cliente da API do Prumo (`~/git/prumo`), equivalente à web: mesmas funcionalidades, mesmos números, nenhuma regra de negócio. Tudo o que é derivado (saldos, faturas, status do óleo, consumo, progresso de leitura) vem pronto da API.
+
+## Visão geral
+
+```
+ App Android ──HTTP(S)──► servidor do usuário (nginx) ──/api──► API FastAPI ──► PostgreSQL
+               bearer                                    (mesma API da web)
+```
+
+- O endereço do servidor é escolhido pelo usuário no primeiro acesso (`http://192.168.0.10:8000`, `https://prumo.exemplo.com`) e pode ser trocado em Configurações › Servidor.
+- O app só fala com esse servidor e só manda o token para ele.
+
+## Módulos Gradle
+
+```
+:app                  Activity, Application (Hilt), shell, telas de sistema
+                      (primeiro acesso, Início, Configurações), montagem dos PrumoFeature
+:core:model           JVM puro: Outcome/AppError, códigos de erro, dinheiro, km, litros,
+                      datas e endereço do servidor; modelos do sistema
+:core:network         JVM puro: OkHttp + Retrofit + kotlinx.serialization, DTOs do sistema,
+                      AuthInterceptor, ApiFactory (endereço dinâmico), ServerProbe (health),
+                      apiCall (erros pelo code), o resumo do Início como JsonObject
+:core:data            sessão (Tink + DataStore), preferências do aparelho, repositórios do
+                      sistema (servidor, conta, preferências, módulos, sessões, Início)
+:core:designsystem    PrumoTheme, ModuleTheme, tokens, ícones, componentes, @PhonePreviews
+:core:ui              estados (carregando, vazio, erro, sem conexão, servidor inacessível,
+                      sessão expirada), textos de erro por code, formatadores Compose
+:core:feature         contrato PrumoFeature
+:core:testing         fakes dos repositórios e regras de teste
+:core:database        (Fase 4) Room
+:feature:finance      cada módulo com sua API (Retrofit), DTOs, repositório e telas;
+:feature:garage       na fundação, só o PrumoFeature, o card do Início e uma tela de
+:feature:reading      "em breve" no lugar do módulo
+```
+
+Plugins de convenção (`build-logic/convention`):
+
+| Plugin | Para |
+|---|---|
+| `prumo.jvm.library` | `:core:model`, `:core:network` (Kotlin JVM, bytecode 17, JUnit) |
+| `prumo.android.library` | módulos Android (compileSdk/targetSdk 37, minSdk 26, JUnit, Turbine) |
+| `prumo.android.compose` | Compose (BOM, compilador, tooling dos previews) |
+| `prumo.android.feature` | `:feature:*`: biblioteca Android + Compose + Hilt + as dependências do contrato, e a regra que impede depender de outro `:feature:*` |
+| `prumo.android.application` | `:app` |
+| `prumo.hilt` | Hilt com KSP (em módulo JVM, `hilt-core`; em Android, `hilt-android` e o plugin do Hilt) |
+
+### Regras de dependência
+
+- `:app` → tudo.
+- `:feature:X` → `:core:feature`, `:core:designsystem`, `:core:ui`, `:core:data`, `:core:network`, `:core:model`. Nunca outro `:feature:*` (o `prumo.android.feature` falha o build, como o import-linter no servidor).
+- `:core:data` → `:core:network`, `:core:model` (e `:core:database` na Fase 4).
+- `:core:network` → `:core:model`. `:core:ui` → `:core:designsystem`, `:core:model`. `:core:feature` → `:core:designsystem`, `:core:model`.
+- `:core:model` e `:core:network` não importam nada do Android.
+- Repositórios expõem `Flow`/`StateFlow` desde já, para o Room entrar na Fase 4 sem mudar as telas.
+
+## Dependências
+
+Versões só em `gradle/libs.versions.toml`, conferidas em 2026-11-04 (Google Maven pelas notas de versão do AndroidX, Maven Central e Gradle Plugin Portal). Confira as estáveis atuais antes de mudar uma.
+
+| Grupo | Bibliotecas |
+|---|---|
+| Build | Gradle 9.8.2 · AGP 9.5.0 (Kotlin embutido) · Kotlin 2.4.21 · KSP 2.3.13 · compileSdk e targetSdk 37 · minSdk 26 · bytecode 17 |
+| Interface | Compose BOM 2026.09.00 · material3 e navigation-suite 1.5.0-beta02 (D03) · material3-adaptive 1.3.0 · Navigation 3 1.2.0 · lifecycle 2.11.0 (com `lifecycle-viewmodel-navigation3`) · activity-compose 1.13.0 · core-ktx 1.19.1 · core-splashscreen 1.2.0 · material-color-utilities (`com.materialkolor`) 5.0.1 |
+| Injeção e dados | Hilt 2.60.1 · hilt-lifecycle-viewmodel-compose 1.4.0 · OkHttp 5.5.1 · Retrofit 3.0.0 + converter kotlinx-serialization · kotlinx-serialization-json 1.12.0 · coroutines 1.11.0 · DataStore 1.3.0 · Tink 1.24.0 |
+| Previstas por fase | Coil 3.6.3 (Livros) · Paging 3.5.3 (Finanças) · Room 2.8.5 e WorkManager 2.12.0 (offline) · Glance 1.2.0 (widget) · material3-adaptive-navigation3 1.3.0 (telas grandes) |
+| Qualidade | detekt 1.23.8 (a 2.0 ainda é alpha) + compose-rules 0.6.8 · Spotless 8.11.0 + ktlint 1.8.0 · JUnit 4.13.2 · Turbine 1.2.1 · Robolectric 4.17 · MockK 1.14.11 (só onde um fake for difícil) · mockwebserver3 5.5.1 |
+
+Sem biblioteca para UUID v7 (`kotlin.uuid.Uuid.generateV7()`, da stdlib) nem para datas (`java.time`). Ícones: Material Symbols Rounded convertidos em vetores (`scripts/material_symbol.py`), sem a fonte de ícones.
+
+## Ambiente
+
+- Gradle roda com JDK 17 ou 21. Na máquina do mantenedor, `JAVA_HOME=/usr/lib/jvm/java-17-openjdk` (o padrão do sistema é o 27, novo demais para o Gradle 9.8).
+- Android SDK em `~/Android/Sdk` (`sdk.dir` no `local.properties`, fora do git), com `platforms;android-37`, `build-tools;37.0.0` e `platform-tools`. Emulador `Pixel_9` com API 37.
+- O CI (GitHub Actions) roda `./gradlew spotlessCheck detekt` e `./gradlew build` em cada pull request para a `main`.
+
+## Camadas
+
+```
+XRoute ──► XViewModel ──► Repository (:core:data) ──► PrumoApi (:core:network)
+  │            │ StateFlow<XUiState>        │ Outcome<T>          │ DTO
+XScreen ◄──────┘                            └── modelo (:core:model) ◄── map
+```
+
+- **Tela**: `XRoute` pega o ViewModel (`hiltViewModel()`) e coleta o estado; `XScreen(state, callbacks, modifier)` é sem estado, e é o que previews e testes usam.
+- **ViewModel**: um `StateFlow<XUiState>`; eventos são funções públicas. Texto digitado em estado de snapshot.
+- **Repositório**: chama a API por `apiCall { }`, converte DTO em modelo e devolve `Outcome<T>`; dados que a tela observa ficam num `StateFlow`.
+- **Rede**: DTOs `@Serializable` em snake_case (`@SerialName`), Retrofit com `suspend`.
+
+## Rede
+
+- `NetworkJson`: ignora campos desconhecidos, aceita nulos implícitos e enums desconhecidos (`coerceInputValues`). A v1 só cresce, e o app não quebra quando o servidor ganha campos.
+- `ApiFactory.create(baseUrl)` monta (e guarda) um `PrumoApi` para o endereço da sessão. O endereço é dinâmico: trocar de servidor é encerrar a sessão e entrar no outro.
+- `AuthInterceptor`: acrescenta `Authorization: Bearer <token>` só a requisições para o servidor da sessão (mesmo esquema, host, porta e caminho base). Um `401` a uma requisição que levou o token (fora de `/auth/login`) avisa a sessão (`SessionGateway.onUnauthorized`), que é encerrada com o motivo "expirada".
+- `apiCall { }` converte o resultado:
+
+| Falha | `AppError` |
+|---|---|
+| Resposta com `{"error": {…}}` | `Api(status, code, message, details, fields, retryAfterSeconds)` |
+| `401` com `auth.required` ou `auth.session_expired` | `SessionExpired` |
+| Sem conexão, DNS, recusa, tempo esgotado, TLS | `Unreachable(cause)`: `UnknownHost`, `Refused`, `Timeout`, `Certificate`, `Other` (cada causa tem o seu texto do que conferir) |
+| Corpo que não é JSON do Prumo, `5xx` sem `error` | `Unexpected` |
+
+- Os textos são do app: `errorText(error)` em `:core:ui` traduz cada `code` conhecido (lista em `ErrorCodes`) e cai num texto genérico pelo status quando não conhece o `code`. `auth.rate_limited` usa o `Retry-After`.
+- `ServerProbe.check(input)`: transforma o que o usuário digitou em endereços candidatos (`ServerAddress`: sem esquema, tenta `https://` e depois `http://`; IP ou `.local` tenta `http://` primeiro), chama `GET /api/health` em cada um com um cliente sem token e mede o tempo de resposta. Resultado (`ServerCheck`):
+
+| Resposta | Resultado |
+|---|---|
+| `200` com `service: "prumo"` (ou sem `service`, com `status`, `database`, `version`: servidores anteriores à D44 do servidor) | `Found(baseUrl, version, latência)` |
+| `503` com o formato do health | `DatabaseDown(baseUrl, version)` |
+| Outra resposta (HTML, outro JSON, `404`) | `NotPrumo` |
+| Sem resposta | `Unreachable(baseUrl, cause)` |
+| Texto que não forma um endereço | `InvalidAddress` |
+
+## Sessão
+
+- Login: `POST /api/v1/auth/login` com `client: "app"` e `device_name` (o nome do aparelho em Configurações do Android, `Settings.Global.DEVICE_NAME`, ou o modelo). A resposta traz `token` e `expires_at`.
+- O token é cifrado com AES-256-GCM (Tink) sob uma chave do Android Keystore e guardado no DataStore com o endereço do servidor e o usuário (`SessionStore`). Nada da sessão vai para o backup (`data_extraction_rules.xml`): a chave do Keystore não sai do aparelho.
+- `SessionRepository.state: StateFlow<SessionState>`: `Loading` (lendo o DataStore, a splash fica na tela), `SignedOut(reason)` ou `SignedIn(session)`. O `AuthInterceptor` lê o token desse estado em memória.
+- Sair: `POST /auth/logout` (o erro de rede não impede sair) e limpeza local. Sessão expirada (401): limpeza local e diálogo; o login seguinte volta ao mesmo servidor.
+- Chave do Keystore perdida ou trocada (backup restaurado em outro aparelho): o token não decifra, a sessão é descartada e o app volta ao login.
+
+## Módulos do Prumo no app
+
+O servidor tem a lista de módulos instalados e a preferência de cada usuário (`GET /api/v1/modules`: `id`, `enabled`, `position`). O app tem os `PrumoFeature` que conhece (um por `:feature:*`, registrados no Hilt com `@IntoSet`).
+
+```kotlin
+interface PrumoFeature {
+    val id: String                       // "garage": o mesmo id do servidor
+    val nameRes: Int                     // "Veículos"
+    val icon: Int                        // Material Symbol
+    val seed: Long                       // seed do ModuleTheme (ARGB)
+    val entryKey: NavKey                 // destino inicial do módulo
+    val quickActions: List<QuickAction>  // "Todas as ações" e a toolbar do Início
+    fun EntryProviderScope<NavKey>.entries(navigator: Navigator)
+    @Composable fun HomeCard(summary: JsonObject, hero: Boolean, onOpen: () -> Unit, modifier: Modifier)
+}
+```
+
+- **Montagem** (`ModuleRegistry` no `:app`): a ordem e os ativos vêm do servidor; o app mostra a interseção. Módulo que o servidor tem e o app não conhece é ignorado; módulo que o app conhece e o servidor não tem (ou que o usuário desativou) fica oculto.
+- **Início**: `GET /api/v1/dashboard` devolve um resumo por módulo ativo, na ordem do usuário, como união discriminada por `module`. `:core:network` entrega cada resumo como `JsonObject`; o `PrumoFeature` do módulo decodifica o seu. O primeiro módulo da ordem é o card hero (D08).
+- **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell. Na fundação, cada módulo só tem a tela "em breve" no lugar do conteúdo.
+
+## Navegação
+
+- Navigation 3: a pilha (`NavBackStack<NavKey>`) é do `:app`; `NavDisplay` com os decoradores de estado salvo e de `ViewModelStore` por entrada.
+- Primeiro acesso: Boas-vindas → Servidor → Login, numa pilha própria. Ao entrar, a pilha vira `[Início]`.
+- Celular: o Início é a raiz, sem barra de navegação. Módulos abrem pelos cards; Configurações, pela engrenagem. A toolbar flutuante muda por destino.
+- Folhas de registro rápido (`ModalBottomSheet`) não são destinos.
+- Telas grandes (Fase 5): `NavigationSuiteScaffold` com rail a partir de 600 dp e lista e detalhe.
+
+## Tema
+
+- `PrumoTheme(themeMode, dynamicColor, pureBlack)`: `MaterialExpressiveTheme` com `MotionScheme.expressive()`. Esquema `SchemeTonalSpot` (contraste 0) do seed do app `#6A4F86`, calculado com material-color-utilities; cor dinâmica no Android 12+ quando ligada (padrão); preto puro escurece as superfícies em Oklab.
+- O tema vem da preferência do servidor (`theme`: `system`, `light`, `dark`); preto puro e cor dinâmica são do aparelho (DataStore).
+- `ModuleTheme(seed)`: esquema aninhado gerado do seed do módulo, harmonizado com o `primary` do tema quando a cor dinâmica está ligada.
+- success `#3B8A3E` e warning `#B5651D`, harmonizados com o seed, em `PrumoTheme.extendedColors`.
+
+## Testes e verificação
+
+| O quê | Onde | Como |
+|---|---|---|
+| Dinheiro, datas, endereço do servidor, erros | `:core:model` | JUnit no JVM |
+| Bearer, 401, erros pelo `code`, health, união do Início | `:core:network` | MockWebServer com respostas reais gravadas (test fixtures, `fixtures/`) |
+| DTOs × contrato | `:core:network` (`ContractTest`) | cópia de `openapi.json`: campos obrigatórios e enums de cada DTO |
+| Sessão, repositórios | `:core:data` | fakes e Robolectric (Keystore fora do teste) |
+| ViewModels | `:app`, `:feature:*` | Turbine + fakes de `:core:testing` |
+| Telas | `:app` | Robolectric sobre os `XScreen` |
+| Aparência | todos os componentes e telas | `@PhonePreviews` (claro, escuro, 360 e 412 dp) |
+| Contra o servidor | emulador `Pixel_9` (API 37) | `make dev` e `make user` em `~/git/prumo`, `http://10.0.2.2:8000` |
+
+Fluxos do teste real: servidor errado e certo, senha errada, login, Início, Configurações, sessão expirada (revogar a sessão do app pela web), servidor inacessível (parar a API), token cifrado (`adb shell run-as com.henriquesebastiao.prumo.debug cat files/datastore/session.preferences_pb`). Para dados iguais aos das pranchas, `backend/scripts/e2e_server.py` (D30 do servidor) na porta 8001.
+
+Comparação visual: `design/v1/` não tem PNGs. As pranchas são renderizadas a 412 × 915 com Playwright em `design/renders/v1/` (fora da `v1/`) e comparadas com capturas do `adb exec-out screencap`.

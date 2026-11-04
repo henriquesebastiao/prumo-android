@@ -1,0 +1,394 @@
+{
+  "modules": [
+    {
+      "module": "finance",
+      "month": "2026-11",
+      "total_balance_cents": 715427,
+      "accounts": [
+        {
+          "account": {
+            "id": "01a1ea85-ce00-762e-9401-ca0af7e09b96",
+            "name": "Nubank",
+            "kind": "checking",
+            "color": "violet",
+            "icon": "landmark"
+          },
+          "balance_cents": 481237
+        },
+        {
+          "account": {
+            "id": "01a1ea85-ce03-7300-9d7d-413b6888d90c",
+            "name": "Inter",
+            "kind": "checking",
+            "color": "orange",
+            "icon": "landmark"
+          },
+          "balance_cents": 215690
+        },
+        {
+          "account": {
+            "id": "01a1ea85-ce04-7678-b13c-ac3fc30d258a",
+            "name": "Carteira",
+            "kind": "cash",
+            "color": "green",
+            "icon": "wallet"
+          },
+          "balance_cents": 18500
+        }
+      ],
+      "income_cents": 530000,
+      "expense_cents": 256419,
+      "expense_percent": 48,
+      "expenses_by_category": [
+        {
+          "category": {
+            "id": "019a9bfc-62f1-76c7-8b8c-78c9635b25d1",
+            "name": "Moradia",
+            "kind": "expense",
+            "color": "blue",
+            "icon": "house"
+          },
+          "amount_cents": 138630,
+          "percent": 54,
+          "transactions_count": 3
+        },
+        {
+          "category": {
+            "id": "019a9bfc-62f1-76c7-8b8c-78c89e4b35b9",
+            "name": "Alimentação",
+            "kind": "expense",
+            "color": "orange",
+            "icon": "utensils"
+          },
+          "amount_cents": 74285,
+          "percent": 29,
+          "transactions_count": 9
+        },
+        {
+          "category": {
+            "id": "019a9bfc-62f1-76c7-8b8c-78cba55a4732",
+            "name": "Combustível",
+            "kind": "expense",
+            "color": "gray",
+            "icon": "fuel"
+          },
+          "amount_cents": 27104,
+          "percent": 11,
+          "transactions_count": 3
+        },
+        {
+          "category": {
+            "id": "019a9bfc-62f1-76c7-8b8c-78ce4249c848",
+            "name": "Lazer",
+            "kind": "expense",
+            "color": "pink",
+            "icon": "ticket"
+          },
+          "amount_cents": 16400,
+          "percent": 6,
+          "transactions_count": 4
+        }
+      ],
+      "next_invoice": {
+        "card": {
+          "id": "01a1ea85-ce08-7192-8496-0e166f11c2c7",
+          "name": "Nubank",
+          "color": "green"
+        },
+        "limit_cents": 500000,
+        "available_limit_cents": 371540,
+        "invoice": {
+          "closing_on": "2026-12-03",
+          "due_on": "2026-12-10",
+          "starts_on": "2026-11-03",
+          "ends_on": "2026-12-02",
+          "amount_cents": 128460,
+          "paid_cents": 0,
+          "remaining_cents": 128460,
+          "status": "open",
+          "transactions_count": 12,
+          "last_payment_on": null,
+          "last_payment_account": null
+        }
+      }
+    },
+    {
+      "module": "garage",
+      "vehicles_count": 2,
+      "next_due": {
+        "vehicle": {
+          "id": "019a9bfc-62f6-7580-bea2-f7c49820d997",
+          "name": "Honda CG 160 Fan",
+          "kind": "motorcycle"
+        },
+        "status": "ok",
+        "primary": "km",
+        "remaining_km": 220,
+        "remaining_days": 65,
+        "used_percent": 78,
+        "due_on": "2026-11-25"
+      },
+      "vehicles": [
+        {
+          "vehicle": {
+            "id": "019a9bfc-62f6-7580-bea2-f7c49820d997",
+            "name": "Honda CG 160 Fan",
+            "kind": "motorcycle"
+          },
+          "current_km": 18420,
+          "oil_primary": "km",
+          "oil_status": "ok",
+          "remaining_km": 220,
+          "remaining_days": 65,
+          "used_percent": 78
+        },
+        {
+          "vehicle": {
+            "id": "019aa122-be00-72e6-b3fd-3a22cd30fed4",
+            "name": "Fiat Strada Freedom",
+            "kind": "car"
+          },
+          "current_km": 52300,
+          "oil_primary": "date",
+          "oil_status": "ok",
+          "remaining_km": 4600,
+          "remaining_days": 18,
+          "used_percent": 95
+        }
+      ],
+      "month_fuel_cents": 27520
+    },
+    {
+      "module": "reading",
+      "books_count": 3,
+      "current": {
+        "book": {
+          "id": "01a17a8c-a4c0-72f8-bfd2-17208bb026c3",
+          "title": "Código Limpo",
+          "author": "Robert C. Martin"
+        },
+        "current_page": 212,
+        "total_pages": 425,
+        "progress_percent": 50,
+        "has_cover": false,
+        "cover_updated_at": null
+      },
+      "shelf": [
+        {
+          "book": {
+            "id": "01a0dacc-0980-77fe-bb86-bf09c4fc4255",
+            "title": "Dom Casmurro",
+            "author": "Machado de Assis"
+          },
+          "status": "read",
+          "total_pages": 256,
+          "finished_on": "2026-10-18"
+        },
+        {
+          "book": {
+            "id": "01a19e46-c300-75b1-9879-fd182f3d8e30",
+            "title": "O Hobbit",
+            "author": "J.R.R. Tolkien"
+          },
+          "status": "want_to_read",
+          "total_pages": 336,
+          "finished_on": null
+        }
+      ]
+    }
+  ],
+  "upcoming": [
+    {
+      "module": "garage",
+      "kind": "garage.oil_change",
+      "on": "2026-11-25",
+      "subject": "Honda CG 160 Fan",
+      "entity_id": "019a9bfc-62f6-7580-bea2-f7c49820d997",
+      "data": {
+        "basis": "km_pace",
+        "status": "ok",
+        "remaining_km": 220,
+        "remaining_days": 65,
+        "pace_km_per_day": 29.7,
+        "interval_months": 3
+      }
+    },
+    {
+      "module": "finance",
+      "kind": "finance.invoice_closing",
+      "on": "2026-12-03",
+      "subject": "Nubank",
+      "entity_id": "01a1ea85-ce08-7192-8496-0e166f11c2c7",
+      "data": {
+        "amount_cents": 128460,
+        "available_limit_cents": 371540
+      }
+    },
+    {
+      "module": "garage",
+      "kind": "garage.oil_change",
+      "on": "2026-12-05",
+      "subject": "Fiat Strada Freedom",
+      "entity_id": "019aa122-be00-72e6-b3fd-3a22cd30fed4",
+      "data": {
+        "basis": "date",
+        "status": "ok",
+        "remaining_km": 4600,
+        "remaining_days": 18,
+        "pace_km_per_day": 15.6,
+        "interval_months": 12
+      }
+    },
+    {
+      "module": "finance",
+      "kind": "finance.invoice_due",
+      "on": "2026-12-10",
+      "subject": "Nubank",
+      "entity_id": "01a1ea85-ce08-7192-8496-0e166f11c2c7",
+      "data": {
+        "amount_cents": 128460,
+        "paid_cents": 0,
+        "status": "open"
+      }
+    }
+  ],
+  "activity": [
+    {
+      "module": "finance",
+      "kind": "finance.transaction",
+      "occurred_at": "2026-11-17T08:10:00-03:00",
+      "subject": "Padaria",
+      "entity_id": "01a1ea85-cec7-75be-8a3f-5a49fe7f56f9",
+      "data": {
+        "transaction_kind": "expense",
+        "amount_cents": 1850,
+        "category": "Alimentação",
+        "account": "Carteira",
+        "destination_account": null,
+        "credit_card": null,
+        "occurred_time": "08:10"
+      }
+    },
+    {
+      "module": "garage",
+      "kind": "garage.odometer",
+      "occurred_at": "2026-11-17T10:42:00Z",
+      "subject": "Honda CG 160 Fan",
+      "entity_id": "019a9bfc-62f6-7580-bea2-f7c49820d997",
+      "data": {
+        "km": 18420
+      }
+    },
+    {
+      "module": "finance",
+      "kind": "finance.transaction",
+      "occurred_at": "2026-11-16T18:10:00-03:00",
+      "subject": "Posto · CG 160",
+      "entity_id": "01a1ea85-cece-77c2-bc5e-81dde9acf994",
+      "data": {
+        "transaction_kind": "expense",
+        "amount_cents": 4636,
+        "category": "Combustível",
+        "account": null,
+        "destination_account": null,
+        "credit_card": "Nubank",
+        "occurred_time": "18:10"
+      }
+    },
+    {
+      "module": "garage",
+      "kind": "garage.fueling",
+      "occurred_at": "2026-11-16T21:10:00Z",
+      "subject": "Honda CG 160 Fan",
+      "entity_id": "01a1a43f-83d0-716c-85a1-edc84e20ccdf",
+      "data": {
+        "vehicle_id": "019a9bfc-62f6-7580-bea2-f7c49820d997",
+        "km": 18400,
+        "volume_ml": 7300,
+        "total_cents": 4636
+      }
+    },
+    {
+      "module": "finance",
+      "kind": "finance.transaction",
+      "occurred_at": "2026-11-16T11:25:00-03:00",
+      "subject": "Supermercado",
+      "entity_id": "01a1ea85-cec4-7265-a06f-cc6a72ecb612",
+      "data": {
+        "transaction_kind": "expense",
+        "amount_cents": 21240,
+        "category": "Alimentação",
+        "account": "Nubank",
+        "destination_account": null,
+        "credit_card": null,
+        "occurred_time": "11:25"
+      }
+    },
+    {
+      "module": "reading",
+      "kind": "reading.note",
+      "occurred_at": "2026-11-16T01:10:00.001424Z",
+      "subject": "Código Limpo",
+      "entity_id": "01a17a8c-a4c0-72f8-bfd2-17208bb026c3",
+      "data": {
+        "page": 212,
+        "excerpt": "Capítulo sobre tratamento de erros: revisar como a minha API devolve falhas e trocar códi…"
+      }
+    },
+    {
+      "module": "reading",
+      "kind": "reading.progress",
+      "occurred_at": "2026-11-16T01:05:00.000039Z",
+      "subject": "Código Limpo",
+      "entity_id": "01a17a8c-a4c0-72f8-bfd2-17208bb026c3",
+      "data": {
+        "page": 212,
+        "pages": 14,
+        "total_pages": 425,
+        "status": "reading"
+      }
+    },
+    {
+      "module": "garage",
+      "kind": "garage.odometer",
+      "occurred_at": "2026-11-15T22:20:00Z",
+      "subject": "Fiat Strada Freedom",
+      "entity_id": "019aa122-be00-72e6-b3fd-3a22cd30fed4",
+      "data": {
+        "km": 52300
+      }
+    },
+    {
+      "module": "finance",
+      "kind": "finance.transaction",
+      "occurred_at": "2026-11-15T00:00:00-03:00",
+      "subject": "Streaming",
+      "entity_id": "01a1ea85-cedd-732f-88ae-fbcab092a355",
+      "data": {
+        "transaction_kind": "expense",
+        "amount_cents": 3990,
+        "category": "Lazer",
+        "account": null,
+        "destination_account": null,
+        "credit_card": "Nubank",
+        "occurred_time": null
+      }
+    },
+    {
+      "module": "finance",
+      "kind": "finance.transaction",
+      "occurred_at": "2026-11-15T00:00:00-03:00",
+      "subject": "Padaria e açougue",
+      "entity_id": "01a1ea85-cec1-761b-a9e2-5c040be13d8e",
+      "data": {
+        "transaction_kind": "expense",
+        "amount_cents": 14431,
+        "category": "Alimentação",
+        "account": null,
+        "destination_account": null,
+        "credit_card": "Nubank",
+        "occurred_time": null
+      }
+    }
+  ]
+}

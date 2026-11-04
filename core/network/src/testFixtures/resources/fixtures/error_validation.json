@@ -1,0 +1,18 @@
+{
+  "error": {
+    "code": "validation_error",
+    "message": "Invalid request.",
+    "fields": [
+      {
+        "path": "username",
+        "code": "string_too_short",
+        "message": "String should have at least 1 character"
+      },
+      {
+        "path": "password",
+        "code": "string_too_short",
+        "message": "String should have at least 1 character"
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The window behind the first frame and the splash: the app seed's light surface. -->
+    <color name="window_background">#FFFFF7FF</color>
+    <color name="launcher_background">#FF6A4F86</color>
+    <color name="launcher_foreground">#FFFFFFFF</color>
+</resources>

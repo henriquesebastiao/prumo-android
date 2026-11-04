@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_coming_soon_title">%1$s chega na próxima fase</string>
+    <string name="feature_coming_soon_body">A fundação do app está pronta: entrar, Início e Configurações. As telas deste módulo vêm em seguida, com as mesmas funções da web.</string>
+    <string name="feature_open_module">Abrir %1$s</string>
+</resources>
