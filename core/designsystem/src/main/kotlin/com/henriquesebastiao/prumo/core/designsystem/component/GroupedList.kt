@@ -22,8 +22,15 @@ import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
 
 /** What tapping a [GroupedRow] does, and what it shows at the end. */
 sealed interface RowAction {
-    /** Opens something; [chevron] says it's a screen. */
-    data class Click(val onClick: () -> Unit, val chevron: Boolean = true) : RowAction
+    /**
+     * Opens something; [chevron] says it's a screen. A [trailing] value (a total, a date) takes the
+     * chevron's place.
+     */
+    data class Click(
+        val onClick: () -> Unit,
+        val chevron: Boolean = true,
+        val trailing: (@Composable () -> Unit)? = null,
+    ) : RowAction
 
     /** A switch: the whole row toggles it. */
     data class Toggle(val checked: Boolean, val onCheckedChange: (Boolean) -> Unit) : RowAction
@@ -104,7 +111,7 @@ fun GroupedListItem(
             modifier = modifier,
             enabled = row.enabled,
             leadingContent = leading,
-            trailingContent = if (action.chevron) {
+            trailingContent = action.trailing ?: if (action.chevron) {
                 {
                     Icon(
                         painterResource(PrumoIcons.ChevronRight),

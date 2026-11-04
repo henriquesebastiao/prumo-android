@@ -1,5 +1,6 @@
 package com.henriquesebastiao.prumo.system.home
 
+import com.henriquesebastiao.prumo.core.data.repository.DataChanges
 import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.core.model.Dashboard
 import com.henriquesebastiao.prumo.core.model.DayPart
@@ -31,6 +32,8 @@ class HomeViewModelTest {
     @get:Rule
     val main = MainDispatcherRule()
 
+    private val changes = DataChanges()
+
     private val registry = ModuleRegistry(setOf(FinanceFeature(), GarageFeature(), ReadingFeature()))
 
     // 17/11/2026 at 14:30 in São Paulo (UTC-3), as the design boards; 17:30 in UTC.
@@ -44,7 +47,7 @@ class HomeViewModelTest {
             Dashboard(listOf(summary("finance"), summary("garage"), summary("reading")), emptyList(), emptyList()),
         ),
         devicePreferences: FakeDevicePreferences = FakeDevicePreferences(),
-    ) = HomeViewModel(account, dashboard, devicePreferences, registry, FakeSessionRepository(), clock)
+    ) = HomeViewModel(account, dashboard, devicePreferences, registry, FakeSessionRepository(), clock, changes)
 
     @Test
     fun theCardsFollowTheUsersOrderAndSkipWhatTheAppDoesNotKnow() = runTest {
@@ -114,5 +117,20 @@ class HomeViewModelTest {
         vm.refresh()
 
         assertEquals(AppError.Unexpected(500), vm.state.first { !it.loading }.error)
+    }
+
+    @Test
+    fun aRecordSavedInAModuleReloadsTheSummaries() = runTest {
+        val dashboard = FakeDashboardRepository(Dashboard(listOf(summary("finance")), emptyList(), emptyList()))
+        val vm = viewModel(dashboard = dashboard)
+        backgroundScope.launch { vm.state.collect {} }
+        vm.refresh()
+        vm.state.first { !it.loading }
+
+        dashboard.dashboard = Dashboard(listOf(summary("finance"), summary("garage")), emptyList(), emptyList())
+        changes.changed("garage")
+
+        val garage = vm.state.first { state -> state.cards.any { it.feature.id == "garage" && it.summary != null } }
+        assertEquals("garage", garage.cards[1].feature.id)
     }
 }

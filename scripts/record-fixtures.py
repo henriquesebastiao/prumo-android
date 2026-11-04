@@ -44,10 +44,37 @@ def call(base, method, path, token=None, body=None):
 
 
 def save(name, payload):
-    TARGET.mkdir(parents=True, exist_ok=True)
+    target = TARGET / name
+    target.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
-    (TARGET / name).write_text(text, encoding="utf-8")
+    target.write_text(text, encoding="utf-8")
     print(f"  {name}")
+
+
+def record_garage(base, token):
+    """Veículos (fixtures/garage/): reads, plus one refused odometer reading (nothing is saved)."""
+
+    def get(path):
+        status, payload, _ = call(base, "GET", path, token=token)
+        assert status == 200, f"{path} answered {status}"
+        return payload
+
+    vehicles = get("/api/v1/garage/vehicles")
+    save("garage/vehicles.json", vehicles)
+    vehicle = next(v for v in vehicles["items"] if v["kind"] == "motorcycle")
+    path = f"/api/v1/garage/vehicles/{vehicle['id']}"
+    save("garage/vehicle.json", get(path))
+    save("garage/odometer.json", get(f"{path}/odometer"))
+    maintenances = get(f"{path}/maintenances")
+    save("garage/maintenances.json", maintenances)
+    save("garage/maintenance.json", get(f"{path}/maintenances/{maintenances['items'][0]['id']}"))
+    save("garage/fuelings.json", get(f"{path}/fuelings"))
+    save("garage/oil_suggestion.json", get(f"{path}/oil-change-suggestion?km={vehicle['current_km']}"))
+    save("garage/workshops.json", get("/api/v1/garage/workshops"))
+    save("garage/overview.json", get("/api/v1/garage/overview"))
+    status, refused, _ = call(base, "POST", f"{path}/odometer", token=token, body={"km": 1})
+    assert status == 422, f"a lower reading answered {status}"
+    save("garage/error_odometer_inconsistent.json", refused)
 
 
 def main():
@@ -98,6 +125,8 @@ def main():
         status, payload, _ = call(base, "GET", path, token=token)
         assert status == 200, f"{path} answered {status}"
         save(name, payload)
+
+    record_garage(base, token)
 
     status, missing, _ = call(base, "GET", "/api/v1/auth/sessions", token="not-a-token")
     assert status == 401, f"a bad token answered {status}"

@@ -1,0 +1,37 @@
+{
+  "month": "2026-11",
+  "month_fuel_cents": 27520,
+  "month_fuelings_count": 3,
+  "month_km": 1020,
+  "vehicles_km": [
+    {
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "km": 620
+    },
+    {
+      "vehicle": {
+        "id": "019aa122-be00-72f7-b6c8-7ff7aa43d49e",
+        "name": "Fiat Strada Freedom",
+        "kind": "car"
+      },
+      "km": 400
+    }
+  ],
+  "next_due": {
+    "vehicle": {
+      "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+      "name": "Honda CG 160 Fan",
+      "kind": "motorcycle"
+    },
+    "status": "ok",
+    "primary": "km",
+    "remaining_km": 220,
+    "remaining_days": 65,
+    "used_percent": 78,
+    "due_on": "2026-11-25"
+  }
+}

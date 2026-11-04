@@ -19,7 +19,8 @@ import com.henriquesebastiao.prumo.core.designsystem.R
 /**
  * A screen's top app bar with a back button: [large] for the first level (Configurações), small for
  * the levels under it (Conta, Aparência). Pair the large one with an exit-until-collapsed
- * [scrollBehavior].
+ * [scrollBehavior]. A [subtitle] goes under the title ("Honda CG 160 Fan · 2023"); a form that
+ * discards what was typed shows [close] (✕) instead of the arrow.
  */
 @Composable
 fun PrumoTopBar(
@@ -28,9 +29,12 @@ fun PrumoTopBar(
     modifier: Modifier = Modifier,
     large: Boolean = false,
     scrollBehavior: TopAppBarScrollBehavior? = null,
+    subtitle: String? = null,
+    close: Boolean = false,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
-    val navigation: @Composable () -> Unit = { if (onBack != null) BackButton(onBack) }
+    val navigation: @Composable () -> Unit = { if (onBack != null) BackButton(onBack, close = close) }
+    val subtitleText: (@Composable () -> Unit)? = subtitle?.let { { Text(it) } }
     val colors = TopAppBarDefaults.topAppBarColors(
         containerColor = MaterialTheme.colorScheme.surface,
         scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -38,6 +42,17 @@ fun PrumoTopBar(
     if (large) {
         LargeFlexibleTopAppBar(
             title = { Text(title) },
+            subtitle = subtitleText,
+            modifier = modifier,
+            navigationIcon = navigation,
+            actions = actions,
+            colors = colors,
+            scrollBehavior = scrollBehavior,
+        )
+    } else if (subtitleText != null) {
+        TopAppBar(
+            title = { Text(title) },
+            subtitle = subtitleText,
             modifier = modifier,
             navigationIcon = navigation,
             actions = actions,
@@ -56,9 +71,9 @@ fun PrumoTopBar(
     }
 }
 
-/** The round back button of every screen under the Home. */
+/** The round back button of every screen under the Home; [close] (✕) on forms. */
 @Composable
-fun BackButton(onBack: () -> Unit, modifier: Modifier = Modifier) {
+fun BackButton(onBack: () -> Unit, modifier: Modifier = Modifier, close: Boolean = false) {
     FilledTonalIconButton(
         onClick = onBack,
         modifier = modifier,
@@ -66,6 +81,10 @@ fun BackButton(onBack: () -> Unit, modifier: Modifier = Modifier) {
             containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
         ),
     ) {
-        Icon(painterResource(PrumoIcons.ArrowBack), contentDescription = stringResource(R.string.designsystem_back))
+        if (close) {
+            Icon(painterResource(PrumoIcons.Close), contentDescription = stringResource(R.string.designsystem_close))
+        } else {
+            Icon(painterResource(PrumoIcons.ArrowBack), contentDescription = stringResource(R.string.designsystem_back))
+        }
     }
 }

@@ -1,0 +1,121 @@
+{
+  "items": [
+    {
+      "id": "01a1a616-4df7-71c3-9b45-8fd83bc7b585",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "fueled_at": "2026-11-16T21:10:00Z",
+      "km": 18400,
+      "fuel_type": "gasoline",
+      "volume_ml": 7300,
+      "total_cents": 4636,
+      "price_per_liter": 6.351,
+      "full_tank": true,
+      "consumption_km_l": 39.73,
+      "notes": null,
+      "created_at": "2026-11-04T10:24:02.039710Z",
+      "updated_at": "2026-11-04T10:24:02.039713Z"
+    },
+    {
+      "id": "01a1a616-4de8-755e-a71b-9e84ace02237",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "fueled_at": "2026-11-06T12:00:00Z",
+      "km": 18110,
+      "fuel_type": "gasoline",
+      "volume_ml": 7640,
+      "total_cents": 4850,
+      "price_per_liter": 6.348,
+      "full_tank": true,
+      "consumption_km_l": 40.58,
+      "notes": null,
+      "created_at": "2026-11-04T10:24:02.025279Z",
+      "updated_at": "2026-11-04T10:24:02.025283Z"
+    },
+    {
+      "id": "01a1a616-4de3-717a-a269-72827fad83c6",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "fueled_at": "2026-10-27T12:00:00Z",
+      "km": 17800,
+      "fuel_type": "gasoline",
+      "volume_ml": 7520,
+      "total_cents": 4770,
+      "price_per_liter": 6.343,
+      "full_tank": true,
+      "consumption_km_l": 39.89,
+      "notes": null,
+      "created_at": "2026-11-04T10:24:02.019881Z",
+      "updated_at": "2026-11-04T10:24:02.019884Z"
+    },
+    {
+      "id": "01a1a616-4dd7-733c-a001-bcd852d923bb",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "fueled_at": "2026-10-17T12:00:00Z",
+      "km": 17500,
+      "fuel_type": "gasoline",
+      "volume_ml": 7480,
+      "total_cents": 4730,
+      "price_per_liter": 6.324,
+      "full_tank": true,
+      "consumption_km_l": 40.11,
+      "notes": null,
+      "created_at": "2026-11-04T10:24:02.007668Z",
+      "updated_at": "2026-11-04T10:24:02.007671Z"
+    },
+    {
+      "id": "01a1a616-4dd2-7715-8045-ab781eef2282",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "fueled_at": "2026-10-07T12:00:00Z",
+      "km": 17200,
+      "fuel_type": "gasoline",
+      "volume_ml": 7280,
+      "total_cents": 4600,
+      "price_per_liter": 6.319,
+      "full_tank": true,
+      "consumption_km_l": 41.21,
+      "notes": null,
+      "created_at": "2026-11-04T10:24:02.003053Z",
+      "updated_at": "2026-11-04T10:24:02.003056Z"
+    },
+    {
+      "id": "01a1a616-4dcc-7339-8a5c-fd26dea329ae",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "fueled_at": "2026-09-27T12:00:00Z",
+      "km": 16900,
+      "fuel_type": "gasoline",
+      "volume_ml": 7000,
+      "total_cents": 4410,
+      "price_per_liter": 6.3,
+      "full_tank": true,
+      "consumption_km_l": null,
+      "notes": null,
+      "created_at": "2026-11-04T10:24:01.997104Z",
+      "updated_at": "2026-11-04T10:24:01.997107Z"
+    }
+  ],
+  "total": 6,
+  "limit": 50,
+  "offset": 0
+}

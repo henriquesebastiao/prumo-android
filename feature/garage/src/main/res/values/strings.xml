@@ -26,4 +26,212 @@
     </plurals>
     <string name="garage_status_due_soon">Em breve</string>
     <string name="garage_status_overdue">Atrasada</string>
+    <!-- Shared -->
+    <string name="garage_loading">Carregando os veículos</string>
+    <string name="garage_retry">Tentar novamente</string>
+    <string name="garage_save">Salvar</string>
+    <string name="garage_edit">Editar</string>
+    <string name="garage_delete">Excluir</string>
+    <string name="garage_archive">Arquivar</string>
+    <string name="garage_unarchive">Desarquivar</string>
+    <string name="garage_more">Mais ações</string>
+    <string name="garage_load_more">Carregar mais</string>
+    <string name="garage_none">—</string>
+    <string name="garage_join">%1$s · %2$s</string>
+    <string name="garage_brand_model">%1$s %2$s</string>
+    <string name="garage_today_at">hoje, %1$s</string>
+    <string name="garage_yesterday_at">ontem, %1$s</string>
+    <string name="garage_km_l">%1$s km/l</string>
+    <string name="garage_litre_unit">L</string>
+    <plurals name="garage_days">
+        <item quantity="one">%1$d dia</item>
+        <item quantity="other">%1$d dias</item>
+    </plurals>
+    <string name="garage_notes">Observações</string>
+    <string name="garage_date_time">Data e hora</string>
+    <string name="garage_field_invalid">Confira este valor.</string>
+    <string name="garage_no_vehicles_for_record">Cadastre um veículo primeiro.</string>
+
+    <string name="garage_kind_car">Carro</string>
+    <string name="garage_kind_motorcycle">Moto</string>
+    <string name="garage_fuel">Combustível</string>
+    <string name="garage_fuel_gasoline">Gasolina comum</string>
+    <string name="garage_fuel_gasoline_additive">Gasolina aditivada</string>
+    <string name="garage_fuel_gasoline_premium">Gasolina premium</string>
+    <string name="garage_fuel_ethanol">Etanol</string>
+    <string name="garage_fuel_diesel">Diesel</string>
+    <string name="garage_fuel_cng">GNV</string>
+    <string name="garage_fuel_short_gasoline">Gasolina</string>
+    <string name="garage_fuel_short_gasoline_additive">Aditivada</string>
+    <string name="garage_fuel_short_gasoline_premium">Premium</string>
+    <string name="garage_status_ok">Em dia</string>
+    <string name="garage_status_unknown">Sem registro</string>
+    <string name="garage_source_manual">Atualização manual</string>
+    <string name="garage_source_maintenance">Manutenção</string>
+    <string name="garage_source_fueling">Abastecimento</string>
+
+    <!-- Errors of Veículos (docs/api.md of the server) -->
+    <string name="garage_error_odometer_inconsistent">O km não combina com outro registro. Confira o valor.</string>
+    <string name="garage_error_last_reading">O veículo precisa manter pelo menos uma leitura de km.</string>
+    <string name="garage_error_reading_not_manual">Esta leitura veio de um abastecimento ou manutenção: exclua o registro de origem.</string>
+    <string name="garage_error_workshop_in_use">Esta oficina tem manutenções e não pode ser excluída.</string>
+    <string name="garage_error_workshop_exists">Já existe uma oficina com esse nome.</string>
+    <string name="garage_error_oil_fields">Os dados de óleo só valem para trocas de óleo.</string>
+    <string name="garage_error_fuel_type_required">Escolha o combustível.</string>
+    <string name="garage_km_lower">Menor que o registro de %1$s (%2$s). Confira o valor.</string>
+    <string name="garage_km_higher">Maior que o registro de %1$s (%2$s). Confira o valor.</string>
+
+    <!-- List -->
+    <string name="garage_add_vehicle">Adicionar veículo</string>
+    <string name="garage_empty_title">Nenhum veículo ainda</string>
+    <string name="garage_empty_body">Cadastre seu carro ou moto para acompanhar km, abastecimentos e trocas de óleo.</string>
+    <string name="garage_list_note">O status é da próxima troca de óleo, pelo critério que vence primeiro.</string>
+    <string name="garage_archived_title">Arquivados</string>
+    <string name="garage_archived_empty">Nenhum veículo arquivado</string>
+    <string name="garage_archived">Arquivado</string>
+    <string name="garage_fuelings">Abastecimentos</string>
+    <string name="garage_maintenances">Manutenções</string>
+    <string name="garage_oil_changes">Trocas de óleo</string>
+    <string name="garage_workshops">Oficinas</string>
+
+    <!-- Vehicle -->
+    <string name="garage_current_km_label">Km atual</string>
+    <string name="garage_updated_at">atualizado %1$s</string>
+    <string name="garage_update">Atualizar</string>
+    <string name="garage_maintenance">Manutenção</string>
+    <string name="garage_oil_change">Troca de óleo</string>
+    <string name="garage_oil_next">Próxima troca de óleo</string>
+    <string name="garage_oil_first">Registre a primeira troca</string>
+    <string name="garage_oil_no_interval">Sem intervalo de troca de óleo. Defina um intervalo por km ou por tempo na edição do veículo.</string>
+    <string name="garage_oil_no_change">Nenhuma troca de óleo registrada ainda.</string>
+    <string name="garage_oil_first_by_km">Vence primeiro por km</string>
+    <string name="garage_oil_first_by_date">Vence primeiro por data</string>
+    <string name="garage_oil_left">Faltam %1$s</string>
+    <string name="garage_oil_over_km">Passou %1$s</string>
+    <string name="garage_oil_overdue_days">Venceu há %1$s</string>
+    <string name="garage_oil_by_km">Por km</string>
+    <string name="garage_oil_by_km_left">Por km · faltam %1$s</string>
+    <string name="garage_oil_by_km_over">Por km · passou %1$s</string>
+    <string name="garage_oil_by_date">Por data</string>
+    <string name="garage_oil_by_date_left">Por data · faltam %1$s</string>
+    <string name="garage_oil_by_date_over">Por data · venceu há %1$s</string>
+    <string name="garage_oil_pace">No ritmo atual (%1$s km/dia), a quilometragem deve vencer por volta de %2$s.</string>
+    <string name="garage_oil_last">Última troca: %1$s · %2$s</string>
+    <string name="garage_stats_title">Consumo e gastos</string>
+    <string name="garage_avg_consumption">Consumo médio</string>
+    <string name="garage_last_tank">Último tanque</string>
+    <string name="garage_fueled_on">Abastecido em %1$s</string>
+    <string name="garage_last_fueling">Último abastecimento</string>
+    <string name="garage_month_spent">Gastos de %1$s</string>
+    <string name="garage_consumption_empty">O consumo aparece depois de dois abastecimentos com tanque cheio.</string>
+    <string name="garage_tab_oil">Óleo</string>
+    <string name="garage_tab_km">Km</string>
+    <string name="garage_history_empty">Nada registrado ainda.</string>
+    <string name="garage_item_and_more">%1$s e mais %2$d</string>
+    <string name="garage_reading_delete">Excluir leitura</string>
+    <string name="garage_reading_delete_title">Excluir leitura?</string>
+    <string name="garage_reading_delete_body">A leitura de km será excluída. Não dá para desfazer.</string>
+    <string name="garage_vehicle_delete_title">Excluir %1$s?</string>
+    <string name="garage_vehicle_delete_body">O veículo e todo o histórico (km, abastecimentos, trocas e manutenções) serão apagados. Para só tirar da lista, use Arquivar. Não dá para desfazer.</string>
+
+    <!-- Km sheet -->
+    <string name="garage_current_km">Atual: %1$s · %2$s</string>
+    <string name="garage_km_on_panel">Km no painel</string>
+    <string name="garage_km_since_last">+%1$s desde a última atualização</string>
+
+    <!-- Fueling sheet -->
+    <string name="garage_fueling_title">Abastecimento</string>
+    <string name="garage_fueling_edit">Editar abastecimento</string>
+    <string name="garage_fueling_total">Valor total</string>
+    <string name="garage_fueling_litres">Litros</string>
+    <string name="garage_fueling_price_preview">%1$s por litro · calculado</string>
+    <string name="garage_full_tank">Tanque cheio</string>
+    <string name="garage_full_tank_hint">Necessário para calcular o consumo.</string>
+    <string name="garage_partial_tank_hint">Sem tanque cheio, estes litros entram no cálculo do próximo abastecimento completo.</string>
+    <string name="garage_fueling_save">Salvar abastecimento</string>
+    <string name="garage_fueling_delete_title">Excluir abastecimento?</string>
+    <string name="garage_fueling_delete_body">O abastecimento de %1$s (%2$s) será excluído e a leitura de km correspondente, removida. Não dá para desfazer.</string>
+    <!-- Vehicle form -->
+    <string name="garage_vehicle_new">Novo veículo</string>
+    <string name="garage_vehicle_edit">Editar %1$s</string>
+    <string name="garage_vehicle_name">Nome ou apelido</string>
+    <string name="garage_vehicle_name_hint">É assim que ele aparece no Prumo.</string>
+    <string name="garage_vehicle_brand">Marca</string>
+    <string name="garage_vehicle_model">Modelo</string>
+    <string name="garage_vehicle_year">Ano</string>
+    <string name="garage_km_unit">km</string>
+    <string name="garage_months_unit">meses</string>
+    <string name="garage_vehicle_fuel">Combustível habitual</string>
+    <string name="garage_vehicle_no_fuel">Não informar</string>
+    <string name="garage_vehicle_every">A cada</string>
+    <string name="garage_vehicle_or_every">Ou a cada</string>
+    <string name="garage_vehicle_oil_note">Preencha um ou os dois. O que vencer primeiro define o status.</string>
+    <string name="garage_vehicle_create">Cadastrar veículo</string>
+    <string name="garage_vehicle_save">Salvar veículo</string>
+    <string name="garage_cancel">Cancelar</string>
+
+    <!-- Maintenance form -->
+    <string name="garage_maintenance_edit">Editar manutenção</string>
+    <string name="garage_oil_change_edit">Editar troca de óleo</string>
+    <string name="garage_km_at">Km no momento</string>
+    <string name="garage_workshop">Oficina</string>
+    <string name="garage_workshop_create">Cadastrar nova oficina “%1$s”</string>
+    <string name="garage_workshop_new_hint">Nova oficina: é cadastrada ao salvar.</string>
+    <string name="garage_oil_type">Óleo utilizado</string>
+    <string name="garage_next_change">Próxima troca</string>
+    <string name="garage_next_change_km">Por km</string>
+    <string name="garage_next_change_date">Por data</string>
+    <string name="garage_interval_note_both">A cada %1$s ou %2$s, como no cadastro do veículo. Pode editar só para esta troca.</string>
+    <string name="garage_interval_note">A cada %1$s, como no cadastro do veículo. Pode editar só para esta troca.</string>
+    <string name="garage_interval_none">O veículo não tem intervalo de troca: preencha para ter uma previsão.</string>
+    <plurals name="garage_months">
+        <item quantity="one">%1$d mês</item>
+        <item quantity="other">%1$d meses</item>
+    </plurals>
+    <string name="garage_parts">Peças trocadas</string>
+    <plurals name="garage_parts_count">
+        <item quantity="one">%1$d peça</item>
+        <item quantity="other">%1$d peças</item>
+    </plurals>
+    <string name="garage_part">Peça</string>
+    <string name="garage_part_quantity">Qtd.</string>
+    <string name="garage_part_price">Valor</string>
+    <string name="garage_part_add">Adicionar peça</string>
+    <string name="garage_part_remove">Remover peça</string>
+    <string name="garage_part_name_missing">Informe a peça.</string>
+    <string name="garage_labor">Mão de obra</string>
+    <string name="garage_total_preview">Total calculado</string>
+    <string name="garage_total_hint">Peças %1$s + mão de obra %2$s</string>
+    <string name="garage_notes_placeholder">Algo que valha lembrar na próxima visita</string>
+    <string name="garage_maintenance_save">Salvar manutenção</string>
+    <string name="garage_oil_change_save">Salvar troca de óleo</string>
+
+    <!-- Maintenance -->
+    <string name="garage_no_workshop">Sem oficina</string>
+    <string name="garage_values">Valores</string>
+    <string name="garage_part_times">%1$s × %2$d</string>
+    <string name="garage_total">Total</string>
+    <string name="garage_next_change_both">%1$s ou %2$s</string>
+    <string name="garage_next_change_value">Próxima troca: %1$s</string>
+    <string name="garage_maintenance_delete_title">Excluir manutenção?</string>
+    <string name="garage_oil_change_delete_title">Excluir troca de óleo?</string>
+    <string name="garage_maintenance_delete_body">O registro de %1$s (%2$s) será excluído e a leitura de km correspondente, removida. Não dá para desfazer.</string>
+
+    <!-- Workshops -->
+    <string name="garage_workshop_new">Nova oficina</string>
+    <string name="garage_workshop_edit">Editar oficina</string>
+    <string name="garage_workshop_name">Nome</string>
+    <string name="garage_workshops_empty_title">Nenhuma oficina ainda</string>
+    <string name="garage_workshops_empty_body">Elas são criadas ao registrar uma manutenção ou aqui.</string>
+    <string name="garage_workshop_unused">Nenhuma manutenção</string>
+    <plurals name="garage_workshop_stats">
+        <item quantity="one">%1$d manutenção · última em %2$s</item>
+        <item quantity="other">%1$d manutenções · última em %2$s</item>
+    </plurals>
+    <plurals name="garage_maintenances_count">
+        <item quantity="one">%1$d manutenção</item>
+        <item quantity="other">%1$d manutenções</item>
+    </plurals>
+    <string name="garage_workshop_delete_title">Excluir oficina?</string>
+    <string name="garage_workshop_delete_body">%1$s será excluída.</string>
 </resources>

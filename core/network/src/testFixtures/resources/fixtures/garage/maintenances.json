@@ -1,0 +1,217 @@
+{
+  "items": [
+    {
+      "id": "01a1a616-4ddd-7374-96fe-e15bc4fb1996",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "kind": "oil_change",
+      "performed_at": "2026-10-21T13:00:00Z",
+      "km": 17640,
+      "workshop": null,
+      "labor_cost_cents": 1500,
+      "parts_cents": 3890,
+      "total_cents": 5390,
+      "notes": null,
+      "oil_type": "4T 20W-50 semissintético",
+      "next_oil_change_km": 18640,
+      "next_oil_change_on": "2027-01-21",
+      "items": [
+        {
+          "id": "01a1a616-4ddf-7371-9343-2c6e71a97900",
+          "description": "Óleo 4T 20W-50 semissintético",
+          "quantity": 1,
+          "unit_price_cents": 3890,
+          "total_cents": 3890
+        }
+      ],
+      "created_at": "2026-11-04T10:24:02.014510Z",
+      "updated_at": "2026-11-04T10:24:02.014513Z"
+    },
+    {
+      "id": "01a1a616-4dc5-758d-aa43-b609131c5af6",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "kind": "oil_change",
+      "performed_at": "2026-09-12T13:00:00Z",
+      "km": 16640,
+      "workshop": null,
+      "labor_cost_cents": 1500,
+      "parts_cents": 3890,
+      "total_cents": 5390,
+      "notes": null,
+      "oil_type": "4T 20W-50 semissintético",
+      "next_oil_change_km": 17640,
+      "next_oil_change_on": "2026-12-12",
+      "items": [
+        {
+          "id": "01a1a616-4dc7-74cd-8e57-b9ce1464b961",
+          "description": "Óleo 4T 20W-50 semissintético",
+          "quantity": 1,
+          "unit_price_cents": 3890,
+          "total_cents": 3890
+        }
+      ],
+      "created_at": "2026-11-04T10:24:01.990486Z",
+      "updated_at": "2026-11-04T10:24:01.990488Z"
+    },
+    {
+      "id": "01a1a616-4dbf-7256-8f97-5162cf61c5ed",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "kind": "general",
+      "performed_at": "2026-09-03T13:30:00Z",
+      "km": 16180,
+      "workshop": {
+        "id": "01a1a616-4da8-7203-8ea7-ac09ad15a645",
+        "name": "Moto Peças Rocha"
+      },
+      "labor_cost_cents": 6000,
+      "parts_cents": 22440,
+      "total_cents": 28440,
+      "notes": "Corrente estava no limite de esticamento. O mecânico recomendou olhar a lona do freio traseiro na próxima visita.",
+      "oil_type": null,
+      "next_oil_change_km": null,
+      "next_oil_change_on": null,
+      "items": [
+        {
+          "id": "01a1a616-4dc0-725e-a583-21188147c753",
+          "description": "Kit relação (coroa, pinhão e corrente)",
+          "quantity": 1,
+          "unit_price_cents": 18990,
+          "total_cents": 18990
+        },
+        {
+          "id": "01a1a616-4dc0-725e-a583-2119998294ac",
+          "description": "Pastilha de freio dianteira",
+          "quantity": 1,
+          "unit_price_cents": 3450,
+          "total_cents": 3450
+        }
+      ],
+      "created_at": "2026-11-04T10:24:01.983544Z",
+      "updated_at": "2026-11-04T10:24:01.983547Z"
+    },
+    {
+      "id": "01a1a616-4db8-7517-ad36-14bc8606d41f",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "kind": "general",
+      "performed_at": "2026-07-14T13:30:00Z",
+      "km": 14620,
+      "workshop": {
+        "id": "01a1a616-4da8-7203-8ea7-ac09ad15a645",
+        "name": "Moto Peças Rocha"
+      },
+      "labor_cost_cents": 2500,
+      "parts_cents": 25100,
+      "total_cents": 27600,
+      "notes": null,
+      "oil_type": null,
+      "next_oil_change_km": null,
+      "next_oil_change_on": null,
+      "items": [
+        {
+          "id": "01a1a616-4db9-7566-9236-84df8018011b",
+          "description": "Pneu traseiro 90/90-18",
+          "quantity": 1,
+          "unit_price_cents": 21900,
+          "total_cents": 21900
+        },
+        {
+          "id": "01a1a616-4db9-7566-9236-84e0530d8778",
+          "description": "Câmara de ar",
+          "quantity": 1,
+          "unit_price_cents": 3200,
+          "total_cents": 3200
+        }
+      ],
+      "created_at": "2026-11-04T10:24:01.977192Z",
+      "updated_at": "2026-11-04T10:24:01.977196Z"
+    },
+    {
+      "id": "01a1a616-4db0-7136-ad36-d56e3dd0a07b",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "kind": "oil_change",
+      "performed_at": "2026-06-20T13:00:00Z",
+      "km": 13900,
+      "workshop": null,
+      "labor_cost_cents": 1500,
+      "parts_cents": 3890,
+      "total_cents": 5390,
+      "notes": null,
+      "oil_type": "4T 10W-30 sintético",
+      "next_oil_change_km": 14900,
+      "next_oil_change_on": "2026-09-20",
+      "items": [
+        {
+          "id": "01a1a616-4db2-77df-88d2-efe501ea0096",
+          "description": "Óleo 4T 10W-30 sintético",
+          "quantity": 1,
+          "unit_price_cents": 3890,
+          "total_cents": 3890
+        }
+      ],
+      "created_at": "2026-11-04T10:24:01.969549Z",
+      "updated_at": "2026-11-04T10:24:01.969551Z"
+    },
+    {
+      "id": "01a1a616-4da9-7608-aaf2-85d842226c39",
+      "vehicle": {
+        "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+        "name": "Honda CG 160 Fan",
+        "kind": "motorcycle"
+      },
+      "kind": "general",
+      "performed_at": "2026-05-22T13:30:00Z",
+      "km": 13050,
+      "workshop": {
+        "id": "01a1a616-4da8-7203-8ea7-ac09ad15a645",
+        "name": "Moto Peças Rocha"
+      },
+      "labor_cost_cents": 3000,
+      "parts_cents": 4690,
+      "total_cents": 7690,
+      "notes": null,
+      "oil_type": null,
+      "next_oil_change_km": null,
+      "next_oil_change_on": null,
+      "items": [
+        {
+          "id": "01a1a616-4dab-76f3-95ff-508882aedf7f",
+          "description": "Cabo de embreagem",
+          "quantity": 1,
+          "unit_price_cents": 2800,
+          "total_cents": 2800
+        },
+        {
+          "id": "01a1a616-4dab-76f3-95ff-5089dc9d963d",
+          "description": "Lâmpada do farol",
+          "quantity": 1,
+          "unit_price_cents": 1890,
+          "total_cents": 1890
+        }
+      ],
+      "created_at": "2026-11-04T10:24:01.961871Z",
+      "updated_at": "2026-11-04T10:24:01.961875Z"
+    }
+  ],
+  "total": 6,
+  "limit": 50,
+  "offset": 0
+}

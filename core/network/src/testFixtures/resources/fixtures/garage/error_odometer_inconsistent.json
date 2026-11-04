@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "garage.odometer_inconsistent",
+    "message": "Reading is lower than a previous reading.",
+    "details": {
+      "conflict": "previous",
+      "km": 18420,
+      "recorded_at": "2026-11-17T10:42:00Z"
+    }
+  }
+}

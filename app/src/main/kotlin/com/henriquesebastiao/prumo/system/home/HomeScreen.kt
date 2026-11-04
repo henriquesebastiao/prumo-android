@@ -101,6 +101,11 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
     var showAllActions by rememberSaveable { mutableStateOf(false) }
+    // A module's sheet open over the Home ("Registrar abastecimento"), by the action's id.
+    var sheetAction by rememberSaveable { mutableStateOf<String?>(null) }
+    val act: (QuickAction) -> Unit = { action ->
+        if (action.sheet != null) sheetAction = action.id else onAction(action)
+    }
     Surface(modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Box(Modifier.fillMaxSize()) {
             Column(Modifier.fillMaxSize().statusBarsPadding()) {
@@ -127,7 +132,7 @@ fun HomeScreen(
             if (state.pinned.isNotEmpty() && state.error == null && !state.loading) {
                 Toolbar(
                     state.pinned,
-                    onAction,
+                    act,
                     onAll = { showAllActions = true },
                     modifier = Modifier.align(
                         Alignment.BottomCenter,
@@ -142,12 +147,14 @@ fun HomeScreen(
             pinned = state.pinned.map { it.id }.toSet(),
             onAction = {
                 showAllActions = false
-                onAction(it)
+                act(it)
             },
             onTogglePinned = onTogglePinned,
             onDismiss = { showAllActions = false },
         )
     }
+    val sheet = sheetAction?.let { id -> state.groups.flatMap { it.actions }.firstOrNull { it.id == id }?.sheet }
+    sheet?.invoke { sheetAction = null }
 }
 
 @Composable

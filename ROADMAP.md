@@ -42,6 +42,8 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [ ] Verificação no emulador contra `make dev` e comparação com `design/v1/`
 
 ## Fase 1 — Veículos (`garage`)
+
+> **Implementada em 2026-11-04 (sessão na nuvem, sem Android SDK local).** Todos os itens abaixo, exceto o desfazer da exclusão, estão implementados e passam no CI (build, lint, testes de unidade e Robolectric); a camada de dados também foi conferida contra o `e2e_server.py`. Eles só são marcados depois da conferência no emulador e da revisão visual contra `design/v1/`, que ficam com o mantenedor. Os conflitos C1–C5 e C9 seguem a web (D15): as exclusões pedem confirmação e acontecem na hora, como na web; o snackbar com desfazer ficou para depois.
 - [ ] Lista, estado vazio, cadastro, edição e arquivamento
 - [ ] Detalhe: km atual, hero da troca de óleo, consumo e gastos, histórico em abas (manutenções, abastecimentos, óleo, km)
 - [ ] Folhas: atualizar km e abastecimento

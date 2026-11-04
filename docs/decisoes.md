@@ -90,6 +90,19 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 **Decisão:** `cleartextTrafficPermitted="true"` no app inteiro, como no Downtify, e certificados instalados pelo usuário são aceitos (proxy com CA própria). A tela do servidor avisa quando o endereço é público e sem HTTPS.
 **Consequências:** o token viaja sem cifra em HTTP; na rede de casa é a mesma exposição da web. Para acesso pela internet, o guia de instalação do servidor recomenda um proxy com TLS.
 
+## D15 — Conflitos de Veículos resolvidos como na web
+**Status:** aceita · 2026-11
+**Contexto:** as pranchas de Veículos pedem cálculos e campos que o domínio não tem do mesmo jeito (C1–C5 e C9 de `docs/design-v1.md`). A web do servidor já passou por eles na Fase 1 dela (D27 do servidor e `docs/frontend.md` de lá, "Veículos (Fase 1, D27): resolvidas"), e o app deve ter as mesmas funções da web.
+**Decisão:** o app segue o que a web faz.
+- C1: no abastecimento, o usuário digita valor total e litros; o preço por litro aparece como prévia marcada "calculado", só para conferir. O valor gravado vem da API (G7). O app não calcula o terceiro valor a partir de dois.
+- C2: cada peça tem quantidade (padrão 1), como no domínio (D27 do servidor).
+- C3: o total da manutenção (peças × quantidade + mão de obra) aparece como prévia "calculado"; o total gravado e exibido depois vem da API (G4).
+- C4: o óleo da troca é um campo próprio (`oil_type`), com as sugestões de `previous_oil_types`; peças continuam disponíveis na troca de óleo.
+- C5: o app não valida a ordem do km; o servidor responde `garage.odometer_inconsistent`, mostrado no campo com o km do registro em conflito. A diferença "+92 km desde a última atualização" é só prévia.
+- C9: o combustível padrão é o habitual do veículo (`fuel_type`); sem ele, gasolina comum. O veículo padrão é o último usado nesta execução do app; sem uso, o primeiro da lista.
+- Excluir uma manutenção, um abastecimento ou uma leitura pede confirmação e exclui na hora, como a web ("Não dá para desfazer"); o snackbar com desfazer das pranchas fica para depois.
+**Consequências:** as prévias são conveniência de digitação, nunca o valor salvo; quando o servidor ganhar uma prévia própria (como já há para a próxima troca de óleo, `oil-change-suggestion`), o app passa a usá-la.
+
 ---
 
 ## Modelo

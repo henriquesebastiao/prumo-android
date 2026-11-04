@@ -1,0 +1,147 @@
+{
+  "items": [
+    {
+      "id": "019a9bfc-628e-753e-9ac2-b5793e4d7003",
+      "kind": "motorcycle",
+      "name": "Honda CG 160 Fan",
+      "brand": "Honda",
+      "model": "CG 160 Fan",
+      "year": 2023,
+      "fuel_type": "gasoline",
+      "current_km": 18420,
+      "current_km_at": "2026-11-17T10:42:00Z",
+      "oil_interval_km": 1000,
+      "oil_interval_months": 3,
+      "notes": null,
+      "archived_at": null,
+      "oil_change": {
+        "status": "ok",
+        "primary": "km",
+        "interval_km": 1000,
+        "interval_months": 3,
+        "last": {
+          "maintenance_id": "01a1a616-4ddd-7374-96fe-e15bc4fb1996",
+          "performed_at": "2026-10-21T13:00:00Z",
+          "km": 17640,
+          "oil_type": "4T 20W-50 semissintético"
+        },
+        "next_km": 18640,
+        "remaining_km": 220,
+        "used_km_percent": 78,
+        "next_on": "2027-01-21",
+        "remaining_days": 65,
+        "used_days_percent": 29,
+        "estimated_km_on": "2026-11-25"
+      },
+      "stats": {
+        "last_fueling": {
+          "id": "01a1a616-4df7-71c3-9b45-8fd83bc7b585",
+          "fueled_at": "2026-11-16T21:10:00Z",
+          "volume_ml": 7300,
+          "total_cents": 4636,
+          "price_per_liter": 6.351,
+          "full_tank": true
+        },
+        "last_consumption_km_l": 39.73,
+        "avg_consumption_km_l": 40.3,
+        "recent_consumption": [
+          {
+            "fueling_id": "01a1a616-4dd2-7715-8045-ab781eef2282",
+            "fueled_at": "2026-10-07T12:00:00Z",
+            "km_l": 41.21
+          },
+          {
+            "fueling_id": "01a1a616-4dd7-733c-a001-bcd852d923bb",
+            "fueled_at": "2026-10-17T12:00:00Z",
+            "km_l": 40.11
+          },
+          {
+            "fueling_id": "01a1a616-4de3-717a-a269-72827fad83c6",
+            "fueled_at": "2026-10-27T12:00:00Z",
+            "km_l": 39.89
+          },
+          {
+            "fueling_id": "01a1a616-4de8-755e-a71b-9e84ace02237",
+            "fueled_at": "2026-11-06T12:00:00Z",
+            "km_l": 40.58
+          },
+          {
+            "fueling_id": "01a1a616-4df7-71c3-9b45-8fd83bc7b585",
+            "fueled_at": "2026-11-16T21:10:00Z",
+            "km_l": 39.73
+          }
+        ],
+        "pace_km_per_day": 29.7,
+        "month_km": 620,
+        "month_spent_cents": 9486,
+        "month_fuelings_count": 2,
+        "month_maintenances_count": 0
+      },
+      "created_at": "2025-11-19T12:00:00.143306Z",
+      "updated_at": "2026-11-17T10:42:00.003104Z"
+    },
+    {
+      "id": "019aa122-be00-72f7-b6c8-7ff7aa43d49e",
+      "kind": "car",
+      "name": "Fiat Strada Freedom",
+      "brand": "Fiat",
+      "model": "Strada Freedom",
+      "year": 2021,
+      "fuel_type": "gasoline",
+      "current_km": 52300,
+      "current_km_at": "2026-11-15T22:20:00Z",
+      "oil_interval_km": 10000,
+      "oil_interval_months": 12,
+      "notes": null,
+      "archived_at": null,
+      "oil_change": {
+        "status": "ok",
+        "primary": "date",
+        "interval_km": 10000,
+        "interval_months": 12,
+        "last": {
+          "maintenance_id": "01a1a616-4d94-76dd-8a51-95417242096b",
+          "performed_at": "2025-12-05T14:00:00Z",
+          "km": 46900,
+          "oil_type": "5W-30 sintético"
+        },
+        "next_km": 56900,
+        "remaining_km": 4600,
+        "used_km_percent": 54,
+        "next_on": "2026-12-05",
+        "remaining_days": 18,
+        "used_days_percent": 95,
+        "estimated_km_on": "2027-09-08"
+      },
+      "stats": {
+        "last_fueling": {
+          "id": "01a1a616-4df2-7684-8e5b-451c35009e7a",
+          "fueled_at": "2026-11-13T21:00:00Z",
+          "volume_ml": 28400,
+          "total_cents": 18034,
+          "price_per_liter": 6.35,
+          "full_tank": true
+        },
+        "last_consumption_km_l": 14.08,
+        "avg_consumption_km_l": 14.08,
+        "recent_consumption": [
+          {
+            "fueling_id": "01a1a616-4df2-7684-8e5b-451c35009e7a",
+            "fueled_at": "2026-11-13T21:00:00Z",
+            "km_l": 14.08
+          }
+        ],
+        "pace_km_per_day": 15.6,
+        "month_km": 400,
+        "month_spent_cents": 18034,
+        "month_fuelings_count": 1,
+        "month_maintenances_count": 0
+      },
+      "created_at": "2025-11-20T12:00:00.000409Z",
+      "updated_at": "2026-11-15T22:20:00.003489Z"
+    }
+  ],
+  "total": 2,
+  "limit": 50,
+  "offset": 0
+}

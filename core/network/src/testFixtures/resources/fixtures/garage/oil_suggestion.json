@@ -1,0 +1,12 @@
+{
+  "next_oil_change_km": 19420,
+  "next_oil_change_on": "2027-02-17",
+  "interval_km": 1000,
+  "interval_months": 3,
+  "pace_km_per_day": 29.7,
+  "estimated_km_on": "2026-12-21",
+  "previous_oil_types": [
+    "4T 20W-50 semissintético",
+    "4T 10W-30 sintético"
+  ]
+}
