@@ -1,0 +1,115 @@
+{
+  "month": "2026-11",
+  "items": [
+    {
+      "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+      "kind": "expense",
+      "name": "Alimentação",
+      "color": "orange",
+      "icon": "utensils",
+      "archived_at": null,
+      "transactions_count": 16,
+      "month_transactions_count": 9,
+      "month_total_cents": 74285
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63b65d8e7f53",
+      "kind": "expense",
+      "name": "Moradia",
+      "color": "blue",
+      "icon": "house",
+      "archived_at": null,
+      "transactions_count": 8,
+      "month_transactions_count": 3,
+      "month_total_cents": 138630
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63b765ae6fff",
+      "kind": "expense",
+      "name": "Transporte",
+      "color": "indigo",
+      "icon": "bus",
+      "archived_at": null,
+      "transactions_count": 0,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63b8d38641e1",
+      "kind": "expense",
+      "name": "Combustível",
+      "color": "gray",
+      "icon": "fuel",
+      "archived_at": null,
+      "transactions_count": 8,
+      "month_transactions_count": 3,
+      "month_total_cents": 27104
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63b94fecba9e",
+      "kind": "expense",
+      "name": "Saúde",
+      "color": "red",
+      "icon": "heart-pulse",
+      "archived_at": null,
+      "transactions_count": 2,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63baec561f22",
+      "kind": "expense",
+      "name": "Educação",
+      "color": "violet",
+      "icon": "graduation-cap",
+      "archived_at": null,
+      "transactions_count": 1,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63bb53cd4d72",
+      "kind": "expense",
+      "name": "Lazer",
+      "color": "pink",
+      "icon": "ticket",
+      "archived_at": null,
+      "transactions_count": 9,
+      "month_transactions_count": 4,
+      "month_total_cents": 16400
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63bc1fdb0e0c",
+      "kind": "expense",
+      "name": "Compras",
+      "color": "amber",
+      "icon": "shopping-bag",
+      "archived_at": null,
+      "transactions_count": 4,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63bddcc6cd74",
+      "kind": "expense",
+      "name": "Assinaturas",
+      "color": "cyan",
+      "icon": "repeat",
+      "archived_at": null,
+      "transactions_count": 0,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63be3947bc0a",
+      "kind": "expense",
+      "name": "Outros",
+      "color": "gray",
+      "icon": "tag",
+      "archived_at": null,
+      "transactions_count": 0,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    }
+  ]
+}

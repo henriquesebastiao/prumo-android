@@ -55,4 +55,12 @@ class FormatsTest {
         assertEquals("1.234,5", Formats.decimal(1234.5))
         assertEquals("29,7", Formats.decimal(29.66, maxDecimals = 1))
     }
+
+    @Test
+    fun monthsReadAsTheBoardsDo() {
+        assertEquals("Novembro 2026", Formats.monthYear(java.time.YearMonth.of(2026, 11)))
+        assertEquals("Março 2027", Formats.monthYear(java.time.YearMonth.of(2027, 3)))
+        assertEquals("nov", Formats.shortMonth(java.time.YearMonth.of(2026, 11)))
+        assertEquals("02/11", Formats.shortDate(java.time.LocalDate.of(2026, 11, 2)))
+    }
 }

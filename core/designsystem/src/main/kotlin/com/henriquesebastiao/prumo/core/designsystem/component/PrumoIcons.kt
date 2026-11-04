@@ -19,9 +19,13 @@ object PrumoIcons {
 
     @DrawableRes val ArrowBack = R.drawable.ic_arrow_back
 
+    @DrawableRes val ArrowDropDown = R.drawable.ic_arrow_drop_down
+
     @DrawableRes val ArrowForward = R.drawable.ic_arrow_forward
 
     @DrawableRes val AutoStories = R.drawable.ic_auto_stories
+
+    @DrawableRes val BarChart = R.drawable.ic_bar_chart
 
     @DrawableRes val BrightnessAuto = R.drawable.ic_brightness_auto
 
@@ -39,6 +43,8 @@ object PrumoIcons {
 
     @DrawableRes val Checkroom = R.drawable.ic_checkroom
 
+    @DrawableRes val ChevronLeft = R.drawable.ic_chevron_left
+
     @DrawableRes val ChevronRight = R.drawable.ic_chevron_right
 
     @DrawableRes val Close = R.drawable.ic_close
@@ -50,6 +56,8 @@ object PrumoIcons {
     @DrawableRes val CloudOff = R.drawable.ic_cloud_off
 
     @DrawableRes val Code = R.drawable.ic_code
+
+    @DrawableRes val CompareArrows = R.drawable.ic_compare_arrows
 
     @DrawableRes val Computer = R.drawable.ic_computer
 
@@ -72,6 +80,8 @@ object PrumoIcons {
     @DrawableRes val Dns = R.drawable.ic_dns
 
     @DrawableRes val DoNotDisturbOn = R.drawable.ic_do_not_disturb_on
+
+    @DrawableRes val DonutSmall = R.drawable.ic_donut_small
 
     @DrawableRes val DragIndicator = R.drawable.ic_drag_indicator
 
@@ -149,6 +159,8 @@ object PrumoIcons {
 
     @DrawableRes val School = R.drawable.ic_school
 
+    @DrawableRes val Search = R.drawable.ic_search
+
     @DrawableRes val Sell = R.drawable.ic_sell
 
     @DrawableRes val Settings = R.drawable.ic_settings
@@ -164,6 +176,8 @@ object PrumoIcons {
     @DrawableRes val Subscriptions = R.drawable.ic_subscriptions
 
     @DrawableRes val SwapHoriz = R.drawable.ic_swap_horiz
+
+    @DrawableRes val SwapVert = R.drawable.ic_swap_vert
 
     @DrawableRes val TrendingUp = R.drawable.ic_trending_up
 

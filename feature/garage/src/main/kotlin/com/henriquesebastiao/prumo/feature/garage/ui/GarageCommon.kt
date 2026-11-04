@@ -3,20 +3,13 @@ package com.henriquesebastiao.prumo.feature.garage.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FloatingToolbarDefaults
 import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -130,32 +123,6 @@ internal fun LoadMore(loading: Boolean, onClick: () -> Unit, modifier: Modifier 
     Box(modifier.fillMaxWidth().padding(vertical = Spacing.sm), contentAlignment = Alignment.Center) {
         OutlinedButton(onClick = onClick, enabled = !loading) {
             Text(stringResource(R.string.garage_load_more))
-        }
-    }
-}
-
-/** One option of a ⋮ menu. */
-internal data class MenuOption(val label: String, val icon: Int, val onClick: () -> Unit)
-
-/** The ⋮ button of a top bar and its menu. */
-@Composable
-internal fun OverflowMenu(options: List<MenuOption>, modifier: Modifier = Modifier) {
-    var open by remember { mutableStateOf(false) }
-    Box(modifier) {
-        IconButton(onClick = { open = true }) {
-            Icon(painterResource(PrumoIcons.MoreVert), contentDescription = stringResource(R.string.garage_more))
-        }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
-            options.forEach { option ->
-                DropdownMenuItem(
-                    text = { Text(option.label, style = MaterialTheme.typography.bodyLarge) },
-                    onClick = {
-                        open = false
-                        option.onClick()
-                    },
-                    leadingIcon = { Icon(painterResource(option.icon), contentDescription = null) },
-                )
-            }
         }
     }
 }

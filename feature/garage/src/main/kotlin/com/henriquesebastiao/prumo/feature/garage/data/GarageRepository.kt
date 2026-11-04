@@ -5,6 +5,7 @@ import com.henriquesebastiao.prumo.core.data.repository.ServerCalls
 import com.henriquesebastiao.prumo.core.model.Outcome
 import com.henriquesebastiao.prumo.core.model.map
 import com.henriquesebastiao.prumo.core.model.onOk
+import com.henriquesebastiao.prumo.core.network.requestBody
 import com.henriquesebastiao.prumo.feature.garage.model.Fueling
 import com.henriquesebastiao.prumo.feature.garage.model.FuelingInput
 import com.henriquesebastiao.prumo.feature.garage.model.GARAGE_MODULE_ID
@@ -131,10 +132,10 @@ class DefaultGarageRepository @Inject constructor(
     override suspend fun vehicle(id: String) = api { vehicle(id) }.map { it.toModel() }
 
     override suspend fun createVehicle(input: VehicleInput) =
-        write { createVehicle(body(VehicleWriteDto.serializer(), input.toDto())) }.map { it.toModel() }
+        write { createVehicle(requestBody(VehicleWriteDto.serializer(), input.toDto())) }.map { it.toModel() }
 
     override suspend fun updateVehicle(id: String, input: VehicleInput) =
-        write { updateVehicle(id, body(VehicleWriteDto.serializer(), input.toDto())) }.map { it.toModel() }
+        write { updateVehicle(id, requestBody(VehicleWriteDto.serializer(), input.toDto())) }.map { it.toModel() }
 
     override suspend fun setArchived(id: String, archived: Boolean) =
         write { if (archived) archiveVehicle(id) else unarchiveVehicle(id) }.map { it.toModel() }
@@ -144,9 +145,10 @@ class DefaultGarageRepository @Inject constructor(
     override suspend fun readings(vehicleId: String, offset: Int) =
         api { odometer(vehicleId, GarageRepository.PAGE_SIZE, offset) }.map { it.toPage { dto -> dto.toModel() } }
 
-    override suspend fun addReading(vehicleId: String, km: Long) =
-        write { addReading(vehicleId, body(OdometerReadingCreateDto.serializer(), OdometerReadingCreateDto(km))) }
-            .map { it.toModel() }
+    override suspend fun addReading(vehicleId: String, km: Long) = write {
+        addReading(vehicleId, requestBody(OdometerReadingCreateDto.serializer(), OdometerReadingCreateDto(km)))
+    }
+        .map { it.toModel() }
 
     override suspend fun deleteReading(vehicleId: String, readingId: String) =
         write { deleteReading(vehicleId, readingId) }
@@ -159,12 +161,12 @@ class DefaultGarageRepository @Inject constructor(
         api { maintenance(vehicleId, id) }.map { it.toModel() }
 
     override suspend fun createMaintenance(vehicleId: String, input: MaintenanceInput) =
-        write { createMaintenance(vehicleId, body(MaintenanceCreateDto.serializer(), input.toCreateDto())) }
+        write { createMaintenance(vehicleId, requestBody(MaintenanceCreateDto.serializer(), input.toCreateDto())) }
             .map { it.toModel() }
             .onOk { lastVehicleId = vehicleId }
 
     override suspend fun updateMaintenance(vehicleId: String, id: String, input: MaintenanceInput) =
-        write { updateMaintenance(vehicleId, id, body(MaintenanceUpdateDto.serializer(), input.toUpdateDto())) }
+        write { updateMaintenance(vehicleId, id, requestBody(MaintenanceUpdateDto.serializer(), input.toUpdateDto())) }
             .map { it.toModel() }
 
     override suspend fun deleteMaintenance(vehicleId: String, id: String) = write { deleteMaintenance(vehicleId, id) }
@@ -178,12 +180,13 @@ class DefaultGarageRepository @Inject constructor(
     override suspend fun fueling(vehicleId: String, id: String) = api { fueling(vehicleId, id) }.map { it.toModel() }
 
     override suspend fun createFueling(vehicleId: String, input: FuelingInput) =
-        write { createFueling(vehicleId, body(FuelingWriteDto.serializer(), input.toDto())) }
+        write { createFueling(vehicleId, requestBody(FuelingWriteDto.serializer(), input.toDto())) }
             .map { it.toModel() }
             .onOk { lastVehicleId = vehicleId }
 
-    override suspend fun updateFueling(vehicleId: String, id: String, input: FuelingInput) =
-        write { updateFueling(vehicleId, id, body(FuelingWriteDto.serializer(), input.toDto())) }.map { it.toModel() }
+    override suspend fun updateFueling(vehicleId: String, id: String, input: FuelingInput) = write {
+        updateFueling(vehicleId, id, requestBody(FuelingWriteDto.serializer(), input.toDto()))
+    }.map { it.toModel() }
 
     override suspend fun deleteFueling(vehicleId: String, id: String) = write { deleteFueling(vehicleId, id) }
 
@@ -192,11 +195,11 @@ class DefaultGarageRepository @Inject constructor(
             .map { page -> page.items.map { it.toModel() } }
 
     override suspend fun createWorkshop(name: String, notes: String?) =
-        write { createWorkshop(body(WorkshopWriteDto.serializer(), WorkshopWriteDto(name, notes))) }
+        write { createWorkshop(requestBody(WorkshopWriteDto.serializer(), WorkshopWriteDto(name, notes))) }
             .map { it.toModel() }
 
     override suspend fun updateWorkshop(id: String, name: String, notes: String?) =
-        write { updateWorkshop(id, body(WorkshopWriteDto.serializer(), WorkshopWriteDto(name, notes))) }
+        write { updateWorkshop(id, requestBody(WorkshopWriteDto.serializer(), WorkshopWriteDto(name, notes))) }
             .map { it.toModel() }
 
     override suspend fun deleteWorkshop(id: String) = write { deleteWorkshop(id) }

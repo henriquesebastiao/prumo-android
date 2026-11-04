@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 /**
  * The routes of Veículos (`docs/api.md` of the server, "Veículos"), relative to the server's base
- * URL. Bodies go as [JsonObject] encoded by [GarageWriteJson]: a `PATCH` clears a field with an
+ * URL. Bodies go as [JsonObject] encoded by `RequestJson` (:core:network): a `PATCH` clears a field with an
  * explicit `null`, which the app's lenient JSON leaves out.
  */
 @Suppress("TooManyFunctions")

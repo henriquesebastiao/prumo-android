@@ -1,0 +1,14 @@
+{
+  "error": {
+    "code": "finance.invalid_combination",
+    "message": "Invalid fields for this kind of transaction.",
+    "details": {
+      "kind": "expense",
+      "missing": [
+        "account_id",
+        "category_id"
+      ],
+      "unexpected": []
+    }
+  }
+}

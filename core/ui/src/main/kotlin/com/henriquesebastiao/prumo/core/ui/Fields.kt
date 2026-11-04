@@ -153,6 +153,44 @@ fun DateField(
     }
 }
 
+/** An optional time of day ("Hora"): empty until picked; [onClear] empties it. */
+@Composable
+fun TimeField(
+    value: LocalTime?,
+    onValueChange: (LocalTime) -> Unit,
+    onClear: () -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+) {
+    var open by rememberSaveable { mutableStateOf(false) }
+    ClickableField(
+        text = value?.let(Formats::time).orEmpty(),
+        label = label,
+        icon = PrumoIcons.Schedule,
+        onClick = { open = true },
+        modifier = modifier,
+        trailing = if (value != null) {
+            {
+                IconButton(onClick = onClear) {
+                    Icon(painterResource(PrumoIcons.Close), contentDescription = stringResource(R.string.ui_clear))
+                }
+            }
+        } else {
+            null
+        },
+    )
+    if (open) {
+        TimeDialog(
+            initial = value ?: LocalTime.NOON,
+            onPick = {
+                onValueChange(it)
+                open = false
+            },
+            onDismiss = { open = false },
+        )
+    }
+}
+
 private enum class PickerStep { Closed, Date, Time }
 
 /** A read-only field that does something when tapped (opens a picker). */

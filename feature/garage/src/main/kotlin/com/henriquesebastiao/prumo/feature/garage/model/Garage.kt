@@ -1,5 +1,6 @@
 package com.henriquesebastiao.prumo.feature.garage.model
 
+import com.henriquesebastiao.prumo.core.model.Wire
 import java.time.Instant
 import java.time.LocalDate
 
@@ -8,14 +9,6 @@ const val GARAGE_MODULE_ID = "garage"
 
 // Veículos as the API gives it (docs/dominio.md of the server, "Veículos"). Every derived number
 // (oil status, consumption, pace, the month's spending, totals) comes ready from the server (D02).
-
-/** An enum value as sent on the wire; an unknown one (a newer server) maps to a fallback. */
-interface Wire {
-    val wire: String
-}
-
-inline fun <reified T> wireOf(value: String?, fallback: T): T where T : Enum<T>, T : Wire =
-    enumValues<T>().firstOrNull { it.wire == value } ?: fallback
 
 enum class VehicleKind(override val wire: String) : Wire {
     Car("car"),

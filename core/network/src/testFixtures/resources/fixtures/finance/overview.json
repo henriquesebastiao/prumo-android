@@ -1,0 +1,174 @@
+{
+  "month": "2026-11",
+  "until": "2026-11-17",
+  "total_balance_cents": 715427,
+  "accounts_count": 3,
+  "accounts": [
+    {
+      "account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      },
+      "balance_cents": 481237
+    },
+    {
+      "account": {
+        "id": "01a1ea85-ce03-7246-8389-e4cbf16b335c",
+        "name": "Inter",
+        "kind": "checking",
+        "color": "orange",
+        "icon": "landmark"
+      },
+      "balance_cents": 215690
+    },
+    {
+      "account": {
+        "id": "01a1ea85-ce05-7626-9960-c6c5cd9c4009",
+        "name": "Carteira",
+        "kind": "cash",
+        "color": "green",
+        "icon": "wallet"
+      },
+      "balance_cents": 18500
+    }
+  ],
+  "income_cents": 530000,
+  "expense_cents": 256419,
+  "expense_percent": 48,
+  "result_cents": 273581,
+  "series": [
+    {
+      "month": "2026-06",
+      "income_cents": 500000,
+      "expense_cents": 330000
+    },
+    {
+      "month": "2026-07",
+      "income_cents": 540000,
+      "expense_cents": 360000
+    },
+    {
+      "month": "2026-08",
+      "income_cents": 490000,
+      "expense_cents": 300000
+    },
+    {
+      "month": "2026-09",
+      "income_cents": 560000,
+      "expense_cents": 380000
+    },
+    {
+      "month": "2026-10",
+      "income_cents": 510000,
+      "expense_cents": 340000
+    },
+    {
+      "month": "2026-11",
+      "income_cents": 530000,
+      "expense_cents": 256419
+    }
+  ],
+  "expenses_by_category": [
+    {
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b65d8e7f53",
+        "name": "Moradia",
+        "kind": "expense",
+        "color": "blue",
+        "icon": "house"
+      },
+      "amount_cents": 138630,
+      "percent": 54,
+      "transactions_count": 3
+    },
+    {
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+        "name": "Alimentação",
+        "kind": "expense",
+        "color": "orange",
+        "icon": "utensils"
+      },
+      "amount_cents": 74285,
+      "percent": 29,
+      "transactions_count": 9
+    },
+    {
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b8d38641e1",
+        "name": "Combustível",
+        "kind": "expense",
+        "color": "gray",
+        "icon": "fuel"
+      },
+      "amount_cents": 27104,
+      "percent": 11,
+      "transactions_count": 3
+    },
+    {
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63bb53cd4d72",
+        "name": "Lazer",
+        "kind": "expense",
+        "color": "pink",
+        "icon": "ticket"
+      },
+      "amount_cents": 16400,
+      "percent": 6,
+      "transactions_count": 4
+    }
+  ],
+  "income_by_category": [
+    {
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63bf578da810",
+        "name": "Salário",
+        "kind": "income",
+        "color": "green",
+        "icon": "briefcase"
+      },
+      "amount_cents": 380000,
+      "percent": 72,
+      "transactions_count": 1
+    },
+    {
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63c063cc0319",
+        "name": "Freelance",
+        "kind": "income",
+        "color": "teal",
+        "icon": "code-xml"
+      },
+      "amount_cents": 150000,
+      "percent": 28,
+      "transactions_count": 1
+    }
+  ],
+  "open_invoices": [
+    {
+      "card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "limit_cents": 500000,
+      "available_limit_cents": 371540,
+      "invoice": {
+        "closing_on": "2026-12-03",
+        "due_on": "2026-12-10",
+        "starts_on": "2026-11-03",
+        "ends_on": "2026-12-02",
+        "amount_cents": 128460,
+        "paid_cents": 0,
+        "remaining_cents": 128460,
+        "status": "open",
+        "transactions_count": 12,
+        "last_payment_on": null,
+        "last_payment_account": null
+      }
+    }
+  ]
+}

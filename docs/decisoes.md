@@ -103,6 +103,23 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 - Excluir uma manutenção, um abastecimento ou uma leitura pede confirmação e exclui na hora, como a web ("Não dá para desfazer"); o snackbar com desfazer das pranchas fica para depois.
 **Consequências:** as prévias são conveniência de digitação, nunca o valor salvo; quando o servidor ganhar uma prévia própria (como já há para a próxima troca de óleo, `oil-change-suggestion`), o app passa a usá-la.
 
+## D16 — Finanças como na web, sem cálculo no app
+**Status:** aceita · 2026-11
+**Contexto:** as pranchas de Finanças pedem dados que a API não tem (A6–A10) e prévias no formulário (C7), usam 8 cores hex e ícones Material onde o servidor guarda 11 chaves de cor e nomes Lucide (C10, C11), e mostram "Excluir" categoria sem olhar o uso (C15). A web já resolveu a maioria na Fase 2 dela (D31–D34 do servidor).
+**Decisão:** o app segue a web e o que a API já entrega.
+- A6: o cabeçalho de cada dia em Transações mostra só a data ("Hoje · 02/11"); os totais de receitas e despesas são os do filtro inteiro, que a API já devolve (D34 do servidor). Somar a página no app ficaria errado com paginação. O total por dia no servidor fica no ROADMAP, à espera de aprovação.
+- A7: o percentual por categoria é o inteiro da API ("78 %").
+- A8: sem "Criada por" no detalhe da transação.
+- A9: a conta pré-selecionada é a última usada nesta execução do app; sem uso, a primeira da lista (a web usa a primeira). Igual ao veículo de Veículos (D15).
+- A10: o detalhe de uma compra no cartão mostra a fatura dela ("Fatura de dezembro") e o status, lido de `GET …/invoices/{closing_on}`; sem campo novo.
+- C7: "Pagar fatura" tem Total (o `remaining_cents` da fatura) e Parcial. No parcial, "Restam R$ 564,22 nesta fatura" é prévia (`remaining_cents` menos o digitado), como as prévias de D15; o que vale é a fatura que a API devolve depois.
+- C10: cada uma das 11 chaves de cor (`green`…`gray`) vira o seed do avatar (`ModuleTheme`), com o mesmo hex da paleta da web. Os seletores oferecem as 7 cores da web (azul, violeta, laranja, verde, rosa, ciano, cinza) e a cor atual, se for outra.
+- C11: os seletores de ícone gravam os nomes Lucide da web (`ACCOUNT_ICONS` e `CATEGORY_ICONS` de `helpers.ts`), desenhados pelo `ServerIcons`; nome desconhecido usa o ícone genérico.
+- C15: categoria, conta ou cartão sem transações podem ser excluídos; com transações, a ação vira "Arquivar" (D32 do servidor).
+- Navegação: Finanças abre no Resumo, com abas em pílula (Resumo, Transações, Contas, Cartões); Categorias e a busca ficam no topo. A toolbar tem nova receita, nova transferência e pagar fatura, e o FAB lança despesa. O formulário de transação é uma tela (prancha 08), não uma folha; categoria e pagamento de fatura são folhas (pranchas 11 e 14).
+- Exclusões pedem confirmação e excluem na hora, como em Veículos (D15); uma parcela pergunta se é só ela ou a compra inteira (`?installments=all`).
+**Consequências:** nenhuma mudança no servidor nesta fase. Se o total por dia (A6) for aprovado, o app passa a mostrá-lo no cabeçalho do dia.
+
 ---
 
 ## Modelo

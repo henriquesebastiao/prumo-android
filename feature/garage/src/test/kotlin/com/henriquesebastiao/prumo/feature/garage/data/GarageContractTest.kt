@@ -1,12 +1,12 @@
 package com.henriquesebastiao.prumo.feature.garage.data
 
+import com.henriquesebastiao.prumo.core.model.Wire
 import com.henriquesebastiao.prumo.core.network.testing.OpenApiContract
 import com.henriquesebastiao.prumo.feature.garage.model.FuelType
 import com.henriquesebastiao.prumo.feature.garage.model.MaintenanceKind
 import com.henriquesebastiao.prumo.feature.garage.model.OilStatus
 import com.henriquesebastiao.prumo.feature.garage.model.ReadingSource
 import com.henriquesebastiao.prumo.feature.garage.model.VehicleKind
-import com.henriquesebastiao.prumo.feature.garage.model.Wire
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

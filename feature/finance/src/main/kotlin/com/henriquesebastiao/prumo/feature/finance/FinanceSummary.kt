@@ -12,20 +12,20 @@ data class FinanceSummaryDto(
     val month: String,
     @SerialName("total_balance_cents") val totalBalanceCents: Long,
     @SerialName("expense_cents") val expenseCents: Long,
-    @SerialName("next_invoice") val nextInvoice: OpenInvoiceDto? = null,
+    @SerialName("next_invoice") val nextInvoice: SummaryOpenInvoiceDto? = null,
 )
 
 /** Schema OpenInvoice: the card and its invoice. */
 @Serializable
-data class OpenInvoiceDto(val card: CardRefDto, val invoice: InvoiceDto)
+data class SummaryOpenInvoiceDto(val card: SummaryCardDto, val invoice: SummaryInvoiceDto)
 
 /** Schema CardRef. */
 @Serializable
-data class CardRefDto(val id: String, val name: String)
+data class SummaryCardDto(val id: String, val name: String)
 
 /** Schema InvoiceRead, the fields the card shows. */
 @Serializable
-data class InvoiceDto(
+data class SummaryInvoiceDto(
     @SerialName("closing_on") val closingOn: String,
     @SerialName("amount_cents") val amountCents: Long,
     val status: String,

@@ -6,6 +6,7 @@ import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Currency
 import java.util.Locale
@@ -27,6 +28,8 @@ object Formats {
     private val hourMinute = DateTimeFormatter.ofPattern("HH:mm", Locale)
     private val dayOfMonth = DateTimeFormatter.ofPattern("d 'de' MMMM", Locale)
     private val monthName = DateTimeFormatter.ofPattern("MMMM", Locale)
+    private val shortMonthName = DateTimeFormatter.ofPattern("MMM", Locale)
+    private val dayMonth = DateTimeFormatter.ofPattern("dd/MM", Locale)
 
     /**
      * [cents] in [currency] (ISO 4217, the user's preference; F9 of the server): `R$ 1.234,56`.
@@ -51,6 +54,16 @@ object Formats {
         format.maximumFractionDigits = UNIT_PRICE_SCALE
         return format.format(value)
     }
+
+    /** A month with its year, capitalized, as a period title: `Novembro 2026`. */
+    fun monthYear(month: YearMonth): String =
+        "${monthName.format(month.atDay(1)).replaceFirstChar { it.titlecase(Locale) }} ${month.year}"
+
+    /** A month in three letters, for a chart's axis: `nov`. */
+    fun shortMonth(month: YearMonth): String = shortMonthName.format(month.atDay(1)).trimEnd('.')
+
+    /** Day and month in digits: `02/11`. */
+    fun shortDate(date: LocalDate): String = dayMonth.format(date)
 
     /** A decimal with up to [maxDecimals] places (a consumption): `40,3`, `39,73`, `1.234,5`. */
     fun decimal(value: Double, maxDecimals: Int = 2): String {

@@ -113,7 +113,10 @@ private fun FinanceHomeCardPreview() {
                     month = "2026-11",
                     totalBalanceCents = 874_235,
                     expenseCents = 148_290,
-                    nextInvoice = OpenInvoiceDto(CardRefDto("1", "Nubank"), InvoiceDto("2026-12-03", 106_422, "open")),
+                    nextInvoice = SummaryOpenInvoiceDto(
+                        SummaryCardDto("1", "Nubank"),
+                        SummaryInvoiceDto("2026-12-03", 106_422, "open"),
+                    ),
                 ),
                 hero = true,
                 currency = "BRL",

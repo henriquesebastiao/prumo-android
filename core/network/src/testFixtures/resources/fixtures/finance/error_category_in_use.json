@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "finance.category_in_use",
+    "message": "Category has transactions; archive it instead.",
+    "details": {
+      "transactions_count": 16
+    }
+  }
+}

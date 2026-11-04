@@ -55,6 +55,8 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [ ] Revisão visual contra `design/v1/`
 
 ## Fase 2 — Finanças (`finance`)
+
+> **Implementada em 2026-11-04 (sessão na nuvem, sem Android SDK local).** Os itens do app estão implementados e passam no CI (build, lint, testes de unidade e Robolectric); a camada de dados também foi conferida contra o `e2e_server.py`. Eles só são marcados depois da conferência no emulador e da revisão visual contra `design/v1/`, que ficam com o mantenedor. As lacunas e conflitos seguem a web e a API como estão (D16): sem total por dia (A6), percentual inteiro (A7), sem origem do registro (A8) e o status da fatura lido da própria fatura (A10); nenhuma mudança no servidor. O total por dia continua à espera de aprovação.
 - [ ] Resumo do mês com seletor de período e gráfico por categoria
 - [ ] Contas: lista, cadastro, edição, arquivamento
 - [ ] Transações: lista por dia com busca e filtros (Paging 3), nova despesa, receita e transferência, detalhe, edição e exclusão
