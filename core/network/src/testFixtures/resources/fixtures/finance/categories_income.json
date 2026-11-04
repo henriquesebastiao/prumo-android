@@ -1,0 +1,49 @@
+{
+  "month": "2026-11",
+  "items": [
+    {
+      "id": "019a9bfc-628e-75cd-8047-63bf578da810",
+      "kind": "income",
+      "name": "Salário",
+      "color": "green",
+      "icon": "briefcase",
+      "archived_at": null,
+      "transactions_count": 6,
+      "month_transactions_count": 1,
+      "month_total_cents": 380000
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63c063cc0319",
+      "kind": "income",
+      "name": "Freelance",
+      "color": "teal",
+      "icon": "code-xml",
+      "archived_at": null,
+      "transactions_count": 6,
+      "month_transactions_count": 1,
+      "month_total_cents": 150000
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63c1cfeba67d",
+      "kind": "income",
+      "name": "Rendimentos",
+      "color": "cyan",
+      "icon": "trending-up",
+      "archived_at": null,
+      "transactions_count": 0,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    },
+    {
+      "id": "019a9bfc-628e-75cd-8047-63c22f87c501",
+      "kind": "income",
+      "name": "Outros",
+      "color": "gray",
+      "icon": "tag",
+      "archived_at": null,
+      "transactions_count": 0,
+      "month_transactions_count": 0,
+      "month_total_cents": 0
+    }
+  ]
+}

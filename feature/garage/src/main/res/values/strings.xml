@@ -34,7 +34,6 @@
     <string name="garage_delete">Excluir</string>
     <string name="garage_archive">Arquivar</string>
     <string name="garage_unarchive">Desarquivar</string>
-    <string name="garage_more">Mais ações</string>
     <string name="garage_load_more">Carregar mais</string>
     <string name="garage_none">—</string>
     <string name="garage_join">%1$s · %2$s</string>

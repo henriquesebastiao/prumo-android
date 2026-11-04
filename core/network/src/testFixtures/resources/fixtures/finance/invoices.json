@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "closing_on": "2026-12-03",
+      "due_on": "2026-12-10",
+      "starts_on": "2026-11-03",
+      "ends_on": "2026-12-02",
+      "amount_cents": 128460,
+      "paid_cents": 0,
+      "remaining_cents": 128460,
+      "status": "open",
+      "transactions_count": 12,
+      "last_payment_on": null,
+      "last_payment_account": null
+    },
+    {
+      "closing_on": "2026-11-03",
+      "due_on": "2026-11-10",
+      "starts_on": "2026-10-03",
+      "ends_on": "2026-11-02",
+      "amount_cents": 193218,
+      "paid_cents": 193218,
+      "remaining_cents": 0,
+      "status": "paid",
+      "transactions_count": 4,
+      "last_payment_on": "2026-11-10",
+      "last_payment_account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      }
+    },
+    {
+      "closing_on": "2026-10-03",
+      "due_on": "2026-10-10",
+      "starts_on": "2026-09-03",
+      "ends_on": "2026-10-02",
+      "amount_cents": 171845,
+      "paid_cents": 171845,
+      "remaining_cents": 0,
+      "status": "paid",
+      "transactions_count": 4,
+      "last_payment_on": "2026-10-09",
+      "last_payment_account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      }
+    },
+    {
+      "closing_on": "2026-09-03",
+      "due_on": "2026-09-10",
+      "starts_on": "2026-08-03",
+      "ends_on": "2026-09-02",
+      "amount_cents": 122635,
+      "paid_cents": 122635,
+      "remaining_cents": 0,
+      "status": "paid",
+      "transactions_count": 4,
+      "last_payment_on": "2026-09-10",
+      "last_payment_account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      }
+    }
+  ]
+}

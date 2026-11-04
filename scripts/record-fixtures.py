@@ -2,7 +2,7 @@
 """Records real responses of a Prumo server as test fixtures of :core:network.
 
 The fixtures feed the network tests (the Home's union, the error format, the health) and the
-features' tests of their Home summaries. Record them from the design-board data, so they match
+features' tests (their Home summaries, and each module's DTOs read from real responses). Record them from the design-board data, so they match
 the boards: in ~/git/prumo/backend, run `uv run python scripts/e2e_server.py` (port 8001, user
 `henrique`, password `prumo-demo-01`, clock frozen at 17/11/2026 14:30 in São Paulo).
 
@@ -77,6 +77,44 @@ def record_garage(base, token):
     save("garage/error_odometer_inconsistent.json", refused)
 
 
+def record_finance(base, token):
+    """Finanças (fixtures/finance/): reads, plus two refused writes (nothing is saved)."""
+
+    def get(path):
+        status, payload, _ = call(base, "GET", path, token=token)
+        assert status == 200, f"{path} answered {status}"
+        return payload
+
+    root = "/api/v1/finance"
+    save("finance/overview.json", get(f"{root}/overview"))
+    accounts = get(f"{root}/accounts")
+    save("finance/accounts.json", accounts)
+    account = accounts["items"][0]
+    save("finance/account.json", get(f"{root}/accounts/{account['id']}"))
+    expense = get(f"{root}/categories?kind=expense")
+    save("finance/categories_expense.json", expense)
+    save("finance/categories_income.json", get(f"{root}/categories?kind=income"))
+    transactions = get(f"{root}/transactions?limit=20")
+    save("finance/transactions.json", transactions)
+    installment = next(t for t in transactions["items"] if t["installment_count"])
+    save("finance/transaction_installment.json", get(f"{root}/transactions/{installment['id']}"))
+    cards = get(f"{root}/credit-cards")
+    save("finance/credit_cards.json", cards)
+    card = cards["items"][0]
+    save("finance/credit_card.json", get(f"{root}/credit-cards/{card['id']}"))
+    save("finance/invoices.json", get(f"{root}/credit-cards/{card['id']}/invoices"))
+    closing = card["current_invoice"]["closing_on"]
+    save("finance/invoice.json", get(f"{root}/credit-cards/{card['id']}/invoices/{closing}"))
+    body = {"kind": "expense", "amount_cents": 100, "occurred_on": "2026-11-17", "description": "x"}
+    status, refused, _ = call(base, "POST", f"{root}/transactions", token=token, body=body)
+    assert status == 422, f"an expense without account answered {status}"
+    save("finance/error_invalid_combination.json", refused)
+    used = next(c for c in expense["items"] if c["transactions_count"] > 0)
+    status, refused, _ = call(base, "DELETE", f"{root}/categories/{used['id']}", token=token)
+    assert status == 422, f"deleting a used category answered {status}"
+    save("finance/error_category_in_use.json", refused)
+
+
 def main():
     base = (sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8001").rstrip("/")
     username = sys.argv[2] if len(sys.argv) > 2 else "henrique"
@@ -127,6 +165,7 @@ def main():
         save(name, payload)
 
     record_garage(base, token)
+    record_finance(base, token)
 
     status, missing, _ = call(base, "GET", "/api/v1/auth/sessions", token="not-a-token")
     assert status == 401, f"a bad token answered {status}"

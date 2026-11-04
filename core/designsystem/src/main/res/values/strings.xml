@@ -3,4 +3,7 @@
     <string name="designsystem_close">Fechar</string>
     <string name="designsystem_back">Voltar</string>
     <string name="designsystem_cancel">Cancelar</string>
+    <string name="designsystem_previous">Anterior</string>
+    <string name="designsystem_next">Próximo</string>
+    <string name="designsystem_more">Mais ações</string>
 </resources>

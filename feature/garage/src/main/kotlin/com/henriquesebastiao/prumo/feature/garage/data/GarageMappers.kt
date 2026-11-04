@@ -1,5 +1,6 @@
 package com.henriquesebastiao.prumo.feature.garage.data
 
+import com.henriquesebastiao.prumo.core.model.wireOf
 import com.henriquesebastiao.prumo.core.network.parseInstant
 import com.henriquesebastiao.prumo.feature.garage.VehicleRefDto
 import com.henriquesebastiao.prumo.feature.garage.model.ConsumptionPoint
@@ -25,27 +26,9 @@ import com.henriquesebastiao.prumo.feature.garage.model.VehicleRef
 import com.henriquesebastiao.prumo.feature.garage.model.VehicleStats
 import com.henriquesebastiao.prumo.feature.garage.model.Workshop
 import com.henriquesebastiao.prumo.feature.garage.model.WorkshopRef
-import com.henriquesebastiao.prumo.feature.garage.model.wireOf
 import java.time.LocalDate
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
 
 // DTOs stay in the data package: the screens get the models of `model/`.
-
-/**
- * The JSON of request bodies. Unlike the app's lenient [com.henriquesebastiao.prumo.core.network.NetworkJson],
- * it writes `null`s: on a `PATCH` a `null` clears the field (`docs/api.md`, "Formatos"), and on an
- * oil change a `null` next km or date means "no forecast".
- */
-internal val GarageWriteJson = Json {
-    explicitNulls = true
-    encodeDefaults = true
-}
-
-internal fun <T> body(serializer: KSerializer<T>, value: T): JsonObject =
-    GarageWriteJson.encodeToJsonElement(serializer, value).jsonObject
 
 internal fun VehicleRefDto.toModel() = VehicleRef(id = id, name = name, kind = wireOf(kind, VehicleKind.Car))
 

@@ -35,6 +35,7 @@ object ServerIcons {
         "book" to PrumoIcons.MenuBook,
         "book-open" to PrumoIcons.AutoStories,
         "card" to PrumoIcons.CreditCard,
+        "credit-card" to PrumoIcons.CreditCard,
         "receipt" to PrumoIcons.ReceiptLong,
         "gift" to PrumoIcons.Redeem,
         "plane" to PrumoIcons.Flight,

@@ -15,4 +15,306 @@
     <string name="finance_card_invoice">Fatura %1$s</string>
     <string name="finance_card_no_invoice">Nenhuma fatura aberta</string>
     <string name="finance_card_open">Abrir Finanças</string>
+    <!-- Shared -->
+    <string name="finance_loading">Carregando Finanças</string>
+    <string name="finance_retry">Tentar novamente</string>
+    <string name="finance_save">Salvar</string>
+    <string name="finance_cancel">Cancelar</string>
+    <string name="finance_edit">Editar</string>
+    <string name="finance_delete">Excluir</string>
+    <string name="finance_archive">Arquivar</string>
+    <string name="finance_unarchive">Reativar</string>
+    <string name="finance_archived">Arquivados</string>
+    <string name="finance_archived_one">Arquivada</string>
+    <string name="finance_archived_empty">Nada arquivado</string>
+    <string name="finance_clear">Limpar</string>
+    <string name="finance_search">Buscar</string>
+    <string name="finance_see_all">Ver todas</string>
+    <string name="finance_none">Nenhuma</string>
+    <string name="finance_field_name">Nome</string>
+    <string name="finance_field_invalid">Confira este valor.</string>
+    <string name="finance_kind">Tipo</string>
+    <string name="finance_color">Cor</string>
+    <string name="finance_icon">Ícone</string>
+    <string name="finance_date">Data</string>
+    <string name="finance_time">Hora</string>
+    <string name="finance_notes">Observações</string>
+    <string name="finance_negative">Saldo negativo</string>
+    <string name="finance_today">Hoje</string>
+    <string name="finance_tomorrow">Amanhã</string>
+    <string name="finance_yesterday">Ontem</string>
+    <string name="finance_plus">+%1$s</string>
+    <string name="finance_minus">−%1$s</string>
+    <string name="finance_percent">%1$d %%</string>
+    <string name="finance_card_named">Cartão %1$s</string>
+    <string name="finance_from_to">%1$s → %2$s</string>
+    <string name="finance_installment">%1$d/%2$d</string>
+
+    <string name="finance_kind_income">Receita</string>
+    <string name="finance_kind_expense">Despesa</string>
+    <string name="finance_kind_transfer">Transferência</string>
+    <string name="finance_kind_card_payment">Pagamento de fatura</string>
+    <string name="finance_kind_adjustment">Ajuste de saldo</string>
+    <string name="finance_account_checking">Conta corrente</string>
+    <string name="finance_account_checking_short">Corrente</string>
+    <string name="finance_account_savings">Poupança</string>
+    <string name="finance_account_cash">Dinheiro</string>
+    <string name="finance_account_cash_short">Carteira</string>
+    <string name="finance_account_investment">Investimento</string>
+    <string name="finance_account_other">Outra</string>
+    <string name="finance_invoice_open">Aberta</string>
+    <string name="finance_invoice_closed">Fechada</string>
+    <string name="finance_invoice_paid">Paga</string>
+    <string name="finance_invoice_overdue">Vencida</string>
+    <string name="finance_invoice_of">Fatura de %1$s</string>
+
+    <string name="finance_color_green">Verde</string>
+    <string name="finance_color_teal">Verde-azulado</string>
+    <string name="finance_color_cyan">Ciano</string>
+    <string name="finance_color_blue">Azul</string>
+    <string name="finance_color_indigo">Anil</string>
+    <string name="finance_color_violet">Violeta</string>
+    <string name="finance_color_pink">Rosa</string>
+    <string name="finance_color_red">Vermelho</string>
+    <string name="finance_color_orange">Laranja</string>
+    <string name="finance_color_amber">Âmbar</string>
+    <string name="finance_color_gray">Cinza</string>
+    <string name="finance_icon_landmark">Banco</string>
+    <string name="finance_icon_vault">Cofre</string>
+    <string name="finance_icon_wallet">Carteira</string>
+    <string name="finance_icon_trending_up">Investimento</string>
+    <string name="finance_icon_credit_card">Cartão</string>
+    <string name="finance_icon_fuel">Combustível</string>
+    <string name="finance_icon_utensils">Alimentação</string>
+    <string name="finance_icon_house">Casa</string>
+    <string name="finance_icon_ticket">Lazer</string>
+    <string name="finance_icon_briefcase">Trabalho</string>
+    <string name="finance_icon_code_xml">Projetos</string>
+    <string name="finance_icon_wrench">Manutenção</string>
+    <string name="finance_icon_bus">Transporte</string>
+    <string name="finance_icon_heart_pulse">Saúde</string>
+    <string name="finance_icon_graduation_cap">Educação</string>
+    <string name="finance_icon_shopping_bag">Compras</string>
+    <string name="finance_icon_repeat">Assinaturas</string>
+    <string name="finance_icon_paw_print">Pets</string>
+    <string name="finance_icon_gift">Presentes</string>
+    <string name="finance_icon_plane">Viagens</string>
+    <string name="finance_icon_shirt">Roupas</string>
+    <string name="finance_icon_banknote">Dinheiro</string>
+    <string name="finance_icon_tag">Outros</string>
+
+    <!-- Errors of Finanças (docs/api.md of the server) -->
+    <plurals name="finance_error_category_in_use">
+        <item quantity="one">A categoria tem %1$d transação: arquive para tirá-la dos seletores.</item>
+        <item quantity="other">A categoria tem %1$d transações: arquive para tirá-la dos seletores.</item>
+    </plurals>
+    <plurals name="finance_error_account_in_use">
+        <item quantity="one">A conta tem %1$d transação: arquive para tirá-la dos seletores.</item>
+        <item quantity="other">A conta tem %1$d transações: arquive para tirá-la dos seletores.</item>
+    </plurals>
+    <plurals name="finance_error_card_in_use">
+        <item quantity="one">O cartão tem %1$d transação: arquive para tirá-lo dos seletores.</item>
+        <item quantity="other">O cartão tem %1$d transações: arquive para tirá-lo dos seletores.</item>
+    </plurals>
+    <string name="finance_error_category_exists">Já existe uma categoria com esse nome.</string>
+    <string name="finance_error_invalid_amount">Informe um valor maior que zero.</string>
+    <string name="finance_error_category_kind">A categoria não é deste tipo de transação.</string>
+    <string name="finance_error_same_account">Escolha contas diferentes para a origem e o destino.</string>
+    <string name="finance_error_installments">Parcelas só valem para compras no cartão.</string>
+    <string name="finance_error_invalid_invoice">Esta fatura não existe para o cartão.</string>
+    <string name="finance_error_balance_unchanged">O saldo informado é igual ao calculado: nada a ajustar.</string>
+    <string name="finance_error_invalid_combination">Faltam dados para este tipo de transação. Confira a conta, o cartão e a categoria.</string>
+
+    <!-- Home of Finanças -->
+    <string name="finance_tab_overview">Resumo</string>
+    <string name="finance_tab_transactions">Transações</string>
+    <string name="finance_tab_accounts">Contas</string>
+    <string name="finance_tab_cards">Cartões</string>
+    <string name="finance_categories">Categorias</string>
+    <string name="finance_new_expense">Nova despesa</string>
+    <string name="finance_new_income">Nova receita</string>
+    <string name="finance_new_transfer">Nova transferência</string>
+    <string name="finance_pay_invoice">Pagar fatura</string>
+
+    <!-- Overview -->
+    <string name="finance_previous_month">Mês anterior</string>
+    <string name="finance_next_month">Próximo mês</string>
+    <string name="finance_empty_title">Comece pelas suas contas</string>
+    <string name="finance_empty_body">Cadastre onde o seu dinheiro está, como conta corrente, poupança ou carteira, para lançar transações e acompanhar o saldo.</string>
+    <string name="finance_add_account">Adicionar conta</string>
+    <string name="finance_total_balance">Saldo total</string>
+    <plurals name="finance_accounts_count">
+        <item quantity="one">%1$d conta</item>
+        <item quantity="other">%1$d contas</item>
+    </plurals>
+    <string name="finance_until">Saldos de %1$s</string>
+    <string name="finance_income_expense">Receitas × despesas</string>
+    <string name="finance_income">Receitas</string>
+    <string name="finance_expenses">Despesas</string>
+    <string name="finance_expense_share">Despesas = %1$d %% das receitas</string>
+    <string name="finance_no_income">Sem receitas no mês.</string>
+    <string name="finance_result_left">Sobra %1$s</string>
+    <string name="finance_result_short">Falta %1$s</string>
+    <string name="finance_expenses_by_category">Despesas por categoria</string>
+    <string name="finance_income_by_category">Receitas por categoria</string>
+    <string name="finance_no_expenses">Nenhuma despesa no mês.</string>
+    <string name="finance_six_months">Últimos 6 meses</string>
+    <string name="finance_six_months_description">Receitas e despesas dos últimos 6 meses</string>
+    <string name="finance_open_invoices">Faturas em aberto</string>
+    <string name="finance_no_open_invoices">Nenhuma fatura em aberto.</string>
+    <string name="finance_invoice_line">Cartão %1$s · %2$s</string>
+    <string name="finance_closes_due">Fecha %1$s · vence %2$s</string>
+    <string name="finance_pay">Pagar</string>
+
+    <!-- Transactions -->
+    <string name="finance_search_hint">Descrição ou valor</string>
+    <string name="finance_filter_all_months">Todo o período</string>
+    <string name="finance_filter_account">Conta</string>
+    <string name="finance_filter_all_accounts">Todas as contas</string>
+    <string name="finance_filter_card">Cartão</string>
+    <string name="finance_filter_all_cards">Todos os cartões</string>
+    <string name="finance_filter_category">Categoria</string>
+    <string name="finance_filter_all_categories">Todas as categorias</string>
+    <string name="finance_filter_kind">Tipo</string>
+    <string name="finance_filter_all_kinds">Todos os tipos</string>
+    <string name="finance_filter_expenses">Despesas</string>
+    <string name="finance_filter_incomes">Receitas</string>
+    <string name="finance_filter_transfers">Transferências</string>
+    <plurals name="finance_transactions_count">
+        <item quantity="one">%1$d transação</item>
+        <item quantity="other">%1$d transações</item>
+    </plurals>
+    <string name="finance_day_today">Hoje · %1$s</string>
+    <string name="finance_day_yesterday">Ontem · %1$s</string>
+    <string name="finance_transactions_empty">Nenhuma transação encontrada</string>
+    <string name="finance_transactions_empty_hint">Ajuste os filtros ou registre uma transação.</string>
+
+    <!-- Accounts -->
+    <string name="finance_out_of_total">fora do saldo total</string>
+    <string name="finance_accounts_empty">Nenhuma conta cadastrada</string>
+    <string name="finance_accounts_empty_hint">Cadastre suas contas e a carteira para acompanhar os saldos.</string>
+    <string name="finance_accounts_note">Saldos calculados pelo servidor: o saldo inicial mais as transações. Para acertar com o banco, use Ajustar saldo na conta.</string>
+    <string name="finance_new_account">Nova conta</string>
+    <string name="finance_account_new">Nova conta</string>
+    <string name="finance_account_edit">Editar conta</string>
+    <string name="finance_account_name_hint">Ex.: Poupança Inter</string>
+    <string name="finance_current_balance">Saldo atual</string>
+    <string name="finance_current_balance_hint">Saldo de hoje. As próximas transações partem dele.</string>
+    <string name="finance_initial_balance">Saldo inicial</string>
+    <string name="finance_initial_balance_hint">Ponto de partida do saldo. Para acertar com o banco, prefira Ajustar saldo.</string>
+    <string name="finance_include_in_total">Somar no saldo total</string>
+    <string name="finance_account_save">Salvar conta</string>
+    <string name="finance_account">Conta</string>
+    <string name="finance_balance_today">Saldo de hoje</string>
+    <string name="finance_last_movement">Última movimentação: %1$s</string>
+    <string name="finance_no_movement">Sem movimentação</string>
+    <string name="finance_month_transactions">Transações em %1$s</string>
+    <string name="finance_latest">Últimas transações</string>
+    <string name="finance_no_transactions">Nenhuma transação ainda.</string>
+    <string name="finance_adjust">Ajustar saldo</string>
+    <string name="finance_adjust_current">Saldo calculado hoje: %1$s</string>
+    <string name="finance_adjust_balance">Saldo real</string>
+    <string name="finance_adjust_hint">Cria um ajuste com a diferença. Ajustes não entram em receitas nem despesas.</string>
+    <string name="finance_adjust_save">Ajustar</string>
+    <string name="finance_account_delete_title">Excluir conta?</string>
+    <string name="finance_account_delete_body">“%1$s” não tem transações e será excluída.</string>
+
+    <!-- Cards -->
+    <string name="finance_cards_empty">Nenhum cartão cadastrado</string>
+    <string name="finance_cards_empty_hint">Cadastre um cartão para acompanhar faturas e limite.</string>
+    <string name="finance_new_card">Novo cartão</string>
+    <string name="finance_card">Cartão</string>
+    <string name="finance_card_days">Fecha dia %1$d · vence dia %2$d</string>
+    <string name="finance_available_limit">Limite disponível</string>
+    <string name="finance_total_limit">Limite total</string>
+    <string name="finance_closes_today">Fecha hoje, %1$s</string>
+    <string name="finance_closes_tomorrow">Fecha amanhã, %1$s</string>
+    <string name="finance_closes_on">Fecha %1$s</string>
+    <string name="finance_closed_on">Fechou %1$s</string>
+    <string name="finance_due_on">vence %1$s</string>
+    <string name="finance_previous_invoice">Fatura anterior</string>
+    <string name="finance_next_invoice">Próxima fatura</string>
+    <string name="finance_invoice_period">Lançamentos de %1$s a %2$s</string>
+    <string name="finance_closes">Fecha</string>
+    <string name="finance_due">Vence</string>
+    <string name="finance_paid_so_far">Pago %1$s · faltam %2$s</string>
+    <string name="finance_entries">Lançamentos</string>
+    <plurals name="finance_entries_count">
+        <item quantity="one">%1$d lançamento</item>
+        <item quantity="other">%1$d lançamentos</item>
+    </plurals>
+    <string name="finance_no_entries">Nenhum lançamento nesta fatura.</string>
+    <string name="finance_payments">Pagamentos</string>
+    <string name="finance_card_delete_title">Excluir cartão?</string>
+    <string name="finance_card_delete_body">“%1$s” não tem transações e será excluído.</string>
+    <string name="finance_card_new">Novo cartão</string>
+    <string name="finance_card_edit">Editar cartão</string>
+    <string name="finance_card_name_hint">Ex.: Nubank</string>
+    <string name="finance_limit">Limite</string>
+    <string name="finance_closing_day">Dia do fechamento</string>
+    <string name="finance_due_day">Dia do vencimento</string>
+    <string name="finance_closing_hint">Compras no dia do fechamento entram na fatura seguinte.</string>
+    <string name="finance_payment_account">Conta de pagamento</string>
+    <string name="finance_card_create">Criar cartão</string>
+
+    <!-- Pay invoice -->
+    <string name="finance_pay_invoice_of">Pagar fatura de %1$s</string>
+    <string name="finance_nothing_to_pay">Nada a pagar: nenhuma fatura em aberto.</string>
+    <string name="finance_pay_total">Total · %1$s</string>
+    <string name="finance_pay_partial">Parcial</string>
+    <string name="finance_pay_amount">Valor do pagamento</string>
+    <string name="finance_pay_left">Restam %1$s nesta fatura</string>
+    <string name="finance_pay_with">Pagar com</string>
+    <string name="finance_pay_hint">O valor sai da conta escolhida e o limite do cartão é liberado.</string>
+    <string name="finance_pay_amount_button">Pagar %1$s</string>
+
+    <!-- Categories -->
+    <string name="finance_new_category">Nova categoria</string>
+    <string name="finance_edit_category">Editar categoria</string>
+    <string name="finance_new_category_short">Nova</string>
+    <string name="finance_category">Categoria</string>
+    <string name="finance_category_month">%1$s em %2$s</string>
+    <string name="finance_category_unused">Nenhuma transação em %1$s</string>
+    <string name="finance_category_actions">Ações de %1$s</string>
+    <string name="finance_archived_categories">Arquivadas</string>
+    <plurals name="finance_categories_count">
+        <item quantity="one">%1$d categoria</item>
+        <item quantity="other">%1$d categorias</item>
+    </plurals>
+    <string name="finance_kind_locked">O tipo não muda enquanto houver transações.</string>
+    <plurals name="finance_category_archive_note">
+        <item quantity="one">Esta categoria tem %1$d transação. Ao arquivar, ela sai dos seletores, mas continua no histórico e nos relatórios.</item>
+        <item quantity="other">Esta categoria tem %1$d transações. Ao arquivar, ela sai dos seletores, mas continua no histórico e nos relatórios.</item>
+    </plurals>
+    <string name="finance_category_delete_note">Sem transações: pode ser excluída.</string>
+    <string name="finance_no_categories">Nenhuma categoria ativa deste tipo.</string>
+
+    <!-- Transaction form and detail -->
+    <string name="finance_transaction_new">Nova transação</string>
+    <string name="finance_transaction_edit">Editar transação</string>
+    <string name="finance_no_accounts_for_record">Cadastre uma conta antes de registrar transações.</string>
+    <string name="finance_amount">Valor</string>
+    <string name="finance_field_description">Descrição</string>
+    <string name="finance_description_optional">Descrição (opcional)</string>
+    <string name="finance_description_hint">Ex.: Feira</string>
+    <string name="finance_source">Conta ou cartão</string>
+    <string name="finance_installments_single">À vista</string>
+    <string name="finance_installments_times">%1$dx</string>
+    <string name="finance_installments_hint">Uma parcela por fatura; os centavos que sobram vão na primeira.</string>
+    <string name="finance_from">De</string>
+    <string name="finance_to">Para</string>
+    <string name="finance_swap">Inverter contas</string>
+    <string name="finance_transfer_hint">Transferências não entram em receitas nem despesas.</string>
+    <string name="finance_save_expense">Salvar despesa</string>
+    <string name="finance_save_income">Salvar receita</string>
+    <string name="finance_save_transfer">Salvar transferência</string>
+    <string name="finance_transfer_amount">Transferir %1$s</string>
+    <string name="finance_scheduled">Agendada</string>
+    <string name="finance_installment_label">Parcela</string>
+    <string name="finance_installment_of">%1$d de %2$d</string>
+    <string name="finance_transaction_delete_title">Excluir transação?</string>
+    <string name="finance_transaction_delete_body">“%1$s” sai do histórico e dos saldos.</string>
+    <string name="finance_delete_installments">É a parcela %1$d de %2$d. Você pode excluir só esta parcela ou a compra inteira.</string>
+    <string name="finance_delete_one_installment">Excluir esta parcela</string>
+    <string name="finance_delete_all_installments">Excluir todas as parcelas</string>
 </resources>

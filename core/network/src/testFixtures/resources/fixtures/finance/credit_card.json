@@ -1,0 +1,33 @@
+{
+  "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+  "name": "Nubank",
+  "limit_cents": 500000,
+  "closing_day": 3,
+  "due_day": 10,
+  "payment_account": {
+    "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+    "name": "Nubank",
+    "kind": "checking",
+    "color": "violet",
+    "icon": "landmark"
+  },
+  "color": "green",
+  "archived_at": null,
+  "created_at": "2026-11-17T17:20:00.012077Z",
+  "used_cents": 128460,
+  "available_limit_cents": 371540,
+  "current_invoice": {
+    "closing_on": "2026-12-03",
+    "due_on": "2026-12-10",
+    "starts_on": "2026-11-03",
+    "ends_on": "2026-12-02",
+    "amount_cents": 128460,
+    "paid_cents": 0,
+    "remaining_cents": 128460,
+    "status": "open",
+    "transactions_count": 12,
+    "last_payment_on": null,
+    "last_payment_account": null
+  },
+  "transactions_count": 27
+}

@@ -1,0 +1,603 @@
+{
+  "items": [
+    {
+      "id": "01a1ea85-ce75-7224-abcb-eeff153d5478",
+      "kind": "expense",
+      "amount_cents": 32635,
+      "occurred_on": "2026-11-20",
+      "occurred_time": null,
+      "description": "Celular",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63bc1fdb0e0c",
+        "name": "Compras",
+        "kind": "expense",
+        "color": "amber",
+        "icon": "shopping-bag"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": "01a1ea85-ce75-7224-abcb-eefb3a490cbe",
+      "installment_number": 4,
+      "installment_count": 4,
+      "created_at": "2026-11-17T17:20:00.118854Z",
+      "updated_at": "2026-11-17T17:20:00.118855Z"
+    },
+    {
+      "id": "01a1ea85-cee2-70c9-acf1-b8af6fe3e94f",
+      "kind": "expense",
+      "amount_cents": 1850,
+      "occurred_on": "2026-11-17",
+      "occurred_time": "08:10:00",
+      "description": "Padaria",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce05-7626-9960-c6c5cd9c4009",
+        "name": "Carteira",
+        "kind": "cash",
+        "color": "green",
+        "icon": "wallet"
+      },
+      "destination_account": null,
+      "credit_card": null,
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+        "name": "Alimentação",
+        "kind": "expense",
+        "color": "orange",
+        "icon": "utensils"
+      },
+      "invoice_closing_on": null,
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.226990Z",
+      "updated_at": "2026-11-17T17:20:00.227029Z"
+    },
+    {
+      "id": "01a1ea85-ceed-71f7-bfff-b43fd154324e",
+      "kind": "expense",
+      "amount_cents": 4636,
+      "occurred_on": "2026-11-16",
+      "occurred_time": "18:10:00",
+      "description": "Posto · CG 160",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b8d38641e1",
+        "name": "Combustível",
+        "kind": "expense",
+        "color": "gray",
+        "icon": "fuel"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.237763Z",
+      "updated_at": "2026-11-17T17:20:00.237770Z"
+    },
+    {
+      "id": "01a1ea85-cede-7121-9dde-79fae40fc6f8",
+      "kind": "expense",
+      "amount_cents": 21240,
+      "occurred_on": "2026-11-16",
+      "occurred_time": "11:25:00",
+      "description": "Supermercado",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      },
+      "destination_account": null,
+      "credit_card": null,
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+        "name": "Alimentação",
+        "kind": "expense",
+        "color": "orange",
+        "icon": "utensils"
+      },
+      "invoice_closing_on": null,
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.222844Z",
+      "updated_at": "2026-11-17T17:20:00.222851Z"
+    },
+    {
+      "id": "01a1ea85-ceff-74a4-9500-c3fc2d912157",
+      "kind": "expense",
+      "amount_cents": 3990,
+      "occurred_on": "2026-11-15",
+      "occurred_time": null,
+      "description": "Streaming",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63bb53cd4d72",
+        "name": "Lazer",
+        "kind": "expense",
+        "color": "pink",
+        "icon": "ticket"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.255589Z",
+      "updated_at": "2026-11-17T17:20:00.255596Z"
+    },
+    {
+      "id": "01a1ea85-ceda-70ff-924e-ce5363010675",
+      "kind": "expense",
+      "amount_cents": 14431,
+      "occurred_on": "2026-11-15",
+      "occurred_time": null,
+      "description": "Padaria e açougue",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+        "name": "Alimentação",
+        "kind": "expense",
+        "color": "orange",
+        "icon": "utensils"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.218658Z",
+      "updated_at": "2026-11-17T17:20:00.218665Z"
+    },
+    {
+      "id": "01a1ea85-cef9-76c4-a28f-5e9403a8ba2b",
+      "kind": "expense",
+      "amount_cents": 6400,
+      "occurred_on": "2026-11-14",
+      "occurred_time": null,
+      "description": "Cinema",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63bb53cd4d72",
+        "name": "Lazer",
+        "kind": "expense",
+        "color": "pink",
+        "icon": "ticket"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.249794Z",
+      "updated_at": "2026-11-17T17:20:00.249801Z"
+    },
+    {
+      "id": "01a1ea85-ceea-759c-acfd-02f0b7445c40",
+      "kind": "expense",
+      "amount_cents": 18034,
+      "occurred_on": "2026-11-13",
+      "occurred_time": "18:00:00",
+      "description": "Posto · Strada",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b8d38641e1",
+        "name": "Combustível",
+        "kind": "expense",
+        "color": "gray",
+        "icon": "fuel"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.234359Z",
+      "updated_at": "2026-11-17T17:20:00.234367Z"
+    },
+    {
+      "id": "01a1ea85-cebb-715c-8ff5-b3091f17890f",
+      "kind": "transfer",
+      "amount_cents": 50000,
+      "occurred_on": "2026-11-12",
+      "occurred_time": null,
+      "description": "",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce03-7246-8389-e4cbf16b335c",
+        "name": "Inter",
+        "kind": "checking",
+        "color": "orange",
+        "icon": "landmark"
+      },
+      "destination_account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      },
+      "credit_card": null,
+      "category": null,
+      "invoice_closing_on": null,
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.187410Z",
+      "updated_at": "2026-11-17T17:20:00.187416Z"
+    },
+    {
+      "id": "01a1ea85-ceb3-73a8-94bb-b3845b7fb250",
+      "kind": "income",
+      "amount_cents": 150000,
+      "occurred_on": "2026-11-12",
+      "occurred_time": null,
+      "description": "Site institucional",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce03-7246-8389-e4cbf16b335c",
+        "name": "Inter",
+        "kind": "checking",
+        "color": "orange",
+        "icon": "landmark"
+      },
+      "destination_account": null,
+      "credit_card": null,
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63c063cc0319",
+        "name": "Freelance",
+        "kind": "income",
+        "color": "teal",
+        "icon": "code-xml"
+      },
+      "invoice_closing_on": null,
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.179407Z",
+      "updated_at": "2026-11-17T17:20:00.179415Z"
+    },
+    {
+      "id": "01a1ea85-ced5-74e4-a4a0-8dbdf631c1fa",
+      "kind": "expense",
+      "amount_cents": 9260,
+      "occurred_on": "2026-11-11",
+      "occurred_time": null,
+      "description": "Restaurante",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+        "name": "Alimentação",
+        "kind": "expense",
+        "color": "orange",
+        "icon": "utensils"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.214135Z",
+      "updated_at": "2026-11-17T17:20:00.214143Z"
+    },
+    {
+      "id": "01a1ea85-cf02-73e3-9180-eed4c6ba6d85",
+      "kind": "card_payment",
+      "amount_cents": 193218,
+      "occurred_on": "2026-11-10",
+      "occurred_time": null,
+      "description": "",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      },
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": null,
+      "invoice_closing_on": "2026-11-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.258895Z",
+      "updated_at": "2026-11-17T17:20:00.258901Z"
+    },
+    {
+      "id": "01a1ea85-cebe-70a0-8d6e-55b43d96e162",
+      "kind": "expense",
+      "amount_cents": 110000,
+      "occurred_on": "2026-11-10",
+      "occurred_time": null,
+      "description": "Aluguel",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce03-7246-8389-e4cbf16b335c",
+        "name": "Inter",
+        "kind": "checking",
+        "color": "orange",
+        "icon": "landmark"
+      },
+      "destination_account": null,
+      "credit_card": null,
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b65d8e7f53",
+        "name": "Moradia",
+        "kind": "expense",
+        "color": "blue",
+        "icon": "house"
+      },
+      "invoice_closing_on": null,
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.191074Z",
+      "updated_at": "2026-11-17T17:20:00.191080Z"
+    },
+    {
+      "id": "01a1ea85-cec1-75d6-a781-cd0582f81ba6",
+      "kind": "expense",
+      "amount_cents": 18640,
+      "occurred_on": "2026-11-09",
+      "occurred_time": null,
+      "description": "Energia elétrica",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b65d8e7f53",
+        "name": "Moradia",
+        "kind": "expense",
+        "color": "blue",
+        "icon": "house"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.193890Z",
+      "updated_at": "2026-11-17T17:20:00.193896Z"
+    },
+    {
+      "id": "01a1ea85-cef5-77f8-8cb0-c69a54a9d252",
+      "kind": "expense",
+      "amount_cents": 2500,
+      "occurred_on": "2026-11-08",
+      "occurred_time": null,
+      "description": "Sorvete",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63bb53cd4d72",
+        "name": "Lazer",
+        "kind": "expense",
+        "color": "pink",
+        "icon": "ticket"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.245484Z",
+      "updated_at": "2026-11-17T17:20:00.245493Z"
+    },
+    {
+      "id": "01a1ea85-ced2-72f0-adb3-c2bf360eeaee",
+      "kind": "expense",
+      "amount_cents": 6430,
+      "occurred_on": "2026-11-08",
+      "occurred_time": null,
+      "description": "Feira",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce05-7626-9960-c6c5cd9c4009",
+        "name": "Carteira",
+        "kind": "cash",
+        "color": "green",
+        "icon": "wallet"
+      },
+      "destination_account": null,
+      "credit_card": null,
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+        "name": "Alimentação",
+        "kind": "expense",
+        "color": "orange",
+        "icon": "utensils"
+      },
+      "invoice_closing_on": null,
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.210865Z",
+      "updated_at": "2026-11-17T17:20:00.210870Z"
+    },
+    {
+      "id": "01a1ea85-cef0-71d0-aa13-29ab3009b7c3",
+      "kind": "expense",
+      "amount_cents": 3510,
+      "occurred_on": "2026-11-07",
+      "occurred_time": null,
+      "description": "Livraria",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63bb53cd4d72",
+        "name": "Lazer",
+        "kind": "expense",
+        "color": "pink",
+        "icon": "ticket"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.241299Z",
+      "updated_at": "2026-11-17T17:20:00.241306Z"
+    },
+    {
+      "id": "01a1ea85-ced0-7530-83bc-43c64f0294be",
+      "kind": "expense",
+      "amount_cents": 3050,
+      "occurred_on": "2026-11-07",
+      "occurred_time": null,
+      "description": "iFood",
+      "notes": null,
+      "account": {
+        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "name": "Nubank",
+        "kind": "checking",
+        "color": "violet",
+        "icon": "landmark"
+      },
+      "destination_account": null,
+      "credit_card": null,
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+        "name": "Alimentação",
+        "kind": "expense",
+        "color": "orange",
+        "icon": "utensils"
+      },
+      "invoice_closing_on": null,
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.208485Z",
+      "updated_at": "2026-11-17T17:20:00.208490Z"
+    },
+    {
+      "id": "01a1ea85-cee6-775f-ae79-95b4dca4df4c",
+      "kind": "expense",
+      "amount_cents": 4434,
+      "occurred_on": "2026-11-06",
+      "occurred_time": null,
+      "description": "Posto · CG 160",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b8d38641e1",
+        "name": "Combustível",
+        "kind": "expense",
+        "color": "gray",
+        "icon": "fuel"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.231115Z",
+      "updated_at": "2026-11-17T17:20:00.231123Z"
+    },
+    {
+      "id": "01a1ea85-cec5-72b6-8a8b-6e14532998b7",
+      "kind": "expense",
+      "amount_cents": 9990,
+      "occurred_on": "2026-11-05",
+      "occurred_time": null,
+      "description": "Internet",
+      "notes": null,
+      "account": null,
+      "destination_account": null,
+      "credit_card": {
+        "id": "01a1ea85-ce0a-73af-b0c9-1e58f72d1273",
+        "name": "Nubank",
+        "color": "green"
+      },
+      "category": {
+        "id": "019a9bfc-628e-75cd-8047-63b65d8e7f53",
+        "name": "Moradia",
+        "kind": "expense",
+        "color": "blue",
+        "icon": "house"
+      },
+      "invoice_closing_on": "2026-12-03",
+      "installment_group_id": null,
+      "installment_number": null,
+      "installment_count": null,
+      "created_at": "2026-11-17T17:20:00.197363Z",
+      "updated_at": "2026-11-17T17:20:00.197370Z"
+    }
+  ],
+  "total": 65,
+  "limit": 20,
+  "offset": 0,
+  "income_cents": 3130000,
+  "expense_cents": 1999054
+}

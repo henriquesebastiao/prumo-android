@@ -30,8 +30,8 @@ class FinanceSummaryTest {
     @Test
     fun theDtosFollowTheContract() {
         OpenApiContract.assertReads(FinanceSummaryDto.serializer().descriptor, "FinanceSummary")
-        OpenApiContract.assertReads(OpenInvoiceDto.serializer().descriptor, "OpenInvoice")
-        OpenApiContract.assertReads(CardRefDto.serializer().descriptor, "CardRef")
-        OpenApiContract.assertReads(InvoiceDto.serializer().descriptor, "InvoiceRead")
+        OpenApiContract.assertReads(SummaryOpenInvoiceDto.serializer().descriptor, "OpenInvoice")
+        OpenApiContract.assertReads(SummaryCardDto.serializer().descriptor, "CardRef")
+        OpenApiContract.assertReads(SummaryInvoiceDto.serializer().descriptor, "InvoiceRead")
     }
 }
