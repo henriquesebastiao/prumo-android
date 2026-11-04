@@ -1,0 +1,53 @@
+/* v3 type: Google Sans Flex (rounded, ROND 100) for the UI, wide Google Sans Flex for hero display, JetBrains Mono for data.
+ * Scale from PixelPlayerOSS ui/theme/Type.kt (bolder headlines, titleMedium 18, labels 16/14). Emphasized = +1 weight step.
+ * Rounded terminals come from font-variation-settings 'ROND' 100, set on body in base.css (inherits). Hero roles override it. */
+:root{
+--font-ui:'Google Sans Flex','Roboto Flex',Roboto,system-ui,sans-serif;
+--font-display:'Google Sans Flex','Roboto Flex',system-ui,sans-serif;
+--font-ui-legacy:'Roboto Flex',Roboto,system-ui,sans-serif; /* v1/v2 (Netrik today) */
+--font-data:'JetBrains Mono',ui-monospace,Menlo,monospace;
+--font-data-features:'tnum' 1;
+--font-ui-fvs:'ROND' 100; /* @kind other */
+--font-display-fvs:'ROND' 0,'wdth' 151; /* @kind other */
+--type-display-large:700 48px/56px var(--font-ui);--type-display-large-tracking:0px;
+--type-display-medium:700 36px/44px var(--font-ui);--type-display-medium-tracking:0px;
+--type-display-small:400 30px/38px var(--font-ui);--type-display-small-tracking:0px;
+--type-headline-large:600 32px/40px var(--font-ui);--type-headline-large-tracking:0px;
+--type-headline-medium:600 28px/36px var(--font-ui);--type-headline-medium-tracking:0px;
+--type-headline-small:600 24px/32px var(--font-ui);--type-headline-small-tracking:0px;
+--type-title-large:400 22px/28px var(--font-ui);--type-title-large-tracking:0px;
+--type-title-medium:500 18px/24px var(--font-ui);--type-title-medium-tracking:0.15px;
+--type-title-small:500 14px/20px var(--font-ui);--type-title-small-tracking:0.1px;
+--type-body-large:400 16px/24px var(--font-ui);--type-body-large-tracking:0.5px;
+--type-body-medium:400 14px/20px var(--font-ui);--type-body-medium-tracking:0.25px;
+--type-body-small:400 12px/16px var(--font-ui);--type-body-small-tracking:0.4px;
+--type-label-large:500 16px/20px var(--font-ui);--type-label-large-tracking:0.1px;
+--type-label-medium:500 14px/16px var(--font-ui);--type-label-medium-tracking:0.5px;
+--type-label-small:500 11px/16px var(--font-ui);--type-label-small-tracking:0.5px;
+/* Emphasized (M3 Expressive): same size and line height, one weight step up. Compose: typography.<role>Emphasized */
+--type-display-large-emphasized:800 48px/56px var(--font-ui);
+--type-display-medium-emphasized:800 36px/44px var(--font-ui);
+--type-display-small-emphasized:500 30px/38px var(--font-ui);
+--type-headline-large-emphasized:700 32px/40px var(--font-ui);
+--type-headline-medium-emphasized:700 28px/36px var(--font-ui);
+--type-headline-small-emphasized:700 24px/32px var(--font-ui);
+--type-title-large-emphasized:500 22px/28px var(--font-ui);
+--type-title-medium-emphasized:700 18px/24px var(--font-ui);
+--type-title-small-emphasized:700 14px/20px var(--font-ui);
+--type-body-large-emphasized:500 16px/24px var(--font-ui);
+--type-body-medium-emphasized:500 14px/20px var(--font-ui);
+--type-body-small-emphasized:500 12px/16px var(--font-ui);
+--type-label-large-emphasized:700 16px/20px var(--font-ui);
+--type-label-medium-emphasized:700 14px/16px var(--font-ui);
+--type-label-small-emphasized:700 11px/16px var(--font-ui);
+/* Hero display (wide): onboarding welcome, home hero. Use with --font-display-fvs and -0.02em tracking. */
+--type-display-hero:600 60px/57px var(--font-display);
+--type-display-hero-small:600 44px/42px var(--font-display);
+--type-display-hero-tracking:-0.02em;
+/* Page title (large app bar): displayLarge */
+--type-page-title:700 48px/56px var(--font-ui);
+--type-data-large:500 22px/28px var(--font-data);
+--type-data-medium:500 14px/20px var(--font-data);
+--type-data-small:400 12px/16px var(--font-data);
+--type-terminal:400 13px/18px var(--font-data);
+}

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/icons.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/shape.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/base.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/styles.css">
+<script src="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/_ds_bundle.js"></script>
+<style>body{background:var(--md-surface-container-high)}a{color:var(--md-primary)}a:hover{color:var(--md-on-primary-container)}</style>
+</helmet>
+<div style="padding:56px 64px 96px;display:flex;flex-direction:column;gap:56px">
+<header style="display:flex;flex-direction:column;gap:16px">
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Prumo Android · Fase 2 · variante B</span>
+<h1 style="margin:0;font:var(--type-display-medium-emphasized);color:var(--md-on-surface)">Finanças</h1>
+<nav style="display:flex;flex-wrap:wrap;gap:8px">
+<a href="Prumo%20Fase%202%20-%20Inicio%20e%20acesso.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Início e acesso</a>
+<a href="Prumo%20Fase%202%20-%20Configuracoes%20e%20estados.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Configurações e estados</a>
+<a href="Prumo%20Fase%202%20-%20Financas.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-secondary-container);color:var(--md-on-secondary-container);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Finanças</a>
+<a href="Prumo%20Fase%202%20-%20Veiculos.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Veículos</a>
+<a href="Prumo%20Fase%202%20-%20Livros.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Livros</a>
+<a href="Prumo%20Fase%202%20-%20Telas%20grandes.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Telas grandes e widget</a>
+<a href="Prumo%20Fase%202%20-%20Handoff.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Entrega para implementação</a>
+</nav>
+</header>
+
+<section data-screen-label="Resumo" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Resumo do mês</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="01 Resumo claro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Finanças" dc-props="{{ finBarTop }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="resumo" dc-props="{{ finTabs }}" hint-size="100%,52px"></x-import>
+<div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="chevron_left" label="Mês anterior" variant="surface" hint-size="40px,40px"></x-import><span style="font:var(--type-title-large-emphasized)">Novembro 2026</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="chevron_right" label="Próximo mês" variant="surface" hint-size="40px,40px"></x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="account_balance_wallet" overline="3 contas" title="Saldo total" hint-size="100%,290px">
+<span style="font:var(--type-display-large);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 8.742,35</span>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:40px;padding:0 14px;background:var(--md-surface);border-radius:var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small)"><span style="font:var(--type-body-medium)">Inter</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 5.312,95</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:40px;padding:0 14px;background:var(--md-surface);border-radius:var(--md-sys-shape-corner-extra-small)"><span style="font:var(--type-body-medium)">Nubank</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 3.218,40</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:40px;padding:0 14px;background:var(--md-surface);border-radius:var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium)"><span style="font:var(--type-body-medium)">Carteira</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 211,00</span></div>
+</div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" icon="compare_arrows" title="Receitas × despesas" hint-size="100%,200px">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Receitas" value="R$ 6.250,00" tone="success" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Despesas" value="R$ 1.482,90" hint-size="100%,52px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" value="{{ 0.24 }}" hint-size="100%,8px"></x-import>
+<div style="display:flex;justify-content:space-between;font:var(--type-body-small);color:var(--md-on-surface-variant)"><span>Despesas = 24% das receitas</span><span style="font:var(--type-data-small)">sobra R$ 4.767,10</span></div>
+</x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ finBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">01 · Resumo · claro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Visão geral do módulo. Abas em pílula para as seções; seletor de mês acima do hero. O FAB lança despesa, a ação mais comum.</span>
+</div>
+
+<div data-screen-label="02 Resumo rolado" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Finanças" subtitle="Novembro 2026" dc-props="{{ finBarTop }}" hint-size="100%,64px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="resumo" dc-props="{{ finTabs }}" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" icon="donut_small" title="Despesas por categoria" hint-size="100%,330px">
+<div style="display:flex;gap:2px;height:16px;border-radius:8px;overflow:hidden"><div style="flex:77.5;background:#6A4F86"></div><div style="flex:13.9;background:#B5651D"></div><div style="flex:6.5;background:#1F5F8B"></div><div style="flex:1.5;background:#136B79;min-width:4px"></div><div style="flex:0.6;background:#8F4C38;min-width:4px"></div></div>
+<div style="display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:12px minmax(0,1fr) auto 48px;gap:12px;align-items:center;min-height:40px"><span style="width:12px;height:12px;border-radius:6px;background:#6A4F86"></span><span style="font:var(--type-body-large)">Moradia</span><span style="font:var(--type-data-medium)">R$ 1.149,90</span><span style="font:var(--type-data-small);color:var(--md-on-surface-variant);text-align:right">77,5%</span></div>
+<div style="display:grid;grid-template-columns:12px minmax(0,1fr) auto 48px;gap:12px;align-items:center;min-height:40px"><span style="width:12px;height:12px;border-radius:6px;background:#B5651D"></span><span style="font:var(--type-body-large)">Alimentação</span><span style="font:var(--type-data-medium)">R$ 205,96</span><span style="font:var(--type-data-small);color:var(--md-on-surface-variant);text-align:right">13,9%</span></div>
+<div style="display:grid;grid-template-columns:12px minmax(0,1fr) auto 48px;gap:12px;align-items:center;min-height:40px"><span style="width:12px;height:12px;border-radius:6px;background:#1F5F8B"></span><span style="font:var(--type-body-large)">Transporte</span><span style="font:var(--type-data-medium)">R$ 96,64</span><span style="font:var(--type-data-small);color:var(--md-on-surface-variant);text-align:right">6,5%</span></div>
+<div style="display:grid;grid-template-columns:12px minmax(0,1fr) auto 48px;gap:12px;align-items:center;min-height:40px"><span style="width:12px;height:12px;border-radius:6px;background:#136B79"></span><span style="font:var(--type-body-large)">Assinaturas</span><span style="font:var(--type-data-medium)">R$ 21,90</span><span style="font:var(--type-data-small);color:var(--md-on-surface-variant);text-align:right">1,5%</span></div>
+<div style="display:grid;grid-template-columns:12px minmax(0,1fr) auto 48px;gap:12px;align-items:center;min-height:40px"><span style="width:12px;height:12px;border-radius:6px;background:#8F4C38"></span><span style="font:var(--type-body-large)">Lazer</span><span style="font:var(--type-data-medium)">R$ 8,50</span><span style="font:var(--type-data-small);color:var(--md-on-surface-variant);text-align:right">0,6%</span></div>
+</div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" icon="credit_card" title="Faturas em aberto" hint-size="100%,170px">
+<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font:var(--type-title-medium)">Cartão Nubank · novembro</span><span style="font:var(--type-body-small);color:var(--md-on-surface-variant)">Fecha amanhã, 03/11 · vence 10/11</span></div><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.StatusChip" label="Aberta" tone="neutral" size="small" hint-size="70px,24px"></x-import></div>
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:var(--type-headline-small-emphasized);font-feature-settings:'tnum' 1">R$ 1.064,22</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="tonal" hint-size="90px,40px">Pagar</x-import></div>
+</x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ finBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">02 · Resumo · rolado</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">A app bar recolhe e mostra o mês. Gráfico de barra empilhada com a cor de cada categoria e legenda em lista; tocar numa linha filtra as transações.</span>
+</div>
+
+<div data-screen-label="03 Resumo escuro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" mode="dark" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Finanças" dc-props="{{ finBarTop }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="resumo" dc-props="{{ finTabs }}" hint-size="100%,52px"></x-import>
+<div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="chevron_left" label="Mês anterior" variant="surface" hint-size="40px,40px"></x-import><span style="font:var(--type-title-large-emphasized)">Novembro 2026</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="chevron_right" label="Próximo mês" variant="surface" hint-size="40px,40px"></x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="account_balance_wallet" overline="3 contas" title="Saldo total" hint-size="100%,290px">
+<span style="font:var(--type-display-large);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 8.742,35</span>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:40px;padding:0 14px;background:var(--md-surface);border-radius:var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small)"><span style="font:var(--type-body-medium)">Inter</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 5.312,95</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:40px;padding:0 14px;background:var(--md-surface);border-radius:var(--md-sys-shape-corner-extra-small)"><span style="font:var(--type-body-medium)">Nubank</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 3.218,40</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:40px;padding:0 14px;background:var(--md-surface);border-radius:var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium)"><span style="font:var(--type-body-medium)">Carteira</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 211,00</span></div>
+</div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" icon="compare_arrows" title="Receitas × despesas" hint-size="100%,200px">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Receitas" value="R$ 6.250,00" tone="success" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Despesas" value="R$ 1.482,90" hint-size="100%,52px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" value="{{ 0.24 }}" hint-size="100%,8px"></x-import>
+<div style="display:flex;justify-content:space-between;font:var(--type-body-small);color:var(--md-on-surface-variant)"><span>Despesas = 24% das receitas</span><span style="font:var(--type-data-small)">sobra R$ 4.767,10</span></div>
+</x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ finBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">03 · Resumo · escuro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Mesmo layout no esquema escuro do seed de Finanças.</span>
+</div>
+
+<div data-screen-label="04 Vazio" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Finanças" dc-props="{{ back }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 24px 160px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.EmptyState" variant="hero" icon="account_balance_wallet" title="Comece pelas suas contas" text="Cadastre onde o seu dinheiro está, como conta corrente, poupança ou carteira, para lançar transações e acompanhar o saldo." action-label="Adicionar conta" hint-size="100%,320px"></x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">04 · Vazio · primeiro uso</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Sem contas não há onde lançar. As categorias padrão já vêm criadas pelo servidor.</span>
+</div>
+
+</div>
+</section>
+
+<section data-screen-label="Contas e transações" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Contas e transações</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="05 Contas" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Finanças" dc-props="{{ finBarTop }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="contas" dc-props="{{ finTabs }}" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="segmented" hint-size="100%,240px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Inter" subtitle="Conta corrente" dc-props="{{ accInter }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Nubank" subtitle="Conta corrente" dc-props="{{ accNu }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Carteira" subtitle="Carteira" dc-props="{{ accCart }}" hint-size="100%,72px"></x-import>
+</x-import>
+<div style="display:flex;align-items:baseline;justify-content:space-between;padding:0 16px"><span style="font:var(--type-title-medium)">Saldo total</span><span style="font:var(--type-data-large)">R$ 8.742,35</span></div>
+<span style="font:var(--type-body-small);color:var(--md-on-surface-variant);padding:0 16px;text-wrap:pretty">Saldos calculados pelo servidor. Contas fora do saldo total aparecem com a marca "fora do total".</span>
+<div style="display:flex;justify-content:center"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="outlined" icon="add" hint-size="160px,40px">Nova conta</x-import></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ finBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">05 · Contas</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Ordenadas por saldo. O avatar usa a cor e o ícone escolhidos no cadastro.</span>
+</div>
+
+<div data-screen-label="06 Nova conta" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Nova conta" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Nome" value="Carteira" mono="{{ false }}" hint-size="100%,56px"></x-import>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Tipo</span><div style="display:flex;flex-wrap:wrap;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Corrente" hint-size="90px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Poupança" hint-size="100px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Carteira" selected="{{ true }}" hint-size="100px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Investimento" hint-size="110px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Outro" hint-size="70px,32px"></x-import>
+</div></div>
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Saldo inicial</span><div style="display:flex;align-items:center"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 250,00</span></div></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Cor</span><div style="display:flex;gap:10px">
+<span style="width:36px;height:36px;border-radius:18px;background:#6A4F86"></span><span style="width:36px;height:36px;border-radius:18px;background:#1F5F8B"></span><span style="width:36px;height:36px;border-radius:18px;background:#136B79"></span><span style="width:36px;height:36px;border-radius:18px;background:#2E6B4F;box-shadow:0 0 0 3px var(--md-surface),0 0 0 5px var(--md-on-surface);display:grid;place-items:center;color:#FFFFFF"><span class="ms" style="font-size:20px">check</span></span><span style="width:36px;height:36px;border-radius:18px;background:#3B8A3E"></span><span style="width:36px;height:36px;border-radius:18px;background:#B5651D"></span><span style="width:36px;height:36px;border-radius:18px;background:#8F4C38"></span><span style="width:36px;height:36px;border-radius:18px;background:#8A4B2E"></span>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Ícone</span><div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;justify-items:center">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="account_balance" label="Banco" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="wallet" label="Carteira" variant="filled" size="r" shape="square" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="savings" label="Poupança" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="trending_up" label="Investimento" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="payments" label="Dinheiro" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="currency_exchange" label="Outro" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+</div></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SwitchRow" variant="inline" title="Incluir no saldo total" checked="{{ true }}" hint-size="100%,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar conta</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">06 · Cadastro de conta</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Tipo em chips de escolha única, saldo inicial em destaque. A cor vira o seed do avatar da conta.</span>
+</div>
+
+<div data-screen-label="07 Transações" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Finanças" subtitle="Novembro 2026" dc-props="{{ finBarTop }}" hint-size="100%,64px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="trans" dc-props="{{ finTabs }}" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Buscar" placeholder="Descrição ou valor" leading-icon="search" size="compact" mono="{{ false }}" hint-size="100%,48px"></x-import>
+<div style="display:flex;gap:8px;overflow:hidden;margin:0 -16px;padding:0 16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Novembro" selected="{{ true }}" hint-size="110px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Conta" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Cartão" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Categoria" hint-size="100px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Tipo" hint-size="70px,32px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="+R$ 609,04" hint-size="100%,20px">Hoje · 02/11</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="segmented" hint-size="100%,300px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Projeto site Ótica Vitória" subtitle="Freelance · Nubank" dc-props="{{ tFree }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Mercado Bom Preço" subtitle="Alimentação · Cartão Nubank" dc-props="{{ tMerc }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Moto Peças Rocha" subtitle="Transporte · Carteira" dc-props="{{ tRocha }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Padaria Pão Quente" subtitle="Alimentação · Carteira" dc-props="{{ tPad }}" hint-size="100%,72px"></x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="+R$ 4.158,06" hint-size="100%,20px">Ontem · 01/11</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="segmented" hint-size="100%,150px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Salário" subtitle="Salário · Inter" dc-props="{{ tSal }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Aluguel" subtitle="Moradia · Inter" dc-props="{{ tAlu }}" hint-size="100%,72px"></x-import>
+</x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ finBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">07 · Transações</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Agrupadas por dia, com o saldo do dia no cabeçalho. Filtros em chips (período, conta, cartão, categoria, tipo) e busca. Receitas em verde com sinal +.</span>
+</div>
+
+<div data-screen-label="08 Nova despesa" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Nova transação" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ kindExp }}" hint-size="100%,40px"></x-import>
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Valor</span><span style="font:var(--type-display-medium-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 187,46</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Descrição" value="Mercado Bom Preço" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Data" value="Hoje" leading-icon="event" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Conta ou cartão</span><div style="display:flex;gap:8px;overflow:hidden">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Cartão Nubank" selected="{{ true }}" hint-size="140px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Inter" hint-size="70px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Nubank" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Carteira" hint-size="80px,32px"></x-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Categoria</span><div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ cAli }}" hint-size="100%,84px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="restaurant" label="Alimentação" variant="filled" size="m" shape="square" hint-size="56px,56px"></x-import><span style="font:var(--type-label-medium-emphasized)">Alimentação</span></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ cMor }}" hint-size="100%,84px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="home" label="Moradia" variant="tonal" size="m" hint-size="56px,56px"></x-import><span style="font:var(--type-label-medium)">Moradia</span></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ cTra }}" hint-size="100%,84px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="directions_car" label="Transporte" variant="tonal" size="m" hint-size="56px,56px"></x-import><span style="font:var(--type-label-medium)">Transporte</span></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ cLaz }}" hint-size="100%,84px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="celebration" label="Lazer" variant="tonal" size="m" hint-size="56px,56px"></x-import><span style="font:var(--type-label-medium)">Lazer</span></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ cAss }}" hint-size="100%,84px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="subscriptions" label="Assinaturas" variant="tonal" size="m" hint-size="56px,56px"></x-import><span style="font:var(--type-label-medium)">Assinaturas</span></x-import>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="add" label="Nova categoria" variant="outlined" size="m" hint-size="56px,56px"></x-import><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Nova</span></div>
+</div></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar despesa</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">08 · Nova transação · despesa</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Abre com o teclado numérico no valor; aqui já preenchido. Conta mais usada pré-selecionada. Categoria escolhida fica quadrada e preenchida.</span>
+</div>
+
+<div data-screen-label="09 Transferência" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" keyboard="numpad" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Nova transação" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:14px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ kindTr }}" hint-size="100%,40px"></x-import>
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Valor</span><div style="display:flex;align-items:center"><span style="font:var(--type-display-medium-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 500,00</span><span style="width:2px;height:44px;background:var(--md-primary);margin-left:3px"></span></div></div>
+<div style="position:relative;display:flex;flex-direction:column;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="De" value="Inter · R$ 5.312,95" leading-icon="account_balance" trailing-icon="arrow_drop_down" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Para" value="Nubank · R$ 3.218,40" leading-icon="account_balance" trailing-icon="arrow_drop_down" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<div style="position:absolute;right:56px;top:40px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="swap_vert" label="Inverter contas" variant="tonal" size="s" hint-size="40px,40px"></x-import></div>
+</div>
+<div style="display:flex;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="event" label="Hoje, 02/11" size="s" hint-size="120px,32px"></x-import><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="notes" label="Adicionar descrição" size="s" hint-size="170px,32px"></x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Transferir R$ 500,00</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">09 · Nova transação · transferência</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Na transferência, categoria dá lugar a origem e destino, com o saldo de cada conta e um botão para inverter.</span>
+</div>
+
+</div>
+</section>
+
+<section data-screen-label="Categorias e cartões" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Categorias e cartões</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="10 Categorias" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Categorias" dc-props="{{ catBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ catKind }}" hint-size="100%,40px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="segmented" hint-size="100%,370px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Moradia" subtitle="R$ 1.149,90 em novembro" trailing="more_vert" dc-props="{{ lMor }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Alimentação" subtitle="R$ 205,96 em novembro" trailing="more_vert" dc-props="{{ lAli }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Transporte" subtitle="R$ 96,64 em novembro" trailing="more_vert" dc-props="{{ lTra }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Assinaturas" subtitle="R$ 21,90 em novembro" trailing="more_vert" dc-props="{{ lAss }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Lazer" subtitle="R$ 8,50 em novembro" trailing="more_vert" dc-props="{{ lLaz }}" hint-size="100%,72px"></x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="segmented" hint-size="100%,72px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="inventory_2" avatar-tone="neutral" title="Arquivadas" subtitle="1 categoria" trailing="chevron" hint-size="100%,72px"></x-import>
+</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">10 · Categorias</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Aberta pelo ícone no topo de Finanças. Despesas e receitas (Salário, Freelance) no button group. O menu de cada linha tem Editar e Arquivar.</span>
+</div>
+
+<div data-screen-label="11 Editar categoria" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" scrim="{{ true }}" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Categorias" dc-props="{{ catBar }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Editar categoria" gap="{{ 16 }}" hint-size="100%,1px">
+<div style="display:flex;align-items:center;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ cLazAv }}" hint-size="56px,56px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconAvatar" icon="celebration" tone="primary" shape="cookie9" size="{{ 56 }}" hint-size="56px,56px"></x-import></x-import>
+<div style="flex:1"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Nome" value="Lazer" mono="{{ false }}" label-bg="var(--md-surface-container-low)" hint-size="100%,56px"></x-import></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ catKindSmall }}" hint-size="100%,40px"></x-import>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Ícone</span><div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;justify-items:center">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="celebration" label="Festa" variant="filled" size="r" shape="square" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="movie" label="Cinema" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="sports_esports" label="Jogos" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="music_note" label="Música" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="park" label="Passeio" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="flight" label="Viagem" variant="outlined" size="r" hint-size="48px,48px"></x-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Cor</span><div style="display:flex;gap:10px">
+<span style="width:36px;height:36px;border-radius:18px;background:#6A4F86"></span><span style="width:36px;height:36px;border-radius:18px;background:#1F5F8B"></span><span style="width:36px;height:36px;border-radius:18px;background:#136B79"></span><span style="width:36px;height:36px;border-radius:18px;background:#2E6B4F"></span><span style="width:36px;height:36px;border-radius:18px;background:#3B8A3E"></span><span style="width:36px;height:36px;border-radius:18px;background:#B5651D"></span><span style="width:36px;height:36px;border-radius:18px;background:#8F4C38;box-shadow:0 0 0 3px var(--md-surface-container-low),0 0 0 5px var(--md-on-surface);display:grid;place-items:center;color:#FFFFFF"><span class="ms" style="font-size:20px">check</span></span><span style="width:36px;height:36px;border-radius:18px;background:#8A4B2E"></span>
+</div></div>
+<div style="display:flex;justify-content:space-between;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="text" icon="archive" size="m" hint-size="140px,56px">Arquivar</x-import><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" hint-size="140px,56px">Salvar</x-import></div>
+</x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">11 · Criar e editar categoria</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Folha com prévia do avatar, que muda de forma e cor ao vivo. Criar usa a mesma folha, sem Arquivar.</span>
+</div>
+
+<div data-screen-label="12 Cartões" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Finanças" dc-props="{{ finBarTop }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="cartoes" dc-props="{{ finTabs }}" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="credit_card" overline="Cartão Nubank" title="Fatura de novembro" hint-size="100%,330px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font:var(--type-display-small-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 1.064,22</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.StatusChip" label="Aberta" tone="neutral" hint-size="84px,32px"></x-import></div>
+<span style="font:var(--type-body-medium)">Fecha amanhã, 03/11 · vence 10/11</span>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" value="{{ 0.24 }}" hint-size="100%,8px"></x-import>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Limite disponível" value="R$ 3.435,78" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Limite total" value="R$ 4.500,00" hint-size="100%,52px"></x-import>
+</div>
+</x-import>
+<div style="display:flex;justify-content:center"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="outlined" icon="add" hint-size="170px,40px">Novo cartão</x-import></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ finBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">12 · Cartões</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Um card por cartão com a fatura atual, o uso do limite e o disponível. Com vários cartões, viram uma lista de cards.</span>
+</div>
+
+<div data-screen-label="13 Detalhe do cartão" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Cartão Nubank" subtitle="Fecha dia 3 · vence dia 10" dc-props="{{ cardBar }}" hint-size="100%,64px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:4px 16px 0;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="chevron_left" label="Fatura anterior" variant="surface" hint-size="40px,40px"></x-import><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="font:var(--type-title-large-emphasized)">Novembro 2026</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.StatusChip" label="Aberta" tone="neutral" size="small" hint-size="70px,24px"></x-import></div><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="chevron_right" label="Próxima fatura" variant="surface" hint-size="40px,40px"></x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,190px">
+<span style="font:var(--type-display-small-emphasized);font-feature-settings:'tnum' 1">R$ 1.064,22</span>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Fecha" value="03/11 · amanhã" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Vence" value="10/11/2026" hint-size="100%,52px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Pagar fatura</x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="18 lançamentos" hint-size="100%,20px">Lançamentos</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="segmented" hint-size="100%,300px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Mercado Bom Preço" subtitle="02/11 · Alimentação" dc-props="{{ fMerc }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Posto Shell" subtitle="01/11 · Transporte" dc-props="{{ fPosto }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Spotify" subtitle="01/11 · Assinaturas" dc-props="{{ fSpot }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" title="Sorveteria Gelato" subtitle="01/11 · Lazer" dc-props="{{ fSorv }}" hint-size="100%,72px"></x-import>
+</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">13 · Detalhe do cartão</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">As setas navegam entre faturas. Status: Aberta (neutro), Fechada (aviso), Paga (sucesso) e Vencida (erro), sempre com ícone e rótulo.</span>
+</div>
+
+<div data-screen-label="14 Pagar fatura" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#2E6B4F" keyboard="numpad" scrim="{{ true }}" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Cartão Nubank" subtitle="Fecha dia 3 · vence dia 10" dc-props="{{ cardBar }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Pagar fatura de novembro" gap="{{ 14 }}" hint-size="100%,1px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ payKind }}" hint-size="100%,40px"></x-import>
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Valor do pagamento</span><div style="display:flex;align-items:center"><span style="font:var(--type-display-small-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 500,00</span><span style="width:2px;height:40px;background:var(--md-primary);margin-left:3px"></span></div></div>
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="info" label="Restam R$ 564,22 nesta fatura" size="s" hint-size="240px,32px"></x-import></div>
+<div style="display:flex;gap:8px;overflow:hidden">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Inter" selected="{{ true }}" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Nubank" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Carteira" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="event" label="Hoje" size="s" hint-size="80px,32px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Pagar R$ 500,00</x-import>
+</x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">14 · Pagar fatura</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Total ou parcial. Total já vem com o valor da fatura; parcial mostra quanto resta. O pagamento sai da conta escolhida.</span>
+</div>
+
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (!window.HenriqueSebastiOAndroidDesignSystem_5ac522) {
+      this.t = setInterval(() => { if (window.HenriqueSebastiOAndroidDesignSystem_5ac522) { clearInterval(this.t); this.forceUpdate(); } }, 100);
+    }
+  }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const DS = window.HenriqueSebastiOAndroidDesignSystem_5ac522;
+    const h = React.createElement;
+    const noop = () => {};
+    const C = { mor: '#6A4F86', ali: '#B5651D', tra: '#1F5F8B', ass: '#136B79', laz: '#8F4C38', sal: '#2E6B4F', fre: '#3B8A3E', nu: '#6A4F86', inter: '#B5651D', cart: '#2E6B4F' };
+    const av = (seed, icon) => DS ? h(DS.AppTheme, { seed, mode: 'light', style: { background: 'transparent' } }, h(DS.IconAvatar, { icon, tone: 'primary' })) : null;
+    const val = (t, plus) => h('span', { style: { font: 'var(--type-data-medium)', whiteSpace: 'nowrap', color: plus ? 'var(--md-success)' : 'var(--md-on-surface)' } }, t);
+    const row = (seed, icon, v, plus) => ({ leading: av(seed, icon), trailing: val(v, plus) });
+    const tile = (seed) => ({ seed, mode: 'light', style: { background: 'transparent', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 } });
+    return {
+      back: { onBack: noop },
+      finBarTop: { onBack: noop, actions: [{ icon: 'category', label: 'Categorias' }, { icon: 'search', label: 'Buscar' }] },
+      closeBar: { onBack: noop, backIcon: 'close', backLabel: 'Fechar' },
+      catBar: { onBack: noop, actions: [{ icon: 'add', label: 'Nova categoria', variant: 'tonal' }] },
+      cardBar: { onBack: noop, actions: [{ icon: 'edit', label: 'Editar cartão' }] },
+      finTabs: { items: [
+        { value: 'resumo', label: 'Resumo' }, { value: 'trans', label: 'Transações' },
+        { value: 'contas', label: 'Contas' }, { value: 'cartoes', label: 'Cartões' },
+      ] },
+      finBar: {
+        floating: true, bottom: 40, label: 'Ações de Finanças',
+        items: [
+          { icon: 'savings', label: 'Nova receita' },
+          { icon: 'swap_horiz', label: 'Nova transferência' },
+          { icon: 'credit_card', label: 'Pagar fatura' },
+        ],
+        fab: { icon: 'payments', label: 'Nova despesa' },
+      },
+      accInter: row(C.inter, 'account_balance', 'R$ 5.312,95'),
+      accNu: row(C.nu, 'account_balance', 'R$ 3.218,40'),
+      accCart: row(C.cart, 'wallet', 'R$ 211,00'),
+      tFree: row(C.fre, 'work', '+R$ 850,00', true),
+      tMerc: row(C.ali, 'restaurant', '−R$ 187,46'),
+      tRocha: row(C.tra, 'directions_car', '−R$ 35,00'),
+      tPad: row(C.ali, 'restaurant', '−R$ 18,50'),
+      tSal: row(C.sal, 'payments', '+R$ 5.400,00', true),
+      tAlu: row(C.mor, 'home', '−R$ 1.050,00'),
+      fMerc: row(C.ali, 'restaurant', 'R$ 187,46'),
+      fPosto: row(C.tra, 'directions_car', 'R$ 61,64'),
+      fSpot: row(C.ass, 'subscriptions', 'R$ 21,90'),
+      fSorv: row(C.laz, 'celebration', 'R$ 8,50'),
+      lMor: { leading: av(C.mor, 'home') },
+      lAli: { leading: av(C.ali, 'restaurant') },
+      lTra: { leading: av(C.tra, 'directions_car') },
+      lAss: { leading: av(C.ass, 'subscriptions') },
+      lLaz: { leading: av(C.laz, 'celebration') },
+      cAli: tile(C.ali), cMor: tile(C.mor), cTra: tile(C.tra), cLaz: tile(C.laz), cAss: tile(C.ass),
+      cLazAv: { seed: C.laz, mode: 'light', style: { background: 'transparent' } },
+      kindExp: { value: 'despesa', items: [
+        { value: 'despesa', label: 'Despesa' },
+        { value: 'receita', label: 'Receita' },
+        { value: 'transf', label: 'Transferência' },
+      ] },
+      kindTr: { value: 'transf', items: [
+        { value: 'despesa', label: 'Despesa' },
+        { value: 'receita', label: 'Receita' },
+        { value: 'transf', label: 'Transferência' },
+      ] },
+      catKind: { value: 'desp', items: [{ value: 'desp', label: 'Despesas' }, { value: 'rec', label: 'Receitas' }] },
+      catKindSmall: { value: 'desp', items: [{ value: 'desp', label: 'Despesa' }, { value: 'rec', label: 'Receita' }] },
+      payKind: { value: 'parcial', items: [{ value: 'total', label: 'Total · R$ 1.064,22' }, { value: 'parcial', label: 'Parcial' }] },
+    };
+  }
+}
+</script>
+</body>
+</html>

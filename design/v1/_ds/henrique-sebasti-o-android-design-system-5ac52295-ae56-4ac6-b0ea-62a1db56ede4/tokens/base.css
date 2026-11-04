@@ -1,0 +1,4 @@
+body{margin:0;font:var(--type-body-medium);font-variation-settings:var(--font-ui-fvs);background:var(--md-surface);color:var(--md-on-surface);-webkit-font-smoothing:antialiased}
+a{color:var(--md-primary)}a:hover{color:var(--md-on-primary-container)}
+.ms{font-family:var(--icon-font);font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;white-space:nowrap;direction:ltr;font-variation-settings:var(--icon-fvs);-webkit-font-smoothing:antialiased;display:inline-block}
+.data{font-family:var(--font-data);font-feature-settings:var(--font-data-features)}

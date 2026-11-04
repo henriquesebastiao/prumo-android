@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/icons.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/shape.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/base.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/styles.css">
+<script src="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/_ds_bundle.js"></script>
+<style>body{background:var(--md-surface-container-high)}a{color:var(--md-primary)}a:hover{color:var(--md-on-primary-container)}</style>
+</helmet>
+<div style="padding:56px 64px 96px;display:flex;flex-direction:column;gap:56px">
+<header style="display:flex;flex-direction:column;gap:16px">
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Prumo Android · Fase 2 · variante B</span>
+<h1 style="margin:0;font:var(--type-display-medium-emphasized);color:var(--md-on-surface)">Veículos</h1>
+<nav style="display:flex;flex-wrap:wrap;gap:8px">
+<a href="Prumo%20Fase%202%20-%20Inicio%20e%20acesso.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Início e acesso</a>
+<a href="Prumo%20Fase%202%20-%20Configuracoes%20e%20estados.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Configurações e estados</a>
+<a href="Prumo%20Fase%202%20-%20Financas.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Finanças</a>
+<a href="Prumo%20Fase%202%20-%20Veiculos.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-secondary-container);color:var(--md-on-secondary-container);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Veículos</a>
+<a href="Prumo%20Fase%202%20-%20Livros.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Livros</a>
+<a href="Prumo%20Fase%202%20-%20Telas%20grandes.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Telas grandes e widget</a>
+<a href="Prumo%20Fase%202%20-%20Handoff.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Entrega para implementação</a>
+</nav>
+</header>
+
+<section data-screen-label="Lista e cadastro" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Lista e cadastro</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="01 Lista de veículos" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Veículos" dc-props="{{ listBar }}" hint-size="100%,160px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="separated" hint-size="100%,170px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="two_wheeler" avatar-tone="primary" title="CG" subtitle="Honda CG 160 Fan · 2023 · 18.420 km" dc-props="{{ chipSoon }}" hint-size="100%,80px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="directions_car" avatar-tone="primary" title="Strada" subtitle="Fiat Strada Freedom · 2021 · 52.300 km" dc-props="{{ chipOk }}" hint-size="100%,80px"></x-import>
+</x-import>
+<span style="font:var(--type-body-small);color:var(--md-on-surface-variant);text-wrap:pretty">O status é da próxima troca de óleo, pelo critério que vence primeiro.</span>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ listToolbar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">01 · Lista de veículos · claro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Visão geral do módulo. Apelido, modelo, ano, km atual e status da troca de óleo numa linha. As ações da toolbar perguntam o veículo quando há mais de um.</span>
+</div>
+
+<div data-screen-label="02 Lista de veículos escuro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" mode="dark" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Veículos" dc-props="{{ listBar }}" hint-size="100%,160px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="separated" hint-size="100%,170px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="two_wheeler" avatar-tone="primary" title="CG" subtitle="Honda CG 160 Fan · 2023 · 18.420 km" dc-props="{{ chipSoon }}" hint-size="100%,80px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="directions_car" avatar-tone="primary" title="Strada" subtitle="Fiat Strada Freedom · 2021 · 52.300 km" dc-props="{{ chipOk }}" hint-size="100%,80px"></x-import>
+</x-import>
+<span style="font:var(--type-body-small);color:var(--md-on-surface-variant);text-wrap:pretty">O status é da próxima troca de óleo, pelo critério que vence primeiro.</span>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ listToolbar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">02 · Lista de veículos · escuro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Mesmo esquema gerado pelo seed de Veículos, no modo escuro.</span>
+</div>
+
+<div data-screen-label="03 Vazio" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Veículos" dc-props="{{ back }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 24px 160px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.EmptyState" variant="hero" icon="two_wheeler" title="Nenhum veículo ainda" text="Cadastre um carro ou uma moto para acompanhar km, abastecimentos, manutenções e trocas de óleo." action-label="Adicionar veículo" hint-size="100%,320px"></x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">03 · Vazio · primeiro uso</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Sem veículos, a toolbar some: não há o que registrar. A única ação é cadastrar.</span>
+</div>
+
+<div data-screen-label="04 Cadastro de veículo" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Novo veículo" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="m" full-width="{{ true }}" dc-props="{{ typeGroup }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Apelido" value="CG" mono="{{ false }}" supporting-text="Como o veículo aparece no app." hint-size="100%,80px"></x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Marca" value="Honda" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Modelo" value="CG 160 Fan" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Ano" value="2023" clearable="{{ false }}" input-mode="numeric" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Km atual" value="18.420" suffix="km" clearable="{{ false }}" input-mode="numeric" hint-size="100%,56px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" hint-size="100%,20px">Troca de óleo</x-import>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="A cada" value="1.000" suffix="km" clearable="{{ false }}" input-mode="numeric" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Ou a cada" value="3" suffix="meses" clearable="{{ false }}" input-mode="numeric" hint-size="100%,56px"></x-import>
+</div>
+<span style="font:var(--type-body-small);color:var(--md-on-surface-variant);text-wrap:pretty">Preencha um ou os dois. O que vencer primeiro define o status.</span>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar veículo</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">04 · Cadastro e edição</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Tipo em button group conectado. Na edição o formulário vem preenchido, com o título "Editar CG" e Arquivar no menu.</span>
+</div>
+
+</div>
+</section>
+
+<section data-screen-label="Detalhe" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Detalhe do veículo</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="05 Detalhe do veículo" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" status-bg="color-mix(in srgb, var(--md-primary) 18%, var(--md-surface))" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="CG" subtitle="Honda CG 160 Fan · 2023" tint="{{ true }}" dc-props="{{ detailBar }}" hint-size="100%,64px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:4px 16px 0;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,88px">
+<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Km atual · atualizado hoje, 08:12</span><span style="font:var(--type-headline-medium-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">18.420 km</span></div><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="tonal" icon="edit" hint-size="120px,40px">Atualizar</x-import></div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="oil_barrel" overline="Próxima troca de óleo" title="Faltam 180 km" hint-size="100%,250px">
+<div style="display:flex;align-items:center;gap:10px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.StatusChip" label="Em breve" tone="warning" hint-size="104px,32px"></x-import><span style="font:var(--type-body-medium)">Vence primeiro por km</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.82 }}" hint-size="100%,10px"></x-import>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Por km · vence primeiro" value="18.600 km" tone="warning" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Por data · em 48 dias" value="20/12/2026" hint-size="100%,52px"></x-import>
+</div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,148px">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Consumo médio" value="38,6 km/l" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Último tanque" value="39,2 km/l" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Abastecido em 01/11" value="R$ 61,64" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Gasto de novembro" value="R$ 96,64" hint-size="100%,52px"></x-import>
+</div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="man" dc-props="{{ histTabs }}" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="separated" hint-size="100%,160px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="build" title="Lubrificação da corrente" subtitle="01/11/2026 · 18.390 km · Moto Peças Rocha" dc-props="{{ v35 }}" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="build" title="Pastilhas de freio" subtitle="12/08/2026 · 16.980 km · Moto Peças Rocha" dc-props="{{ v120 }}" hint-size="100%,72px"></x-import>
+</x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ carBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">05 · Detalhe do veículo</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Hero da troca de óleo com os dois critérios; o que vence primeiro leva o tom do status. Sem registro: chip neutro e "Registre a primeira troca". Histórico em abas roláveis.</span>
+</div>
+
+<div data-screen-label="06 Atualizar km" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" keyboard="numpad" scrim="{{ true }}" status-bg="color-mix(in srgb, var(--md-primary) 18%, var(--md-surface))" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="CG" subtitle="Honda CG 160 Fan · 2023" tint="{{ true }}" dc-props="{{ detailBar }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Atualizar km" gap="{{ 16 }}" hint-size="100%,1px">
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="history" label="Atual: 18.420 km · hoje, 08:12" size="s" hint-size="240px,32px"></x-import></div>
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Km no painel</span><div style="display:flex;align-items:center;gap:6px"><span style="font:var(--type-display-medium-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">18.512</span><span style="width:2px;height:40px;background:var(--md-primary)"></span><span style="font:var(--type-title-large);color:var(--md-on-surface-variant)">km</span></div></div>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface-variant)">+92 km desde a última atualização</span>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar</x-import>
+</x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">06 · Atualizar km</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Um campo só, com o km atual como referência. Valor menor que o atual mostra erro no campo: "Menor que o último registro (18.420 km)".</span>
+</div>
+
+<div data-screen-label="07 Detalhe de manutenção" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Pastilhas de freio" subtitle="CG · manutenção" dc-props="{{ itemBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,150px">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Data e hora" value="12/08/2026 10:40" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Km" value="16.980 km" hint-size="100%,52px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Oficina" value="Moto Peças Rocha" hint-size="100%,52px"></x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="2 peças" hint-size="100%,20px">Valores</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,200px">
+<div style="display:flex;justify-content:space-between;gap:12px;font:var(--type-body-large)"><span>Pastilha de freio dianteira</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 48,00</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;font:var(--type-body-large)"><span>Fluido de freio DOT 4</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 22,00</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;font:var(--type-body-large);color:var(--md-on-surface-variant)"><span>Mão de obra</span><span style="font:var(--type-data-medium);white-space:nowrap">R$ 50,00</span></div>
+<div style="height:1px;background:var(--md-outline-variant)"></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><span style="font:var(--type-title-medium-emphasized)">Total</span><span style="font:var(--type-data-large);white-space:nowrap">R$ 120,00</span></div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" hint-size="100%,20px">Observações</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,80px">
+<span style="font:var(--type-body-large)">Fluido trocado junto, por recomendação da oficina.</span>
+</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">07 · Detalhe de uma manutenção</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Leitura pura: valores em mono e alinhados à direita, total calculado pelo servidor. Editar e excluir no topo.</span>
+</div>
+
+</div>
+</section>
+
+<section data-screen-label="Registros" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Registros</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="08 Abastecimento claro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" keyboard="numpad" scrim="{{ true }}" hint-size="412px,915px">
+<div style="flex:none;height:64px;padding:8px 12px 0 24px;box-sizing:border-box;display:flex;align-items:center"><span style="flex:1;font:var(--type-headline-medium-emphasized);letter-spacing:-0.02em">Prumo</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Abastecimento" gap="{{ 14 }}" hint-size="100%,1px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ vehicles }}" hint-size="100%,40px"></x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:8px">
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 14px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Valor total</span><div style="display:flex;align-items:center"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 61,64</span><span style="width:2px;height:32px;background:var(--md-primary);margin-left:2px"></span></div></div>
+<div style="border-radius:var(--md-sys-shape-corner-large);padding:12px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-highest)"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Litros</span><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">9,80 L</span></div>
+</div>
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="calculate" label="R$ 6,29 por litro · calculado" size="s" hint-size="220px,32px"></x-import></div>
+<div style="display:flex;gap:8px;overflow:hidden">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Gasolina comum" selected="{{ true }}" hint-size="150px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Aditivada" hint-size="90px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Premium" hint-size="90px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Etanol" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Diesel" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="GNV" hint-size="60px,32px"></x-import>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="event" label="Hoje, 14:30" size="s" hint-size="120px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="speed" label="18.420 km" size="s" hint-size="110px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Tanque cheio" selected="{{ true }}" hint-size="130px,32px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar abastecimento</x-import>
+</x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">08 · Abastecimento · claro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Aberto pela toolbar do Início. Veículo e combustível vêm do último uso; km e data são padrões que mudam com um toque. Litros ou valor: digite dois e o terceiro é calculado.</span>
+</div>
+
+<div data-screen-label="09 Abastecimento escuro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" mode="dark" keyboard="numpad" scrim="{{ true }}" hint-size="412px,915px">
+<div style="flex:none;height:64px;padding:8px 12px 0 24px;box-sizing:border-box;display:flex;align-items:center"><span style="flex:1;font:var(--type-headline-medium-emphasized);letter-spacing:-0.02em">Prumo</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Abastecimento" gap="{{ 14 }}" hint-size="100%,1px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ vehicles }}" hint-size="100%,40px"></x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:8px">
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 14px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Valor total</span><div style="display:flex;align-items:center"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 61,64</span><span style="width:2px;height:32px;background:var(--md-primary);margin-left:2px"></span></div></div>
+<div style="border-radius:var(--md-sys-shape-corner-large);padding:12px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-highest)"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Litros</span><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">9,80 L</span></div>
+</div>
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="calculate" label="R$ 6,29 por litro · calculado" size="s" hint-size="220px,32px"></x-import></div>
+<div style="display:flex;gap:8px;overflow:hidden">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Gasolina comum" selected="{{ true }}" hint-size="150px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Aditivada" hint-size="90px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Premium" hint-size="90px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Etanol" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Diesel" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="GNV" hint-size="60px,32px"></x-import>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="event" label="Hoje, 14:30" size="s" hint-size="120px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="speed" label="18.420 km" size="s" hint-size="110px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Tanque cheio" selected="{{ true }}" hint-size="130px,32px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar abastecimento</x-import>
+</x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">09 · Abastecimento · escuro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">O formulário em tema escuro. Ao salvar, o botão muda de forma e a folha fecha com snackbar "Abastecimento salvo · Desfazer".</span>
+</div>
+
+<div data-screen-label="10 Manutenção oficina" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" keyboard="text" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Manutenção" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px;position:relative">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ vehiclesStrada }}" hint-size="100%,40px"></x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Data e hora" value="02/11/2026 14:30" leading-icon="event" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Km" value="52.300" suffix="km" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Oficina" value="Auto Ce" leading-icon="storefront" mono="{{ false }}" hint-size="100%,56px"></x-import>
+<div style="margin-top:-12px;background:var(--md-surface-container);border-radius:var(--md-sys-shape-corner-large);box-shadow:var(--md-sys-elevation-level2);padding:8px 0;display:flex;flex-direction:column">
+<div style="min-height:56px;padding:8px 16px;display:flex;align-items:center;gap:16px;background:var(--md-surface-container-highest)"><span class="ms" style="font-size:24px;color:var(--md-on-surface-variant)">storefront</span><div style="flex:1;display:flex;flex-direction:column"><span style="font:var(--type-body-large)"><strong style="font-weight:700">Auto Ce</strong>nter Silva</span><span style="font:var(--type-body-small);color:var(--md-on-surface-variant)">4 serviços · último em 10/07/2026</span></div></div>
+<div style="min-height:56px;padding:8px 16px;display:flex;align-items:center;gap:16px"><span class="ms" style="font-size:24px;color:var(--md-primary)">add</span><span style="font:var(--type-body-large);color:var(--md-primary)">Criar oficina "Auto Ce"</span></div>
+</div>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">10 · Manutenção · oficina</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Autocompletar com as oficinas já usadas; a última opção cria uma oficina com o nome digitado. Data, hora e km vêm preenchidos.</span>
+</div>
+
+<div data-screen-label="11 Manutenção peças" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Manutenção" subtitle="Strada · Auto Center Silva" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="2 itens" hint-size="100%,20px">Peças trocadas</x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 128px 40px;gap:8px;align-items:center">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Peça" value="Pastilhas dianteiras" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Valor (R$)" value="189,90" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="remove_circle_outline" label="Remover peça" hint-size="40px,40px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Peça" value="Discos de freio (par)" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Valor (R$)" value="320,00" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="remove_circle_outline" label="Remover peça" hint-size="40px,40px"></x-import>
+</div>
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="tonal" icon="add" hint-size="160px,40px">Adicionar peça</x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Mão de obra (R$)" value="120,00" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:var(--md-sys-shape-corner-large);background:var(--md-primary-container);color:var(--md-on-primary-container)"><div style="display:flex;flex-direction:column"><span style="font:var(--type-label-medium)">Total</span><span style="font:var(--type-body-small)">calculado</span></div><span style="font:var(--type-headline-medium-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 629,90</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Observações" value="Discos 2 mm abaixo do mínimo." mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar manutenção</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">11 · Manutenção · peças e total</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Mesma tela, rolada. Peças em lista dinâmica com o valor de cada uma; o total soma peças e mão de obra e não é editável.</span>
+</div>
+
+<div data-screen-label="12 Troca de óleo" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#1F5F8B" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Troca de óleo" subtitle="CG" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:14px">
+<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Data e hora" value="02/11/2026 14:30" leading-icon="event" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Km" value="18.420" suffix="km" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Oficina" value="Moto Peças Rocha" leading-icon="storefront" mono="{{ false }}" hint-size="100%,56px"></x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Peça" value="Óleo 10W-30 semissintético 1 L" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Valor (R$)" value="38,00" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:center">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Mão de obra (R$)" value="15,00" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<div style="display:flex;flex-direction:column;align-items:flex-end;padding-right:4px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Total · calculado</span><span style="font:var(--type-headline-small-emphasized);font-feature-settings:'tnum' 1">R$ 53,00</span></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="oil_barrel" overline="Sugerida pelo intervalo" title="Próxima troca" hint-size="100%,230px">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Km" value="19.420" suffix="km" clearable="{{ false }}" label-bg="var(--md-primary-container)" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Data" value="02/02/2027" clearable="{{ false }}" label-bg="var(--md-primary-container)" hint-size="100%,56px"></x-import>
+</div>
+<span style="font:var(--type-body-small);text-wrap:pretty">A cada 1.000 km ou 3 meses, como no cadastro da CG. Pode editar só para esta troca.</span>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar troca de óleo</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">12 · Troca de óleo</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Os campos da manutenção, mais a próxima troca sugerida por km e por data, editável. É o único valor calculado que o usuário pode mudar.</span>
+</div>
+
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (!window.HenriqueSebastiOAndroidDesignSystem_5ac522) {
+      this.t = setInterval(() => { if (window.HenriqueSebastiOAndroidDesignSystem_5ac522) { clearInterval(this.t); this.forceUpdate(); } }, 100);
+    }
+  }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const DS = window.HenriqueSebastiOAndroidDesignSystem_5ac522;
+    const h = React.createElement;
+    const noop = () => {};
+    const chip = (label, tone) => DS ? h(DS.StatusChip, { label, tone, size: 'small' }) : null;
+    const val = (t) => h('span', { style: { font: 'var(--type-data-medium)', whiteSpace: 'nowrap' } }, t);
+    return {
+      back: { onBack: noop },
+      listBar: { onBack: noop, actions: [{ icon: 'add', label: 'Adicionar veículo', variant: 'tonal' }] },
+      closeBar: { onBack: noop, backIcon: 'close', backLabel: 'Fechar' },
+      detailBar: { onBack: noop, actions: [{ icon: 'edit', label: 'Editar veículo' }, { icon: 'more_vert', label: 'Mais opções' }] },
+      itemBar: { onBack: noop, actions: [{ icon: 'edit', label: 'Editar' }, { icon: 'delete', label: 'Excluir' }] },
+      chipSoon: { trailing: chip('Em breve', 'warning') },
+      chipOk: { trailing: chip('Em dia', 'success') },
+      v35: { trailing: val('R$ 35,00') },
+      v120: { trailing: val('R$ 120,00') },
+      typeGroup: { value: 'moto', items: [
+        { value: 'carro', label: 'Carro', icon: 'directions_car' },
+        { value: 'moto', label: 'Moto', icon: 'two_wheeler' },
+      ] },
+      vehicles: { value: 'cg', items: [
+        { value: 'cg', label: 'CG', icon: 'two_wheeler' },
+        { value: 'strada', label: 'Strada', icon: 'directions_car' },
+      ] },
+      vehiclesStrada: { value: 'strada', items: [
+        { value: 'cg', label: 'CG', icon: 'two_wheeler' },
+        { value: 'strada', label: 'Strada', icon: 'directions_car' },
+      ] },
+      histTabs: { items: [
+        { value: 'man', label: 'Manutenções' }, { value: 'abs', label: 'Abastecimentos' },
+        { value: 'oleo', label: 'Óleo' }, { value: 'km', label: 'Km' },
+      ] },
+      listToolbar: {
+        floating: true, bottom: 40, label: 'Ações de Veículos',
+        items: [
+          { icon: 'speed', label: 'Atualizar km' },
+          { icon: 'build', label: 'Registrar manutenção' },
+          { icon: 'oil_barrel', label: 'Registrar troca de óleo' },
+        ],
+        fab: { icon: 'local_gas_station', label: 'Registrar abastecimento' },
+      },
+      carBar: {
+        floating: true, bottom: 40, label: 'Ações da CG',
+        items: [
+          { icon: 'speed', label: 'Atualizar km' },
+          { icon: 'build', label: 'Registrar manutenção' },
+          { icon: 'oil_barrel', label: 'Registrar troca de óleo' },
+        ],
+        fab: { icon: 'local_gas_station', label: 'Registrar abastecimento' },
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

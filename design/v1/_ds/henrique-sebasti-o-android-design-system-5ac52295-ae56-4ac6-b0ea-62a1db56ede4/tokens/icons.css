@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block');
+/* Material Symbols Rounded, wght 400, outlined (FILL 0) by default; FILL 1 only for the selected nav item and status icons. */
+:root{
+--icon-font:'Material Symbols Rounded'; /* @kind font */
+--icon-fvs:'FILL' 0,'wght' 400,'opsz' 24; /* @kind other */
+--icon-fvs-filled:'FILL' 1,'wght' 400,'opsz' 24; /* @kind other */
+}
+@keyframes hs-spin{to{transform:rotate(360deg)}}
+@keyframes hs-indeterminate{0%{left:-40%}100%{left:100%}}

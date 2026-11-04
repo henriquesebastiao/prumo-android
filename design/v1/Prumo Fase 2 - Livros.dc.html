@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/icons.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/shape.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/base.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/styles.css">
+<script src="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/_ds_bundle.js"></script>
+<style>body{background:var(--md-surface-container-high)}a{color:var(--md-primary)}a:hover{color:var(--md-on-primary-container)}</style>
+</helmet>
+<div style="padding:56px 64px 96px;display:flex;flex-direction:column;gap:56px">
+<header style="display:flex;flex-direction:column;gap:16px">
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Prumo Android · Fase 2 · variante B</span>
+<h1 style="margin:0;font:var(--type-display-medium-emphasized);color:var(--md-on-surface)">Livros</h1>
+<nav style="display:flex;flex-wrap:wrap;gap:8px">
+<a href="Prumo%20Fase%202%20-%20Inicio%20e%20acesso.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Início e acesso</a>
+<a href="Prumo%20Fase%202%20-%20Configuracoes%20e%20estados.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Configurações e estados</a>
+<a href="Prumo%20Fase%202%20-%20Financas.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Finanças</a>
+<a href="Prumo%20Fase%202%20-%20Veiculos.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Veículos</a>
+<a href="Prumo%20Fase%202%20-%20Livros.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-secondary-container);color:var(--md-on-secondary-container);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Livros</a>
+<a href="Prumo%20Fase%202%20-%20Telas%20grandes.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Telas grandes e widget</a>
+<a href="Prumo%20Fase%202%20-%20Handoff.dc.html" style="height:36px;padding:0 16px;border-radius:9999px;background:var(--md-surface-container-lowest);color:var(--md-on-surface);display:flex;align-items:center;font:var(--type-label-large);text-decoration:none">Entrega para implementação</a>
+</nav>
+</header>
+
+<section data-screen-label="Estante" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Estante e cadastro</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="01 Estante claro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#8A4B2E" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Livros" dc-props="{{ shelfBar }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:8px;align-items:center">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Lendo" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Quero ler" hint-size="96px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Lidos" hint-size="70px,32px"></x-import>
+<span style="width:1px;height:24px;background:var(--md-outline-variant)"></span>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Tenho" hint-size="76px,32px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" overline="Lendo agora" hint-size="100%,220px">
+<div style="display:flex;gap:16px;align-items:flex-start">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 76 }}" height="{{ 112 }}" shape="rounded" icon="menu_book" color="var(--md-surface)" content-color="var(--md-primary)" hint-size="76px,112px"></x-import>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><span style="font:var(--type-headline-small-emphasized)">Código Limpo</span><span style="font:var(--type-body-medium)">Robert C. Martin</span><div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1">50%</span><span style="font:var(--type-body-small)">pág. 212 de 425</span></div></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.5 }}" hint-size="100%,10px"></x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="3 livros" hint-size="100%,20px">Estante</x-import>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+<div style="display:flex;flex-direction:column;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 112 }}" height="{{ 164 }}" shape="rounded" icon="menu_book" color="var(--md-primary-container)" content-color="var(--md-on-primary-container)" hint-size="112px,164px"></x-import><div style="display:flex;flex-direction:column"><span style="font:var(--type-title-small);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Código Limpo</span><span style="font:var(--type-body-small);color:var(--md-on-surface-variant)">Lendo · tenho</span></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 112 }}" height="{{ 164 }}" shape="rounded" icon="menu_book" color="var(--md-tertiary-container)" content-color="var(--md-on-tertiary-container)" hint-size="112px,164px"></x-import><div style="display:flex;flex-direction:column"><span style="font:var(--type-title-small);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Dom Casmurro</span><span style="font:var(--type-body-small);color:var(--md-on-surface-variant)">Lido · tenho</span></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 112 }}" height="{{ 164 }}" shape="rounded" icon="menu_book" color="var(--md-secondary-container)" content-color="var(--md-on-secondary-container)" hint-size="112px,164px"></x-import><div style="display:flex;flex-direction:column"><span style="font:var(--type-title-small);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">O Hobbit</span><span style="font:var(--type-body-small);color:var(--md-on-surface-variant)">Quero ler</span></div></div>
+</div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ livBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">01 · Estante · claro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Visão geral do módulo. O livro em leitura vira o hero. Os filtros de status são exclusivos; "Tenho", separado, combina com qualquer um.</span>
+</div>
+
+<div data-screen-label="02 Estante escuro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#8A4B2E" mode="dark" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Livros" dc-props="{{ shelfBar }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:8px;align-items:center">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Lendo" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Quero ler" hint-size="96px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Lidos" hint-size="70px,32px"></x-import>
+<span style="width:1px;height:24px;background:var(--md-outline-variant)"></span>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Tenho" selected="{{ true }}" hint-size="76px,32px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" overline="Lendo agora" hint-size="100%,220px">
+<div style="display:flex;gap:16px;align-items:flex-start">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 76 }}" height="{{ 112 }}" shape="rounded" icon="menu_book" color="var(--md-surface)" content-color="var(--md-primary)" hint-size="76px,112px"></x-import>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><span style="font:var(--type-headline-small-emphasized)">Código Limpo</span><span style="font:var(--type-body-medium)">Robert C. Martin</span><div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1">50%</span><span style="font:var(--type-body-small)">pág. 212 de 425</span></div></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.5 }}" hint-size="100%,10px"></x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="2 livros" hint-size="100%,20px">Tenho</x-import>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+<div style="display:flex;flex-direction:column;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 112 }}" height="{{ 164 }}" shape="rounded" icon="menu_book" color="var(--md-primary-container)" content-color="var(--md-on-primary-container)" hint-size="112px,164px"></x-import><div style="display:flex;flex-direction:column"><span style="font:var(--type-title-small);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Código Limpo</span><span style="font:var(--type-body-small);color:var(--md-on-surface-variant)">Lendo · tenho</span></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 112 }}" height="{{ 164 }}" shape="rounded" icon="menu_book" color="var(--md-tertiary-container)" content-color="var(--md-on-tertiary-container)" hint-size="112px,164px"></x-import><div style="display:flex;flex-direction:column"><span style="font:var(--type-title-small);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Dom Casmurro</span><span style="font:var(--type-body-small);color:var(--md-on-surface-variant)">Lido · tenho</span></div></div>
+</div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ livBar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">02 · Estante · escuro, filtro Tenho</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Com o filtro "Tenho", O Hobbit sai da grade. O hero continua, porque Código Limpo também passa no filtro.</span>
+</div>
+
+<div data-screen-label="03 Vazio" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#8A4B2E" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" size="large" title="Livros" dc-props="{{ back }}" hint-size="100%,160px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 24px 160px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.EmptyState" variant="hero" icon="menu_book" title="Sua estante está vazia" text="Adicione os livros que você está lendo, quer ler ou já leu. Dá para marcar quais você tem em casa." action-label="Adicionar livro" hint-size="100%,320px"></x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">03 · Vazio · primeiro uso</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Mesmo padrão de estado vazio dos outros módulos, na cor de Livros.</span>
+</div>
+
+<div data-screen-label="04 Cadastro de livro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#8A4B2E" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="Novo livro" dc-props="{{ closeBar }}" hint-size="100%,64px"></x-import>
+<div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:16px;align-items:flex-end">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 112 }}" height="{{ 164 }}" shape="rounded" icon="add_photo_alternate" color="var(--md-surface-container-highest)" content-color="var(--md-on-surface-variant)" hint-size="112px,164px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Capa</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="tonal" icon="photo_camera" full-width="{{ true }}" hint-size="100%,40px">Câmera</x-import><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="outlined" icon="image" full-width="{{ true }}" hint-size="100%,40px">Galeria</x-import></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Título" value="O Hobbit" mono="{{ false }}" hint-size="100%,56px"></x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Autor" value="J.R.R. Tolkien" mono="{{ false }}" clearable="{{ false }}" hint-size="100%,56px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Páginas" value="336" clearable="{{ false }}" input-mode="numeric" hint-size="100%,56px"></x-import>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Status</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ statusGroup }}" hint-size="100%,40px"></x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SwitchRow" variant="inline" title="Tenho este livro" checked="{{ false }}" hint-size="100%,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar livro</x-import>
+</div>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">04 · Cadastro de livro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Status em button group. Lendo mostra o campo de página atual e a data de início; Lido mostra as duas datas.</span>
+</div>
+
+</div>
+</section>
+
+<section data-screen-label="Leitura" style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font:var(--type-headline-small-emphasized);color:var(--md-on-surface)">Leitura</h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px;align-items:flex-start">
+
+<div data-screen-label="05 Detalhe do livro" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#8A4B2E" status-bg="color-mix(in srgb, var(--md-primary) 18%, var(--md-surface))" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" tint="{{ true }}" dc-props="{{ bookBar }}" hint-size="100%,64px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:16px;align-items:flex-end">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 100 }}" height="{{ 148 }}" shape="rounded" icon="menu_book" color="var(--md-primary-container)" content-color="var(--md-on-primary-container)" hint-size="100px,148px"></x-import>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-headline-medium-emphasized)">Código Limpo</span><span style="font:var(--type-body-large);color:var(--md-on-surface-variant)">Robert C. Martin · 425 páginas</span><div style="display:flex;gap:6px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" label="Lendo" size="s" hint-size="70px,32px"></x-import><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="check" label="Tenho" size="s" hint-size="80px,32px"></x-import></div></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="auto_stories" overline="Progresso" title="Página 212 de 425" hint-size="100%,220px">
+<div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font:var(--type-display-medium-emphasized);font-feature-settings:'tnum' 1">50%</span><span style="font:var(--type-body-medium)">faltam 213 páginas</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.5 }}" hint-size="100%,10px"></x-import>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" full-width="{{ true }}" hint-size="100%,40px">+1</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" full-width="{{ true }}" hint-size="100%,40px">+10</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" full-width="{{ true }}" hint-size="100%,40px">+25</x-import>
+</div>
+</x-import>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Início" value="14/10/2026" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Término" value="em leitura" hint-size="100%,52px"></x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionHeader" trailing="2" hint-size="100%,20px">Anotações</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="separated" hint-size="100%,160px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="sticky_note_2" title="Reler o capítulo de tratamento de erros antes do projeto novo." subtitle="pág. 103 · 28/10/2026" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="sticky_note_2" title="Aplicar a regra de funções pequenas no módulo de faturas." subtitle="pág. 35 · 18/10/2026" hint-size="100%,72px"></x-import>
+</x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ bookToolbar }}" hint-size="100%,1px"></x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">05 · Detalhe do livro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Atualização rápida no próprio hero: +1, +10 ou +25 páginas com um toque. O FAB abre a folha para digitar a página.</span>
+</div>
+
+<div data-screen-label="06 Atualizar progresso" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#8A4B2E" keyboard="numpad" scrim="{{ true }}" status-bg="color-mix(in srgb, var(--md-primary) 18%, var(--md-surface))" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" tint="{{ true }}" dc-props="{{ bookBar }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Atualizar progresso" gap="{{ 14 }}" hint-size="100%,1px">
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="history" label="Código Limpo · estava na pág. 212" size="s" hint-size="260px,32px"></x-import></div>
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Página atual</span><div style="display:flex;align-items:center;gap:6px"><span style="font:var(--type-display-medium-emphasized);font-feature-settings:'tnum' 1">236</span><span style="width:2px;height:40px;background:var(--md-primary)"></span><span style="font:var(--type-title-large);color:var(--md-on-surface-variant)">de 425</span></div></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.555 }}" hint-size="100%,10px"></x-import>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface-variant)">56% · +24 páginas hoje</span>
+<div style="display:flex;justify-content:space-between;gap:8px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="text" icon="done_all" size="m" hint-size="170px,56px">Terminei</x-import><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" hint-size="140px,56px">Salvar</x-import></div>
+</x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">06 · Atualizar progresso</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">A onda acompanha a página digitada. "Terminei" marca como lido com a data de hoje e dispara a confirmação expressiva.</span>
+</div>
+
+<div data-screen-label="07 Nova anotação" style="display:flex;flex-direction:column;gap:12px;width:412px">
+<x-import component-from-global-scope="PrumoPhone" from="./PrumoPhone.jsx" seed="#8A4B2E" keyboard="text" scrim="{{ true }}" status-bg="color-mix(in srgb, var(--md-primary) 18%, var(--md-surface))" hint-size="412px,915px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" tint="{{ true }}" dc-props="{{ bookBar }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Nova anotação" gap="{{ 14 }}" hint-size="100%,1px">
+<div style="position:relative;border:2px solid var(--md-primary);border-radius:var(--shape-text-field);padding:16px;min-height:120px;box-sizing:border-box"><span style="position:absolute;top:-9px;left:12px;padding:0 4px;background:var(--md-surface-container-low);font:var(--type-body-small);color:var(--md-primary)">Anotação</span><span style="font:var(--type-body-large)">Comparar os exemplos de testes com o que fazemos no projeto do trabalho</span><span style="display:inline-block;width:2px;height:20px;background:var(--md-primary);vertical-align:middle;margin-left:2px"></span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TextField" label="Página (opcional)" value="236" size="compact" label-bg="var(--md-surface-container-low)" hint-size="100%,48px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" hint-size="120px,56px">Salvar</x-import>
+</div>
+</x-import>
+</x-import>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">07 · Nova anotação</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Texto livre e página opcional, já sugerida com a página atual.</span>
+</div>
+
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const noop = () => {};
+    return {
+      back: { onBack: noop },
+      shelfBar: { onBack: noop, actions: [{ icon: 'search', label: 'Buscar livro' }] },
+      closeBar: { onBack: noop, backIcon: 'close', backLabel: 'Fechar' },
+      bookBar: { onBack: noop, actions: [{ icon: 'edit', label: 'Editar livro' }, { icon: 'more_vert', label: 'Mais opções' }] },
+      livBar: {
+        floating: true, bottom: 40, label: 'Ações de Livros',
+        items: [
+          { icon: 'edit_note', label: 'Nova anotação' },
+          { icon: 'library_add', label: 'Adicionar livro' },
+        ],
+        fab: { icon: 'auto_stories', label: 'Atualizar página' },
+      },
+      bookToolbar: {
+        floating: true, bottom: 40, label: 'Ações do livro',
+        items: [
+          { icon: 'edit_note', label: 'Nova anotação' },
+        ],
+        fab: { icon: 'auto_stories', label: 'Atualizar página' },
+      },
+      statusGroup: { value: 'quero', items: [
+        { value: 'quero', label: 'Quero ler' }, { value: 'lendo', label: 'Lendo' }, { value: 'lido', label: 'Lido' },
+      ] },
+      quickPages: { items: [
+        { value: '1', label: '+1' }, { value: '10', label: '+10' }, { value: '25', label: '+25' },
+      ] },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+/* Spacing (dp). Base 4. Screen gutter 16. Touch targets ≥ 48. */
+:root{
+--space-2:2px;  /* gap between grouped-list items */
+--space-4:4px;
+--space-6:6px;  /* chip gaps */
+--space-8:8px;
+--space-12:12px;
+--space-16:16px;
+--space-20:20px;
+--space-24:24px;
+--space-32:32px;
+--space-40:40px;
+--gutter:16px;
+--section-gap:24px;
+--touch-min:48px;
+--status-bar-height:40px;
+--top-app-bar-height:64px;
+--nav-bar-height:64px; /* M3E flexible navigation bar (was 80) */
+--floating-toolbar-height:64px;
+--fab-size:56px;--fab-medium-size:80px;--fab-large-size:96px;
+--button-xs:32px;--button-s:40px;--button-m:56px;--button-l:96px;--button-xl:136px;
+--loading-indicator-size:48px;--loading-indicator-active:38px;
+--gesture-bar-height:24px;
+--list-item-min:72px;
+--value-tile-min:60px;
+--avatar-size:40px;
+--icon-size:24px;
+--device-width:412px;
+--device-height:915px;
+--device-width-min:360px;
+}

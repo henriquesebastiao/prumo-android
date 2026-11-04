@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/icons.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/shape.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/tokens/base.css">
+<link rel="stylesheet" href="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/styles.css">
+<script src="_ds/henrique-sebasti-o-android-design-system-5ac52295-ae56-4ac6-b0ea-62a1db56ede4/_ds_bundle.js"></script>
+<style>body{background:var(--md-surface-container-high)}.dv-turn{padding:56px 64px 64px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 24px}.dv-tid{font:var(--type-label-small);font-family:var(--font-data);padding:3px 8px;background:var(--md-inverse-surface);color:var(--md-inverse-on-surface);border-radius:9999px;text-decoration:none}.dv-tname{font:var(--type-title-small);color:var(--md-on-surface)}.dv-opt{display:flex;flex-direction:column;gap:24px}.dv-oid{font:var(--type-label-medium);font-family:var(--font-data);padding:4px 10px;background:var(--md-inverse-surface);color:var(--md-inverse-on-surface);border-radius:9999px;text-decoration:none}.dv-oid:hover{color:var(--md-inverse-on-surface)}.dv-next{margin:56px 0 0;font:var(--type-body-large);color:var(--md-on-surface-variant)}</style>
+</helmet>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Variante B no design system Android · ordem Finanças, Veículos, Livros</span></div>
+<div class="dv-opt" id="2a">
+<div style="display:flex;align-items:center;gap:14px"><a class="dv-oid" href="#2a">2a</a><span style="font:var(--type-headline-medium-emphasized);color:var(--md-on-surface)">Início como hub</span><span style="font:var(--type-body-large);color:var(--md-on-surface-variant)">a partir de 1b</span></div>
+
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;width:1744px">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">O que mudou</span><p style="margin:0;font:var(--type-body-large);color:var(--md-on-surface);text-wrap:pretty">Telas montadas com os componentes do design system Android (v3 Expressive+). Finanças vira o card hero do Início, o único da tela, e lidera a toolbar; Veículos e Livros ficam lado a lado logo abaixo.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Cor por módulo</span><p style="margin:0;font:var(--type-body-large);color:var(--md-on-surface);text-wrap:pretty">Cada módulo é um AppTheme aninhado com seed próprio, o mesmo mecanismo da cor de conteúdo do player. No Início, só o card do módulo usa o seed; dentro do módulo, a tela inteira usa.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Cor dinâmica</span><p style="margin:0;font:var(--type-body-large);color:var(--md-on-surface);text-wrap:pretty">No Android 12+ o chrome segue o papel de parede. Os módulos mantêm seus seeds, harmonizados com a cor do sistema (Blend.harmonize), para continuarem reconhecíveis.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Navegação e toques</span><p style="margin:0;font:var(--type-body-large);color:var(--md-on-surface);text-wrap:pretty">Sem barra inferior: o card abre o módulo e voltar retorna ao Início. Abastecer a partir do Início: 1 toque na toolbar. O FAB ao lado abre todas as ações, agrupadas por módulo.</p></div>
+</div>
+
+<div style="display:flex;gap:24px;align-items:stretch;width:1744px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:var(--md-surface);border-radius:var(--shape-section);padding:20px 24px">
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Seeds · provisórios até eu receber as telas da web</span>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-title-small)">Prumo · chrome <span style="font:var(--type-data-small);color:var(--md-on-surface-variant)">#6A4F86</span></span><div style="display:flex;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swAppL }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-tertiary-container)"></div></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swAppD }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-tertiary-container)"></div></x-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-title-small)">Finanças <span style="font:var(--type-data-small);color:var(--md-on-surface-variant)">#2E6B4F</span></span><div style="display:flex;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swFinL }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-on-primary-container)"></div></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swFinD }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-on-primary-container)"></div></x-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-title-small)">Veículos <span style="font:var(--type-data-small);color:var(--md-on-surface-variant)">#1F5F8B</span></span><div style="display:flex;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swVeiL }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-on-primary-container)"></div></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swVeiD }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-on-primary-container)"></div></x-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-title-small)">Livros <span style="font:var(--type-data-small);color:var(--md-on-surface-variant)">#8A4B2E</span></span><div style="display:flex;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swLivL }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-on-primary-container)"></div></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ swLivD }}" hint-size="140px,52px"><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-primary-container)"></div><div style="width:32px;height:32px;border-radius:10px;background:var(--md-on-primary-container)"></div></x-import>
+</div></div>
+</div>
+</div>
+<div style="width:420px;display:flex;flex-direction:column;gap:8px;background:var(--md-surface);border-radius:var(--shape-section);padding:20px 24px">
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">Fora do design system</span>
+<p style="margin:0;font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty"><strong style="font-weight:700">Campo de valor em destaque</strong>, no formulário: valor grande com foco ao abrir, composto com tokens de forma e tipo. O teclado numérico é o do sistema. O FAB menu não existe no design system e esta variante não precisa dele.</p>
+</div>
+</div>
+
+<div style="display:flex;gap:32px;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:14px;width:412px">
+<div style="border-radius:28px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.14)">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ phoneL }}" hint-size="412px,915px">
+<div style="flex:none;height:40px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;font:500 14px/20px var(--font-ui)"><span>14:30</span><span style="display:flex;gap:4px;align-items:center"><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">wifi</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">signal_cellular_alt</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">battery_5_bar</span></span></div>
+<div style="flex:none;height:64px;padding:8px 12px 0 24px;box-sizing:border-box;display:flex;align-items:center;gap:4px"><span style="flex:1;font:var(--type-headline-medium-emphasized);letter-spacing:-0.02em">Prumo</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="cloud_done" label="Tudo sincronizado" variant="surface" size="r" hint-size="48px,48px"></x-import><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="settings" label="Configurações" variant="surface" size="r" hint-size="48px,48px"></x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.HeroHeader" title="Boa tarde" subtitle="Segunda, 2 de novembro" size="s" hint-size="100%,124px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:12px 16px 0;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ finL }}" hint-size="100%,248px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="account_balance_wallet" overline="Finanças" title="Saldo total" hint-size="100%,248px">
+<span style="font:var(--type-display-large);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 8.742,35</span>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Gastos de novembro" value="R$ 1.482,90" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Fatura Nubank" value="R$ 1.064,22" hint-size="100%,52px"></x-import>
+</div>
+</x-import>
+<div style="position:absolute;top:28px;right:20px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="arrow_forward" label="Abrir Finanças" variant="filled" hint-size="40px,40px"></x-import></div>
+</x-import>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ veiL }}" hint-size="100%,224px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" tone="primary" icon="two_wheeler" overline="Veículos" dc-props="{{ tileStyle }}" hint-size="100%,224px">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">180 km</span><span style="font:var(--type-body-small)">até a troca de óleo da CG</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.82 }}" hint-size="100%,10px"></x-import>
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.StatusChip" label="Em breve" tone="warning" size="small" hint-size="88px,24px"></x-import></div>
+</x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ livL }}" hint-size="100%,224px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" tone="primary" icon="menu_book" overline="Livros" dc-props="{{ tileStyle }}" hint-size="100%,224px">
+<div style="display:flex;align-items:flex-end;gap:12px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 36 }}" height="{{ 52 }}" shape="rounded" icon="menu_book" color="var(--md-surface)" content-color="var(--md-primary)" hint-size="36px,52px"></x-import><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1">50%</span></div>
+<div style="display:flex;flex-direction:column"><span style="font:var(--type-title-small);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Código Limpo</span><span style="font:var(--type-body-small)">pág. 212 de 425</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.5 }}" hint-size="100%,10px"></x-import>
+</x-import>
+</x-import>
+</div>
+<div style="display:flex;justify-content:center"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="text" icon="tune" hint-size="200px,40px">Organizar módulos</x-import></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ homeBar }}" hint-size="100%,1px"></x-import>
+<div style="position:absolute;left:0;right:0;bottom:0;height:24px;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:108px;height:4px;border-radius:2px;background:var(--md-on-surface);opacity:0.4"></div></div>
+</x-import>
+</div>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">01 · Início · claro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Finanças no card hero; Veículos e Livros em meia largura. A toolbar segue a mesma ordem: despesa, abastecimento, km e página. O botão ao lado abre todas as ações.</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:412px">
+<div style="border-radius:28px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.14)">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ phoneD }}" hint-size="412px,915px">
+<div style="flex:none;height:40px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;font:500 14px/20px var(--font-ui)"><span>14:30</span><span style="display:flex;gap:4px;align-items:center"><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">wifi</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">signal_cellular_alt</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">battery_5_bar</span></span></div>
+<div style="flex:none;height:64px;padding:8px 12px 0 24px;box-sizing:border-box;display:flex;align-items:center;gap:4px"><span style="flex:1;font:var(--type-headline-medium-emphasized);letter-spacing:-0.02em">Prumo</span><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="cloud_done" label="Tudo sincronizado" variant="surface" size="r" hint-size="48px,48px"></x-import><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="settings" label="Configurações" variant="surface" size="r" hint-size="48px,48px"></x-import></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.HeroHeader" title="Boa tarde" subtitle="Segunda, 2 de novembro" size="s" hint-size="100%,124px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:12px 16px 0;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ finD }}" hint-size="100%,248px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="account_balance_wallet" overline="Finanças" title="Saldo total" hint-size="100%,248px">
+<span style="font:var(--type-display-large);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 8.742,35</span>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Gastos de novembro" value="R$ 1.482,90" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Fatura Nubank" value="R$ 1.064,22" hint-size="100%,52px"></x-import>
+</div>
+</x-import>
+<div style="position:absolute;top:28px;right:20px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.IconButton" icon="arrow_forward" label="Abrir Finanças" variant="filled" hint-size="40px,40px"></x-import></div>
+</x-import>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ veiD }}" hint-size="100%,224px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" tone="primary" icon="two_wheeler" overline="Veículos" dc-props="{{ tileStyle }}" hint-size="100%,224px">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">180 km</span><span style="font:var(--type-body-small)">até a troca de óleo da CG</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.82 }}" hint-size="100%,10px"></x-import>
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.StatusChip" label="Em breve" tone="warning" size="small" hint-size="88px,24px"></x-import></div>
+</x-import>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ livD }}" hint-size="100%,224px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" tone="primary" icon="menu_book" overline="Livros" dc-props="{{ tileStyle }}" hint-size="100%,224px">
+<div style="display:flex;align-items:flex-end;gap:12px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Artwork" width="{{ 36 }}" height="{{ 52 }}" shape="rounded" icon="menu_book" color="var(--md-surface)" content-color="var(--md-primary)" hint-size="36px,52px"></x-import><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1">50%</span></div>
+<div style="display:flex;flex-direction:column"><span style="font:var(--type-title-small);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Código Limpo</span><span style="font:var(--type-body-small)">pág. 212 de 425</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.5 }}" hint-size="100%,10px"></x-import>
+</x-import>
+</x-import>
+</div>
+<div style="display:flex;justify-content:center"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="text" icon="tune" hint-size="200px,40px">Organizar módulos</x-import></div>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ homeBar }}" hint-size="100%,1px"></x-import>
+<div style="position:absolute;left:0;right:0;bottom:0;height:24px;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:108px;height:4px;border-radius:2px;background:var(--md-on-surface);opacity:0.4"></div></div>
+</x-import>
+</div>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">02 · Início · escuro</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Mesmo layout no tema escuro. Cada card gera o esquema escuro do seu seed, então as cores de módulo continuam distintas sem perder contraste.</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:412px">
+<div style="border-radius:28px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.14)">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ veiScreen }}" hint-size="412px,915px">
+<div style="flex:none;height:40px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;font:500 14px/20px var(--font-ui);background:color-mix(in srgb, var(--md-primary) 18%, var(--md-surface))"><span>14:30</span><span style="display:flex;gap:4px;align-items:center"><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">wifi</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">signal_cellular_alt</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">battery_5_bar</span></span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.TopAppBar" title="CG" subtitle="Honda CG 160 Fan · 2023" tint="{{ true }}" dc-props="{{ carBarTop }}" hint-size="100%,64px"></x-import>
+<div style="flex:1;min-height:0;overflow:hidden;padding:4px 16px 0;display:flex;flex-direction:column;gap:12px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,88px">
+<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Km atual · atualizado hoje, 08:12</span><span style="font:var(--type-headline-medium-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">18.420 km</span></div><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="tonal" icon="edit" hint-size="120px,40px">Atualizar</x-import></div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" emphasis="hero" tone="primary" icon="oil_barrel" overline="Próxima troca de óleo" title="Faltam 180 km" hint-size="100%,250px">
+<div style="display:flex;align-items:center;gap:10px"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.StatusChip" label="Em breve" tone="warning" hint-size="104px,32px"></x-import><span style="font:var(--type-body-medium)">Vence primeiro por km</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ProgressBar" wavy="{{ true }}" value="{{ 0.82 }}" hint-size="100%,10px"></x-import>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Por km" value="18.600 km" tone="warning" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Por data · 48 dias" value="20/12/2026" hint-size="100%,52px"></x-import>
+</div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.SectionCard" hint-size="100%,148px">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Consumo médio" value="38,6 km/l" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Último tanque" value="39,2 km/l" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Abastecido em 01/11" value="R$ 61,64" hint-size="100%,52px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.KpiTile" label="Gasto do mês" value="R$ 96,64" hint-size="100%,52px"></x-import>
+</div>
+</x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.PillTabs" value="abs" dc-props="{{ historyTabs }}" hint-size="100%,66px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedList" variant="separated" hint-size="100%,160px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="local_gas_station" title="R$ 61,64 · 9,80 L" subtitle="01/11/2026 · 18.390 km · Gasolina comum" trailing="chevron" hint-size="100%,72px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.GroupedListItem" icon="local_gas_station" title="R$ 63,93 · 10,10 L" subtitle="24/10/2026 · 18.006 km · Gasolina comum" trailing="chevron" hint-size="100%,72px"></x-import>
+</x-import>
+</div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FloatingToolbar" dc-props="{{ carBar }}" hint-size="100%,1px"></x-import>
+<div style="position:absolute;left:0;right:0;bottom:0;height:24px;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:108px;height:4px;border-radius:2px;background:var(--md-on-surface);opacity:0.4"></div></div>
+</x-import>
+</div>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">03 · Detalhe do veículo</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">A tela toda usa o seed de Veículos. O card hero é a troca de óleo, com o critério que vence primeiro em destaque. A toolbar traz as ações da CG, com Abastecer no FAB.</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:412px">
+<div style="border-radius:28px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.14)">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.AppTheme" dc-props="{{ phoneL }}" hint-size="412px,915px">
+<div style="flex:1;min-height:0;position:relative;overflow:hidden;display:flex;flex-direction:column">
+<div style="flex:none;height:40px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;font:500 14px/20px var(--font-ui)"><span>14:30</span><span style="display:flex;gap:4px;align-items:center"><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">wifi</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">signal_cellular_alt</span><span class="ms" style="font-size:18px;font-variation-settings:var(--icon-fvs-filled)">battery_5_bar</span></span></div>
+<div style="flex:none;height:64px;padding:8px 12px 0 24px;box-sizing:border-box;display:flex;align-items:center;gap:4px"><span style="flex:1;font:var(--type-headline-medium-emphasized);letter-spacing:-0.02em">Prumo</span></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.HeroHeader" title="Boa tarde" subtitle="Segunda, 2 de novembro" size="s" hint-size="100%,124px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.BottomSheet" title="Abastecimento" gap="{{ 14 }}" hint-size="100%,1px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.ButtonGroup" variant="connected" size="s" full-width="{{ true }}" dc-props="{{ vehicles }}" hint-size="100%,40px"></x-import>
+<div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:8px">
+<div style="border:2px solid var(--md-primary);border-radius:var(--md-sys-shape-corner-large);padding:10px 14px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-lowest)"><span style="font:var(--type-label-medium);color:var(--md-primary)">Valor total</span><div style="display:flex;align-items:center"><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">R$ 61,64</span><span style="width:2px;height:32px;background:var(--md-primary);margin-left:2px"></span></div></div>
+<div style="border-radius:var(--md-sys-shape-corner-large);padding:12px 16px;display:flex;flex-direction:column;gap:2px;background:var(--md-surface-container-highest)"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Litros</span><span style="font:var(--type-headline-large-emphasized);font-feature-settings:'tnum' 1;white-space:nowrap">9,80 L</span></div>
+</div>
+<div style="display:flex"><x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="calculate" label="R$ 6,29 por litro · calculado" size="s" hint-size="220px,32px"></x-import></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Combustível</span><div style="display:flex;gap:8px;overflow:hidden">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Gasolina comum" selected="{{ true }}" hint-size="150px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Aditivada" hint-size="90px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Premium" hint-size="90px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Etanol" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Diesel" hint-size="80px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="GNV" hint-size="60px,32px"></x-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:var(--type-label-medium);color:var(--md-on-surface-variant)">Padrões · toque para alterar</span><div style="display:flex;flex-wrap:wrap;gap:8px">
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="event" label="Hoje, 14:30" size="s" hint-size="120px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Tag" icon="speed" label="18.420 km" size="s" hint-size="110px,32px"></x-import>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.FilterChip" label="Tanque cheio" selected="{{ true }}" hint-size="130px,32px"></x-import>
+</div></div>
+<x-import component-from-global-scope="HenriqueSebastiOAndroidDesignSystem_5ac522.Button" variant="filled" size="m" full-width="{{ true }}" hint-size="100%,56px">Salvar abastecimento</x-import>
+</x-import>
+</div>
+<div style="flex:none;background:var(--md-surface-container-high);padding:8px 6px 30px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,0.8fr);gap:6px;font:400 22px/1 var(--font-ui)">
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">1</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">2</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">3</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-highest);display:grid;place-items:center">−</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">4</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">5</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">6</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-highest);display:grid;place-items:center"><span class="ms" style="font-size:22px">space_bar</span></div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">7</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">8</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">9</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-highest);display:grid;place-items:center"><span class="ms" style="font-size:22px">backspace</span></div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">,</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">0</div>
+<div style="height:46px;border-radius:var(--md-sys-shape-corner-small);background:var(--md-surface-container-lowest);display:grid;place-items:center">.</div>
+<div style="height:46px;border-radius:23px;background:var(--md-primary);color:var(--md-on-primary);display:grid;place-items:center"><span class="ms" style="font-size:22px">arrow_forward</span></div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:24px;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:108px;height:4px;border-radius:2px;background:var(--md-on-surface);opacity:0.4"></div></div>
+</x-import>
+</div>
+<span style="font:var(--type-label-medium);font-family:var(--font-data);letter-spacing:0.1em;text-transform:uppercase;color:var(--md-on-surface-variant)">04 · Registrar abastecimento</span>
+<span style="font:var(--type-body-medium);color:var(--md-on-surface);text-wrap:pretty">Bottom sheet sobre o Início. Veículo no button group conectado; valor e litros em destaque; data, km e tanque cheio vêm como padrões em chips. O preço por litro é só informação.</span>
+</div>
+
+</div>
+</div>
+<p class="dv-next">Próximo passo: confirme esta base para eu seguir para a Fase 2, ou peça ajustes, por exemplo "toolbar standard em vez de vibrant" ou "Veículos também em largura inteira". Para fechar as cores de módulo, preciso das telas da web.</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const S = { app: '#6A4F86', fin: '#2E6B4F', vei: '#1F5F8B', liv: '#8A4B2E' };
+    const frame = { width: 412, height: 915, position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' };
+    const mod = (seed, mode) => ({ seed, mode, style: { background: 'transparent', position: 'relative' } });
+    const sw = (seed, mode) => ({ seed, mode, style: { display: 'flex', gap: 6, padding: 10, borderRadius: 16 } });
+    const noop = () => {};
+    return {
+      phoneL: { seed: S.app, mode: 'light', style: frame },
+      phoneD: { seed: S.app, mode: 'dark', style: frame },
+      veiScreen: { seed: S.vei, mode: 'light', style: frame },
+      finL: mod(S.fin, 'light'), finD: mod(S.fin, 'dark'),
+      veiL: mod(S.vei, 'light'), veiD: mod(S.vei, 'dark'),
+      livL: mod(S.liv, 'light'), livD: mod(S.liv, 'dark'),
+      swAppL: sw(S.app, 'light'), swAppD: sw(S.app, 'dark'),
+      swFinL: sw(S.fin, 'light'), swFinD: sw(S.fin, 'dark'),
+      swVeiL: sw(S.vei, 'light'), swVeiD: sw(S.vei, 'dark'),
+      swLivL: sw(S.liv, 'light'), swLivD: sw(S.liv, 'dark'),
+      tileStyle: { style: { minHeight: 224, justifyContent: 'space-between' } },
+      homeBar: {
+        floating: true, bottom: 40, variant: 'vibrant', label: 'Ações rápidas',
+        items: [
+          { icon: 'payments', label: 'Lançar despesa' },
+          { icon: 'local_gas_station', label: 'Registrar abastecimento' },
+          { icon: 'speed', label: 'Atualizar km' },
+          { icon: 'auto_stories', label: 'Atualizar página do livro' },
+        ],
+        fab: { icon: 'add', label: 'Todas as ações' },
+      },
+      carBar: {
+        floating: true, bottom: 40, label: 'Ações da CG',
+        items: [
+          { icon: 'speed', label: 'Atualizar km' },
+          { icon: 'build', label: 'Registrar manutenção' },
+          { icon: 'oil_barrel', label: 'Registrar troca de óleo' },
+        ],
+        fab: { icon: 'local_gas_station', label: 'Registrar abastecimento' },
+      },
+      carBarTop: { onBack: noop, actions: [{ icon: 'edit', label: 'Editar veículo' }, { icon: 'more_vert', label: 'Mais opções' }] },
+      historyTabs: { items: [
+        { value: 'man', label: 'Manutenções' },
+        { value: 'abs', label: 'Abastecimentos' },
+        { value: 'oleo', label: 'Óleo' },
+        { value: 'km', label: 'Km' },
+      ] },
+      vehicles: { value: 'cg', items: [
+        { value: 'cg', label: 'CG', icon: 'two_wheeler' },
+        { value: 'strada', label: 'Strada', icon: 'directions_car' },
+      ] },
+    };
+  }
+}
+</script>
+</body>
+</html>

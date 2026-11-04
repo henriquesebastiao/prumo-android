@@ -1,0 +1,50 @@
+/* Shape: M3 Expressive corner scale (md.sys.shape.corner.*) + component shapes used here.
+ * Compose: ShapeDefaults.ExtraSmall … ExtraExtraLarge, MaterialTheme.shapes.*. "full" is finite on buttons (height/2) so press morphs interpolate. */
+:root{
+--md-sys-shape-corner-none:0px;
+--md-sys-shape-corner-extra-small:4px;
+--md-sys-shape-corner-small:8px;
+--md-sys-shape-corner-medium:12px;
+--md-sys-shape-corner-large:16px;
+--md-sys-shape-corner-large-increased:20px;
+--md-sys-shape-corner-extra-large:28px;
+--md-sys-shape-corner-extra-large-increased:32px;
+--md-sys-shape-corner-extra-extra-large:48px;
+--md-sys-shape-corner-full:9999px;
+/* Button / icon button square + pressed corners by size (XS · S · M · L · XL) */
+--shape-button-xs-square:12px;--shape-button-s-square:12px;--shape-button-m-square:16px;--shape-button-l-square:28px;--shape-button-xl-square:28px;
+--shape-button-xs-pressed:8px;--shape-button-s-pressed:8px;--shape-button-m-pressed:12px;--shape-button-l-pressed:16px;--shape-button-xl-pressed:16px;
+/* Connected button group inner corners by size */
+--shape-connected-xs-inner:4px;--shape-connected-s-inner:8px;--shape-connected-m-inner:8px;--shape-connected-l-inner:16px;--shape-connected-xl-inner:20px;
+/* Semantic */
+--shape-snackbar:var(--md-sys-shape-corner-extra-small);
+--shape-text-field:var(--md-sys-shape-corner-extra-small);
+--shape-chip:var(--md-sys-shape-corner-small);
+--shape-chip-sm:6px; /* Netrik StatusChip 24dp: off-scale, kept from the app */
+--shape-value-tile:var(--md-sys-shape-corner-small);
+--shape-card:var(--md-sys-shape-corner-medium);
+--shape-section:24px; /* v3: section/settings cards (PixelPlayer large = 24) */
+--shape-hero:var(--md-sys-shape-corner-extra-large-increased); /* v3: 32 */
+/* Lists (v3): segmented 24/8 gap 4 (settings, menus) · separated 24 gap 8 (content: songs, files) · compact 16/4 gap 2 (dense technical lists, v1) */
+--shape-list-outer:24px;
+--shape-list-inner:8px;
+--list-gap:4px;
+--list-gap-separated:8px;
+--shape-list-compact-outer:16px;
+--shape-list-compact-inner:4px;
+--list-gap-compact:2px;
+/* Media + layout */
+--shape-artwork-thumb:12px; /* 56dp list art (smooth/squircle) */
+--shape-artwork:28px; /* now-playing art */
+--shape-content-sheet:32px; /* rounded content panel under a tinted header */
+--shape-nav-floating:28px; /* floating navigation bar */
+--shape-mini-player:24px;
+--shape-fab:var(--md-sys-shape-corner-large);
+--shape-fab-medium:var(--md-sys-shape-corner-large-increased);
+--shape-fab-large:var(--md-sys-shape-corner-extra-large);
+--shape-sheet:var(--md-sys-shape-corner-extra-large);
+--shape-dialog:var(--md-sys-shape-corner-extra-large);
+--shape-icon-tile:var(--md-sys-shape-corner-extra-large-increased);
+/* Back-compat aliases (v1) */
+--shape-xs:var(--md-sys-shape-corner-extra-small);--shape-sm:var(--md-sys-shape-corner-small);--shape-md:var(--md-sys-shape-corner-medium);--shape-lg:var(--md-sys-shape-corner-large);--shape-lg-inner:var(--md-sys-shape-corner-extra-small);--shape-xl:var(--md-sys-shape-corner-large-increased);--shape-xxl:24px;--shape-full:var(--md-sys-shape-corner-full);
+}

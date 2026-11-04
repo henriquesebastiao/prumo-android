@@ -1,0 +1,70 @@
+/* Motion: M3 Expressive spring scheme (Compose MotionScheme.expressive / .standard).
+ * Springs have no duration; for CSS each one is approximated by its analytic step response (mass 1),
+ * settled at 0.1% of travel and sampled into linear(). Normalized response depends only on the damping ratio,
+ * so there is one curve per ratio and stiffness lives in the duration.
+ * Spatial (position, size, corner radius, rotation) overshoots in expressive; effects (color, opacity) never do. */
+:root{
+--md-sys-motion-curve-d06:linear(0, 0.057, 0.193, 0.366, 0.545, 0.709, 0.845, 0.95, 1.023, 1.068, 1.09, 1.095, 1.088, 1.074, 1.057, 1.04, 1.025, 1.013, 1.003, 0.997, 0.993, 0.991, 0.991, 0.992, 0.993, 0.995, 0.996, 0.998, 1); /* @kind other */
+--md-sys-motion-curve-d08:linear(0, 0.039, 0.132, 0.252, 0.38, 0.503, 0.615, 0.712, 0.792, 0.856, 0.906, 0.944, 0.971, 0.99, 1.002, 1.01, 1.014, 1.015, 1.015, 1.014, 1.012, 1.01, 1.008, 1.006, 1.005, 1.004, 1.002, 1.002, 1); /* @kind other */
+--md-sys-motion-curve-d09:linear(0, 0.037, 0.125, 0.236, 0.353, 0.466, 0.569, 0.658, 0.734, 0.796, 0.847, 0.887, 0.918, 0.941, 0.959, 0.973, 0.982, 0.989, 0.994, 0.997, 0.999, 1, 1.001, 1.001, 1.002, 1.001, 1.001, 1.001, 1); /* @kind other */
+--md-sys-motion-curve-d10:linear(0, 0.18, 0.454, 0.67, 0.811, 0.896, 0.944, 0.97, 0.985, 0.992, 0.996, 0.998, 1); /* @kind other */
+--md-sys-motion-spring-fast-spatial-damping:0.6; /* @kind other */
+--md-sys-motion-spring-fast-spatial-stiffness:800; /* @kind other */
+--md-sys-motion-spring-default-spatial-damping:0.8; /* @kind other */
+--md-sys-motion-spring-default-spatial-stiffness:380; /* @kind other */
+--md-sys-motion-spring-slow-spatial-damping:0.8; /* @kind other */
+--md-sys-motion-spring-slow-spatial-stiffness:200; /* @kind other */
+--md-sys-motion-spring-fast-effects-stiffness:3800; /* @kind other */
+--md-sys-motion-spring-default-effects-stiffness:1600; /* @kind other */
+--md-sys-motion-spring-slow-effects-stiffness:800; /* @kind other */
+--md-sys-motion-easing-spatial-fast:var(--md-sys-motion-curve-d06); /* @kind other */
+--md-sys-motion-easing-spatial:var(--md-sys-motion-curve-d08); /* @kind other */
+--md-sys-motion-easing-effects:var(--md-sys-motion-curve-d10); /* @kind other */
+--md-sys-motion-duration-spatial-fast:359ms; /* @kind other */
+--md-sys-motion-duration-spatial-default:435ms; /* @kind other */
+--md-sys-motion-duration-spatial-slow:599ms; /* @kind other */
+--md-sys-motion-duration-effects-fast:150ms; /* @kind other */
+--md-sys-motion-duration-effects-default:231ms; /* @kind other */
+--md-sys-motion-duration-effects-slow:326ms; /* @kind other */
+--motion-spatial-fast:var(--md-sys-motion-duration-spatial-fast) var(--md-sys-motion-easing-spatial-fast); /* @kind other */
+--motion-spatial:var(--md-sys-motion-duration-spatial-default) var(--md-sys-motion-easing-spatial); /* @kind other */
+--motion-spatial-slow:var(--md-sys-motion-duration-spatial-slow) var(--md-sys-motion-easing-spatial); /* @kind other */
+--motion-effects-fast:var(--md-sys-motion-duration-effects-fast) var(--md-sys-motion-easing-effects); /* @kind other */
+--motion-effects:var(--md-sys-motion-duration-effects-default) var(--md-sys-motion-easing-effects); /* @kind other */
+--motion-effects-slow:var(--md-sys-motion-duration-effects-slow) var(--md-sys-motion-easing-effects); /* @kind other */
+--duration-indeterminate:1.75s; /* @kind other */
+--duration-spinner:.9s; /* @kind other */
+--loading-morph-interval:650ms; /* @kind other */
+--loading-rotation-period:4666ms; /* @kind other */
+}
+/* Standard scheme: same effects springs, critically-near spatial springs (0.9 / 1400 · 700 · 300). */
+[data-motion="standard"]{
+--md-sys-motion-spring-fast-spatial-damping:0.9; /* @kind other */
+--md-sys-motion-spring-fast-spatial-stiffness:1400; /* @kind other */
+--md-sys-motion-spring-default-spatial-damping:0.9; /* @kind other */
+--md-sys-motion-spring-default-spatial-stiffness:700; /* @kind other */
+--md-sys-motion-spring-slow-spatial-damping:0.9; /* @kind other */
+--md-sys-motion-spring-slow-spatial-stiffness:300; /* @kind other */
+--md-sys-motion-easing-spatial-fast:var(--md-sys-motion-curve-d09); /* @kind other */
+--md-sys-motion-easing-spatial:var(--md-sys-motion-curve-d09); /* @kind other */
+--md-sys-motion-duration-spatial-fast:224ms; /* @kind other */
+--md-sys-motion-duration-spatial-default:317ms; /* @kind other */
+--md-sys-motion-duration-spatial-slow:484ms; /* @kind other */
+--motion-spatial-fast:var(--md-sys-motion-duration-spatial-fast) var(--md-sys-motion-easing-spatial-fast); /* @kind other */
+--motion-spatial:var(--md-sys-motion-duration-spatial-default) var(--md-sys-motion-easing-spatial); /* @kind other */
+--motion-spatial-slow:var(--md-sys-motion-duration-spatial-slow) var(--md-sys-motion-easing-spatial); /* @kind other */
+}
+[data-motion]{
+--motion-effects-fast:var(--md-sys-motion-duration-effects-fast) var(--md-sys-motion-easing-effects); /* @kind other */
+--motion-effects:var(--md-sys-motion-duration-effects-default) var(--md-sys-motion-easing-effects); /* @kind other */
+--motion-effects-slow:var(--md-sys-motion-duration-effects-slow) var(--md-sys-motion-easing-effects); /* @kind other */
+}
+/* Reduced motion: spatial movement jumps; fades and color changes still animate. */
+@media (prefers-reduced-motion: reduce){:root,[data-motion]{
+--md-sys-motion-duration-spatial-fast:0ms; /* @kind other */
+--md-sys-motion-duration-spatial-default:0ms; /* @kind other */
+--md-sys-motion-duration-spatial-slow:0ms; /* @kind other */
+}}
+@keyframes hs-sheet-in{from{transform:translateY(100%)}to{transform:none}}
+@keyframes hs-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes hs-pop-in{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
