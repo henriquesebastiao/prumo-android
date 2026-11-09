@@ -30,6 +30,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.ChoiceGroup
+import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.MenuOption
@@ -178,6 +179,43 @@ internal fun CategoriesScreen(
             events.onActionErrorShown()
         }
     }
+    // Archiving and deleting ask first (D16; board 14): the menu only picks the category.
+    var confirming by remember { mutableStateOf<Category?>(null) }
+    val guarded = CategoriesEvents(
+        onKind = events.onKind,
+        onEdit = events.onEdit,
+        onArchive = { category, archive -> if (archive) confirming = category else events.onArchive(category, false) },
+        onDelete = { confirming = it },
+        onToggleArchived = events.onToggleArchived,
+        onRetry = events.onRetry,
+        onActionErrorShown = events.onActionErrorShown,
+    )
+    confirming?.let { category ->
+        val archive = category.transactionsCount > 0
+        ConfirmDialog(
+            icon = if (archive) PrumoIcons.Archive else PrumoIcons.Delete,
+            title = stringResource(
+                if (archive) R.string.finance_category_archive_title else R.string.finance_category_delete_title,
+                category.name,
+            ),
+            body = if (archive) {
+                pluralStringResource(
+                    R.plurals.finance_category_archive_body,
+                    category.transactionsCount,
+                    category.transactionsCount,
+                )
+            } else {
+                stringResource(R.string.finance_category_delete_body, category.name)
+            },
+            confirmLabel = stringResource(if (archive) R.string.finance_archive else R.string.finance_delete),
+            onConfirm = {
+                if (archive) events.onArchive(category, true) else events.onDelete(category)
+                confirming = null
+            },
+            onDismiss = { confirming = null },
+            destructive = !archive,
+        )
+    }
     Scaffold(
         modifier,
         topBar = {
@@ -196,7 +234,7 @@ internal fun CategoriesScreen(
             when {
                 state.loading -> LoadingState(stringResource(R.string.finance_loading))
                 state.error != null -> ErrorState(state.error, onRetry = events.onRetry)
-                else -> CategoryList(state, events)
+                else -> CategoryList(state, guarded)
             }
         }
     }

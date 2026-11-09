@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -141,9 +142,9 @@ internal fun OverviewTab(state: OverviewUiState, events: OverviewEvents, modifie
             hero = true,
             modifier = modifier,
             action = {
-                Button(onClick = events.onAddAccount) {
-                    Icon(painterResource(PrumoIcons.Add), contentDescription = null)
-                    Text(stringResource(R.string.finance_add_account), Modifier.padding(start = Spacing.sm))
+                // The design system's hero empty state: one tonal M button.
+                FilledTonalButton(onClick = events.onAddAccount, modifier = Modifier.heightIn(min = 56.dp)) {
+                    Text(stringResource(R.string.finance_add_account))
                 }
             },
         )

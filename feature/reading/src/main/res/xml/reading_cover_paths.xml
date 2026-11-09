@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Where the camera saves a cover photo before it is sent (the app's cache, never backed up). -->
+<paths>
+    <cache-path name="covers" path="covers/" />
+</paths>

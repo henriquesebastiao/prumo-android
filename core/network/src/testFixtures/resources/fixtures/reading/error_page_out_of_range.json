@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "reading.page_out_of_range",
+    "message": "Page is beyond the last page.",
+    "details": {
+      "total_pages": 425
+    }
+  }
+}

@@ -85,7 +85,7 @@
     <!-- List -->
     <string name="garage_add_vehicle">Adicionar veículo</string>
     <string name="garage_empty_title">Nenhum veículo ainda</string>
-    <string name="garage_empty_body">Cadastre seu carro ou moto para acompanhar km, abastecimentos e trocas de óleo.</string>
+    <string name="garage_empty_body">Cadastre um carro ou uma moto para acompanhar km, abastecimentos, manutenções e trocas de óleo.</string>
     <string name="garage_list_note">O status é da próxima troca de óleo, pelo critério que vence primeiro.</string>
     <string name="garage_archived_title">Arquivados</string>
     <string name="garage_archived_empty">Nenhum veículo arquivado</string>

@@ -129,7 +129,8 @@ fun DateTimeField(
 
 /**
  * A day (the next oil change's date), or none when [onClear] is given and used. [today] (the
- * user's) shows as "Hoje".
+ * user's) shows as "Hoje". [asTag] draws it as a tag (a quick sheet's default that changes with a
+ * tap, as the note's date).
  */
 @Composable
 fun DateField(
@@ -140,29 +141,40 @@ fun DateField(
     onClear: (() -> Unit)? = null,
     supportingText: String? = null,
     today: LocalDate? = null,
+    asTag: Boolean = false,
 ) {
     var open by rememberSaveable { mutableStateOf(false) }
-    ClickableField(
-        text = when (value) {
-            null -> ""
-            today -> stringResource(R.string.ui_today)
-            else -> Formats.date(value)
-        },
-        label = label,
-        icon = PrumoIcons.CalendarMonth,
-        onClick = { open = true },
-        modifier = modifier,
-        supportingText = supportingText,
-        trailing = if (value != null && onClear != null) {
-            {
-                IconButton(onClick = onClear) {
-                    Icon(painterResource(PrumoIcons.Close), contentDescription = stringResource(R.string.ui_clear))
+    val text = when (value) {
+        null -> ""
+        today -> stringResource(R.string.ui_today)
+        else -> Formats.date(value)
+    }
+    if (asTag) {
+        Tag(
+            text,
+            modifier.semantics { contentDescription = "$label: $text" },
+            icon = PrumoIcons.Event,
+            onClick = { open = true },
+        )
+    } else {
+        ClickableField(
+            text = text,
+            label = label,
+            icon = PrumoIcons.CalendarMonth,
+            onClick = { open = true },
+            modifier = modifier,
+            supportingText = supportingText,
+            trailing = if (value != null && onClear != null) {
+                {
+                    IconButton(onClick = onClear) {
+                        Icon(painterResource(PrumoIcons.Close), contentDescription = stringResource(R.string.ui_clear))
+                    }
                 }
-            }
-        } else {
-            null
-        },
-    )
+            } else {
+                null
+            },
+        )
+    }
     if (open) {
         DateDialog(
             initial = value ?: LocalDate.now(),

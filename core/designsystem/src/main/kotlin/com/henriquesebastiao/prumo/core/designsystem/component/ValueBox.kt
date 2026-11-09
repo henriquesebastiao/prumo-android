@@ -32,7 +32,9 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.TransformedText
@@ -115,11 +117,19 @@ internal fun ValueBox(
                         onValueChange = { onValueChange(it.text) },
                         textStyle = PrumoType.dataHeadline.copy(color = scheme.onSurface),
                         cursorBrush = SolidColor(if (error != null) scheme.error else scheme.primary),
-                        // The unit ("L", "km") follows the number, drawn after what was typed.
-                        visualTransformation = if (suffix !=
-                            null
-                        ) {
-                            SuffixTransformation(transformation, suffix)
+                        // The unit ("L", "km", "de 425") follows the number, drawn after what was
+                        // typed, smaller and muted.
+                        visualTransformation = if (suffix != null) {
+                            val unit = MaterialTheme.typography.titleLarge
+                            SuffixTransformation(
+                                transformation,
+                                suffix,
+                                SpanStyle(
+                                    color = scheme.onSurfaceVariant,
+                                    fontSize = unit.fontSize,
+                                    fontWeight = FontWeight.Normal,
+                                ),
+                            )
                         } else {
                             transformation
                         },
@@ -160,9 +170,12 @@ fun rememberOpeningFocus(enabled: Boolean = true): FocusRequester {
     return requester
 }
 
-/** [base], then " [suffix]" when something was typed. The cursor never goes into the suffix. */
-private class SuffixTransformation(private val base: VisualTransformation, private val suffix: String) :
-    VisualTransformation {
+/** [base], then " [suffix]" in [style] when something was typed. The cursor never goes into the suffix. */
+private class SuffixTransformation(
+    private val base: VisualTransformation,
+    private val suffix: String,
+    private val style: SpanStyle,
+) : VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
         val inner = base.filter(text)
         if (text.isEmpty()) return inner
@@ -173,11 +186,11 @@ private class SuffixTransformation(private val base: VisualTransformation, priva
             override fun transformedToOriginal(offset: Int): Int =
                 inner.offsetMapping.transformedToOriginal(offset.coerceAtMost(shown))
         }
-        return TransformedText(inner.text + AnnotatedString(" $suffix"), mapping)
+        return TransformedText(inner.text + AnnotatedString(" $suffix", style), mapping)
     }
 
     override fun equals(other: Any?): Boolean =
-        other is SuffixTransformation && other.base == base && other.suffix == suffix
+        other is SuffixTransformation && other.base == base && other.suffix == suffix && other.style == style
 
-    override fun hashCode(): Int = 31 * base.hashCode() + suffix.hashCode()
+    override fun hashCode(): Int = 31 * (31 * base.hashCode() + suffix.hashCode()) + style.hashCode()
 }

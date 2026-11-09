@@ -31,8 +31,8 @@ O app é um cliente da API do Prumo (`~/git/prumo`), equivalente à web: mesmas 
 :core:testing         fakes dos repositórios e regras de teste
 :core:database        (Fase 4) Room
 :feature:garage       cada módulo com sua API (Retrofit), DTOs, modelos, repositório e
-:feature:finance      telas (data/, model/, ui/). Veículos (Fase 1) e Finanças (Fase 2)
-:feature:reading      estão prontos; Livros ainda tem só o PrumoFeature, o card do Início e o "em breve"
+:feature:finance      telas (data/, model/, ui/). Veículos (Fase 1), Finanças (Fase 2)
+:feature:reading      e Livros (Fase 3) estão prontos
 ```
 
 Plugins de convenção (`build-logic/convention`):
@@ -63,8 +63,8 @@ Versões só em `gradle/libs.versions.toml`, conferidas em 2026-11-04 (Google Ma
 |---|---|
 | Build | Gradle 9.8.2 · AGP 9.5.0 (Kotlin embutido) · Kotlin 2.4.21 · KSP 2.3.13 · compileSdk e targetSdk 37 · minSdk 26 · bytecode 17 |
 | Interface | Compose BOM 2026.09.00 · material3 e navigation-suite 1.5.0-beta02 (D03) · material3-adaptive 1.3.0 · Navigation 3 1.2.0 · lifecycle 2.11.0 (com `lifecycle-viewmodel-navigation3`) · activity-compose 1.13.0 · core-ktx 1.19.1 · core-splashscreen 1.2.0 · material-color-utilities (`com.materialkolor`) 5.0.1 |
-| Injeção e dados | Hilt 2.60.1 · hilt-lifecycle-viewmodel-compose 1.4.0 · OkHttp 5.5.1 · Retrofit 3.0.0 + converter kotlinx-serialization · kotlinx-serialization-json 1.12.0 · coroutines 1.11.0 · DataStore 1.3.0 · Tink 1.24.0 |
-| Previstas por fase | Coil 3.6.3 (Livros) · Paging 3.5.3 (Finanças) · Room 2.8.5 e WorkManager 2.12.0 (offline) · Glance 1.2.0 (widget) · material3-adaptive-navigation3 1.3.0 (telas grandes) |
+| Injeção e dados | Hilt 2.60.1 · hilt-lifecycle-viewmodel-compose 1.4.0 · OkHttp 5.5.1 · Retrofit 3.0.0 + converter kotlinx-serialization · kotlinx-serialization-json 1.12.0 · coroutines 1.11.0 · DataStore 1.3.0 · Tink 1.24.0 · Coil 3.6.3 (`coil-compose` e `coil-network-okhttp`, as capas de Livros) |
+| Previstas por fase | Paging 3.5.3 (Finanças) · Room 2.8.5 e WorkManager 2.12.0 (offline) · Glance 1.2.0 (widget) · material3-adaptive-navigation3 1.3.0 (telas grandes) |
 | Qualidade | detekt 1.23.8 (a 2.0 ainda é alpha) + compose-rules 0.6.8 · Spotless 8.11.0 + ktlint 1.8.0 · JUnit 4.13.2 · Turbine 1.2.1 · Robolectric 4.17 · MockK 1.14.11 (só onde um fake for difícil) · mockwebserver3 5.5.1 |
 
 Sem biblioteca para UUID v7 (`kotlin.uuid.Uuid.generateV7()`, da stdlib) nem para datas (`java.time`). Ícones: Material Symbols Rounded convertidos em vetores (`scripts/material_symbol.py`), sem a fonte de ícones.
@@ -92,6 +92,7 @@ XScreen ◄──────┘                            └── modelo (:c
 - **Destino com argumento**: a chave do Navigation 3 leva os ids (`VehicleDetail(vehicleId)`), e o ViewModel os recebe por injeção assistida (`@HiltViewModel(assistedFactory = …)` e `hiltViewModel<VM, Factory> { it.create(id) }`), testável pelo construtor.
 - **Listas longas** (as transações de Finanças): Paging 3 sobre a paginação por `offset` da API (`TransactionPagingSource`); a primeira página também traz os totais do filtro inteiro, que a tela mostra no topo. Cabeçalhos de dia entram com `insertSeparators`. Listas pequenas (contas, cartões, categorias) vêm inteiras.
 - **Compartilhado entre módulos**: enums do fio (`Wire`, `wireOf`) ficam em `:core:model`; o JSON dos corpos com nulos explícitos (`RequestJson`, `requestBody`), em `:core:network`; o menu ⋮ (`OverflowMenu`), no design system. Um módulo nunca importa outro.
+- **Imagens autenticadas** (as capas de Livros, R6 do servidor): o Coil busca pelo `OkHttpClient` da sessão (`@ApiClient`, que põe o bearer só no servidor da sessão), num `ImageLoader` do módulo (`Covers`, singleton) entregue às telas por `LocalCovers`; o endereço leva `?v=<cover_updated_at>`, então a cache troca quando a capa muda. Previews e testes ficam sem `Covers` e desenham a capa de título e autor. Fotos da câmera passam por um `FileProvider` do próprio módulo (`CoverFileProvider`, autoridade `<applicationId>.covers`, caminhos no manifest do módulo).
 - **Depois de gravar**: o repositório do módulo avisa `DataChanges` (`:core:data`) a cada gravação que deu certo. As telas abertas do módulo recarregam (o repositório expõe `changes`) e o Início recarrega os resumos, então um abastecimento salvo na folha sobre o Início já muda o card.
 
 ## Rede
@@ -147,7 +148,7 @@ interface PrumoFeature {
 
 - **Montagem** (`ModuleRegistry` no `:app`): a ordem e os ativos vêm do servidor; o app mostra a interseção. Módulo que o servidor tem e o app não conhece é ignorado; módulo que o app conhece e o servidor não tem (ou que o usuário desativou) fica oculto.
 - **Início**: `GET /api/v1/dashboard` devolve um resumo por módulo ativo, na ordem do usuário, como união discriminada por `module`. `:core:network` entrega cada resumo como `JsonObject`; o `PrumoFeature` do módulo decodifica o seu. O primeiro módulo da ordem é o card hero (D08).
-- **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell, cada uma dentro do `ModuleTheme` do módulo. Livros ainda mostra a tela "em breve".
+- **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell, cada uma dentro do `ModuleTheme` do módulo.
 - **Ações rápidas**: uma `QuickAction` com `sheet` abre a folha do módulo sobre o Início (abastecimento, km); sem `sheet`, abre `target` (manutenção e troca de óleo abrem o formulário). A folha cria o seu ViewModel no destino que a mostra e recomeça vazia a cada abertura (um id de abertura guardado com `rememberSaveable`, que sobrevive à rotação).
 
 ## Navegação

@@ -43,41 +43,44 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 
 ## Fase 1 — Veículos (`garage`)
 
-> **Implementada em 2026-11-04 (sessão na nuvem); verificação no emulador em andamento desde 2026-11-09.** Gravados pelo app e conferidos na API: abastecimento (com o erro `garage.odometer_inconsistent` mostrado no campo), leitura de km, cadastro de veículo, manutenção (autocompletar de oficina, peça, mão de obra), edição e exclusão com confirmação, troca de óleo com a próxima sugerida. Revisão visual feita nas pranchas 01, 04, 05, 06, 07 (detalhe refeito em cards, ainda não reconferido no emulador), 08, 10 e 12; faltam 02, 03, 09 e 11. Falta exercitar: edição e arquivamento de veículo, estado vazio, oficinas, arquivados e listas entre veículos. Os conflitos C1–C5 e C9 seguem a web (D15): as exclusões pedem confirmação e acontecem na hora, como na web; o snackbar com desfazer ficou para depois.
-- [ ] Lista, estado vazio, cadastro, edição e arquivamento
+> **Implementada em 2026-11-04 (sessão na nuvem) e verificada em 2026-11-09 (sessão local),** no emulador contra o `e2e_server.py`. Gravados pelo app e conferidos na API: veículo (cadastro, edição, arquivar pelo menu, desarquivar nos arquivados), abastecimento (cadastro e edição, com o erro `garage.odometer_inconsistent` mostrado no campo), leitura de km (cadastro e exclusão), manutenção (oficina pelo autocompletar, peças, mão de obra; edição e exclusão com confirmação), troca de óleo com a próxima sugerida. Vistos: estado vazio, oficinas, listas entre veículos. Pranchas comparadas: 01, 03 a 08, 10 e 12 (as escuras e a 11, rolada, usam os mesmos componentes). Não exercitados: cadastro e edição de oficina. Os conflitos C1–C5 e C9 seguem a web (D15): exclusões pedem confirmação e acontecem na hora; o snackbar com desfazer ficou para depois.
+- [x] Lista, estado vazio, cadastro, edição e arquivamento
 - [x] Detalhe: km atual, hero da troca de óleo, consumo e gastos, histórico em abas (manutenções, abastecimentos, óleo, km)
 - [x] Folhas: atualizar km e abastecimento
-- [ ] Formulários: manutenção (autocompletar de oficina, lista de peças) e troca de óleo (próxima troca sugerida e editável)
-- [ ] Detalhe de manutenção, edição e exclusão com confirmação e desfazer
-- [ ] Paridade com a web, sem prancha (compor com os componentes do design system): combustível habitual e observações no cadastro, óleo utilizado com sugestões, ritmo de uso, detalhe e edição de abastecimento, exclusão de leitura manual, oficinas, listas entre veículos, arquivados
+- [x] Formulários: manutenção (autocompletar de oficina, lista de peças) e troca de óleo (próxima troca sugerida e editável)
+- [x] Detalhe de manutenção, edição e exclusão com confirmação (o desfazer das pranchas ficou para depois, D15)
+- [x] Paridade com a web, sem prancha (compor com os componentes do design system): combustível habitual e observações no cadastro, óleo utilizado com sugestões, ritmo de uso, detalhe e edição de abastecimento, exclusão de leitura manual, oficinas, listas entre veículos, arquivados
 - [x] Card do Início e ações rápidas do módulo
-- [ ] Novos componentes: campo de valor, autocompletar, lista de peças dinâmica
-- [ ] Revisão visual contra `design/v1/`
+- [x] Novos componentes: campo de valor, autocompletar, lista de peças dinâmica
+- [x] Revisão visual contra `design/v1/`
 
 ## Fase 2 — Finanças (`finance`)
 
-> **Implementada em 2026-11-04 (sessão na nuvem); verificação no emulador em andamento desde 2026-11-09.** Gravados pelo app e conferidos na API: despesa, transferência, pagamento parcial de fatura (que corrigiu D18). Revisão visual feita nas pranchas 01, 05, 07, 08, 09, 12 e 14; faltam 02, 03, 04, 06, 10, 11 e 13. Falta exercitar: receita, detalhe, edição e exclusão de transação, contas (cadastro, edição, ajuste, arquivamento), categorias, detalhe e cadastro de cartão, parcelamento. As lacunas e conflitos seguem a web e a API como estão (D16): sem total por dia (A6), percentual inteiro (A7), sem origem do registro (A8) e o status da fatura lido da própria fatura (A10); nenhuma mudança no servidor. O total por dia continua à espera de aprovação.
+> **Implementada em 2026-11-04 (sessão na nuvem) e verificada em 2026-11-09 (sessão local),** no emulador contra o `e2e_server.py`. Gravados pelo app e conferidos na API: despesa, receita, transferência, compra parcelada em 3x (e a exclusão de todas as parcelas), edição e exclusão de transação, conta (cadastro, edição, ajuste de saldo, arquivamento), categoria (cadastro com ícone Lucide, exclusão sem uso e arquivamento, ambos com confirmação, e reativação), cartão (cadastro), pagamento parcial de fatura, navegação entre faturas. Pranchas comparadas: 01, 05 a 14 (02, 03 e 04 usam os mesmos componentes do Resumo e do estado vazio de Veículos). Não exercitados: edição de categoria e de cartão. As lacunas e conflitos seguem a web e a API como estão (D16): sem total por dia (A6), percentual inteiro (A7), sem origem do registro (A8) e o status da fatura lido da própria fatura (A10); nenhuma mudança no servidor. O total por dia continua à espera de aprovação.
 - [x] Resumo do mês com seletor de período e gráfico por categoria
-- [ ] Contas: lista, cadastro, edição, arquivamento
-- [ ] Transações: lista por dia com busca e filtros (Paging 3), nova despesa, receita e transferência, detalhe, edição e exclusão
-- [ ] Categorias: lista, criar, editar, arquivar
-- [ ] Cartões: lista, detalhe com faturas, pagar fatura
-- [ ] Paridade com a web, sem prancha: cartão (cadastro e edição), compra parcelada, ajuste de saldo, detalhe de conta, arquivados, excluir sem uso, série de 6 meses e receitas por categoria
+- [x] Contas: lista, cadastro, edição, arquivamento
+- [x] Transações: lista por dia com busca e filtros (Paging 3), nova despesa, receita e transferência, detalhe, edição e exclusão
+- [x] Categorias: lista, criar, editar, arquivar
+- [x] Cartões: lista, detalhe com faturas, pagar fatura
+- [x] Paridade com a web, sem prancha: cartão (cadastro e edição), compra parcelada, ajuste de saldo, detalhe de conta, arquivados, excluir sem uso, série de 6 meses e receitas por categoria
 - [ ] **(servidor)** Totais por dia na lista de transações, se aprovado (A6)
 - [ ] **(servidor)** Decidir percentual com uma casa (A7), origem do registro (A8) e status da fatura na transação (A10)
 - [x] Card do Início e ações rápidas
-- [ ] Novos componentes: seletor de período, seletor de cor, gráfico por categoria
-- [ ] Revisão visual contra `design/v1/`
+- [x] Novos componentes: seletor de período, seletor de cor, gráfico por categoria
+- [x] Revisão visual contra `design/v1/`
 
 ## Fase 3 — Livros (`reading`)
-- [ ] Estante com filtros, hero "lendo agora", estado vazio
-- [ ] Cadastro com capa (câmera ou galeria), edição e exclusão
-- [ ] Detalhe com progresso rápido (+1, +10, +25), anotações
-- [ ] Folhas: atualizar progresso ("Terminei" com a confirmação expressiva) e nova anotação
-- [ ] Card do Início e ações rápidas
-- [ ] Paridade com a web, sem prancha: busca, todas as anotações, editar e excluir anotação, ritmo, previsão e páginas por semana, remover capa
-- [ ] Novo componente: campo multilinha
-- [ ] Revisão visual contra `design/v1/`
+
+> **Implementada e verificada em 2026-11-09 (sessão local),** no emulador `Pixel_9` (API 37) contra o `e2e_server.py`. Gravados pelo app e conferidos na API: livro novo "Lendo" com página atual, "Tenho" e capa da galeria (o servidor guardou WebP 533×800) e outro com capa da câmera (WebP 600×800), edição do título, remoção da capa, "Marcar como lido" (status, término e 100% vindos do servidor, com a morfose de celebração), exclusão do livro; +1 e página digitada na folha (também pela ação rápida do Início, escolhendo entre dois livros em leitura); "Começar a ler"; anotação nova, editada (texto e data) e excluída. Também: filtros de status e "Tenho", ordenação por título, busca por autor, todas as anotações com busca, estante vazia, tema escuro, card do Início atualizado depois de gravar. Pranchas comparadas: 01 a 07. Decisões em D19: prévia da folha de progresso (C6), capa desenhada com título e autor (R6), Coil sobre o cliente da sessão, data da anotação. A verificação corrigiu: a câmera que derrubava o app (o `FileProvider` sem os caminhos no manifest), a busca da estante que abria fora da tela, a folha de anotação e a de progresso fora do layout das pranchas, o sufixo da unidade do Campo de valor ("de 425", "km") no mesmo tamanho do número, o plural de "Avançar 1 página" e o ritmo "aparece depois…" num livro já lido. Não exercitados no emulador: "Terminei" na folha (manda a última página, como "Marcar como lido"; coberto pelo teste do ViewModel) e a capa recusada pelo servidor (só no teste de tela).
+- [x] Estante com filtros, hero "lendo agora", estado vazio
+- [x] Cadastro com capa (câmera ou galeria), edição e exclusão
+- [x] Detalhe com progresso rápido (+1, +10, +25), anotações
+- [x] Folhas: atualizar progresso ("Terminei" com a confirmação expressiva) e nova anotação
+- [x] Card do Início e ações rápidas
+- [x] Paridade com a web, sem prancha: busca, ordenação, todas as anotações, editar e excluir anotação (com a data), ritmo, previsão e páginas por semana, remover capa
+- [ ] Paridade com a web que falta: filtro "Não tenho" e o ano dos lidos (D19)
+- [x] Novo componente: campo multilinha (e `CelebrationAvatar`, a morfose do herói)
+- [x] Revisão visual contra `design/v1/`
 
 ## Fase 4 — Offline e sincronização
 - [ ] Room como cache: telas leem do banco local e atualizam por pull-to-refresh

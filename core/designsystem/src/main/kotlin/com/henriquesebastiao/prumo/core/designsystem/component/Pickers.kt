@@ -130,10 +130,11 @@ data class ColorOption(val seed: Int, val label: String)
 /** Round swatches, one per color; the selected one has a check and a ring. */
 @Composable
 fun ColorPicker(options: List<ColorOption>, selected: Int, onSelect: (Int) -> Unit, modifier: Modifier = Modifier) {
+    // The design system's color picker: 36 dp circles in 48 dp touch areas, side by side; the
+    // selected one gets a 2 dp ring in onSurface and a check.
     FlowRow(
         modifier.fillMaxWidth().selectableGroup(),
-        horizontalArrangement = Arrangement.spacedBy(Spacing.md),
-        verticalArrangement = Arrangement.spacedBy(Spacing.md),
+        verticalArrangement = Arrangement.spacedBy(Spacing.xs),
     ) {
         options.forEachIndexed { index, option ->
             val color = seededPrimary(option.seed)
@@ -147,15 +148,15 @@ fun ColorPicker(options: List<ColorOption>, selected: Int, onSelect: (Int) -> Un
             ) {
                 Box(
                     Modifier
-                        .size(40.dp)
+                        .size(if (checked) 42.dp else 36.dp)
                         .then(
                             if (checked) {
-                                Modifier.border(3.dp, MaterialTheme.colorScheme.onSurface, CircleShape)
+                                Modifier.border(2.dp, MaterialTheme.colorScheme.onSurface, CircleShape)
                             } else {
                                 Modifier
                             },
                         )
-                        .padding(if (checked) 5.dp else 0.dp)
+                        .padding(if (checked) 4.dp else 0.dp)
                         .background(color, CircleShape),
                     contentAlignment = Alignment.Center,
                 ) {

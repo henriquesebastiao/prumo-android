@@ -184,6 +184,35 @@ private fun isDecimal(text: String, scale: Int): Boolean {
         parts[0].length <= MAX_DIGITS - scale && (parts.size == 1 || parts[1].length <= scale)
 }
 
+/**
+ * Long text (a note, notes on a record): an outlined field at least four lines tall, sentences
+ * capitalized, the label floating. The design system's text field has one line only.
+ */
+@Composable
+fun MultilineField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    error: String? = null,
+    focusRequester: FocusRequester? = null,
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        supportingText = error?.let { { Text(it) } },
+        isError = error != null,
+        minLines = MULTILINE_MIN_LINES,
+        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+        modifier = modifier
+            .fillMaxWidth()
+            .then(if (focusRequester != null) Modifier.focusRequester(focusRequester) else Modifier),
+    )
+}
+
+private const val MULTILINE_MIN_LINES = 4
+
 /** One suggestion of an [AutocompleteField]: [label] and, under it, [detail] ("3 manutenções"). */
 data class Suggestion(val label: String, val detail: String? = null, val icon: Int? = null)
 

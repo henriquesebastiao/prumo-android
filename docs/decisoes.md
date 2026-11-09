@@ -132,6 +132,19 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 **Decisão:** `ValueField` e `DecimalField` com `large` desenham o Campo de valor (`ValueBox` no design system); o cursor fica sempre no fim, como numa calculadora, e a caixa inteira dá o foco ao campo. As folhas e formulários focam o valor ao abrir (`rememberOpeningFocus`). "Parcial" em Pagar fatura começa vazio (a prancha 14 mostra o valor digitado e "Restam …"). No abastecimento, data e km são tags que mudam com um toque (prancha 08); o km abre o campo e fica aberto com um erro do servidor.
 **Consequências:** não dá para editar o meio de um valor; apaga-se do fim. Pagar mais que a fatura continua aceito pelo servidor (F5 não proíbe); fica como pergunta ao mantenedor.
 
+## D19 — Livros como na web, com a capa pelo app
+**Status:** aceita · 2026-11
+**Contexto:** as pranchas de Livros (01–07) e a web do servidor (D35 e D36 de lá) divergem em alguns pontos, e a capa precisa de câmera, galeria e uma rota autenticada. C6 de `docs/design-v1.md` pede "56 % · +24 páginas hoje" enquanto se digita a página, mas o percentual é do servidor (R5).
+**Decisão:**
+- C6: a folha "Atualizar progresso" mostra a onda acompanhando a página digitada e "+N páginas" como prévia; o percentual, o status e as datas só aparecem depois de salvar, vindos da API (R2–R5). "Terminei" e "Marcar como lido" mandam a última página e o servidor marca o livro como lido (R4); se isso acontece com o livro aberto, o avatar do herói faz a morfose de celebração (cookie → sol, `CelebrationAvatar`).
+- "Lendo agora": entre os livros em leitura que o filtro mostra, o que avançou por último (`last_progress_at`), como a web. É escolha de apresentação, não regra.
+- Sem capa, o app desenha uma com título e autor (R6), na cor do status (lendo em primary, quero ler em secondary, lido em tertiary), em vez do só-ícone das pranchas; a capa pequena do herói só tem espaço para o título e o autor abreviado.
+- A capa vem pela rota autenticada com o Coil 3 sobre o `OkHttpClient` da sessão (`@ApiClient`, com o bearer) e com `?v=<cover_updated_at>` no endereço, para a cache trocar junto com a capa. A foto da câmera (`TakePicture` num `FileProvider` próprio, `CoverFileProvider`) ou da galeria (`PickVisualMedia`) vai como está quando é JPEG, PNG ou WebP de até 5 MB; senão o app a reduz a 1600 px, endireita pelo EXIF e manda em JPEG. Reduzir a 800 px e regravar em WebP continua no servidor (D36 de lá). Se o livro salva e a capa não, o formulário fica aberto com o motivo e o próximo "Salvar" edita o livro já criado.
+- A data da anotação (`noted_on`, D35 de lá) é uma tag "Hoje" na folha, que abre o seletor de data; uma anotação nova sem data trocada vai sem `noted_on` e o servidor a data no fuso do usuário. A edição manda a data só quando há uma (o `PATCH` recusa `null`).
+- Estante: os filtros de status são exclusivos e "Tenho" combina com qualquer um (prancha 01). A ordem segue o menu da web (mais recentes, título, autor), pelo `sort` do servidor. Ficam de fora, por ora, o "Não tenho" e o ano dos lidos da web.
+- Excluir livro e anotação pedem confirmação; "Remover capa" remove na hora (a capa pode ser escolhida de novo).
+**Consequências:** a única dependência nova é o Coil, já prevista em `docs/arquitetura.md`. Nenhuma mudança no servidor nesta fase.
+
 ---
 
 ## Modelo

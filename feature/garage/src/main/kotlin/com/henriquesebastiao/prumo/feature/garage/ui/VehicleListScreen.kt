@@ -3,10 +3,12 @@ package com.henriquesebastiao.prumo.feature.garage.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -189,9 +191,9 @@ internal fun VehicleListScreen(
                     body = stringResource(R.string.garage_empty_body),
                     hero = true,
                     action = {
-                        Button(onClick = onAdd) {
-                            Icon(painterResource(PrumoIcons.Add), contentDescription = null)
-                            Text(stringResource(R.string.garage_add_vehicle), Modifier.padding(start = Spacing.sm))
+                        // The design system's hero empty state: one tonal M button.
+                        FilledTonalButton(onClick = onAdd, modifier = Modifier.heightIn(min = 56.dp)) {
+                            Text(stringResource(R.string.garage_add_vehicle))
                         }
                     },
                 )

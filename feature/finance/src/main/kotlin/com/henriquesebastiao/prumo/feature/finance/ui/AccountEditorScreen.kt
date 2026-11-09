@@ -1,9 +1,9 @@
 package com.henriquesebastiao.prumo.feature.finance.ui
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -338,10 +338,8 @@ private fun AccountForm(
             modifier = Modifier.fillMaxWidth(),
         )
         Text(stringResource(R.string.finance_kind), style = MaterialTheme.typography.labelLarge)
-        Row(
-            Modifier.horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-        ) {
+        // Board 06: the kinds wrap onto a second line instead of scrolling out of sight.
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
             AccountKind.entries.forEach { kind ->
                 FilterChip(
                     selected = kind == state.kind,

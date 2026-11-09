@@ -12,11 +12,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +39,8 @@ enum class SectionTone { Low, Container, High, Highest, Primary, Secondary, Tert
 /**
  * A tonal card that groups one subject: no shadow, no border, depth from its tone. [hero] makes it
  * the screen's focal point (32 dp corners, 20 dp padding, a larger avatar and title); one per
- * screen. The header (icon, overline, title, trailing) is optional; [content] goes below it.
+ * screen. The header (icon, overline, title, trailing) is optional; [content] goes below it. A
+ * hero's icon sits in a 9-sided cookie that morphs while [celebrating] (`CelebrationAvatar`).
  */
 @Composable
 fun SectionCard(
@@ -53,6 +52,7 @@ fun SectionCard(
     title: String? = null,
     trailing: (@Composable () -> Unit)? = null,
     onClick: (() -> Unit)? = null,
+    celebrating: Boolean = false,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     val (container, onContainer) = tone.colors()
@@ -63,7 +63,9 @@ fun SectionCard(
             Modifier.padding(if (hero) HERO_PADDING else Spacing.lg),
             verticalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
-            if (hasHeader) SectionHeaderRow(icon, overline, title, trailing, hero, tinted = onContainer != null)
+            if (hasHeader) {
+                SectionHeaderRow(icon, overline, title, trailing, hero, tinted = onContainer != null, celebrating)
+            }
             content()
         }
     }
@@ -83,19 +85,27 @@ private fun SectionHeaderRow(
     trailing: (@Composable () -> Unit)?,
     hero: Boolean,
     tinted: Boolean,
+    celebrating: Boolean,
 ) {
     val scheme = MaterialTheme.colorScheme
     val content = LocalContentColor.current
     val muted = if (tinted) content.copy(alpha = MUTED_ALPHA) else scheme.onSurfaceVariant
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
-        if (icon != null) {
-            IconAvatar(
+        val avatarContainer = if (tinted) content.copy(alpha = AVATAR_ALPHA) else scheme.primaryContainer
+        val avatarContent = if (tinted) content else scheme.onPrimaryContainer
+        when {
+            icon == null -> Unit
+
+            // The hero's cookie is the one that celebrates (finishing a book, an oil change).
+            hero -> CelebrationAvatar(
                 icon,
-                container = if (tinted) content.copy(alpha = AVATAR_ALPHA) else scheme.primaryContainer,
-                content = if (tinted) content else scheme.onPrimaryContainer,
-                size = if (hero) 56.dp else 40.dp,
-                shape = if (hero) MaterialShapes.Cookie9Sided.toShape() else CircleShape,
+                celebrating,
+                size = 56.dp,
+                container = avatarContainer,
+                content = avatarContent,
             )
+
+            else -> IconAvatar(icon, container = avatarContainer, content = avatarContent)
         }
         Column(Modifier.weight(1f)) {
             if (overline != null) {

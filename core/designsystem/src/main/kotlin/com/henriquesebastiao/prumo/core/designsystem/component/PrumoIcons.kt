@@ -15,6 +15,8 @@ object PrumoIcons {
 
     @DrawableRes val Add = R.drawable.ic_add
 
+    @DrawableRes val AddPhotoAlternate = R.drawable.ic_add_photo_alternate
+
     @DrawableRes val Archive = R.drawable.ic_archive
 
     @DrawableRes val ArrowBack = R.drawable.ic_arrow_back
@@ -85,6 +87,8 @@ object PrumoIcons {
 
     @DrawableRes val DoNotDisturbOnFilled = R.drawable.ic_do_not_disturb_on_filled
 
+    @DrawableRes val DoneAll = R.drawable.ic_done_all
+
     @DrawableRes val DonutSmall = R.drawable.ic_donut_small
 
     @DrawableRes val DragIndicator = R.drawable.ic_drag_indicator
@@ -105,9 +109,13 @@ object PrumoIcons {
 
     @DrawableRes val HealthAndSafety = R.drawable.ic_health_and_safety
 
+    @DrawableRes val HideImage = R.drawable.ic_hide_image
+
     @DrawableRes val History = R.drawable.ic_history
 
     @DrawableRes val Home = R.drawable.ic_home
+
+    @DrawableRes val Image = R.drawable.ic_image
 
     @DrawableRes val Info = R.drawable.ic_info
 
@@ -151,6 +159,8 @@ object PrumoIcons {
 
     @DrawableRes val Pets = R.drawable.ic_pets
 
+    @DrawableRes val PhotoCamera = R.drawable.ic_photo_camera
+
     @DrawableRes val ReceiptLong = R.drawable.ic_receipt_long
 
     @DrawableRes val Redeem = R.drawable.ic_redeem
@@ -175,7 +185,11 @@ object PrumoIcons {
 
     @DrawableRes val Smartphone = R.drawable.ic_smartphone
 
+    @DrawableRes val Sort = R.drawable.ic_sort
+
     @DrawableRes val Speed = R.drawable.ic_speed
+
+    @DrawableRes val StickyNote2 = R.drawable.ic_sticky_note_2
 
     @DrawableRes val Storefront = R.drawable.ic_storefront
 

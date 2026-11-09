@@ -1,0 +1,111 @@
+{
+  "items": [
+    {
+      "id": "01a1e1e7-6240-70d1-9057-1aa37d82fc42",
+      "book": {
+        "id": "01a17a8c-a4c0-7100-a052-1cc1102fb28e",
+        "title": "Código Limpo",
+        "author": "Robert C. Martin"
+      },
+      "content": "Capítulo sobre tratamento de erros: revisar como a minha API devolve falhas e trocar códigos de retorno por exceções específicas.",
+      "page": 212,
+      "noted_on": "2026-11-15",
+      "created_at": "2026-11-16T01:10:00.000526Z",
+      "updated_at": "2026-11-16T01:10:00.000530Z"
+    },
+    {
+      "id": "01a1c827-9640-7143-a14a-468a66ec6f48",
+      "book": {
+        "id": "01a17a8c-a4c0-7100-a052-1cc1102fb28e",
+        "title": "Código Limpo",
+        "author": "Robert C. Martin"
+      },
+      "content": "Objetos escondem dados e mostram comportamento; estruturas de dados fazem o contrário. Bom critério para separar models de schemas.",
+      "page": 176,
+      "noted_on": "2026-11-10",
+      "created_at": "2026-11-11T01:10:00.000502Z",
+      "updated_at": "2026-11-11T01:10:00.000506Z"
+    },
+    {
+      "id": "01a19ef4-b640-7285-b6f3-b8dc4d3791bf",
+      "book": {
+        "id": "01a17a8c-a4c0-7100-a052-1cc1102fb28e",
+        "title": "Código Limpo",
+        "author": "Robert C. Martin"
+      },
+      "content": "Funções pequenas, com um só nível de abstração. Testar isso no próximo refactor.",
+      "page": 98,
+      "noted_on": "2026-11-02",
+      "created_at": "2026-11-03T01:10:00.000499Z",
+      "updated_at": "2026-11-03T01:10:00.000503Z"
+    },
+    {
+      "id": "01a18005-6680-710a-9889-124b96d6767c",
+      "book": {
+        "id": "01a17a8c-a4c0-7100-a052-1cc1102fb28e",
+        "title": "Código Limpo",
+        "author": "Robert C. Martin"
+      },
+      "content": "Ir juntando exemplos de nomes ruins que encontro no código do dia a dia.",
+      "page": null,
+      "noted_on": "2026-10-27",
+      "created_at": "2026-10-28T01:00:00.000518Z",
+      "updated_at": "2026-10-28T01:00:00.000522Z"
+    },
+    {
+      "id": "01a15175-3c00-7255-9847-9f1ace218959",
+      "book": {
+        "id": "01a0dacc-0980-7067-8a22-3a624ed778bc",
+        "title": "Dom Casmurro",
+        "author": "Machado de Assis"
+      },
+      "content": "O narrador não é confiável; a dúvida fica com o leitor.",
+      "page": null,
+      "noted_on": "2026-10-18",
+      "created_at": "2026-10-19T00:00:00.000575Z",
+      "updated_at": "2026-10-19T00:00:00.000580Z"
+    },
+    {
+      "id": "01a1231c-0000-7085-8147-193eac5cf8be",
+      "book": {
+        "id": "01a0dacc-0980-7067-8a22-3a624ed778bc",
+        "title": "Dom Casmurro",
+        "author": "Machado de Assis"
+      },
+      "content": "O capítulo dos olhos de ressaca.",
+      "page": null,
+      "noted_on": "2026-10-09",
+      "created_at": "2026-10-10T00:00:00.000563Z",
+      "updated_at": "2026-10-10T00:00:00.000566Z"
+    },
+    {
+      "id": "01a0ff0f-7c00-73cb-b96c-641f8f65c728",
+      "book": {
+        "id": "01a0dacc-0980-7067-8a22-3a624ed778bc",
+        "title": "Dom Casmurro",
+        "author": "Machado de Assis"
+      },
+      "content": "Olhos de cigana oblíqua e dissimulada.",
+      "page": null,
+      "noted_on": "2026-10-02",
+      "created_at": "2026-10-03T00:00:00.000631Z",
+      "updated_at": "2026-10-03T00:00:00.000635Z"
+    },
+    {
+      "id": "01a0e54f-b000-747f-b291-3df3762a42b1",
+      "book": {
+        "id": "01a0dacc-0980-7067-8a22-3a624ed778bc",
+        "title": "Dom Casmurro",
+        "author": "Machado de Assis"
+      },
+      "content": "Bentinho conta a história já velho: tudo passa pelo filtro da memória.",
+      "page": null,
+      "noted_on": "2026-09-27",
+      "created_at": "2026-09-28T00:00:00.001072Z",
+      "updated_at": "2026-09-28T00:00:00.001076Z"
+    }
+  ],
+  "total": 8,
+  "limit": 50,
+  "offset": 0
+}

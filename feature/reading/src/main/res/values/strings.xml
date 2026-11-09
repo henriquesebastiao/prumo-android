@@ -15,4 +15,133 @@
         <item quantity="one">%1$d livro na estante</item>
         <item quantity="other">%1$d livros na estante</item>
     </plurals>
+
+    <!-- Status (R1) -->
+    <string name="reading_status_want_to_read">Quero ler</string>
+    <string name="reading_status_reading">Lendo</string>
+    <string name="reading_status_read">Lido</string>
+    <string name="reading_owned">Tenho</string>
+
+    <!-- Shelf (boards 01 to 03) -->
+    <string name="reading_loading">Carregando a estante</string>
+    <string name="reading_search">Buscar livro</string>
+    <string name="reading_search_hint">Buscar título ou autor</string>
+    <string name="reading_sort">Ordenar</string>
+    <string name="reading_sort_newest">Mais recentes</string>
+    <string name="reading_sort_title">Título</string>
+    <string name="reading_sort_author">Autor</string>
+    <string name="reading_close_search">Fechar busca</string>
+    <string name="reading_all_notes">Anotações</string>
+    <string name="reading_filter_reading">Lendo</string>
+    <string name="reading_filter_want">Quero ler</string>
+    <string name="reading_filter_read">Lidos</string>
+    <string name="reading_reading_now">Lendo agora</string>
+    <string name="reading_shelf">Estante</string>
+    <plurals name="reading_books_count">
+        <item quantity="one">%1$d livro</item>
+        <item quantity="other">%1$d livros</item>
+    </plurals>
+    <string name="reading_shelf_owned">%1$s · tenho</string>
+    <string name="reading_percent">%1$d%%</string>
+    <string name="reading_page_of">pág. %1$d de %2$d</string>
+    <string name="reading_empty_title">Sua estante está vazia</string>
+    <string name="reading_empty_body">Adicione os livros que você está lendo, quer ler ou já leu. Dá para marcar quais você tem em casa.</string>
+    <string name="reading_no_results">Nenhum livro encontrado.</string>
+
+    <!-- Book detail (board 05) -->
+    <string name="reading_book_meta">%1$s · %2$d páginas</string>
+    <string name="reading_progress">Progresso</string>
+    <string name="reading_progress_title">Atualizar progresso</string>
+    <string name="reading_page_title">Página %1$d de %2$d</string>
+    <plurals name="reading_pages_left">
+        <item quantity="one">falta %1$d página</item>
+        <item quantity="other">faltam %1$d páginas</item>
+    </plurals>
+    <string name="reading_add_pages">+%1$d</string>
+    <plurals name="reading_add_pages_label">
+        <item quantity="one">Avançar %1$d página</item>
+        <item quantity="other">Avançar %1$d páginas</item>
+    </plurals>
+    <string name="reading_started">Início</string>
+    <string name="reading_finished">Término</string>
+    <string name="reading_in_progress">em leitura</string>
+    <string name="reading_forecast">Previsão</string>
+    <string name="reading_forecast_value">≈ %1$s</string>
+    <string name="reading_no_date">—</string>
+    <string name="reading_start_reading">Começar a ler</string>
+    <string name="reading_mark_read">Marcar como lido</string>
+    <string name="reading_pace">Ritmo de leitura</string>
+    <plurals name="reading_pace_value">
+        <item quantity="one">≈ %1$s página por dia</item>
+        <item quantity="other">≈ %1$s páginas por dia</item>
+    </plurals>
+    <string name="reading_pace_forecast">No ritmo das últimas duas semanas (cerca de %1$s páginas por dia), termina por volta de %2$s.</string>
+    <string name="reading_no_pace">O ritmo aparece depois das primeiras atualizações de página.</string>
+    <string name="reading_per_week">Páginas por semana</string>
+    <string name="reading_week_label">%1$s: %2$d páginas</string>
+    <string name="reading_notes">Anotações</string>
+    <string name="reading_no_notes">Nenhuma anotação ainda.</string>
+    <string name="reading_note_page_date">pág. %1$d · %2$s</string>
+    <string name="reading_edit_book">Editar livro</string>
+    <string name="reading_more">Mais opções</string>
+    <string name="reading_delete_book">Excluir livro</string>
+    <string name="reading_delete_title">Excluir livro?</string>
+    <string name="reading_delete_body">“%1$s” sai da estante com o histórico de leitura, as anotações e a capa. Não dá para desfazer.</string>
+    <string name="reading_remove_cover">Remover capa</string>
+    <string name="reading_finished_celebration">Livro concluído</string>
+
+    <!-- Book form (board 04) -->
+    <string name="reading_new_book">Novo livro</string>
+    <string name="reading_cover">Capa</string>
+    <string name="reading_camera">Câmera</string>
+    <string name="reading_gallery">Galeria</string>
+    <string name="reading_cover_hint">Sem imagem, o Prumo desenha uma capa com o título.</string>
+    <string name="reading_title">Título</string>
+    <string name="reading_clear_title">Limpar título</string>
+    <string name="reading_author">Autor</string>
+    <string name="reading_pages">Páginas</string>
+    <string name="reading_status">Status</string>
+    <string name="reading_current_page">Página atual</string>
+    <string name="reading_owned_switch">Tenho este livro</string>
+    <string name="reading_save_book">Salvar livro</string>
+    <string name="reading_cover_failed">O livro foi salvo, mas a capa não: %1$s</string>
+    <string name="reading_cover_unreadable">não foi possível ler a imagem.</string>
+
+    <!-- Progress sheet (board 06) -->
+    <string name="reading_was_on_page">%1$s · estava na pág. %2$d</string>
+    <string name="reading_of_total">de %1$d</string>
+    <plurals name="reading_pages_today">
+        <item quantity="one">+%1$d página</item>
+        <item quantity="other">+%1$d páginas</item>
+    </plurals>
+    <string name="reading_page_over">A página vai até %1$d.</string>
+    <string name="reading_finished_button">Terminei</string>
+    <string name="reading_save">Salvar</string>
+    <string name="reading_no_books_reading">Nenhum livro em leitura. Comece um livro na estante.</string>
+
+    <!-- Note sheet (board 07) -->
+    <string name="reading_new_note">Nova anotação</string>
+    <string name="reading_edit_note">Editar anotação</string>
+    <string name="reading_note">Anotação</string>
+    <string name="reading_note_date">Data da anotação</string>
+    <string name="reading_note_page">Página (opcional)</string>
+    <string name="reading_delete_note">Excluir anotação</string>
+    <string name="reading_delete_note_title">Excluir anotação?</string>
+    <string name="reading_delete_note_body">A anotação sai do livro. Não dá para desfazer.</string>
+    <string name="reading_no_books">Adicione um livro antes de fazer anotações.</string>
+
+    <!-- All notes -->
+    <string name="reading_notes_search">Buscar nas anotações</string>
+    <string name="reading_notes_empty_title">Nenhuma anotação</string>
+    <string name="reading_notes_empty_body">As anotações dos seus livros aparecem aqui, das mais recentes para as mais antigas.</string>
+    <string name="reading_note_book_page">%1$s · pág. %2$d · %3$s</string>
+    <string name="reading_note_book">%1$s · %2$s</string>
+    <string name="reading_load_more">Carregar mais</string>
+
+    <!-- Errors of the module (docs/api.md of the server, "Livros") -->
+    <string name="reading_error_page_out_of_range">A página precisa estar entre 0 e o total de páginas do livro.</string>
+    <string name="reading_error_invalid_cover">A imagem não é um JPEG, PNG ou WebP válido.</string>
+    <string name="reading_error_cover_too_large">A imagem passa de 5 MB.</string>
+    <string name="reading_error_invalid_dates">O término não pode ser antes do início.</string>
+    <string name="reading_field_invalid">Confira este valor.</string>
 </resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <!-- The camera writes a book's cover photo here (TakePicture needs a content URI). -->
+        <provider
+            android:name="com.henriquesebastiao.prumo.feature.reading.data.CoverFileProvider"
+            android:authorities="${applicationId}.covers"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!-- getUriForFile reads the paths from here, not from the provider's constructor. -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/reading_cover_paths" />
+        </provider>
+    </application>
+
+</manifest>

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -79,10 +80,14 @@ fun EmptyState(
     hero: Boolean = false,
     action: (@Composable () -> Unit)? = null,
 ) {
+    // A hero empty state is the whole screen: centered in the height it is given (none in a list).
     Column(
-        modifier.fillMaxWidth().padding(horizontal = Spacing.xl, vertical = if (hero) 48.dp else Spacing.xxl),
+        modifier
+            .fillMaxWidth()
+            .then(if (hero) Modifier.fillMaxHeight() else Modifier)
+            .padding(horizontal = Spacing.xl, vertical = if (hero) 48.dp else Spacing.xxl),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(Spacing.md),
+        verticalArrangement = Arrangement.spacedBy(Spacing.md, if (hero) Alignment.CenterVertically else Alignment.Top),
     ) {
         Icon(
             painterResource(icon),

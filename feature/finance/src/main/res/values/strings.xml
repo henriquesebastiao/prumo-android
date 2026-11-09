@@ -202,7 +202,7 @@
     <string name="finance_current_balance_hint">Saldo de hoje. As próximas transações partem dele.</string>
     <string name="finance_initial_balance">Saldo inicial</string>
     <string name="finance_initial_balance_hint">Ponto de partida do saldo. Para acertar com o banco, prefira Ajustar saldo.</string>
-    <string name="finance_include_in_total">Somar no saldo total</string>
+    <string name="finance_include_in_total">Incluir no saldo total</string>
     <string name="finance_account_save">Salvar conta</string>
     <string name="finance_account">Conta</string>
     <string name="finance_balance_today">Saldo de hoje</string>
@@ -218,6 +218,13 @@
     <string name="finance_adjust_save">Ajustar</string>
     <string name="finance_account_delete_title">Excluir conta?</string>
     <string name="finance_account_delete_body">“%1$s” não tem transações e será excluída.</string>
+    <string name="finance_category_archive_title">Arquivar %1$s?</string>
+    <plurals name="finance_category_archive_body">
+        <item quantity="one">A categoria deixa de aparecer em novas transações. A transação antiga continua nela, e você pode desarquivar quando quiser.</item>
+        <item quantity="other">A categoria deixa de aparecer em novas transações. As %1$d transações antigas continuam nela, e você pode desarquivar quando quiser.</item>
+    </plurals>
+    <string name="finance_category_delete_title">Excluir %1$s?</string>
+    <string name="finance_category_delete_body">“%1$s” não tem transações e será excluída. Não dá para desfazer.</string>
 
     <!-- Cards -->
     <string name="finance_cards_empty">Nenhum cartão cadastrado</string>

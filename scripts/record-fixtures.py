@@ -115,6 +115,27 @@ def record_finance(base, token):
     save("finance/error_category_in_use.json", refused)
 
 
+def record_reading(base, token):
+    """Livros (fixtures/reading/): reads, plus one refused page (nothing is saved)."""
+
+    def get(path):
+        status, payload, _ = call(base, "GET", path, token=token)
+        assert status == 200, f"{path} answered {status}"
+        return payload
+
+    root = "/api/v1/reading"
+    save("reading/books.json", get(f"{root}/books?sort=-created_at"))
+    reading = get(f"{root}/books?status=reading")["items"][0]
+    path = f"{root}/books/{reading['id']}"
+    save("reading/book.json", get(path))
+    save("reading/book_notes.json", get(f"{path}/notes"))
+    save("reading/notes.json", get(f"{root}/notes"))
+    body = {"page": reading["total_pages"] + 1}
+    status, refused, _ = call(base, "POST", f"{path}/progress", token=token, body=body)
+    assert status == 422, f"a page past the end answered {status}"
+    save("reading/error_page_out_of_range.json", refused)
+
+
 def main():
     base = (sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8001").rstrip("/")
     username = sys.argv[2] if len(sys.argv) > 2 else "henrique"
@@ -166,6 +187,7 @@ def main():
 
     record_garage(base, token)
     record_finance(base, token)
+    record_reading(base, token)
 
     status, missing, _ = call(base, "GET", "/api/v1/auth/sessions", token="not-a-token")
     assert status == 401, f"a bad token answered {status}"

@@ -189,7 +189,7 @@ Mesmos endpoints das telas de celular. Detalhe da transação no tablet: `GET /f
 
 ## 8. Conflitos entre o design e `docs/dominio.md`
 
-Listados aqui; a decisão de cada um fica em `docs/decisoes.md`, na fase do módulo. Resolvidos até agora: C1–C5 e C9 (D15, Veículos); C7, C10, C11 e C15 (D16, Finanças), com as lacunas A6–A10. C12, C13 e C16 já valem desde a fundação (D11, D08).
+Listados aqui; a decisão de cada um fica em `docs/decisoes.md`, na fase do módulo. Resolvidos até agora: C1–C5 e C9 (D15, Veículos); C7, C10, C11 e C15 (D16, Finanças), com as lacunas A6–A10; C6 (D19, Livros). C12, C13 e C16 já valem desde a fundação (D11, D08).
 
 | # | Design | Regra | Conflito |
 |---|---|---|---|
