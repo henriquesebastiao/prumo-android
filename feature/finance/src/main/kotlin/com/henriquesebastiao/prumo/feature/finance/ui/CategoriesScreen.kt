@@ -247,6 +247,7 @@ private fun CategoryList(state: CategoriesUiState, events: CategoriesEvents) {
                             archived.size,
                         ),
                         icon = PrumoIcons.Inventory2,
+                        neutral = true,
                     ),
                     index = 0,
                     count = 1,

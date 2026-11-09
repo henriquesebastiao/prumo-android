@@ -4,6 +4,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -45,6 +46,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.Tag
 import com.henriquesebastiao.prumo.core.designsystem.component.ValueField
+import com.henriquesebastiao.prumo.core.designsystem.component.rememberOpeningFocus
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
@@ -433,21 +435,29 @@ private fun ColumnScope.FuelingFormFields(
 ) {
     val currency = state.context.currency
     if (state.editing == null) VehicleChoice(state.vehicles, state.vehicleId, callbacks.onSelect)
-    ValueField(
-        digits = fields.total,
-        onDigitsChange = callbacks.onTotalChange,
-        label = stringResource(R.string.garage_fueling_total),
-        transformation = MoneyTransformation(currency),
-        large = true,
-    )
-    DecimalField(
-        text = fields.litres,
-        onTextChange = callbacks.onLitresChange,
-        label = stringResource(R.string.garage_fueling_litres),
-        scale = FuelingViewModel.LITRE_SCALE,
-        suffix = stringResource(R.string.garage_litre_unit),
-        leadingIcon = PrumoIcons.WaterDrop,
-    )
+    // Board 08: total and litres side by side as "Campo de valor"; a new fueling opens on the total,
+    // with the keyboard up.
+    val totalFocus = rememberOpeningFocus(enabled = state.editing == null)
+    Row(horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
+        ValueField(
+            digits = fields.total,
+            onDigitsChange = callbacks.onTotalChange,
+            label = stringResource(R.string.garage_fueling_total),
+            transformation = MoneyTransformation(currency),
+            large = true,
+            focusRequester = totalFocus,
+            modifier = Modifier.weight(1.2f),
+        )
+        DecimalField(
+            text = fields.litres,
+            onTextChange = callbacks.onLitresChange,
+            label = stringResource(R.string.garage_fueling_litres),
+            scale = FuelingViewModel.LITRE_SCALE,
+            suffix = stringResource(R.string.garage_litre_unit),
+            large = true,
+            modifier = Modifier.weight(1f),
+        )
+    }
     // C1 (D15): a preview to check what was typed; the price saved is the server's (G7).
     val cents = Inputs.number(fields.total) ?: 0L
     val ml = Inputs.scaled(fields.litres, FuelingViewModel.LITRE_SCALE) ?: 0L
@@ -468,20 +478,40 @@ private fun ColumnScope.FuelingFormFields(
             )
         }
     }
-    DateTimeField(
-        value = state.fueledAt,
-        onValueChange = callbacks.onDateTimeChange,
-        label = stringResource(R.string.garage_date_time),
-        today = state.context.today,
-    )
-    ValueField(
-        digits = fields.km,
-        onDigitsChange = callbacks.onKmChange,
-        label = stringResource(R.string.garage_km_on_panel),
-        transformation = IntegerTransformation,
-        leadingIcon = PrumoIcons.Speed,
-        error = kmError(state.saveError, state.context),
-    )
+    // Board 08: date and km are defaults shown as tags that change with a tap; the km opens its
+    // field (and stays open with a server error on it).
+    val kmError = kmError(state.saveError, state.context)
+    var editKm by rememberSaveable { mutableStateOf(false) }
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        verticalArrangement = Arrangement.spacedBy(Spacing.sm),
+    ) {
+        DateTimeField(
+            value = state.fueledAt,
+            onValueChange = callbacks.onDateTimeChange,
+            label = stringResource(R.string.garage_date_time),
+            today = state.context.today,
+            asTag = true,
+        )
+        if (!editKm && kmError == null && fields.km.isNotEmpty()) {
+            Tag(
+                Formats.km(Inputs.number(fields.km) ?: 0L),
+                icon = PrumoIcons.Speed,
+                onClick = { editKm = true },
+            )
+        }
+    }
+    if (editKm || kmError != null || fields.km.isEmpty()) {
+        ValueField(
+            digits = fields.km,
+            onDigitsChange = callbacks.onKmChange,
+            label = stringResource(R.string.garage_km_on_panel),
+            transformation = IntegerTransformation,
+            leadingIcon = PrumoIcons.Speed,
+            error = kmError,
+            focusRequester = rememberOpeningFocus(enabled = editKm),
+        )
+    }
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
         FilterChip(
             selected = state.fullTank,

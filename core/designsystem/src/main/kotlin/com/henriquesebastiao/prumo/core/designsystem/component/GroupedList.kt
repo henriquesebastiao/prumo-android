@@ -50,14 +50,16 @@ data class GroupedRow(
     val icon: Int? = null,
     val enabled: Boolean = true,
     val emphasized: Boolean = false,
+    val neutral: Boolean = false,
     val leading: (@Composable () -> Unit)? = null,
 )
 
 /**
  * A group of rows as Material 3 Expressive draws a grouped list (`SegmentedListItem`): each row its
  * own surface, the ends of the group with large corners, a small gap between rows ([style]). A
- * row's icon sits in a tonal circle; [GroupedRow.emphasized] makes it the primary container (the
- * account row at the top of Settings).
+ * row's icon sits in a primary container circle, or a neutral one with [GroupedRow.neutral] (Sair,
+ * the archived items); [GroupedRow.emphasized] makes the row larger (the account at the top of
+ * Settings).
  */
 @Composable
 fun GroupedList(rows: List<GroupedRow>, modifier: Modifier = Modifier, style: ListStyle = ListStyle.Segmented) {
@@ -90,8 +92,8 @@ fun GroupedListItem(
         {
             IconAvatar(
                 icon,
-                container = if (row.emphasized) scheme.primaryContainer else scheme.surfaceContainerHighest,
-                content = if (row.emphasized) scheme.onPrimaryContainer else scheme.onSurfaceVariant,
+                container = if (row.neutral) scheme.surfaceContainerHighest else scheme.primaryContainer,
+                content = if (row.neutral) scheme.onSurfaceVariant else scheme.onPrimaryContainer,
                 modifier = if (row.enabled) Modifier else Modifier.alpha(DISABLED_ALPHA),
             )
         }

@@ -120,6 +120,18 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 - Exclusões pedem confirmação e excluem na hora, como em Veículos (D15); uma parcela pergunta se é só ela ou a compra inteira (`?installments=all`).
 **Consequências:** nenhuma mudança no servidor nesta fase. Se o total por dia (A6) for aprovado, o app passa a mostrá-lo no cabeçalho do dia.
 
+## D17 — KSP sem modo incremental
+**Status:** aceita · 2026-11
+**Contexto:** na primeira verificação local (2026-11-09), um build incremental instalou um app sem Finanças: a saída do KSP de `:feature:finance` (e a entrada dela no build cache) tinha só o arquivo da última mudança, e o Hilt perdeu o `@IntoSet` do `FinanceFeature`. Nada falhou; o módulo só sumiu do Início e de Configurações. O CI, que compila do zero, não pega isso.
+**Decisão:** `ksp.incremental=false` em `gradle.properties`. Cada módulo roda o KSP inteiro quando muda.
+**Consequências:** alguns segundos a mais por módulo alterado. Voltar ao incremental só com uma versão do KSP que corrija a saída parcial, conferindo que `app/build/generated/hilt/component_trees/…/PrumoApplication_ComponentTreeDeps.java` cita os três `*Module` depois de um build incremental.
+
+## D18 — Campo de valor como calculadora
+**Status:** aceita · 2026-11
+**Contexto:** o design pede o "Campo de valor" (borda 2 dp primary, valor grande com algarismos tabulares, foco ao abrir) nos registros rápidos. Os valores são digitados só em dígitos e desenhados por uma `VisualTransformation` ("4636" → "R$ 46,36"). Na verificação, um campo que abria preenchido e recebia o foco por código ficava com o cursor no início: o pagamento parcial de "500,00" virou R$ 50.001.284,60, e o servidor aceitou.
+**Decisão:** `ValueField` e `DecimalField` com `large` desenham o Campo de valor (`ValueBox` no design system); o cursor fica sempre no fim, como numa calculadora, e a caixa inteira dá o foco ao campo. As folhas e formulários focam o valor ao abrir (`rememberOpeningFocus`). "Parcial" em Pagar fatura começa vazio (a prancha 14 mostra o valor digitado e "Restam …"). No abastecimento, data e km são tags que mudam com um toque (prancha 08); o km abre o campo e fica aberto com um erro do servidor.
+**Consequências:** não dá para editar o meio de um valor; apaga-se do fim. Pagar mais que a fatura continua aceito pelo servidor (F5 não proíbe); fica como pergunta ao mantenedor.
+
 ---
 
 ## Modelo

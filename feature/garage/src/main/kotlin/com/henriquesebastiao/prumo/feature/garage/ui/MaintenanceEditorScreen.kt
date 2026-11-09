@@ -36,7 +36,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.henriquesebastiao.prumo.core.designsystem.component.AutocompleteField
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupNote
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
-import com.henriquesebastiao.prumo.core.designsystem.component.PreviewValue
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoTopBar
 import com.henriquesebastiao.prumo.core.designsystem.component.SectionCard
@@ -46,6 +45,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.Suggestion
 import com.henriquesebastiao.prumo.core.designsystem.component.ValueField
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
+import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoType
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
 import com.henriquesebastiao.prumo.core.feature.Navigator
 import com.henriquesebastiao.prumo.core.model.AppError
@@ -167,21 +167,25 @@ private fun MaintenanceForm(
         verticalArrangement = Arrangement.spacedBy(Spacing.md),
     ) {
         if (state.editing == null) VehicleChoice(state.vehicles, state.vehicleId, events.onSelect)
-        DateTimeField(
-            value = state.performedAt,
-            onValueChange = events.onDateTimeChange,
-            label = stringResource(R.string.garage_date_time),
-            today = state.context.today,
-        )
-        ValueField(
-            digits = fields.km,
-            onDigitsChange = { events.onFieldsChange(fields.copy(km = it)) },
-            label = stringResource(R.string.garage_km_at),
-            transformation = IntegerTransformation,
-            leadingIcon = PrumoIcons.Speed,
-            suffix = stringResource(R.string.garage_km_unit),
-            error = kmError(error, state.context),
-        )
+        // Boards 10 and 12: date and km side by side.
+        Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+            DateTimeField(
+                value = state.performedAt,
+                onValueChange = events.onDateTimeChange,
+                label = stringResource(R.string.garage_date_time),
+                today = state.context.today,
+                modifier = Modifier.weight(1.3f),
+            )
+            ValueField(
+                digits = fields.km,
+                onDigitsChange = { events.onFieldsChange(fields.copy(km = it)) },
+                label = stringResource(R.string.garage_km_at),
+                transformation = IntegerTransformation,
+                suffix = stringResource(R.string.garage_km_unit),
+                error = kmError(error, state.context),
+                modifier = Modifier.weight(1f),
+            )
+        }
         WorkshopField(state, fields, events)
         if (state.oilChange) OilFields(state, fields, events)
         SectionHeader(
@@ -200,7 +204,14 @@ private fun MaintenanceForm(
         )
         // C3 (D15): a preview of the total; the total saved is the server's (G4).
         val (parts, labor) = fields.previewTotals()
-        PreviewValue(stringResource(R.string.garage_total_preview), Formats.money(parts + labor, currency))
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
+            Text(
+                stringResource(R.string.garage_total_preview),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Text(Formats.money(parts + labor, currency), style = PrumoType.dataHeadline)
+        }
         GroupNote(
             stringResource(R.string.garage_total_hint, Formats.money(parts, currency), Formats.money(labor, currency)),
         )
@@ -269,22 +280,33 @@ private fun OilFields(state: MaintenanceEditorUiState, fields: MaintenanceFields
         leadingIcon = PrumoIcons.OilBarrel,
         error = fieldError(state.saveError, "oil_type"),
     )
-    SectionCard(tone = SectionTone.Container, overline = stringResource(R.string.garage_next_change)) {
+    // Board 12: the next change in the hero card, km and date side by side.
+    SectionCard(
+        tone = SectionTone.Primary,
+        hero = true,
+        icon = PrumoIcons.OilBarrel,
+        overline = stringResource(R.string.garage_next_change_suggested),
+        title = stringResource(R.string.garage_next_change),
+    ) {
         Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-            ValueField(
-                digits = fields.nextKm,
-                onDigitsChange = { events.onFieldsChange(fields.copy(nextKm = it)) },
-                label = stringResource(R.string.garage_next_change_km),
-                transformation = IntegerTransformation,
-                suffix = stringResource(R.string.garage_km_unit),
-                error = fieldError(state.saveError, "next_oil_change_km"),
-            )
-            DateField(
-                value = state.nextOn,
-                onValueChange = events.onNextOnChange,
-                label = stringResource(R.string.garage_next_change_date),
-                onClear = { events.onNextOnChange(null) },
-            )
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                ValueField(
+                    digits = fields.nextKm,
+                    onDigitsChange = { events.onFieldsChange(fields.copy(nextKm = it)) },
+                    label = stringResource(R.string.garage_next_change_km),
+                    transformation = IntegerTransformation,
+                    suffix = stringResource(R.string.garage_km_unit),
+                    error = fieldError(state.saveError, "next_oil_change_km"),
+                    modifier = Modifier.weight(1f),
+                )
+                DateField(
+                    value = state.nextOn,
+                    onValueChange = events.onNextOnChange,
+                    label = stringResource(R.string.garage_next_change_date),
+                    onClear = { events.onNextOnChange(null) },
+                    modifier = Modifier.weight(1f),
+                )
+            }
             intervalNote(state.suggestion)?.let {
                 Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }

@@ -87,6 +87,7 @@ internal fun CardsTab(state: AccountsUiState, events: CardsEvents, modifier: Mod
                         stringResource(R.string.finance_archived),
                         RowAction.Click(events.onArchived),
                         icon = PrumoIcons.Inventory2,
+                        neutral = true,
                     ),
                     index = 0,
                     count = 1,
@@ -108,9 +109,12 @@ private fun CardSummary(card: CreditCard, context: FinanceContext, onClick: () -
         onClick = onClick,
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
+            // Board 12: the amount on one line, beside the status (it never breaks in the middle).
             Text(
                 context.money(invoice.amountCents),
-                style = PrumoType.dataDisplay,
+                style = PrumoType.dataHeadline,
+                maxLines = 1,
+                softWrap = false,
                 modifier = Modifier.weight(1f, fill = false),
             )
             StatusChip(invoice.status.label(), invoice.status.tone())

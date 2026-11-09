@@ -162,6 +162,7 @@ fun KpiTile(
     label: String,
     modifier: Modifier = Modifier,
     valueStyle: TextStyle = PrumoType.dataMedium.copy(fontSize = 16.sp, lineHeight = 22.sp),
+    valueColor: Color = Color.Unspecified,
 ) {
     Surface(
         modifier,
@@ -183,6 +184,7 @@ fun KpiTile(
             Text(
                 value,
                 style = valueStyle,
+                color = valueColor,
                 maxLines = 1,
                 softWrap = false,
                 autoSize = TextAutoSize.StepBased(

@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
@@ -33,13 +36,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
-import com.henriquesebastiao.prumo.core.designsystem.component.GroupedList
-import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoTopBar
-import com.henriquesebastiao.prumo.core.designsystem.component.RowAction
 import com.henriquesebastiao.prumo.core.designsystem.component.SectionCard
 import com.henriquesebastiao.prumo.core.designsystem.component.SectionHeader
 import com.henriquesebastiao.prumo.core.designsystem.component.SectionTone
@@ -256,32 +256,32 @@ private fun MaintenanceContent(maintenance: Maintenance, context: GarageContext)
         verticalArrangement = Arrangement.spacedBy(Spacing.md),
     ) {
         val at = maintenance.performedAt.atZone(context.zone)
-        Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+        // Board 07: when, km and workshop as tiles in one card.
+        SectionCard(tone = SectionTone.Container) {
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                KpiTile(
+                    join(Formats.date(at.toLocalDate()), Formats.time(at.toLocalTime())),
+                    stringResource(R.string.garage_date_time),
+                    Modifier.weight(1f),
+                )
+                KpiTile(Formats.km(maintenance.km), stringResource(R.string.garage_tab_km), Modifier.weight(1f))
+            }
             KpiTile(
-                join(Formats.date(at.toLocalDate()), Formats.time(at.toLocalTime())),
-                stringResource(R.string.garage_date_time),
-                Modifier.weight(1f),
+                maintenance.workshop?.name ?: stringResource(R.string.garage_no_workshop),
+                stringResource(R.string.garage_workshop),
+                Modifier.fillMaxWidth(),
             )
-            KpiTile(Formats.km(maintenance.km), stringResource(R.string.garage_tab_km), Modifier.weight(1f))
         }
-        KpiTile(
-            maintenance.workshop?.name ?: stringResource(R.string.garage_no_workshop),
-            stringResource(R.string.garage_workshop),
-            valueStyle = MaterialTheme.typography.titleMedium,
-        )
         if (maintenance.kind == MaintenanceKind.OilChange) OilSummary(maintenance)
         val parts = maintenance.items.size
         SectionHeader(
             stringResource(R.string.garage_values),
             trailing = if (parts > 0) pluralStringResource(R.plurals.garage_parts_count, parts, parts) else null,
         )
-        GroupedList(values(maintenance, currency))
+        Values(maintenance, currency)
         maintenance.notes?.let { notes ->
-            SectionCard(
-                tone = SectionTone.Container,
-                icon = PrumoIcons.Notes,
-                overline = stringResource(R.string.garage_notes),
-            ) {
+            SectionHeader(stringResource(R.string.garage_notes))
+            SectionCard(tone = SectionTone.Container) {
                 Text(notes, style = MaterialTheme.typography.bodyLarge)
             }
         }
@@ -308,29 +308,60 @@ private fun OilSummary(maintenance: Maintenance) {
     }
 }
 
-/** Each part (× quantity), the labour and the total, as the server computed them (G4). */
+/**
+ * Board 07: each part (× quantity), the labour and, under a divider, the total, all as the server
+ * computed them (G4), in one card with the values in the data face.
+ */
 @Composable
-private fun values(maintenance: Maintenance, currency: String): List<GroupedRow> {
-    val money: @Composable (Long) -> Unit = { Text(Formats.money(it, currency), style = PrumoType.dataSmall) }
-    val items = maintenance.items.map { item ->
-        GroupedRow(
-            title = if (item.quantity > 1) {
-                stringResource(R.string.garage_part_times, item.description, item.quantity)
-            } else {
-                item.description
-            },
-            summary = if (item.quantity > 1) Formats.money(item.unitPriceCents, currency) else null,
-            action = RowAction.Static { money(item.totalCents) },
+private fun Values(maintenance: Maintenance, currency: String) {
+    SectionCard(tone = SectionTone.Container) {
+        maintenance.items.forEach { item ->
+            ValueRow(
+                if (item.quantity > 1) {
+                    stringResource(R.string.garage_part_times, item.description, item.quantity)
+                } else {
+                    item.description
+                },
+                Formats.money(item.totalCents, currency),
+                detail = if (item.quantity > 1) Formats.money(item.unitPriceCents, currency) else null,
+            )
+        }
+        ValueRow(
+            stringResource(R.string.garage_labor),
+            Formats.money(maintenance.laborCostCents, currency),
+            muted = true,
         )
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                stringResource(R.string.garage_total),
+                style = MaterialTheme.typography.titleMediumEmphasized,
+                modifier = Modifier.weight(1f),
+            )
+            Text(Formats.money(maintenance.totalCents, currency), style = PrumoType.dataLarge)
+        }
     }
-    return items + listOf(
-        GroupedRow(stringResource(R.string.garage_labor), RowAction.Static { money(maintenance.laborCostCents) }),
-        GroupedRow(
-            stringResource(R.string.garage_total),
-            RowAction.Static { Text(Formats.money(maintenance.totalCents, currency), style = PrumoType.dataMedium) },
-            emphasized = true,
-        ),
-    )
+}
+
+@Composable
+private fun ValueRow(label: String, value: String, detail: String? = null, muted: Boolean = false) {
+    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text(
+                label,
+                style = MaterialTheme.typography.bodyLarge,
+                color = if (muted) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
+            )
+            if (detail != null) {
+                Text(
+                    detail,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        Text(value, style = PrumoType.dataMedium)
+    }
 }
 
 @PhonePreviews

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -89,11 +90,16 @@ private fun ActionCell(action: GridAction, modifier: Modifier) {
             Icon(painterResource(if (selected == true) PrumoIcons.Check else action.icon), contentDescription = null)
         }
         Box(Modifier.clearAndSetSemantics {}) {
+            // Words never break in the middle: a single long word ("Abastecimento") runs a little
+            // into the gap between cells, as in the design; several words wrap between them.
+            val oneWord = action.label.none { it.isWhitespace() }
             Text(
                 action.label,
                 style = MaterialTheme.typography.labelMedium,
                 textAlign = TextAlign.Center,
-                maxLines = 2,
+                maxLines = if (oneWord) 1 else 2,
+                softWrap = !oneWord,
+                modifier = if (oneWord) Modifier.wrapContentWidth(unbounded = true) else Modifier,
             )
         }
     }

@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
@@ -115,6 +116,13 @@ fun ServerScreen(
     onContinue: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Testing hides the keyboard, so the result and "Continuar" show (the test also runs when the
+    // field loses focus).
+    val keyboard = LocalSoftwareKeyboardController.current
+    val testAndHide = {
+        keyboard?.hide()
+        onTest()
+    }
     Surface(modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize().imePadding()) {
             Column(
@@ -142,14 +150,14 @@ fun ServerScreen(
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                AddressField(address, state, onAddressChange, onTest)
+                AddressField(address, state, onAddressChange, testAndHide)
                 if (state.check == null && !state.checking) {
-                    TextButton(onClick = onTest, enabled = address.isNotBlank()) {
+                    TextButton(onClick = testAndHide, enabled = address.isNotBlank()) {
                         Icon(painterResource(PrumoIcons.NetworkCheck), contentDescription = null)
                         Text(stringResource(R.string.server_test), Modifier.padding(start = Spacing.sm))
                     }
                 }
-                ServerResult(state, onTest)
+                ServerResult(state, testAndHide)
                 if (localNetworkDenied) {
                     Text(
                         stringResource(R.string.server_local_network_denied),

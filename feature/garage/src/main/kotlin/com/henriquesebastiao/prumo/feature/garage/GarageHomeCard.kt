@@ -23,6 +23,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.StatusTone
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoType
+import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
 import com.henriquesebastiao.prumo.core.model.Formats
 
 /**
@@ -58,7 +59,7 @@ internal fun GarageHomeCard(summary: GarageSummaryDto?, onOpen: () -> Unit, modi
 
 @Composable
 private fun NextOilChange(next: NextDueDto) {
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
         val value = when {
             next.status == "overdue" -> stringResource(R.string.garage_status_overdue)
 
@@ -69,27 +70,45 @@ private fun NextOilChange(next: NextDueDto) {
 
             else -> null
         }
-        if (value != null) Text(value, style = PrumoType.dataLarge, maxLines = 1)
-        Text(
-            when (next.status) {
-                "overdue" -> stringResource(R.string.garage_card_oil_overdue)
-                "unknown" -> stringResource(R.string.garage_card_oil_unknown)
-                else -> stringResource(R.string.garage_card_until_oil_change)
-            },
-            style = MaterialTheme.typography.bodyMedium,
-        )
-        Text(
-            next.vehicle.name,
-            style = MaterialTheme.typography.labelLarge,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
+        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            if (value != null) Text(value, style = PrumoType.dataHeadline, maxLines = 1)
+            Text(
+                when (next.status) {
+                    "overdue" -> stringResource(R.string.garage_card_oil_overdue)
+
+                    "unknown" -> stringResource(R.string.garage_card_oil_unknown)
+
+                    // The article follows the kind: "da CG" (a moto), "do Strada" (o carro).
+                    else -> stringResource(
+                        if (next.vehicle.kind == "car") {
+                            R.string.garage_card_until_oil_change_car
+                        } else {
+                            R.string.garage_card_until_oil_change_motorcycle
+                        },
+                        next.vehicle.name,
+                    )
+                },
+                style = MaterialTheme.typography.bodySmall,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+            if (next.status == "overdue" || next.status == "unknown") {
+                Text(
+                    next.vehicle.name,
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
+        }
         next.usedPercent?.let { used ->
             LinearWavyProgressIndicator(progress = { used / PERCENT }, modifier = Modifier.fillMaxWidth())
         }
         when (next.status) {
+            "ok" -> StatusChip(stringResource(R.string.garage_status_ok), StatusTone.Success, small = true)
             "due_soon" -> StatusChip(stringResource(R.string.garage_status_due_soon), StatusTone.Warning, small = true)
             "overdue" -> StatusChip(stringResource(R.string.garage_status_overdue), StatusTone.Error, small = true)
+            else -> StatusChip(stringResource(R.string.garage_status_unknown), StatusTone.Neutral, small = true)
         }
     }
 }

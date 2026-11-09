@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
@@ -57,6 +58,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.PrumoTopBar
 import com.henriquesebastiao.prumo.core.designsystem.component.SeededAvatar
 import com.henriquesebastiao.prumo.core.designsystem.component.ServerIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.ValueField
+import com.henriquesebastiao.prumo.core.designsystem.component.rememberOpeningFocus
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
@@ -208,44 +210,57 @@ private fun TransactionForm(
             transformation = MoneyTransformation(context.currency),
             large = true,
             error = fieldError(state.saveError, "amount_cents"),
+            focusRequester = rememberOpeningFocus(enabled = state.editing == null),
         )
+        // Board 08: description and date right under the value; then where the money comes from
+        // and the category. A transfer (board 09) shows its accounts first.
+        val descriptionAndDate: @Composable () -> Unit = {
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                OutlinedTextField(
+                    value = fields.description,
+                    onValueChange = { events.onFieldsChange(fields.copy(description = it)) },
+                    label = {
+                        Text(
+                            stringResource(
+                                if (state.kind == EntryKind.Transfer ||
+                                    plain
+                                ) {
+                                    R.string.finance_description_optional
+                                } else {
+                                    R.string.finance_field_description
+                                },
+                            ),
+                        )
+                    },
+                    placeholder = { Text(stringResource(R.string.finance_description_hint)) },
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                    isError = fieldError(state.saveError, "description") != null,
+                    singleLine = true,
+                    modifier = Modifier.weight(DESCRIPTION_WEIGHT),
+                )
+                DateField(
+                    state.date,
+                    events.onDateChange,
+                    stringResource(R.string.finance_date),
+                    Modifier.weight(1f),
+                    today = state.context.today,
+                )
+            }
+        }
+        if (state.kind != EntryKind.Transfer) descriptionAndDate()
         when {
             plain -> Unit
             state.kind == EntryKind.Transfer -> TransferAccounts(state, events)
             else -> SourceAndCategory(state, events, onInstallmentsChange)
         }
-        OutlinedTextField(
-            value = fields.description,
-            onValueChange = { events.onFieldsChange(fields.copy(description = it)) },
-            label = {
-                Text(
-                    stringResource(
-                        if (state.kind == EntryKind.Transfer ||
-                            plain
-                        ) {
-                            R.string.finance_description_optional
-                        } else {
-                            R.string.finance_field_description
-                        },
-                    ),
-                )
-            },
-            placeholder = { Text(stringResource(R.string.finance_description_hint)) },
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-            isError = fieldError(state.saveError, "description") != null,
-            singleLine = true,
+        if (state.kind == EntryKind.Transfer) descriptionAndDate()
+        TimeField(
+            state.time,
+            events.onTimeChange,
+            onClear = { events.onTimeChange(null) },
+            label = stringResource(R.string.finance_time),
             modifier = Modifier.fillMaxWidth(),
         )
-        Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-            DateField(state.date, events.onDateChange, stringResource(R.string.finance_date), Modifier.weight(1f))
-            TimeField(
-                state.time,
-                events.onTimeChange,
-                onClear = { events.onTimeChange(null) },
-                label = stringResource(R.string.finance_time),
-                modifier = Modifier.width(140.dp),
-            )
-        }
         OutlinedTextField(
             value = fields.notes,
             onValueChange = { events.onFieldsChange(fields.copy(notes = it)) },
@@ -263,6 +278,8 @@ private fun TransactionForm(
         }
     }
 }
+
+private const val DESCRIPTION_WEIGHT = 1.6f
 
 @Composable
 private fun saveLabel(state: TransactionEditorUiState, fields: TransactionFields): String = when {
@@ -383,13 +400,17 @@ private fun CategoryTile(label: String, selected: Boolean, onClick: () -> Unit, 
         verticalArrangement = Arrangement.spacedBy(Spacing.xs),
     ) {
         avatar()
+        // As in the action grid: a single word ("Alimentação") runs into the gap instead of being cut.
+        val oneWord = label.none { it.isWhitespace() }
         Text(
             label,
             style = if (selected) MaterialTheme.typography.labelLarge else MaterialTheme.typography.labelMedium,
             color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
-            maxLines = 1,
+            maxLines = if (oneWord) 1 else 2,
+            softWrap = !oneWord,
             overflow = TextOverflow.Ellipsis,
+            modifier = if (oneWord) Modifier.wrapContentWidth(unbounded = true) else Modifier,
         )
     }
 }

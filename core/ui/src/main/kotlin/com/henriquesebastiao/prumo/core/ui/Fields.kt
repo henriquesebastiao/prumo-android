@@ -28,12 +28,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
+import com.henriquesebastiao.prumo.core.designsystem.component.Tag
 import com.henriquesebastiao.prumo.core.designsystem.component.ValueField
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
@@ -68,7 +71,8 @@ private class EndOffsetMapping(private val original: Int, private val transforme
 
 /**
  * When something happened, as a field that opens the date picker and then the time picker. [today]
- * (the user's, in their zone) shows as "Hoje, 14:30".
+ * (the user's, in their zone) shows as "Hoje, 14:30". [asTag] draws it as a tag (a quick sheet's
+ * default that changes with a tap).
  */
 @Composable
 fun DateTimeField(
@@ -77,6 +81,7 @@ fun DateTimeField(
     label: String,
     today: LocalDate,
     modifier: Modifier = Modifier,
+    asTag: Boolean = false,
 ) {
     var step by rememberSaveable { mutableStateOf(PickerStep.Closed) }
     var pickedDate by rememberSaveable { mutableStateOf(value.toLocalDate()) }
@@ -89,7 +94,16 @@ fun DateTimeField(
             Formats.time(value.toLocalTime()),
         )
     }
-    ClickableField(text, label, PrumoIcons.CalendarMonth, onClick = { step = PickerStep.Date }, modifier = modifier)
+    if (asTag) {
+        Tag(
+            text,
+            modifier.semantics { contentDescription = "$label: $text" },
+            icon = PrumoIcons.Event,
+            onClick = { step = PickerStep.Date },
+        )
+    } else {
+        ClickableField(text, label, PrumoIcons.CalendarMonth, onClick = { step = PickerStep.Date }, modifier = modifier)
+    }
     when (step) {
         PickerStep.Date -> DateDialog(
             initial = value.toLocalDate(),
@@ -113,7 +127,10 @@ fun DateTimeField(
     }
 }
 
-/** A day (the next oil change's date), or none when [onClear] is given and used. */
+/**
+ * A day (the next oil change's date), or none when [onClear] is given and used. [today] (the
+ * user's) shows as "Hoje".
+ */
 @Composable
 fun DateField(
     value: LocalDate?,
@@ -122,10 +139,15 @@ fun DateField(
     modifier: Modifier = Modifier,
     onClear: (() -> Unit)? = null,
     supportingText: String? = null,
+    today: LocalDate? = null,
 ) {
     var open by rememberSaveable { mutableStateOf(false) }
     ClickableField(
-        text = value?.let(Formats::date).orEmpty(),
+        text = when (value) {
+            null -> ""
+            today -> stringResource(R.string.ui_today)
+            else -> Formats.date(value)
+        },
         label = label,
         icon = PrumoIcons.CalendarMonth,
         onClick = { open = true },

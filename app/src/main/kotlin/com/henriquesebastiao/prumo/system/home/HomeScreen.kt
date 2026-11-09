@@ -3,9 +3,11 @@ package com.henriquesebastiao.prumo.system.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -246,20 +248,23 @@ private fun Cards(
             }
         }
         items(state.cards.drop(1).chunked(2), key = { row -> row.joinToString { it.feature.id } }) { row ->
-            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
+            // Cards side by side take the height of the taller one.
+            Row(Modifier.height(IntrinsicSize.Max), horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
                 row.forEach { card ->
                     card.feature.HomeCard(card.summary, false, state.context, {
                         onOpenModule(card.feature)
-                    }, Modifier.weight(1f))
+                    }, Modifier.weight(1f).fillMaxHeight())
                 }
                 if (row.size == 1) Spacer(Modifier.weight(1f))
             }
         }
         item(key = "organize") {
-            TextButton(onClick = onOrganizeModules) {
-                Icon(painterResource(PrumoIcons.Tune), contentDescription = null)
-                Spacer(Modifier.padding(start = Spacing.sm))
-                Text(stringResource(R.string.home_organize_modules))
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                TextButton(onClick = onOrganizeModules) {
+                    Icon(painterResource(PrumoIcons.Tune), contentDescription = null)
+                    Spacer(Modifier.padding(start = Spacing.sm))
+                    Text(stringResource(R.string.home_organize_modules))
+                }
             }
         }
     }
@@ -275,7 +280,12 @@ private fun Toolbar(
     HorizontalFloatingToolbar(
         expanded = true,
         floatingActionButton = {
-            FloatingToolbarDefaults.VibrantFloatingActionButton(onClick = onAll) {
+            // The vibrant toolbar's FAB is in tertiary container, as in the design system.
+            FloatingToolbarDefaults.VibrantFloatingActionButton(
+                onClick = onAll,
+                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            ) {
                 Icon(painterResource(PrumoIcons.Add), contentDescription = stringResource(R.string.home_all_actions))
             }
         },

@@ -36,6 +36,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.Tag
 import com.henriquesebastiao.prumo.core.designsystem.component.ValueField
+import com.henriquesebastiao.prumo.core.designsystem.component.rememberOpeningFocus
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
@@ -159,8 +160,9 @@ class PayInvoiceViewModel @Inject constructor(
 
     fun select(index: Int) = mutableState.update { it.copy(selected = index, saveError = null) }
 
+    // Board 14: "Parcial" opens empty, on the value, and "Restam …" follows what is typed. A prefilled
+    // amount would take the digits typed after it (the field types at the end, as a calculator).
     fun onTotalChange(total: Boolean) {
-        if (!total && amount.isEmpty()) amount = Inputs.digitsOf(mutableState.value.invoice?.invoice?.remainingCents)
         mutableState.update { it.copy(total = total, saveError = null) }
     }
 
@@ -326,6 +328,7 @@ internal fun PayInvoiceContent(
                         label = stringResource(R.string.finance_pay_amount),
                         transformation = MoneyTransformation(context.currency),
                         large = true,
+                        focusRequester = rememberOpeningFocus(),
                     )
                     // C7 (D16): a preview of what is left; the invoice the server returns is what counts.
                     val typed = Inputs.number(amount) ?: 0L
@@ -349,7 +352,12 @@ internal fun PayInvoiceContent(
                         )
                     }
                 }
-                DateField(state.on, events.onDateChange, stringResource(R.string.finance_date))
+                DateField(
+                    state.on,
+                    events.onDateChange,
+                    stringResource(R.string.finance_date),
+                    today = state.context.today,
+                )
                 Text(
                     stringResource(R.string.finance_pay_hint),
                     style = MaterialTheme.typography.bodySmall,

@@ -153,8 +153,8 @@
     <string name="finance_expenses">Despesas</string>
     <string name="finance_expense_share">Despesas = %1$d %% das receitas</string>
     <string name="finance_no_income">Sem receitas no mês.</string>
-    <string name="finance_result_left">Sobra %1$s</string>
-    <string name="finance_result_short">Falta %1$s</string>
+    <string name="finance_result_left">sobra %1$s</string>
+    <string name="finance_result_short">falta %1$s</string>
     <string name="finance_expenses_by_category">Despesas por categoria</string>
     <string name="finance_income_by_category">Receitas por categoria</string>
     <string name="finance_no_expenses">Nenhuma despesa no mês.</string>

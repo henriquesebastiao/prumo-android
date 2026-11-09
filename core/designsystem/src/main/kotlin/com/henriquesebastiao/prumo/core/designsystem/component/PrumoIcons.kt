@@ -41,6 +41,8 @@ object PrumoIcons {
 
     @DrawableRes val Check = R.drawable.ic_check
 
+    @DrawableRes val CheckCircleFilled = R.drawable.ic_check_circle_filled
+
     @DrawableRes val Checkroom = R.drawable.ic_checkroom
 
     @DrawableRes val ChevronLeft = R.drawable.ic_chevron_left
@@ -81,6 +83,8 @@ object PrumoIcons {
 
     @DrawableRes val DoNotDisturbOn = R.drawable.ic_do_not_disturb_on
 
+    @DrawableRes val DoNotDisturbOnFilled = R.drawable.ic_do_not_disturb_on_filled
+
     @DrawableRes val DonutSmall = R.drawable.ic_donut_small
 
     @DrawableRes val DragIndicator = R.drawable.ic_drag_indicator
@@ -90,6 +94,8 @@ object PrumoIcons {
     @DrawableRes val EditNote = R.drawable.ic_edit_note
 
     @DrawableRes val Error = R.drawable.ic_error
+
+    @DrawableRes val ErrorFilled = R.drawable.ic_error_filled
 
     @DrawableRes val Event = R.drawable.ic_event
 
@@ -194,6 +200,8 @@ object PrumoIcons {
     @DrawableRes val Wallet = R.drawable.ic_wallet
 
     @DrawableRes val Warning = R.drawable.ic_warning
+
+    @DrawableRes val WarningFilled = R.drawable.ic_warning_filled
 
     @DrawableRes val WaterDrop = R.drawable.ic_water_drop
 

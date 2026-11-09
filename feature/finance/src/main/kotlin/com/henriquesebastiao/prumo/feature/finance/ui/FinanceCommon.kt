@@ -8,6 +8,7 @@ import androidx.compose.material3.FloatingToolbarDefaults
 import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -104,14 +105,19 @@ internal fun FinanceToolbar(actions: FinanceActions, modifier: Modifier = Modifi
     HorizontalFloatingToolbar(
         expanded = true,
         floatingActionButton = {
-            FloatingToolbarDefaults.VibrantFloatingActionButton(onClick = actions.onExpense) {
+            FloatingToolbarDefaults.StandardFloatingActionButton(
+                onClick = actions.onExpense,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ) {
                 Icon(
                     painterResource(PrumoIcons.Payments),
                     contentDescription = stringResource(R.string.finance_new_expense),
                 )
             }
         },
-        colors = FloatingToolbarDefaults.vibrantFloatingToolbarColors(),
+        // A module's toolbar is the standard one (the Home's is vibrant), its FAB in primary container.
+        colors = FloatingToolbarDefaults.standardFloatingToolbarColors(),
         modifier = modifier,
     ) {
         IconButton(onClick = actions.onIncome) {

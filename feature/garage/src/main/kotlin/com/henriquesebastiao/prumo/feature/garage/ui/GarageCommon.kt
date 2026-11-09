@@ -7,6 +7,7 @@ import androidx.compose.material3.FloatingToolbarDefaults
 import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -62,14 +63,19 @@ internal fun GarageToolbar(actions: GarageActions, modifier: Modifier = Modifier
     HorizontalFloatingToolbar(
         expanded = true,
         floatingActionButton = {
-            FloatingToolbarDefaults.VibrantFloatingActionButton(onClick = actions.onFueling) {
+            FloatingToolbarDefaults.StandardFloatingActionButton(
+                onClick = actions.onFueling,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ) {
                 Icon(
                     painterResource(PrumoIcons.LocalGasStation),
                     contentDescription = stringResource(R.string.garage_action_fueling),
                 )
             }
         },
-        colors = FloatingToolbarDefaults.vibrantFloatingToolbarColors(),
+        // A module's toolbar is the standard one (the Home's is vibrant), its FAB in primary container.
+        colors = FloatingToolbarDefaults.standardFloatingToolbarColors(),
         modifier = modifier,
     ) {
         IconButton(onClick = actions.onOdometer) {

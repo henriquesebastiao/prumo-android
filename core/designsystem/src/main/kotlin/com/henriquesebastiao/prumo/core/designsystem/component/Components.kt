@@ -114,7 +114,10 @@ fun EmptyState(
 /** What a [StatusChip] tells. */
 enum class StatusTone { Success, Warning, Error, Neutral }
 
-/** A status in a small pill ("Servidor encontrado", "Em breve"), in its tone's container colors. */
+/**
+ * A status in a pill ("Servidor encontrado", "Em breve"): always color, icon and label, in its
+ * tone's container colors. 32 dp for a state; [small] (24 dp) for an attribute of a list item.
+ */
 @Composable
 fun StatusChip(label: String, tone: StatusTone, modifier: Modifier = Modifier, small: Boolean = false) {
     val extended = PrumoTheme.extendedColors
@@ -125,30 +128,52 @@ fun StatusChip(label: String, tone: StatusTone, modifier: Modifier = Modifier, s
         StatusTone.Error -> scheme.errorContainer to scheme.onErrorContainer
         StatusTone.Neutral -> scheme.surfaceContainerHighest to scheme.onSurfaceVariant
     }
+    val icon = when (tone) {
+        StatusTone.Success -> PrumoIcons.CheckCircleFilled
+        StatusTone.Warning -> PrumoIcons.WarningFilled
+        StatusTone.Error -> PrumoIcons.ErrorFilled
+        StatusTone.Neutral -> PrumoIcons.DoNotDisturbOnFilled
+    }
     Surface(
         color = container,
         contentColor = content,
         shape = RoundedCornerShape(if (small) 6.dp else 8.dp),
         modifier = modifier,
     ) {
-        Text(
-            label,
-            style = if (small) MaterialTheme.typography.labelSmall else MaterialTheme.typography.labelMedium,
-            maxLines = 1,
-            modifier = Modifier.padding(horizontal = if (small) Spacing.sm else Spacing.md, vertical = Spacing.xs),
-        )
+        Row(
+            Modifier
+                .height(if (small) 24.dp else 32.dp)
+                .padding(start = if (small) 6.dp else Spacing.sm, end = if (small) Spacing.sm else Spacing.md),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(if (small) Spacing.xs else 6.dp),
+        ) {
+            Icon(
+                painterResource(icon),
+                contentDescription = null,
+                modifier = Modifier.size(if (small) 14.dp else 18.dp),
+            )
+            Text(
+                label,
+                style = if (small) MaterialTheme.typography.labelMedium else MaterialTheme.typography.labelLarge,
+                maxLines = 1,
+            )
+        }
     }
 }
 
-/** A static label in a pill: the server's address, the time of cached data. Not a filter. */
+/**
+ * A label in a pill: the server's address, the time of cached data. Not a filter. With [onClick],
+ * a default that changes with a tap (the date and km of a fueling).
+ */
 @Composable
-fun Tag(label: String, modifier: Modifier = Modifier, icon: Int? = null, small: Boolean = false) {
-    Surface(
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        shape = CircleShape,
-        modifier = modifier,
-    ) {
+fun Tag(
+    label: String,
+    modifier: Modifier = Modifier,
+    icon: Int? = null,
+    small: Boolean = false,
+    onClick: (() -> Unit)? = null,
+) {
+    val content: @Composable () -> Unit = {
         Row(
             Modifier
                 .height(if (small) 32.dp else 40.dp)
@@ -164,6 +189,13 @@ fun Tag(label: String, modifier: Modifier = Modifier, icon: Int? = null, small: 
                 overflow = TextOverflow.Ellipsis,
             )
         }
+    }
+    val color = MaterialTheme.colorScheme.surfaceContainerHigh
+    val contentColor = MaterialTheme.colorScheme.onSurface
+    if (onClick != null) {
+        Surface(onClick, modifier, shape = CircleShape, color = color, contentColor = contentColor, content = content)
+    } else {
+        Surface(modifier, shape = CircleShape, color = color, contentColor = contentColor, content = content)
     }
 }
 

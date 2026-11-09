@@ -1,15 +1,21 @@
 package com.henriquesebastiao.prumo.core.designsystem.component
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExposedDropdownMenu
@@ -20,33 +26,40 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.ToggleButton
-import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoType
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
+import java.util.Locale
 
 /**
  * A field of a number typed as digits only (money in cents, km): it keeps what was typed and
  * [transformation] draws it ("4636" as "R$ 46,36", "18512" as "18.512"). A key that isn't a digit,
  * or one digit too many ([maxDigits]), is ignored: the text is never rewritten (CLAUDE.md, "Campos
- * de texto"). [large] is the big value of a sheet ("Valor total").
+ * de texto"). [large] is the design's "Campo de valor", the main value of a form ("Valor total"),
+ * which a sheet focuses as it opens through [focusRequester].
  */
 @Composable
 fun ValueField(
@@ -62,26 +75,60 @@ fun ValueField(
     error: String? = null,
     maxDigits: Int = MAX_DIGITS,
     imeAction: ImeAction = ImeAction.Next,
+    focusRequester: FocusRequester? = null,
 ) {
+    val accept: (String) -> Unit = { text ->
+        if (text.length <= maxDigits &&
+            text.all(Char::isDigit)
+        ) {
+            onDigitsChange(text)
+        }
+    }
+    val keyboard = KeyboardOptions(keyboardType = KeyboardType.NumberPassword, imeAction = imeAction)
+    if (large) {
+        ValueBox(
+            digits,
+            accept,
+            label,
+            transformation,
+            keyboard,
+            modifier.fillMaxWidth(),
+            leadingIcon = leadingIcon,
+            suffix = suffix,
+            supportingText = supportingText,
+            error = error,
+            focusRequester = focusRequester,
+        )
+        return
+    }
     OutlinedTextField(
-        value = digits,
+        // The cursor stays at the end, as in the large field (see ValueBox).
+        value = TextFieldValue(digits, TextRange(digits.length)),
         suffix = suffix?.let { { Text(it) } },
-        onValueChange = { text -> if (text.length <= maxDigits && text.all(Char::isDigit)) onDigitsChange(text) },
+        onValueChange = { accept(it.text) },
         label = { Text(label) },
-        modifier = modifier.fillMaxWidth(),
-        textStyle = if (large) PrumoType.dataLarge else PrumoType.dataMedium,
+        modifier = modifier.fillMaxWidth().then(
+            if (focusRequester !=
+                null
+            ) {
+                Modifier.focusRequester(focusRequester)
+            } else {
+                Modifier
+            },
+        ),
+        textStyle = PrumoType.dataMedium,
         leadingIcon = leadingIcon?.let { icon -> { Icon(painterResource(icon), contentDescription = null) } },
         supportingText = (error ?: supportingText)?.let { text -> { Text(text) } },
         isError = error != null,
         visualTransformation = transformation,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword, imeAction = imeAction),
+        keyboardOptions = keyboard,
         singleLine = true,
     )
 }
 
 /**
  * A decimal number with a comma ("7,3" litres), up to [scale] decimals. A point from the keyboard
- * counts as the comma; anything else is ignored.
+ * counts as the comma; anything else is ignored. [large] draws it as a "Campo de valor".
  */
 @Composable
 fun DecimalField(
@@ -95,10 +142,30 @@ fun DecimalField(
     supportingText: String? = null,
     error: String? = null,
     imeAction: ImeAction = ImeAction.Next,
+    large: Boolean = false,
+    focusRequester: FocusRequester? = null,
 ) {
+    val accept: (String) -> Unit = { new -> if (isDecimal(new, scale)) onTextChange(new) }
+    val keyboard = KeyboardOptions(keyboardType = KeyboardType.Decimal, imeAction = imeAction)
+    if (large) {
+        ValueBox(
+            text,
+            accept,
+            label,
+            VisualTransformation.None,
+            keyboard,
+            modifier.fillMaxWidth(),
+            leadingIcon = leadingIcon,
+            suffix = suffix,
+            supportingText = supportingText,
+            error = error,
+            focusRequester = focusRequester,
+        )
+        return
+    }
     OutlinedTextField(
         value = text,
-        onValueChange = { new -> if (isDecimal(new, scale)) onTextChange(new) },
+        onValueChange = accept,
         label = { Text(label) },
         modifier = modifier.fillMaxWidth(),
         textStyle = PrumoType.dataMedium,
@@ -106,7 +173,7 @@ fun DecimalField(
         suffix = suffix?.let { { Text(it) } },
         supportingText = (error ?: supportingText)?.let { message -> { Text(message) } },
         isError = error != null,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal, imeAction = imeAction),
+        keyboardOptions = keyboard,
         singleLine = true,
     )
 }
@@ -198,8 +265,9 @@ fun AutocompleteField(
 }
 
 /**
- * Tabs drawn as pills that scroll sideways (the history of a vehicle: Manutenções, Abastecimentos,
- * Óleo, Km): the selected one filled.
+ * Section tabs as the design draws them (v3 pill tabs): 52 dp pills with an uppercase label, the
+ * selected one in primary with a 4 × 28 dp indicator under it, the others on the lightest surface.
+ * Scrolls sideways when they don't fit.
  */
 @Composable
 fun <T> PillTabs(
@@ -210,26 +278,69 @@ fun <T> PillTabs(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier.horizontalScroll(rememberScrollState()).selectableGroup(),
-        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        modifier.horizontalScroll(rememberScrollState()).selectableGroup().padding(bottom = PILL_INDICATOR_SPACE),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.md),
     ) {
         options.forEach { option ->
-            val checked = option == selected
-            ToggleButton(
-                checked = checked,
-                onCheckedChange = { onSelect(option) },
-                colors = ToggleButtonDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                ),
-                contentPadding = PaddingValues(horizontal = Spacing.lg),
-                modifier = Modifier.heightIn(min = 48.dp).semantics { role = Role.Tab },
-            ) {
-                Text(label(option), style = MaterialTheme.typography.labelLarge)
-            }
+            PillTab(label(option), option == selected) { onSelect(option) }
         }
     }
 }
+
+@Composable
+private fun PillTab(text: String, selected: Boolean, onClick: () -> Unit) {
+    val scheme = MaterialTheme.colorScheme
+    val motion = MaterialTheme.motionScheme
+    val container by animateColorAsState(
+        if (selected) scheme.primary else scheme.surfaceContainerLowest,
+        motion.fastEffectsSpec(),
+        label = "pill",
+    )
+    val content by animateColorAsState(
+        if (selected) scheme.onPrimary else scheme.onSurface,
+        motion.fastEffectsSpec(),
+        label = "pillContent",
+    )
+    val indicator by animateDpAsState(
+        if (selected) PILL_INDICATOR_WIDTH else 0.dp,
+        motion.fastSpatialSpec(),
+        label = "indicator",
+    )
+    Box(contentAlignment = Alignment.BottomCenter) {
+        Surface(
+            selected = selected,
+            onClick = onClick,
+            shape = CircleShape,
+            color = container,
+            contentColor = content,
+            modifier = Modifier.height(PILL_HEIGHT).semantics { role = Role.Tab },
+        ) {
+            Box(Modifier.padding(horizontal = Spacing.xl), contentAlignment = Alignment.Center) {
+                Text(
+                    text.uppercase(PillLocale),
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                        letterSpacing = PILL_TRACKING,
+                    ),
+                    maxLines = 1,
+                )
+            }
+        }
+        Box(
+            Modifier
+                .offset(y = PILL_INDICATOR_SPACE - PILL_INDICATOR_HEIGHT / 2)
+                .size(width = indicator, height = PILL_INDICATOR_HEIGHT)
+                .background(scheme.primary, CircleShape),
+        )
+    }
+}
+
+private val PILL_HEIGHT = 52.dp
+private val PILL_INDICATOR_WIDTH = 28.dp
+private val PILL_INDICATOR_HEIGHT = 4.dp
+private val PILL_INDICATOR_SPACE = 14.dp
+private val PILL_TRACKING = 0.04.em
+private val PillLocale: Locale = Locale.forLanguageTag("pt-BR")
 
 /** A value with its label in a big style ("Total calculado R$ 53,90"), for a form's preview. */
 @Composable

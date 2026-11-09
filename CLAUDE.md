@@ -12,7 +12,7 @@ O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 - `build-logic/`: plugins de convenção do Gradle; versões só em `gradle/libs.versions.toml`
 - `design/`: exportações do Claude Design, versionadas em `design/v1/`… É **somente referência visual**: nunca importe nada daqui no código. A versão ativa está em `design/README.md`
 - `config/detekt/`: regras do detekt
-- `scripts/`: ícones, cópia do contrato do servidor e gravação de respostas reais
+- `scripts/`: ícones, cópia do contrato do servidor, gravação de respostas reais e render das pranchas
 - `docs/`: documentação técnica
 
 ## Leia antes de trabalhar em…
@@ -34,6 +34,7 @@ O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 - `scripts/update-openapi.sh [caminho do prumo]`: copia `openapi/openapi.json` do servidor para o teste de contrato
 - `scripts/record-fixtures.py [url] [usuário] [senha]`: grava respostas reais do servidor em `core/network/src/testFixtures/resources/fixtures/`
 - `scripts/material_symbol.py <nome>…`: gera os vetores de Material Symbols Rounded em `:core:designsystem`
+- `scripts/render-design.mjs [caminho do prumo]`: renderiza as pranchas de `design/v1/` em PNG (`design/renders/v1/`) para comparar com capturas do emulador
 
 ## O contrato do servidor
 

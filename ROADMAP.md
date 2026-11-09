@@ -15,49 +15,49 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [x] **(servidor)** Seção "Servidor e app juntos" no `CLAUDE.md` e `commit-message.md` no `.gitignore`
 - [x] **(servidor)** `service: "prumo"` no `GET /api/health`, para reconhecer um servidor Prumo (A5)
 
-> **Fundação implementada em 2026-11-04 (sessão na nuvem, sem Android SDK local).** Os itens de tela abaixo estão implementados e passam no CI (build, lint, testes de unidade e Robolectric), mas só são marcados depois da conferência no emulador contra `make dev` e da comparação com `design/v1/`, que ficam com o mantenedor. "Vem aí", "Atividade recente" e a exportação dos dados ainda não foram feitos.
+> **Fundação implementada em 2026-11-04 (sessão na nuvem) e verificada em 2026-11-09 (sessão local):** emulador `Pixel_9` (API 37) contra o `e2e_server.py` do servidor, telas comparadas com as pranchas renderizadas por `scripts/render-design.mjs`. Fluxos exercitados: servidor errado e certo (com a permissão de rede local), senha errada, login, token cifrado no DataStore, Início claro e escuro, Todas as ações, Configurações e as cinco subtelas, reordenar módulos por arraste, sessão expirada (sessão revogada pela API) e volta à mesma tela depois do login, servidor inacessível com dados em cache, sair. Não exercitados no emulador: troca de nome e de senha, estado vazio (só nos previews e testes). A verificação corrigiu: o círculo do rodapé do primeiro acesso, o `StatusChip` sem ícone, a app bar grande sem o título de 48 sp, os avatares das linhas sem o tom primary, os cards do Início, as abas em pílula, a toolbar dos módulos, o Campo de valor (D18), a barra de status no tema escuro da conta, o arraste dos módulos que não terminava e um build incremental que deixava o app sem Finanças (D17). "Vem aí", "Atividade recente" e a exportação dos dados ainda não foram feitos.
 
 ### Design system (`:core:designsystem`)
-- [ ] Tema: `MaterialExpressiveTheme` + `MotionScheme.expressive()`, esquemas claro, escuro e preto puro do seed do app, cor dinâmica, success/warning harmonizados
-- [ ] `ModuleTheme(seed)`: esquema aninhado por módulo (e por conta e categoria), harmonizado com a cor dinâmica
-- [ ] Tipografia (Google Sans Flex arredondada, hero largo, dados em JetBrains Mono), formas, espaço, elevação
-- [ ] Ícones Material Symbols Rounded como vetores, e a tabela de ícones Lucide do servidor → Material Symbols
-- [ ] Componentes base usados pela fundação, cada um com `@PhonePreviews` (claro e escuro, 360 e 412 dp)
-- [ ] Novos: diálogo de confirmação, grade de ações rotuladas, linha reordenável
+- [x] Tema: `MaterialExpressiveTheme` + `MotionScheme.expressive()`, esquemas claro, escuro e preto puro do seed do app, cor dinâmica, success/warning harmonizados
+- [x] `ModuleTheme(seed)`: esquema aninhado por módulo (e por conta e categoria), harmonizado com a cor dinâmica
+- [x] Tipografia (Google Sans Flex arredondada, hero largo, dados em JetBrains Mono), formas, espaço, elevação
+- [x] Ícones Material Symbols Rounded como vetores, e a tabela de ícones Lucide do servidor → Material Symbols
+- [x] Componentes base usados pela fundação, cada um com `@PhonePreviews` (claro e escuro, 360 e 412 dp)
+- [x] Novos: diálogo de confirmação, grade de ações rotuladas, linha reordenável
 
 ### Rede e sessão
-- [ ] Endereço do servidor configurável e teste de conexão (`GET /api/health`, versão e tempo de resposta, mensagem por causa)
-- [ ] Login com `client: "app"` e `device_name`; token criptografado (Tink + DataStore); bearer em todas as requisições
-- [ ] 401 encerra a sessão; erros mapeados pelo `code` para textos em pt-BR
-- [ ] Permissão de rede local do Android 17 (`ACCESS_LOCAL_NETWORK`) para servidores na LAN; HTTP sem TLS permitido para a instância do usuário
+- [x] Endereço do servidor configurável e teste de conexão (`GET /api/health`, versão e tempo de resposta, mensagem por causa)
+- [x] Login com `client: "app"` e `device_name`; token criptografado (Tink + DataStore); bearer em todas as requisições
+- [x] 401 encerra a sessão; erros mapeados pelo `code` para textos em pt-BR
+- [x] Permissão de rede local do Android 17 (`ACCESS_LOCAL_NETWORK`) para servidores na LAN; HTTP sem TLS permitido para a instância do usuário
 
 ### Módulos e telas de sistema
-- [ ] Contrato `PrumoFeature` e montagem dos módulos ativos e da ordem a partir de `GET /api/v1/modules`
-- [ ] Primeiro acesso: boas-vindas, servidor, login
-- [ ] Shell: Início como raiz, toolbar flutuante com ações fixadas, folha "Todas as ações", engrenagem para Configurações
-- [ ] Início com os resumos de `GET /api/v1/dashboard` (um card por módulo, no tema do módulo)
-- [ ] Configurações: conta (nome e senha), aparência (tema, preto puro, cor dinâmica), módulos (ativar e reordenar), sessões ativas, servidor, sair
+- [x] Contrato `PrumoFeature` e montagem dos módulos ativos e da ordem a partir de `GET /api/v1/modules`
+- [x] Primeiro acesso: boas-vindas, servidor, login
+- [x] Shell: Início como raiz, toolbar flutuante com ações fixadas, folha "Todas as ações", engrenagem para Configurações
+- [x] Início com os resumos de `GET /api/v1/dashboard` (um card por módulo, no tema do módulo)
+- [x] Configurações: conta (nome e senha), aparência (tema, preto puro, cor dinâmica), módulos (ativar e reordenar), sessões ativas, servidor, sair
 - [ ] Paridade com a web, sem prancha: "Vem aí" e "Atividade recente" no Início, exportação dos dados
-- [ ] Estados de carregando, vazio, erro, servidor inacessível e sessão expirada
-- [ ] Verificação no emulador contra `make dev` e comparação com `design/v1/`
+- [x] Estados de carregando, vazio, erro, servidor inacessível e sessão expirada
+- [x] Verificação no emulador contra `make dev` e comparação com `design/v1/`
 
 ## Fase 1 — Veículos (`garage`)
 
-> **Implementada em 2026-11-04 (sessão na nuvem, sem Android SDK local).** Todos os itens abaixo, exceto o desfazer da exclusão, estão implementados e passam no CI (build, lint, testes de unidade e Robolectric); a camada de dados também foi conferida contra o `e2e_server.py`. Eles só são marcados depois da conferência no emulador e da revisão visual contra `design/v1/`, que ficam com o mantenedor. Os conflitos C1–C5 e C9 seguem a web (D15): as exclusões pedem confirmação e acontecem na hora, como na web; o snackbar com desfazer ficou para depois.
+> **Implementada em 2026-11-04 (sessão na nuvem); verificação no emulador em andamento desde 2026-11-09.** Gravados pelo app e conferidos na API: abastecimento (com o erro `garage.odometer_inconsistent` mostrado no campo), leitura de km, cadastro de veículo, manutenção (autocompletar de oficina, peça, mão de obra), edição e exclusão com confirmação, troca de óleo com a próxima sugerida. Revisão visual feita nas pranchas 01, 04, 05, 06, 07 (detalhe refeito em cards, ainda não reconferido no emulador), 08, 10 e 12; faltam 02, 03, 09 e 11. Falta exercitar: edição e arquivamento de veículo, estado vazio, oficinas, arquivados e listas entre veículos. Os conflitos C1–C5 e C9 seguem a web (D15): as exclusões pedem confirmação e acontecem na hora, como na web; o snackbar com desfazer ficou para depois.
 - [ ] Lista, estado vazio, cadastro, edição e arquivamento
-- [ ] Detalhe: km atual, hero da troca de óleo, consumo e gastos, histórico em abas (manutenções, abastecimentos, óleo, km)
-- [ ] Folhas: atualizar km e abastecimento
+- [x] Detalhe: km atual, hero da troca de óleo, consumo e gastos, histórico em abas (manutenções, abastecimentos, óleo, km)
+- [x] Folhas: atualizar km e abastecimento
 - [ ] Formulários: manutenção (autocompletar de oficina, lista de peças) e troca de óleo (próxima troca sugerida e editável)
 - [ ] Detalhe de manutenção, edição e exclusão com confirmação e desfazer
 - [ ] Paridade com a web, sem prancha (compor com os componentes do design system): combustível habitual e observações no cadastro, óleo utilizado com sugestões, ritmo de uso, detalhe e edição de abastecimento, exclusão de leitura manual, oficinas, listas entre veículos, arquivados
-- [ ] Card do Início e ações rápidas do módulo
+- [x] Card do Início e ações rápidas do módulo
 - [ ] Novos componentes: campo de valor, autocompletar, lista de peças dinâmica
 - [ ] Revisão visual contra `design/v1/`
 
 ## Fase 2 — Finanças (`finance`)
 
-> **Implementada em 2026-11-04 (sessão na nuvem, sem Android SDK local).** Os itens do app estão implementados e passam no CI (build, lint, testes de unidade e Robolectric); a camada de dados também foi conferida contra o `e2e_server.py`. Eles só são marcados depois da conferência no emulador e da revisão visual contra `design/v1/`, que ficam com o mantenedor. As lacunas e conflitos seguem a web e a API como estão (D16): sem total por dia (A6), percentual inteiro (A7), sem origem do registro (A8) e o status da fatura lido da própria fatura (A10); nenhuma mudança no servidor. O total por dia continua à espera de aprovação.
-- [ ] Resumo do mês com seletor de período e gráfico por categoria
+> **Implementada em 2026-11-04 (sessão na nuvem); verificação no emulador em andamento desde 2026-11-09.** Gravados pelo app e conferidos na API: despesa, transferência, pagamento parcial de fatura (que corrigiu D18). Revisão visual feita nas pranchas 01, 05, 07, 08, 09, 12 e 14; faltam 02, 03, 04, 06, 10, 11 e 13. Falta exercitar: receita, detalhe, edição e exclusão de transação, contas (cadastro, edição, ajuste, arquivamento), categorias, detalhe e cadastro de cartão, parcelamento. As lacunas e conflitos seguem a web e a API como estão (D16): sem total por dia (A6), percentual inteiro (A7), sem origem do registro (A8) e o status da fatura lido da própria fatura (A10); nenhuma mudança no servidor. O total por dia continua à espera de aprovação.
+- [x] Resumo do mês com seletor de período e gráfico por categoria
 - [ ] Contas: lista, cadastro, edição, arquivamento
 - [ ] Transações: lista por dia com busca e filtros (Paging 3), nova despesa, receita e transferência, detalhe, edição e exclusão
 - [ ] Categorias: lista, criar, editar, arquivar
@@ -65,7 +65,7 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [ ] Paridade com a web, sem prancha: cartão (cadastro e edição), compra parcelada, ajuste de saldo, detalhe de conta, arquivados, excluir sem uso, série de 6 meses e receitas por categoria
 - [ ] **(servidor)** Totais por dia na lista de transações, se aprovado (A6)
 - [ ] **(servidor)** Decidir percentual com uma casa (A7), origem do registro (A8) e status da fatura na transação (A10)
-- [ ] Card do Início e ações rápidas
+- [x] Card do Início e ações rápidas
 - [ ] Novos componentes: seletor de período, seletor de cor, gráfico por categoria
 - [ ] Revisão visual contra `design/v1/`
 

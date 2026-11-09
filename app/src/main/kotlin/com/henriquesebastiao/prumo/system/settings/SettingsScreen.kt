@@ -107,6 +107,7 @@ fun SettingsScreen(
                             action = RowAction.Click({ confirmSignOut = true }, chevron = false),
                             summary = stringResource(R.string.settings_sign_out_summary),
                             icon = PrumoIcons.Logout,
+                            neutral = true,
                         ),
                     ),
                 )

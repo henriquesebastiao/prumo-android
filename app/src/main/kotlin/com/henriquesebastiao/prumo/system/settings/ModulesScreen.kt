@@ -16,6 +16,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -128,85 +129,93 @@ private fun ReorderableModules(
     Column(verticalArrangement = Arrangement.spacedBy(style.gap)) {
         order.forEachIndexed { index, id ->
             val item = byId[id] ?: return@forEachIndexed
-            val isDragging = dragging == id
-            val name = stringResource(item.feature.nameRes)
-            val handle = Modifier.pointerInput(id) {
-                detectDragGestures(
-                    onDragStart = {
-                        dragging = id
-                        offset = 0f
-                    },
-                    onDragEnd = {
-                        dragging = null
-                        offset = 0f
-                        onReorder(order)
-                    },
-                    onDragCancel = {
-                        dragging = null
-                        offset = 0f
-                    },
-                ) { change, amount ->
-                    change.consume()
-                    offset += amount.y
-                    val step = rowHeight + style.gap.toPx()
-                    if (offset > step / 2) {
-                        move(id, 1)
-                        offset -= step
-                    } else if (offset < -step / 2) {
-                        move(id, -1)
-                        offset += step
+            // The key keeps each row (and its drag gesture) with its module while the order changes
+            // under the finger; without it the gesture moved to another row and never ended.
+            key(id) {
+                val isDragging = dragging == id
+                val name = stringResource(item.feature.nameRes)
+                val handle = Modifier.pointerInput(id) {
+                    detectDragGestures(
+                        onDragStart = {
+                            dragging = id
+                            offset = 0f
+                        },
+                        onDragEnd = {
+                            dragging = null
+                            offset = 0f
+                            onReorder(order)
+                        },
+                        onDragCancel = {
+                            dragging = null
+                            offset = 0f
+                        },
+                    ) { change, amount ->
+                        change.consume()
+                        offset += amount.y
+                        val step = rowHeight + style.gap.toPx()
+                        if (offset > step / 2) {
+                            move(id, 1)
+                            offset -= step
+                        } else if (offset < -step / 2) {
+                            move(id, -1)
+                            offset += step
+                        }
                     }
                 }
-            }
-            GroupedListItem(
-                GroupedRow(
-                    title = name,
-                    action = RowAction.Static {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-                        ) {
-                            Switch(checked = item.enabled, onCheckedChange = { onEnabled(id, it) })
-                            Icon(
-                                painterResource(PrumoIcons.DragIndicator),
-                                contentDescription = stringResource(R.string.modules_drag, name),
-                                modifier = handle.size(40.dp).padding(Spacing.sm),
-                            )
-                        }
-                    },
-                    summary = stringResource(
-                        if (item.enabled) item.feature.descriptionRes else R.string.modules_disabled,
+                GroupedListItem(
+                    GroupedRow(
+                        title = name,
+                        action = RowAction.Static {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+                            ) {
+                                Switch(checked = item.enabled, onCheckedChange = { onEnabled(id, it) })
+                                Icon(
+                                    painterResource(PrumoIcons.DragIndicator),
+                                    contentDescription = stringResource(R.string.modules_drag, name),
+                                    modifier = handle.size(40.dp).padding(Spacing.sm),
+                                )
+                            }
+                        },
+                        summary = stringResource(
+                            if (item.enabled) item.feature.descriptionRes else R.string.modules_disabled,
+                        ),
+                        leading = {
+                            ModuleTheme(item.feature.seed) { IconAvatar(item.feature.icon) }
+                        },
                     ),
-                    leading = {
-                        ModuleTheme(item.feature.seed) { IconAvatar(item.feature.icon) }
-                    },
-                ),
-                index = index,
-                count = order.size,
-                style = style,
-                modifier = Modifier
-                    .zIndex(if (isDragging) 1f else 0f)
-                    .onSizeChanged { rowHeight = it.height }
-                    .graphicsLayer { translationY = if (isDragging) offset else 0f }
-                    .then(
-                        if (isDragging) Modifier.shadow(DRAG_ELEVATION, style.shapeOf(index, order.size)) else Modifier,
-                    )
-                    .semantics {
-                        contentDescription = name
-                        customActions = listOf(
-                            CustomAccessibilityAction(moveUp) {
-                                move(id, -1)
-                                onReorder(order)
-                                true
-                            },
-                            CustomAccessibilityAction(moveDown) {
-                                move(id, 1)
-                                onReorder(order)
-                                true
+                    index = index,
+                    count = order.size,
+                    style = style,
+                    modifier = Modifier
+                        .zIndex(if (isDragging) 1f else 0f)
+                        .onSizeChanged { rowHeight = it.height }
+                        .graphicsLayer { translationY = if (isDragging) offset else 0f }
+                        .then(
+                            if (isDragging) {
+                                Modifier.shadow(DRAG_ELEVATION, style.shapeOf(index, order.size))
+                            } else {
+                                Modifier
                             },
                         )
-                    },
-            )
+                        .semantics {
+                            contentDescription = name
+                            customActions = listOf(
+                                CustomAccessibilityAction(moveUp) {
+                                    move(id, -1)
+                                    onReorder(order)
+                                    true
+                                },
+                                CustomAccessibilityAction(moveDown) {
+                                    move(id, 1)
+                                    onReorder(order)
+                                    true
+                                },
+                            )
+                        },
+                )
+            }
         }
     }
 }

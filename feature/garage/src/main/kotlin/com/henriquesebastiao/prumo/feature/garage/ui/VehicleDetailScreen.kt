@@ -32,6 +32,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -277,7 +278,7 @@ private fun KmCard(vehicle: Vehicle, context: GarageContext, onUpdate: () -> Uni
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                Text(Formats.km(vehicle.currentKm), style = PrumoType.dataLarge)
+                Text(Formats.km(vehicle.currentKm), style = PrumoType.dataHeadline)
                 Text(
                     stringResource(R.string.garage_updated_at, whenText(vehicle.currentKmAt, context)),
                     style = MaterialTheme.typography.bodySmall,
@@ -357,12 +358,29 @@ private fun OilDetails(oil: OilChange, vehicle: Vehicle, context: GarageContext)
             progress = { used.coerceIn(0, PERCENT) / PERCENT.toFloat() },
             modifier = Modifier.fillMaxWidth(),
         )
+        // Board 05: the criterion that comes first takes the status's tone.
+        val extended = PrumoTheme.extendedColors
+        val leading = when (oil.status) {
+            OilStatus.DueSoon -> extended.warning
+            OilStatus.Overdue -> MaterialTheme.colorScheme.error
+            else -> Color.Unspecified
+        }
         Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
             if (oil.nextKm != null) {
-                KpiTile(Formats.km(oil.nextKm), kmTileLabel(oil), Modifier.weight(1f))
+                KpiTile(
+                    Formats.km(oil.nextKm),
+                    kmTileLabel(oil),
+                    Modifier.weight(1f),
+                    valueColor = if (oil.primary == OilCriterion.Km) leading else Color.Unspecified,
+                )
             }
             if (oil.nextOn != null) {
-                KpiTile(Formats.date(oil.nextOn), dateTileLabel(oil), Modifier.weight(1f))
+                KpiTile(
+                    Formats.date(oil.nextOn),
+                    dateTileLabel(oil),
+                    Modifier.weight(1f),
+                    valueColor = if (oil.primary == OilCriterion.Date) leading else Color.Unspecified,
+                )
             }
         }
         val pace = vehicle.stats.paceKmPerDay

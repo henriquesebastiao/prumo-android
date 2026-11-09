@@ -165,7 +165,7 @@ class FinanceViewModelsTest {
         assertEquals("a1", vm.state.value.accountId)
 
         vm.onTotalChange(false)
-        assertEquals("128460", vm.amount)
+        assertEquals("", vm.amount)
         vm.onAmountChange("50000")
         vm.onAccountChange("a2")
         vm.pay()

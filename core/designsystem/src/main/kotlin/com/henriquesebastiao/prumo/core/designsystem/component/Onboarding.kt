@@ -33,12 +33,14 @@ import androidx.compose.ui.unit.dp
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoShape
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
+import kotlin.math.roundToInt
 
 /**
  * The bottom of the first run: where it's at ([label], "Etapa 1 de 3") and the 96 dp button that
  * moves it on ([nextLabel] is what it does). The button changes shape at every [step] (circle,
  * squircle, leaf) and squares up while pressed, on the spatial spring. [busy] puts a loading
- * indicator in it; disabled, it turns grey. Pads itself above the navigation bar.
+ * indicator in it; disabled, it turns grey. [emphasized] (the first step) shows the label larger, in
+ * primary. Pads itself above the navigation bar.
  */
 @Composable
 fun OnboardingFooter(
@@ -50,6 +52,7 @@ fun OnboardingFooter(
     icon: Int = PrumoIcons.ArrowForward,
     enabled: Boolean = true,
     busy: Boolean = false,
+    emphasized: Boolean = false,
 ) {
     Surface(
         modifier.fillMaxWidth(),
@@ -65,10 +68,12 @@ fun OnboardingFooter(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(Spacing.lg),
             ) {
+                val typography = MaterialTheme.typography
+                val scheme = MaterialTheme.colorScheme
                 Text(
                     label,
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = if (emphasized) typography.headlineMedium else typography.titleLarge,
+                    color = if (emphasized) scheme.primary else scheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f),
                 )
                 NextButton(step, nextLabel, icon, onNext, enabled, busy)
@@ -88,8 +93,9 @@ private fun NextButton(step: Int, label: String, icon: Int, onClick: () -> Unit,
     val bottomEnd by animateFloatAsState(corners[2], spec, label = "bottomEnd")
     val bottomStart by animateFloatAsState(corners[3], spec, label = "bottomStart")
 
-    // The spring overshoots; a corner past half the side would fold the shape onto itself.
-    fun corner(percent: Float) = CornerSize(percent.coerceIn(0f, MAX_CORNER))
+    // Percent of the side (CornerSize(Float) would read pixels). The spring overshoots; a corner past
+    // half the side would fold the shape onto itself.
+    fun corner(percent: Float) = CornerSize(percent.coerceIn(0f, MAX_CORNER).roundToInt())
     val shape = RoundedCornerShape(corner(topStart), corner(topEnd), corner(bottomEnd), corner(bottomStart))
     val scheme = MaterialTheme.colorScheme
     FilledIconButton(
@@ -137,7 +143,8 @@ private fun OnboardingPreview() {
     PrumoTheme(dynamicColor = false) {
         Surface {
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.xl)) {
-                OnboardingFooter(step = 1, label = "Etapa 1 de 3", nextLabel = "Começar", onNext = {})
+                OnboardingFooter(step = 1, label = "Etapa 1 de 3", nextLabel = "Começar", onNext = {
+                }, emphasized = true)
                 OnboardingFooter(step = 2, label = "Etapa 2 de 3", nextLabel = "Continuar", onNext = {
                 }, enabled = false)
                 OnboardingFooter(step = 3, label = "Etapa 3 de 3", nextLabel = "Entrar", onNext = {}, busy = true)

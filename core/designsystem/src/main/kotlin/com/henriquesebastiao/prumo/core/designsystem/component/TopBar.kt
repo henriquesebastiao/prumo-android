@@ -5,6 +5,7 @@ import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LargeFlexibleTopAppBar
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -14,6 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.henriquesebastiao.prumo.core.designsystem.R
 
 /**
@@ -41,8 +44,22 @@ fun PrumoTopBar(
     )
     if (large) {
         LargeFlexibleTopAppBar(
-            title = { Text(title) },
+            // Expanded, the page title of the design (48 sp bold); collapsed, the bar's own small title.
+            title = {
+                val current = LocalTextStyle.current
+                Text(
+                    title,
+                    style = if (current.fontSize >
+                        SMALL_TITLE_MAX
+                    ) {
+                        MaterialTheme.typography.displayLarge
+                    } else {
+                        current
+                    },
+                )
+            },
             subtitle = subtitleText,
+            expandedHeight = if (subtitleText != null) LARGE_WITH_SUBTITLE else LARGE_EXPANDED,
             modifier = modifier,
             navigationIcon = navigation,
             actions = actions,
@@ -70,6 +87,11 @@ fun PrumoTopBar(
         )
     }
 }
+
+// The design's large bar: the 64 dp row, then 20 + 56 (the title) + 20, and 4 + 24 with a subtitle.
+private val LARGE_EXPANDED = 160.dp
+private val LARGE_WITH_SUBTITLE = 188.dp
+private val SMALL_TITLE_MAX = 24.sp
 
 /** The round back button of every screen under the Home; [close] (✕) on forms. */
 @Composable

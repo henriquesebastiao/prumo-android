@@ -63,8 +63,8 @@ internal fun ReadingHomeCard(summary: ReadingSummaryDto?, onOpen: () -> Unit, mo
 
 @Composable
 private fun CurrentBook(current: CurrentBookDto) {
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
+        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
             Box(
                 Modifier
                     .size(width = 36.dp, height = 52.dp)
@@ -78,18 +78,20 @@ private fun CurrentBook(current: CurrentBookDto) {
                     modifier = Modifier.size(20.dp),
                 )
             }
-            Text(stringResource(R.string.reading_card_percent, current.progressPercent), style = PrumoType.dataLarge)
+            Text(stringResource(R.string.reading_card_percent, current.progressPercent), style = PrumoType.dataHeadline)
         }
-        Text(
-            current.book.title,
-            style = MaterialTheme.typography.titleMedium,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-        )
-        Text(
-            stringResource(R.string.reading_card_pages, current.currentPage, current.totalPages),
-            style = MaterialTheme.typography.bodyMedium,
-        )
+        Column {
+            Text(
+                current.book.title,
+                style = MaterialTheme.typography.titleSmall,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Text(
+                stringResource(R.string.reading_card_pages, current.currentPage, current.totalPages),
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
         LinearWavyProgressIndicator(progress = {
             current.progressPercent / PERCENT
         }, modifier = Modifier.fillMaxWidth())

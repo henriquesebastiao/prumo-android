@@ -161,6 +161,9 @@ object PrumoType {
     /** The big balance of the Home's hero card: displayLarge's size with tabular figures. */
     val dataDisplay: TextStyle = DisplayLarge.copy(fontFeatureSettings = TABULAR)
 
+    /** A big number on a half-width Home card ("180 km", "50 %"): headlineLarge emphasized, tabular figures. */
+    val dataHeadline: TextStyle = HeadlineLarge.emphasized(700).copy(fontFeatureSettings = TABULAR)
+
     private fun data(weight: FontWeight, size: Int, line: Int) = TextStyle(
         fontFamily = JetBrainsMono,
         fontWeight = weight,

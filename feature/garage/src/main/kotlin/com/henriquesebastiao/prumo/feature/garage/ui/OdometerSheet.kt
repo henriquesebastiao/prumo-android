@@ -33,6 +33,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.Tag
 import com.henriquesebastiao.prumo.core.designsystem.component.ValueField
+import com.henriquesebastiao.prumo.core.designsystem.component.rememberOpeningFocus
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
@@ -211,7 +212,8 @@ fun OdometerSheetContent(
                     label = stringResource(R.string.garage_km_on_panel),
                     transformation = IntegerTransformation,
                     large = true,
-                    leadingIcon = PrumoIcons.Speed,
+                    suffix = stringResource(R.string.garage_km_unit),
+                    focusRequester = rememberOpeningFocus(),
                     supportingText = delta?.let { stringResource(R.string.garage_km_since_last, Formats.km(it)) },
                     error = kmError(state.saveError, state.context),
                     imeAction = ImeAction.Done,

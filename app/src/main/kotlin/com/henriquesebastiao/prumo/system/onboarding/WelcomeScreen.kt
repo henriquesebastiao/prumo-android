@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialShapes
@@ -27,6 +28,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
+import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
 
 /** First run, step 1: the wide title and Material shapes in the colors of the three modules. */
 @Composable
@@ -34,17 +36,24 @@ fun WelcomeScreen(onStart: () -> Unit, modifier: Modifier = Modifier) {
     Surface(modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize()) {
             Column(
-                Modifier.weight(1f).fillMaxWidth().statusBarsPadding(),
-                verticalArrangement = Arrangement.Bottom,
+                Modifier.weight(1f).fillMaxWidth().statusBarsPadding().padding(horizontal = Spacing.sm),
+                // 40 dp between the shapes and the title: 16 here plus the header's own 24.
+                verticalArrangement = Arrangement.spacedBy(Spacing.lg, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                ModuleShapes(Modifier.align(Alignment.CenterHorizontally))
-                HeroHeader(stringResource(R.string.app_name), subtitle = stringResource(R.string.welcome_body))
+                ModuleShapes()
+                HeroHeader(
+                    stringResource(R.string.app_name),
+                    subtitle = stringResource(R.string.welcome_body),
+                    centered = true,
+                )
             }
             OnboardingFooter(
                 step = 1,
                 label = stringResource(R.string.onboarding_step, 1, STEPS),
                 nextLabel = stringResource(R.string.welcome_start),
                 onNext = onStart,
+                emphasized = true,
             )
         }
     }
@@ -53,7 +62,7 @@ fun WelcomeScreen(onStart: () -> Unit, modifier: Modifier = Modifier) {
 /** Three avatars, one per module, each in its module's colors and a Material shape. */
 @Composable
 private fun ModuleShapes(modifier: Modifier = Modifier) {
-    Box(modifier.width(260.dp).height(240.dp)) {
+    Box(modifier.width(300.dp).height(250.dp)) {
         ModuleTheme(Seeds.FINANCE) {
             IconAvatar(
                 PrumoIcons.AccountBalanceWallet,

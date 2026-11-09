@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -197,10 +198,26 @@ private fun BalanceCard(overview: Overview, context: FinanceContext, onAccounts:
                 style = MaterialTheme.typography.bodySmall,
             )
         }
-        overview.accounts.forEach { balance ->
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Text(balance.account.name, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-                Text(context.money(balance.balanceCents), style = PrumoType.dataSmall)
+        // Board 01: each account's balance in a light block, the blocks 2 dp apart.
+        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            overview.accounts.forEach { balance ->
+                Surface(
+                    color = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                    shape = MaterialTheme.shapes.small,
+                ) {
+                    Row(
+                        Modifier.fillMaxWidth().padding(horizontal = Spacing.md, vertical = Spacing.md),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            balance.account.name,
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.weight(1f),
+                        )
+                        Text(context.money(balance.balanceCents), style = PrumoType.dataMedium)
+                    }
+                }
             }
         }
     }
@@ -210,7 +227,12 @@ private fun BalanceCard(overview: Overview, context: FinanceContext, onAccounts:
 private fun IncomeExpenseCard(overview: Overview, context: FinanceContext) {
     SectionCard(icon = PrumoIcons.CompareArrows, title = stringResource(R.string.finance_income_expense)) {
         Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-            KpiTile(context.money(overview.incomeCents), stringResource(R.string.finance_income), Modifier.weight(1f))
+            KpiTile(
+                context.money(overview.incomeCents),
+                stringResource(R.string.finance_income),
+                Modifier.weight(1f),
+                valueColor = PrumoTheme.extendedColors.success,
+            )
             KpiTile(
                 context.money(overview.expenseCents),
                 stringResource(R.string.finance_expenses),
@@ -219,21 +241,32 @@ private fun IncomeExpenseCard(overview: Overview, context: FinanceContext) {
         }
         val percent = overview.expensePercent
         if (percent != null) {
-            LinearWavyProgressIndicator(
+            LinearProgressIndicator(
                 progress = { percent.coerceIn(0, PERCENT) / PERCENT.toFloat() },
                 modifier = Modifier.fillMaxWidth(),
             )
-            Text(stringResource(R.string.finance_expense_share, percent), style = MaterialTheme.typography.bodyMedium)
-        } else {
-            Text(stringResource(R.string.finance_no_income), style = MaterialTheme.typography.bodyMedium)
         }
-        Text(
-            stringResource(
-                if (overview.resultCents >= 0) R.string.finance_result_left else R.string.finance_result_short,
-                context.money(kotlin.math.abs(overview.resultCents)),
-            ),
-            style = MaterialTheme.typography.titleSmall,
-        )
+        // Board 01: the share on the left, what is left (or short) on the right.
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+            Text(
+                if (percent != null) {
+                    stringResource(R.string.finance_expense_share, percent)
+                } else {
+                    stringResource(R.string.finance_no_income)
+                },
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f),
+            )
+            Text(
+                stringResource(
+                    if (overview.resultCents >= 0) R.string.finance_result_left else R.string.finance_result_short,
+                    context.money(kotlin.math.abs(overview.resultCents)),
+                ),
+                style = PrumoType.dataSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
     }
 }
 

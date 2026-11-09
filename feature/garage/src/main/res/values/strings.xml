@@ -12,6 +12,8 @@
     <string name="garage_action_oil_change_short">Troca de óleo</string>
 
     <string name="garage_card_until_oil_change">até a troca de óleo</string>
+    <string name="garage_card_until_oil_change_motorcycle">até a troca de óleo da %1$s</string>
+    <string name="garage_card_until_oil_change_car">até a troca de óleo do %1$s</string>
     <string name="garage_card_oil_overdue">Troca de óleo atrasada</string>
     <string name="garage_card_oil_unknown">Sem troca de óleo registrada</string>
     <string name="garage_card_no_vehicles">Nenhum veículo</string>
@@ -178,6 +180,7 @@
     <string name="garage_workshop_new_hint">Nova oficina: é cadastrada ao salvar.</string>
     <string name="garage_oil_type">Óleo utilizado</string>
     <string name="garage_next_change">Próxima troca</string>
+    <string name="garage_next_change_suggested">Sugerida pelo intervalo</string>
     <string name="garage_next_change_km">Por km</string>
     <string name="garage_next_change_date">Por data</string>
     <string name="garage_interval_note_both">A cada %1$s ou %2$s, como no cadastro do veículo. Pode editar só para esta troca.</string>
@@ -199,7 +202,7 @@
     <string name="garage_part_remove">Remover peça</string>
     <string name="garage_part_name_missing">Informe a peça.</string>
     <string name="garage_labor">Mão de obra</string>
-    <string name="garage_total_preview">Total calculado</string>
+    <string name="garage_total_preview">Total · calculado</string>
     <string name="garage_total_hint">Peças %1$s + mão de obra %2$s</string>
     <string name="garage_notes_placeholder">Algo que valha lembrar na próxima visita</string>
     <string name="garage_maintenance_save">Salvar manutenção</string>

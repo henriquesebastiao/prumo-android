@@ -200,6 +200,7 @@ internal fun AccountsTab(state: AccountsUiState, events: AccountsEvents, modifie
                         stringResource(R.string.finance_archived),
                         RowAction.Click(events.onArchived),
                         icon = PrumoIcons.Inventory2,
+                        neutral = true,
                     ),
                     index = 0,
                     count = 1,

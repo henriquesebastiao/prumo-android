@@ -20,6 +20,9 @@ keystore.properties
 # Python (scripts/)
 __pycache__/
 
+# Design boards rendered by scripts/render-design.mjs (regenerated at will)
+design/renders/
+
 # Local notes
 commit-message.md
 claude-session.md

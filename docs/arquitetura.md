@@ -72,7 +72,8 @@ Sem biblioteca para UUID v7 (`kotlin.uuid.Uuid.generateV7()`, da stdlib) nem par
 ## Ambiente
 
 - Gradle roda com JDK 17 ou 21. Na máquina do mantenedor, `JAVA_HOME=/usr/lib/jvm/java-17-openjdk` (o padrão do sistema é o 27, novo demais para o Gradle 9.8).
-- Android SDK em `~/Android/Sdk` (`sdk.dir` no `local.properties`, fora do git), com `platforms;android-37`, `build-tools;37.0.0` e `platform-tools`. Emulador `Pixel_9` com API 37.
+- Android SDK em `~/Android/Sdk` (`sdk.dir` no `local.properties`, fora do git), com `platforms;android-37`, `build-tools;37.0.0` e `platform-tools`. Emulador `Pixel_9` com API 37 (imagem com Play Store). Sem janela, ele precisa de `-skip-adb-auth`, ou o adb fica `unauthorized` sem diálogo para aceitar: `~/Android/Sdk/emulator/emulator -avd Pixel_9 -no-window -no-audio -no-snapshot-save -gpu swiftshader_indirect -skip-adb-auth`.
+- `ksp.incremental=false` (D17): o KSP incremental chegou a deixar o Hilt sem um `PrumoFeature`.
 - O CI (GitHub Actions) roda `./gradlew spotlessCheck detekt` e `./gradlew build` em cada pull request para a `main`.
 
 ## Camadas
@@ -179,4 +180,4 @@ interface PrumoFeature {
 
 Fluxos do teste real: servidor errado e certo, senha errada, login, Início, Configurações, sessão expirada (revogar a sessão do app pela web), servidor inacessível (parar a API), token cifrado (`adb shell run-as com.henriquesebastiao.prumo.debug cat files/datastore/session.preferences_pb`). Para dados iguais aos das pranchas, `backend/scripts/e2e_server.py` (D30 do servidor) na porta 8001.
 
-Comparação visual: `design/v1/` não tem PNGs. As pranchas são renderizadas a 412 × 915 com Playwright em `design/renders/v1/` (fora da `v1/`) e comparadas com capturas do `adb exec-out screencap`.
+Comparação visual: `design/v1/` não tem PNGs. `scripts/render-design.mjs` renderiza cada prancha numerada (2×, com a legenda) em `design/renders/v1/` (ignorado pelo git) com o Playwright da web do servidor; compare com `adb exec-out screencap -p` da mesma tela. Os dados das pranchas e do `e2e_server.py` são parecidos, não iguais (nomes, valores), e o relógio do servidor fica congelado em 17/11/2026 enquanto o do emulador é o real: registros com data de hoje no app podem dar `garage.odometer_inconsistent` contra leituras "futuras" do servidor, o que é a regra G3 funcionando.
