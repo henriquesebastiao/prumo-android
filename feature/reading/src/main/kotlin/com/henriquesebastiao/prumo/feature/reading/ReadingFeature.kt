@@ -9,9 +9,11 @@ import com.henriquesebastiao.prumo.core.designsystem.color.Seeds
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.feature.HomeContext
+import com.henriquesebastiao.prumo.core.feature.HomeEvent
 import com.henriquesebastiao.prumo.core.feature.Navigator
 import com.henriquesebastiao.prumo.core.feature.PrumoFeature
 import com.henriquesebastiao.prumo.core.feature.QuickAction
+import com.henriquesebastiao.prumo.core.model.ActivityItem
 import com.henriquesebastiao.prumo.core.network.decodeOrNull
 import com.henriquesebastiao.prumo.feature.reading.model.READING_MODULE_ID
 import com.henriquesebastiao.prumo.feature.reading.ui.BookDetailKey
@@ -85,6 +87,9 @@ class ReadingFeature @Inject constructor() : PrumoFeature {
     ) {
         ReadingHomeCard(decodeOrNull(ReadingSummaryDto.serializer(), summary), onOpen, modifier)
     }
+
+    @Composable
+    override fun activity(item: ActivityItem, context: HomeContext): HomeEvent? = readingActivity(item, context)
 
     /** A destination of the module, in its colors and with the covers at hand. */
     @Composable

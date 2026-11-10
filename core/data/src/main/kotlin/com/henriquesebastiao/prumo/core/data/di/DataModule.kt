@@ -7,9 +7,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.data.repository.DashboardRepository
+import com.henriquesebastiao.prumo.core.data.repository.DataExportRepository
 import com.henriquesebastiao.prumo.core.data.repository.DataStoreDevicePreferences
 import com.henriquesebastiao.prumo.core.data.repository.DefaultAccountRepository
 import com.henriquesebastiao.prumo.core.data.repository.DefaultDashboardRepository
+import com.henriquesebastiao.prumo.core.data.repository.DefaultDataExportRepository
 import com.henriquesebastiao.prumo.core.data.repository.DefaultServerRepository
 import com.henriquesebastiao.prumo.core.data.repository.DevicePreferencesRepository
 import com.henriquesebastiao.prumo.core.data.repository.ServerRepository
@@ -94,4 +96,7 @@ abstract class DataBindingsModule {
 
     @Binds
     abstract fun devicePreferences(impl: DataStoreDevicePreferences): DevicePreferencesRepository
+
+    @Binds
+    abstract fun dataExport(impl: DefaultDataExportRepository): DataExportRepository
 }

@@ -1,5 +1,7 @@
 package com.henriquesebastiao.prumo.system.settings
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,12 +10,15 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -25,6 +30,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.henriquesebastiao.prumo.BuildConfig
 import com.henriquesebastiao.prumo.R
+import com.henriquesebastiao.prumo.core.data.repository.ExportResult
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedList
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
@@ -35,6 +41,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.RowAction
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
 import com.henriquesebastiao.prumo.core.model.ThemeMode
+import com.henriquesebastiao.prumo.core.ui.errorText
 import com.henriquesebastiao.prumo.ui.PreviewData
 
 /** Where each entry of Settings leads. */
@@ -55,24 +62,55 @@ fun SettingsRoute(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) { viewModel.refresh() }
-    SettingsScreen(state, actions, onSignOut = viewModel::signOut, modifier = modifier)
+    // The system's file picker creates the document; the app only writes into it.
+    val createFile = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument(ZIP)) { uri ->
+        uri?.let(viewModel::export)
+    }
+    SettingsScreen(
+        state,
+        actions,
+        onSignOut = viewModel::signOut,
+        onExport = { createFile.launch(viewModel.exportFileName()) },
+        onExportResultShown = viewModel::exportResultShown,
+        modifier = modifier,
+    )
 }
 
-/** Settings, opened by the gear on the Home: the account on top, then the app, then "Sair". */
+/**
+ * Settings, opened by the gear on the Home: the account on top, then the app, the account's data
+ * ("Exportar dados", D20) and "Sair".
+ */
 @Composable
 fun SettingsScreen(
     state: SettingsUiState,
     actions: SettingsActions,
     onSignOut: () -> Unit,
+    onExport: () -> Unit,
+    onExportResultShown: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var confirmSignOut by rememberSaveable { mutableStateOf(false) }
     val scroll = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val snackbar = remember { SnackbarHostState() }
+    val result = state.exportResult
+    val message = when (result) {
+        ExportResult.Saved -> stringResource(R.string.settings_export_saved)
+        ExportResult.NotWritten -> stringResource(R.string.settings_export_not_written)
+        is ExportResult.Failed -> errorText(result.error, state.server)
+        null -> null
+    }
+    LaunchedEffect(result) {
+        if (message != null) {
+            snackbar.showSnackbar(message)
+            onExportResultShown()
+        }
+    }
     Scaffold(
         modifier.nestedScroll(scroll.nestedScrollConnection),
         topBar = {
             PrumoTopBar(stringResource(R.string.settings_title), actions.onBack, large = true, scrollBehavior = scroll)
         },
+        snackbarHost = { SnackbarHost(snackbar) },
     ) { padding ->
         LazyColumn(
             Modifier.fillMaxSize(),
@@ -99,6 +137,21 @@ fun SettingsScreen(
                 )
             }
             item { AppGroup(state, actions) }
+            item {
+                GroupedList(
+                    listOf(
+                        GroupedRow(
+                            title = stringResource(R.string.settings_export),
+                            action = RowAction.Click(onExport, chevron = false),
+                            summary = stringResource(
+                                if (state.exporting) R.string.settings_exporting else R.string.settings_export_summary,
+                            ),
+                            icon = PrumoIcons.Download,
+                            enabled = !state.exporting,
+                        ),
+                    ),
+                )
+            }
             item {
                 GroupedList(
                     listOf(
@@ -191,6 +244,14 @@ private fun AppGroup(state: SettingsUiState, actions: SettingsActions) {
 @Composable
 private fun SettingsPreview() {
     PrumoTheme(dynamicColor = false) {
-        SettingsScreen(PreviewData.settings, SettingsActions({}, {}, {}, {}, {}, {}), onSignOut = {})
+        SettingsScreen(
+            PreviewData.settings,
+            SettingsActions({}, {}, {}, {}, {}, {}),
+            onSignOut = {},
+            onExport = {},
+            onExportResultShown = {},
+        )
     }
 }
+
+private const val ZIP = "application/zip"

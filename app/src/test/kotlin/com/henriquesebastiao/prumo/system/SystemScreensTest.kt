@@ -1,25 +1,35 @@
 package com.henriquesebastiao.prumo.system
 
 import android.app.Application
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.hasScrollToKeyAction
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToKey
+import androidx.navigation3.runtime.NavKey
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.henriquesebastiao.prumo.core.data.repository.ExportResult
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.core.model.ErrorCodes
 import com.henriquesebastiao.prumo.core.model.ServerCheck
+import com.henriquesebastiao.prumo.feature.garage.ui.VehicleDetail
 import com.henriquesebastiao.prumo.system.home.HomeScreen
 import com.henriquesebastiao.prumo.system.onboarding.LoginScreen
 import com.henriquesebastiao.prumo.system.onboarding.LoginUiState
 import com.henriquesebastiao.prumo.system.onboarding.ServerScreen
 import com.henriquesebastiao.prumo.system.onboarding.ServerUiState
+import com.henriquesebastiao.prumo.system.settings.SettingsActions
+import com.henriquesebastiao.prumo.system.settings.SettingsScreen
 import com.henriquesebastiao.prumo.ui.PreviewData
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -44,6 +54,7 @@ class SystemScreensTest {
                     state = PreviewData.home,
                     onRefresh = {},
                     onOpenModule = { opened = it.id },
+                    onOpen = {},
                     onAction = {},
                     onTogglePinned = {},
                     onSettings = { settings++ },
@@ -60,6 +71,62 @@ class SystemScreensTest {
         assertEquals(1, settings)
         compose.onNodeWithContentDescription("Abrir Finanças").performClick()
         assertEquals("finance", opened)
+    }
+
+    @Test
+    fun theHomeListsWhatIsDueAndWhatWasRecordedAndOpensThem() {
+        var opened: NavKey? = null
+        compose.setContent {
+            PrumoTheme(dynamicColor = false) {
+                HomeScreen(
+                    state = PreviewData.home,
+                    onRefresh = {},
+                    onOpenModule = {},
+                    onOpen = { opened = it },
+                    onAction = {},
+                    onTogglePinned = {},
+                    onSettings = {},
+                    onOrganizeModules = {},
+                    onSignIn = {},
+                )
+            }
+        }
+        compose.onNode(hasScrollToKeyAction()).performScrollToKey("events")
+        compose.onNodeWithText("Vem aí").assertIsDisplayed()
+        compose.onNodeWithText("Estimativa pelo ritmo de 29 km/dia").assertIsDisplayed()
+        compose.onNodeWithText("Atividade recente").assertIsDisplayed()
+        // The user's today (02/11) in São Paulo: 11:12 UTC is 08:12.
+        compose.onNodeWithText("Hoje, 08:12 · 7,3 L").assertIsDisplayed()
+        compose.onNodeWithText("Supermercado · Alimentação").assertIsDisplayed()
+        compose.onNodeWithText("Ontem, 11:25 · Nubank").assertIsDisplayed()
+        compose.onNodeWithText("Troca de óleo · Honda CG 160 Fan").performClick()
+        assertEquals(VehicleDetail("1"), opened)
+    }
+
+    @Test
+    fun exportingTheDataShowsItsProgressAndItsResult() {
+        var exported = 0
+        var state by mutableStateOf(PreviewData.settings)
+        compose.setContent {
+            PrumoTheme(dynamicColor = false) {
+                SettingsScreen(
+                    state = state,
+                    actions = SettingsActions({}, {}, {}, {}, {}, {}),
+                    onSignOut = {},
+                    onExport = { exported++ },
+                    onExportResultShown = {},
+                )
+            }
+        }
+        compose.onNodeWithText("Exportar dados").performClick()
+        assertEquals(1, exported)
+
+        state = state.copy(exporting = true)
+        compose.onNodeWithText("Preparando o arquivo…").assertIsDisplayed()
+        compose.onNodeWithText("Exportar dados").assertIsNotEnabled()
+
+        state = state.copy(exporting = false, exportResult = ExportResult.Saved)
+        compose.onNodeWithText("Dados exportados").assertIsDisplayed()
     }
 
     @Test

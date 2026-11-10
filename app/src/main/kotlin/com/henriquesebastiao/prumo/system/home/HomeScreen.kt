@@ -42,14 +42,26 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.NavKey
 import com.henriquesebastiao.prumo.R
+import com.henriquesebastiao.prumo.core.designsystem.component.DateBadge
 import com.henriquesebastiao.prumo.core.designsystem.component.EmptyState
+import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
+import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.HeroHeader
+import com.henriquesebastiao.prumo.core.designsystem.component.IconAvatar
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
+import com.henriquesebastiao.prumo.core.designsystem.component.RowAction
+import com.henriquesebastiao.prumo.core.designsystem.component.SectionHeader
 import com.henriquesebastiao.prumo.core.designsystem.component.Tag
+import com.henriquesebastiao.prumo.core.designsystem.theme.ListStyle
+import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
+import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoType
 import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
+import com.henriquesebastiao.prumo.core.feature.HomeContext
+import com.henriquesebastiao.prumo.core.feature.HomeEvent
 import com.henriquesebastiao.prumo.core.feature.PrumoFeature
 import com.henriquesebastiao.prumo.core.feature.QuickAction
 import com.henriquesebastiao.prumo.core.model.DayPart
@@ -58,10 +70,12 @@ import com.henriquesebastiao.prumo.core.ui.ErrorState
 import com.henriquesebastiao.prumo.core.ui.LoadingState
 import com.henriquesebastiao.prumo.core.ui.ServerUnreachableCard
 import com.henriquesebastiao.prumo.ui.PreviewData
+import java.time.YearMonth
 
 @Composable
 fun HomeRoute(
     onOpenModule: (PrumoFeature) -> Unit,
+    onOpen: (NavKey) -> Unit,
     onAction: (QuickAction) -> Unit,
     onSettings: () -> Unit,
     onOrganizeModules: () -> Unit,
@@ -76,6 +90,7 @@ fun HomeRoute(
         state = state,
         onRefresh = viewModel::refresh,
         onOpenModule = onOpenModule,
+        onOpen = onOpen,
         onAction = onAction,
         onTogglePinned = viewModel::togglePinned,
         onSettings = onSettings,
@@ -87,14 +102,15 @@ fun HomeRoute(
 
 /**
  * The root of the app on phones: the greeting, one card per enabled module in the user's order
- * (the first one is the hero, D08) and the floating toolbar with the four pinned actions; its FAB
- * opens "Todas as ações".
+ * (the first one is the hero, D08), "Vem aí" and "Atividade recente" (D20) and the floating toolbar
+ * with the four pinned actions; its FAB opens "Todas as ações". [onOpen] opens an item of the lists.
  */
 @Composable
 fun HomeScreen(
     state: HomeUiState,
     onRefresh: () -> Unit,
     onOpenModule: (PrumoFeature) -> Unit,
+    onOpen: (NavKey) -> Unit,
     onAction: (QuickAction) -> Unit,
     onTogglePinned: (String) -> Unit,
     onSettings: () -> Unit,
@@ -127,7 +143,7 @@ fun HomeScreen(
                         onRefresh = onRefresh,
                         modifier = Modifier.weight(1f),
                     ) {
-                        Cards(state, onOpenModule, onOrganizeModules, onRefresh)
+                        Cards(state, onOpenModule, onOpen, onOrganizeModules, onRefresh)
                     }
                 }
             }
@@ -204,6 +220,7 @@ private fun TopRow(sync: SyncStatus, onSettings: () -> Unit, onSignIn: () -> Uni
 private fun Cards(
     state: HomeUiState,
     onOpenModule: (PrumoFeature) -> Unit,
+    onOpen: (NavKey) -> Unit,
     onOrganizeModules: () -> Unit,
     onRetry: () -> Unit,
 ) {
@@ -258,16 +275,103 @@ private fun Cards(
                 if (row.size == 1) Spacer(Modifier.weight(1f))
             }
         }
-        item(key = "organize") {
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                TextButton(onClick = onOrganizeModules) {
-                    Icon(painterResource(PrumoIcons.Tune), contentDescription = null)
-                    Spacer(Modifier.padding(start = Spacing.sm))
-                    Text(stringResource(R.string.home_organize_modules))
+        // One item: a list whose kinds no module knows draws nothing, and leaves no gap.
+        item(key = "events") {
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
+                Upcoming(state.upcoming, state.context, onOpen)
+                Activity(state.activity, state.context, onOpen)
+                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    TextButton(onClick = onOrganizeModules) {
+                        Icon(painterResource(PrumoIcons.Tune), contentDescription = null)
+                        Spacer(Modifier.padding(start = Spacing.sm))
+                        Text(stringResource(R.string.home_organize_modules))
+                    }
                 }
             }
         }
     }
+}
+
+/** "Vem aí": the first items the modules describe, by date (D20), each with its day. */
+@Composable
+private fun Upcoming(entries: List<HomeUpcoming>, context: HomeContext, onOpen: (NavKey) -> Unit) {
+    val rows = entries.mapNotNull { entry ->
+        entry.feature.upcoming(entry.item, context)?.let { event -> entry to event }
+    }.take(EVENTS_SHOWN)
+    if (rows.isEmpty()) return
+    EventList(stringResource(R.string.home_upcoming)) {
+        rows.forEachIndexed { index, (entry, event) ->
+            val on = entry.item.on
+            EventRow(event, index, rows.size, onOpen) {
+                ModuleTheme(entry.feature.seed) {
+                    DateBadge(on.dayOfMonth.toString(), Formats.shortMonth(YearMonth.from(on)))
+                }
+            }
+        }
+    }
+}
+
+/** "Atividade recente": the newest records the modules describe (D20), each in its module's colors. */
+@Composable
+private fun Activity(entries: List<HomeActivity>, context: HomeContext, onOpen: (NavKey) -> Unit) {
+    val rows = entries.mapNotNull { entry ->
+        entry.feature.activity(entry.item, context)?.let { event -> entry to event }
+    }.take(EVENTS_SHOWN)
+    if (rows.isEmpty()) return
+    EventList(stringResource(R.string.home_activity)) {
+        rows.forEachIndexed { index, (entry, event) ->
+            EventRow(event, index, rows.size, onOpen) {
+                ModuleTheme(entry.feature.seed) { IconAvatar(event.icon ?: entry.feature.icon) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun EventList(title: String, rows: @Composable () -> Unit) {
+    Column {
+        SectionHeader(title)
+        Column(verticalArrangement = Arrangement.spacedBy(ListStyle.Segmented.gap)) { rows() }
+    }
+}
+
+/** A line of the Home's lists: tapping it opens its [HomeEvent.target], when it has one. */
+@Composable
+private fun EventRow(
+    event: HomeEvent,
+    index: Int,
+    count: Int,
+    onOpen: (NavKey) -> Unit,
+    leading: @Composable () -> Unit,
+) {
+    val value: (@Composable () -> Unit)? = event.value?.let { text ->
+        {
+            Text(
+                text,
+                style = PrumoType.dataSmall,
+                color = if (event.positive) {
+                    PrumoTheme.extendedColors.success
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                },
+            )
+        }
+    }
+    val target = event.target
+    GroupedListItem(
+        GroupedRow(
+            title = event.title,
+            summary = event.subtitle,
+            action = if (target != null) {
+                RowAction.Click({ onOpen(target) }, chevron = false, trailing = value)
+            } else {
+                RowAction.Static(value)
+            },
+            leading = leading,
+        ),
+        index,
+        count,
+    )
 }
 
 @Composable
@@ -312,6 +416,9 @@ private fun greeting(part: DayPart): String = stringResource(
 // The list scrolls clear of the floating toolbar (64 dp + its margin).
 private val TOOLBAR_CLEARANCE = 112.dp
 
+/** Items shown in each of the Home's lists, as on the web (the server sends up to ten). */
+private const val EVENTS_SHOWN = 4
+
 @PhonePreviews
 @Composable
 private fun HomePreview() {
@@ -320,6 +427,7 @@ private fun HomePreview() {
             state = PreviewData.home,
             onRefresh = {},
             onOpenModule = {},
+            onOpen = {},
             onAction = {},
             onTogglePinned = {},
             onSettings = {},

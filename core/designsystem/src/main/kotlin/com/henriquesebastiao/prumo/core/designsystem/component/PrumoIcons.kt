@@ -29,6 +29,8 @@ object PrumoIcons {
 
     @DrawableRes val BarChart = R.drawable.ic_bar_chart
 
+    @DrawableRes val Bookmark = R.drawable.ic_bookmark
+
     @DrawableRes val BrightnessAuto = R.drawable.ic_brightness_auto
 
     @DrawableRes val Build = R.drawable.ic_build
@@ -88,6 +90,8 @@ object PrumoIcons {
     @DrawableRes val DoNotDisturbOnFilled = R.drawable.ic_do_not_disturb_on_filled
 
     @DrawableRes val DoneAll = R.drawable.ic_done_all
+
+    @DrawableRes val Download = R.drawable.ic_download
 
     @DrawableRes val DonutSmall = R.drawable.ic_donut_small
 

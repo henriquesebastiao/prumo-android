@@ -182,10 +182,10 @@ Mesmos endpoints das telas de celular. Detalhe da transação no tablet: `GET /f
 
 ## 7. O que a API oferece e o design não mostra
 
-- **Sistema**: "Vem aí" e "Atividade recente" do `GET /dashboard` (D28); exportação dos dados (`GET /me/export`); fuso e moeda nas preferências; login bloqueado (`429` com `Retry-After`).
+- **Sistema**: "Vem aí" e "Atividade recente" do `GET /dashboard` (D28); exportação dos dados (`GET /me/export`); fuso e moeda nas preferências; login bloqueado (`429` com `Retry-After`). As listas do Início e a exportação foram compostas sem prancha (D20 de `docs/decisoes.md`).
 - **Finanças**: formulário de cartão (novo e editar) e de receita; compra parcelada (`installments`, exclusão `?installments=all`); detalhe, edição e exclusão de transação no celular; detalhe e edição de conta; ajuste de saldo (F11); excluir categoria, conta ou cartão sem uso; listas de arquivados (contas, cartões; categorias só mostra a entrada "Arquivadas"); série de 6 meses e receitas por categoria na visão geral (F12); conta fora do total (`include_in_total`) só citada em texto.
 - **Veículos**: combustível habitual (`fuel_type`) e observações no cadastro; óleo utilizado (`oil_type`) e sugestões (`previous_oil_types`); ritmo de uso e data estimada (`pace_km_per_day`, `estimated_km_on`); km do mês e histórico de consumo (`recent_consumption`); detalhe e edição de abastecimento; exclusão de leitura manual; listas entre veículos (`/garage/maintenances`, `/garage/fuelings`); gestão de oficinas; arquivados; resumo do mês (`/garage/overview`); veículo sem intervalo de óleo (`oil_change: null`).
-- **Livros**: ritmo e previsão de término (R7, R8); páginas por semana (R9, `BookDetail`); todas as anotações com busca (`GET /reading/notes`); editar e excluir anotação e livro; remover capa; busca por título e autor (o ícone existe, a tela não); contagens da estante (`/reading/overview`).
+- **Livros**: ritmo e previsão de término (R7, R8); páginas por semana (R9, `BookDetail`); todas as anotações com busca (`GET /reading/notes`); editar e excluir anotação e livro; remover capa; busca por título e autor (o ícone existe, a tela não); contagens da estante (`/reading/overview`); "Não tenho" e o ano dos lidos (D20).
 
 ## 8. Conflitos entre o design e `docs/dominio.md`
 

@@ -141,9 +141,19 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 - Sem capa, o app desenha uma com título e autor (R6), na cor do status (lendo em primary, quero ler em secondary, lido em tertiary), em vez do só-ícone das pranchas; a capa pequena do herói só tem espaço para o título e o autor abreviado.
 - A capa vem pela rota autenticada com o Coil 3 sobre o `OkHttpClient` da sessão (`@ApiClient`, com o bearer) e com `?v=<cover_updated_at>` no endereço, para a cache trocar junto com a capa. A foto da câmera (`TakePicture` num `FileProvider` próprio, `CoverFileProvider`) ou da galeria (`PickVisualMedia`) vai como está quando é JPEG, PNG ou WebP de até 5 MB; senão o app a reduz a 1600 px, endireita pelo EXIF e manda em JPEG. Reduzir a 800 px e regravar em WebP continua no servidor (D36 de lá). Se o livro salva e a capa não, o formulário fica aberto com o motivo e o próximo "Salvar" edita o livro já criado.
 - A data da anotação (`noted_on`, D35 de lá) é uma tag "Hoje" na folha, que abre o seletor de data; uma anotação nova sem data trocada vai sem `noted_on` e o servidor a data no fuso do usuário. A edição manda a data só quando há uma (o `PATCH` recusa `null`).
-- Estante: os filtros de status são exclusivos e "Tenho" combina com qualquer um (prancha 01). A ordem segue o menu da web (mais recentes, título, autor), pelo `sort` do servidor. Ficam de fora, por ora, o "Não tenho" e o ano dos lidos da web.
+- Estante: os filtros de status são exclusivos e "Tenho" combina com qualquer um (prancha 01). A ordem segue o menu da web (mais recentes, título, autor), pelo `sort` do servidor. O "Não tenho" e o ano dos lidos vieram depois (D20).
 - Excluir livro e anotação pedem confirmação; "Remover capa" remove na hora (a capa pode ser escolhida de novo).
 **Consequências:** a única dependência nova é o Coil, já prevista em `docs/arquitetura.md`. Nenhuma mudança no servidor nesta fase.
+
+## D20 — Paridade sem prancha: "Vem aí", "Atividade recente", exportação e a estante da web
+**Status:** aceita · 2026-11
+**Contexto:** a web já mostra os itens `upcoming` e `activity` do `GET /dashboard` (D28 do servidor), exporta os dados (`GET /me/export`, D38 de lá) e filtra a estante por "Não tenho" e pelo ano dos lidos. O design v1 não tem prancha para nada disso, e a fatura de "Vem aí" mostrava "faltam R$ …" subtraindo `paid_cents` de `amount_cents` na web.
+**Decisão:**
+- Cada `PrumoFeature` descreve os seus `kind` (`upcoming` e `activity`, funções `@Composable` que devolvem um `HomeEvent` com título, linha de apoio, valor, ícone e destino), com os textos da web; um `kind` que o módulo não conhece é pulado. O Início mostra, depois dos cards, até 4 itens de cada lista (como a web) num grupo segmentado: "Vem aí" com o dia num `DateBadge` e "Atividade recente" com o ícone, os dois nas cores do módulo; tocar abre o veículo, a manutenção, o cartão, a transação ou o livro. Datas relativas ("Hoje, 08:12", "Ontem", "15/11") no fuso e no "hoje" da preferência (S3), por `relativeDateTime` de `:core:ui`.
+- Nenhum valor é calculado no app: o servidor passou a mandar `remaining_cents` em `finance.invoice_due` (mudança aditiva; a web também o usa). Contra um servidor anterior, a linha mostra o valor da fatura.
+- Exportação: Configurações → "Exportar dados" abre o seletor de arquivos do Android (`ACTION_CREATE_DOCUMENT`) com o nome do servidor (`prumo-<usuário>-<AAAAMMDD-HHMM>.zip`, no fuso do usuário). O app baixa o `.zip` pela sessão para o cache e copia para o arquivo escolhido; se o servidor falha, o arquivo vazio é apagado e o snackbar diz o motivo pelo `code`. Sem permissão de armazenamento.
+- Estante: "Tenho" e "Não tenho" são exclusivos entre si (o mesmo de novo mostra os dois) e combinam com qualquer status. Com "Lidos", um chip com menu escolhe o ano (`finished_on`): começa no mais recente, como a web, e tem "Todos os anos". O filtro de ano é sobre a estante inteira que já veio (até 200 livros, como a web), sem nova requisição.
+**Consequências:** um módulo novo pode publicar itens no Início sem mudar o `:app`. Os itens do Início só existem com rede até a Fase 4 (cache).
 
 ---
 

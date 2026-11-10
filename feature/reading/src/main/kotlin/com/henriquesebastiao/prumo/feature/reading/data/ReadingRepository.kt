@@ -99,7 +99,7 @@ class DefaultReadingRepository @Inject constructor(
     override suspend fun books(filter: ShelfFilter, offset: Int) = api {
         books(
             status = filter.status?.wire,
-            owned = if (filter.owned) true else null,
+            owned = filter.owned,
             query = filter.query.trim().ifEmpty { null },
             sort = filter.order.sort,
             limit = ReadingRepository.ALL,

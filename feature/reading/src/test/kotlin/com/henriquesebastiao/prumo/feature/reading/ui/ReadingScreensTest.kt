@@ -43,7 +43,7 @@ class ReadingScreensTest {
             ShelfScreen(
                 state = ShelfUiState(loading = false, books = PreviewBooks.shelf),
                 onBack = {},
-                events = ShelfEvents({ opened = it.id }, {}, {}, {}, {}, {}, {}, {}),
+                events = ShelfEvents({ opened = it.id }, {}, {}, {}, {}, {}, {}, {}, {}),
                 actions = noActions,
             )
         }
@@ -63,7 +63,7 @@ class ReadingScreensTest {
             ShelfScreen(
                 state = ShelfUiState(loading = false),
                 onBack = {},
-                events = ShelfEvents({}, { added++ }, {}, {}, {}, {}, {}, {}),
+                events = ShelfEvents({}, { added++ }, {}, {}, {}, {}, {}, {}, {}),
                 actions = noActions,
             )
         }
@@ -72,6 +72,41 @@ class ReadingScreensTest {
         compose.onNodeWithContentDescription("Buscar livro").assertDoesNotExist()
         compose.onNodeWithText("Adicionar livro").performClick()
         assertEquals(1, added)
+    }
+
+    @Test
+    fun theReadShowTheirYearAndNotOwningIsAFilter() {
+        var year: ReadYear? = null
+        var owned: Boolean? = null
+        val read =
+            listOf(
+                PreviewBooks.domCasmurro,
+                PreviewBooks.domCasmurro.copy(
+                    id = "b9",
+                    title = "Memórias Póstumas",
+                    finishedOn = java.time.LocalDate.of(2025, 3, 2),
+                ),
+            )
+        show {
+            ShelfScreen(
+                state = ShelfUiState(
+                    loading = false,
+                    books = read,
+                    filter = com.henriquesebastiao.prumo.feature.reading.model.ShelfFilter(status = BookStatus.Read),
+                ),
+                onBack = {},
+                events = ShelfEvents({}, {}, {}, {}, { owned = it }, { year = it }, {}, {}, {}),
+                actions = noActions,
+            )
+        }
+        compose.onNodeWithText("Dom Casmurro").assertIsDisplayed()
+        compose.onNodeWithText("Memórias Póstumas").assertDoesNotExist()
+        compose.onNodeWithText("1 livro").assertIsDisplayed()
+        compose.onNodeWithContentDescription("Ano dos lidos: 2026").performClick()
+        compose.onNodeWithText("2025").performClick()
+        assertEquals(ReadYear.Of(2025), year)
+        compose.onNodeWithText("Não tenho").performClick()
+        assertEquals(false, owned)
     }
 
     @Test

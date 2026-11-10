@@ -1,8 +1,11 @@
 package com.henriquesebastiao.prumo.core.testing
 
+import android.net.Uri
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.data.repository.DashboardRepository
+import com.henriquesebastiao.prumo.core.data.repository.DataExportRepository
 import com.henriquesebastiao.prumo.core.data.repository.DevicePreferencesRepository
+import com.henriquesebastiao.prumo.core.data.repository.ExportResult
 import com.henriquesebastiao.prumo.core.data.repository.LoadedDashboard
 import com.henriquesebastiao.prumo.core.data.repository.ServerRepository
 import com.henriquesebastiao.prumo.core.data.session.Session
@@ -142,6 +145,15 @@ class FakeDashboardRepository(var dashboard: Dashboard = Dashboard(emptyList(), 
 
     override fun clear() {
         mutableLast.value = null
+    }
+}
+
+class FakeDataExportRepository(var result: ExportResult = ExportResult.Saved) : DataExportRepository {
+    val exported = mutableListOf<Uri>()
+
+    override suspend fun export(target: Uri): ExportResult {
+        exported += target
+        return result
     }
 }
 

@@ -49,6 +49,7 @@
     <!-- Fields -->
     <string name="ui_today_at">Hoje, %1$s</string>
     <string name="ui_today">Hoje</string>
+    <string name="ui_yesterday">Ontem</string>
     <string name="ui_date_at">%1$s, %2$s</string>
     <string name="ui_pick_time">Horário</string>
     <string name="ui_ok">OK</string>

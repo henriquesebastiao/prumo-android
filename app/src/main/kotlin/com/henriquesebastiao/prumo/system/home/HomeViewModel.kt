@@ -13,11 +13,13 @@ import com.henriquesebastiao.prumo.core.data.session.SignOutReason
 import com.henriquesebastiao.prumo.core.feature.HomeContext
 import com.henriquesebastiao.prumo.core.feature.PrumoFeature
 import com.henriquesebastiao.prumo.core.feature.QuickAction
+import com.henriquesebastiao.prumo.core.model.ActivityItem
 import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.core.model.DayPart
 import com.henriquesebastiao.prumo.core.model.DevicePreferences
 import com.henriquesebastiao.prumo.core.model.Preferences
 import com.henriquesebastiao.prumo.core.model.ServerAddress
+import com.henriquesebastiao.prumo.core.model.UpcomingItem
 import com.henriquesebastiao.prumo.core.model.errorOrNull
 import com.henriquesebastiao.prumo.system.ModuleRegistry
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,6 +38,12 @@ import kotlinx.serialization.json.JsonObject
 /** A module's card on the Home: its feature and its summary from `GET /dashboard`. */
 data class HomeModuleCard(val feature: PrumoFeature, val summary: JsonObject?)
 
+/** An item of "Vem aí" and the module that writes it (D20). */
+data class HomeUpcoming(val feature: PrumoFeature, val item: UpcomingItem)
+
+/** An item of "Atividade recente" and the module that writes it (D20). */
+data class HomeActivity(val feature: PrumoFeature, val item: ActivityItem)
+
 /** A module's actions in "Todas as ações". */
 data class ActionGroup(val feature: PrumoFeature, val actions: List<QuickAction>)
 
@@ -49,6 +57,9 @@ data class HomeUiState(
     val greeting: DayPart = DayPart.Afternoon,
     val date: LocalDate? = null,
     val cards: List<HomeModuleCard> = emptyList(),
+    /** What is due soon and what was recorded lately, of the enabled modules the app knows. */
+    val upcoming: List<HomeUpcoming> = emptyList(),
+    val activity: List<HomeActivity> = emptyList(),
     val context: HomeContext = HomeContext("BRL", LocalDate.MIN),
     val pinned: List<QuickAction> = emptyList(),
     val groups: List<ActionGroup> = emptyList(),
@@ -115,6 +126,7 @@ class HomeViewModel @Inject constructor(
         val zone = (prefs ?: Preferences.Default).zone
         val features = registry.enabled(prefs?.enabledModules.orEmpty())
         val summaries = last?.dashboard?.summaries.orEmpty().associate { it.module to it.json }
+        val byId = features.associateBy { it.id }
         val groups = features.map { ActionGroup(it, it.quickActions) }.filter { it.actions.isNotEmpty() }
         val signedIn = session as? SessionState.SignedIn
         val expired = (session as? SessionState.SignedOut)?.reason == SignOutReason.Expired
@@ -125,7 +137,17 @@ class HomeViewModel @Inject constructor(
             greeting = DayPart.of(now.atZone(zone).hour),
             date = prefs?.today(now) ?: now.atZone(zone).toLocalDate(),
             cards = features.map { HomeModuleCard(it, summaries[it.id]) },
-            context = HomeContext(prefs?.currency ?: Preferences.Default.currency, now.atZone(zone).toLocalDate()),
+            upcoming = last?.dashboard?.upcoming.orEmpty().mapNotNull { item ->
+                byId[item.module]?.let { HomeUpcoming(it, item) }
+            },
+            activity = last?.dashboard?.activity.orEmpty().mapNotNull { item ->
+                byId[item.module]?.let { HomeActivity(it, item) }
+            },
+            context = HomeContext(
+                currency = prefs?.currency ?: Preferences.Default.currency,
+                today = now.atZone(zone).toLocalDate(),
+                zone = zone,
+            ),
             pinned = pinned(groups, device.pinnedActions),
             groups = groups,
             loadedAt = last?.loadedAt?.atZone(zone)?.toLocalTime(),

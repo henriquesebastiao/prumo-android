@@ -1,11 +1,13 @@
 package com.henriquesebastiao.prumo.system.home
 
 import com.henriquesebastiao.prumo.core.data.repository.DataChanges
+import com.henriquesebastiao.prumo.core.model.ActivityItem
 import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.core.model.Dashboard
 import com.henriquesebastiao.prumo.core.model.DayPart
 import com.henriquesebastiao.prumo.core.model.ModuleSummary
 import com.henriquesebastiao.prumo.core.model.UnreachableCause
+import com.henriquesebastiao.prumo.core.model.UpcomingItem
 import com.henriquesebastiao.prumo.core.testing.FakeAccountRepository
 import com.henriquesebastiao.prumo.core.testing.FakeDashboardRepository
 import com.henriquesebastiao.prumo.core.testing.FakeDevicePreferences
@@ -18,6 +20,7 @@ import com.henriquesebastiao.prumo.system.ModuleRegistry
 import java.time.Clock
 import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.ZoneOffset
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -132,5 +135,30 @@ class HomeViewModelTest {
 
         val garage = vm.state.first { state -> state.cards.any { it.feature.id == "garage" && it.summary != null } }
         assertEquals("garage", garage.cards[1].feature.id)
+    }
+
+    @Test
+    fun theListsKeepTheItemsOfTheEnabledModulesTheAppKnows() = runTest {
+        val account = FakeAccountRepository()
+        account.setEnabledModules(listOf("finance", "reading", "health"))
+        fun upcoming(module: String) =
+            UpcomingItem(module, "$module.x", LocalDate.of(2026, 11, 20), "s", null, emptyMap())
+        fun activity(module: String) =
+            ActivityItem(module, "$module.x", Instant.parse("2026-11-17T10:00:00Z"), "s", null, emptyMap())
+        val dashboard = FakeDashboardRepository(
+            Dashboard(
+                listOf(summary("finance")),
+                listOf(upcoming("garage"), upcoming("finance"), upcoming("health")),
+                listOf(activity("reading"), activity("garage"), activity("finance")),
+            ),
+        )
+        val vm = viewModel(account, dashboard)
+        backgroundScope.launch { vm.state.collect {} }
+        vm.refresh()
+
+        val state = vm.state.first { !it.loading }
+        assertEquals(listOf("finance"), state.upcoming.map { it.feature.id })
+        assertEquals(listOf("reading", "finance"), state.activity.map { it.feature.id })
+        assertEquals(ZoneId.of("America/Sao_Paulo"), state.context.zone)
     }
 }

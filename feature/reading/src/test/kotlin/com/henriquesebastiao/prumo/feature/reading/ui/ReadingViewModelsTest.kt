@@ -46,7 +46,7 @@ class ReadingViewModelsTest {
         val vm = ShelfViewModel(repository)
 
         vm.selectStatus(BookStatus.Read)
-        vm.toggleOwned()
+        vm.selectOwned(true)
         assertEquals(ShelfFilter(status = BookStatus.Read, owned = true), repository.filters.last())
 
         vm.selectStatus(BookStatus.WantToRead)
@@ -54,7 +54,43 @@ class ReadingViewModelsTest {
 
         vm.selectStatus(BookStatus.WantToRead)
         assertNull(repository.filters.last().status)
-        assertTrue(repository.filters.last().owned)
+        assertEquals(true, repository.filters.last().owned)
+
+        // "Não tenho" takes the place of "Tenho"; the chosen one again shows both.
+        vm.selectOwned(false)
+        assertEquals(false, repository.filters.last().owned)
+        assertEquals(listOf("O Hobbit"), vm.state.value.books.map { it.title })
+        vm.selectOwned(false)
+        assertNull(repository.filters.last().owned)
+    }
+
+    @Test
+    fun theReadShowOneYearAtATimeFromTheLatest() = runTest {
+        val older = PreviewBooks.domCasmurro.copy(
+            id = "b9",
+            title = "Memórias Póstumas",
+            finishedOn = LocalDate.of(2025, 3, 2),
+        )
+        repository.books = listOf(cleanCode, PreviewBooks.domCasmurro, older)
+        val vm = ShelfViewModel(repository)
+        assertEquals(emptyList<Int>(), vm.state.value.readYears)
+
+        vm.selectStatus(BookStatus.Read)
+        assertEquals(listOf(2026, 2025), vm.state.value.readYears)
+        assertEquals(listOf("Dom Casmurro"), vm.state.value.shown.map { it.title })
+
+        val asked = repository.filters.size
+        vm.selectYear(ReadYear.Of(2025))
+        assertEquals(listOf("Memórias Póstumas"), vm.state.value.shown.map { it.title })
+        vm.selectYear(ReadYear.All)
+        assertEquals(2, vm.state.value.shown.size)
+        assertEquals(asked, repository.filters.size)
+
+        // Another status shows every book it got, and "Lidos" again starts from the latest year.
+        vm.selectStatus(BookStatus.Read)
+        assertEquals(3, vm.state.value.shown.size)
+        vm.selectStatus(BookStatus.Read)
+        assertEquals(2026, vm.state.value.shownYear)
     }
 
     @Test
@@ -87,7 +123,7 @@ class ReadingViewModelsTest {
         val vm = ShelfViewModel(repository)
         assertTrue(vm.state.value.emptyShelf)
 
-        vm.toggleOwned()
+        vm.selectOwned(true)
         assertFalse(vm.state.value.emptyShelf)
     }
 

@@ -39,6 +39,16 @@
     <string name="garage_load_more">Carregar mais</string>
     <string name="garage_none">—</string>
     <string name="garage_join">%1$s · %2$s</string>
+
+    <!-- The Home's lists (the web's garage.events) -->
+    <string name="garage_event_oil_change">Troca de óleo · %1$s</string>
+    <string name="garage_event_by_pace">Estimativa pelo ritmo de %1$s km/dia</string>
+    <string name="garage_event_by_date">Vence por data (%1$s)</string>
+    <string name="garage_event_by_date_plain">Vence por data</string>
+    <string name="garage_event_overdue">Atrasada</string>
+    <string name="garage_event_odometer">Km atualizado · %1$s</string>
+    <string name="garage_event_fueling">Abastecimento · %1$s</string>
+    <string name="garage_event_maintenance">Manutenção · %1$s</string>
     <string name="garage_brand_model">%1$s %2$s</string>
     <string name="garage_today_at">hoje, %1$s</string>
     <string name="garage_yesterday_at">ontem, %1$s</string>

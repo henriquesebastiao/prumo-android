@@ -147,6 +147,25 @@ fun IconAvatar(
     }
 }
 
+/**
+ * A day as a list row's leading badge ("Vem aí" on the Home): the [day] of the month over its
+ * [month] in three letters, in the primary container, the size of an [IconAvatar] row.
+ */
+@Composable
+fun DateBadge(day: String, month: String, modifier: Modifier = Modifier) {
+    val content = MaterialTheme.colorScheme.onPrimaryContainer
+    Column(
+        modifier
+            .size(width = 44.dp, height = 48.dp)
+            .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(day, style = PrumoType.dataMedium.copy(fontSize = 18.sp, lineHeight = 22.sp), color = content)
+        Text(month, style = MaterialTheme.typography.labelSmall, color = content)
+    }
+}
+
 /** A [SectionCard]'s container and its content color, when the tone has one of its own. */
 @Composable
 private fun SectionTone.colors(): Pair<Color, Color?> {
@@ -231,6 +250,11 @@ private fun ContainersPreview() {
                     }
                 }
                 SectionCard(icon = PrumoIcons.Dns, title = "prumo.minhacasa.net", onClick = {})
+                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
+                    DateBadge("25", "nov")
+                    DateBadge("3", "dez")
+                    IconAvatar(PrumoIcons.History)
+                }
             }
         }
     }

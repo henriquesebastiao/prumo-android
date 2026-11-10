@@ -2,7 +2,10 @@ package com.henriquesebastiao.prumo.core.model
 
 import java.time.Instant
 import java.time.LocalDate
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonPrimitive
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 
 class SystemModelsTest {
@@ -41,5 +44,24 @@ class SystemModelsTest {
         val failed: Outcome<Int> = Outcome.Failed(AppError.SessionExpired)
         assertEquals(4, ok.map { it * 2 }.getOrNull())
         assertEquals(AppError.SessionExpired, failed.map { it * 2 }.errorOrNull())
+    }
+
+    @Test
+    fun itemDataReadsOnlyTheTypeAsked() {
+        val data = mapOf(
+            "km" to JsonPrimitive(17640),
+            "pace" to JsonPrimitive(29.3),
+            "workshop" to JsonPrimitive("Moto Peças Silva"),
+            "account" to JsonNull,
+            "code" to JsonPrimitive("42"),
+        )
+        assertEquals(17640L, data.long("km"))
+        assertEquals(29.3, data.double("pace")!!, 0.0)
+        assertEquals("Moto Peças Silva", data.text("workshop"))
+        assertNull(data.text("account"))
+        assertNull(data.long("account"))
+        assertNull(data.long("code"))
+        assertNull(data.text("km"))
+        assertNull(data.long("missing"))
     }
 }

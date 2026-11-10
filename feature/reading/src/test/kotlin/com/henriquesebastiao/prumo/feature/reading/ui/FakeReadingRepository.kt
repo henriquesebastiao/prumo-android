@@ -50,7 +50,7 @@ class FakeReadingRepository(var books: List<Book> = PreviewBooks.shelf, var note
         filters += filter
         val found = books.filter { book ->
             (filter.status == null || book.status == filter.status) &&
-                (!filter.owned || book.owned) &&
+                (filter.owned == null || book.owned == filter.owned) &&
                 (
                     filter.query.isBlank() ||
                         "${book.title} ${book.author}".contains(filter.query.trim(), ignoreCase = true)

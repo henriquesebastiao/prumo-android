@@ -8,9 +8,12 @@ import com.henriquesebastiao.prumo.core.designsystem.color.Seeds
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.feature.HomeContext
+import com.henriquesebastiao.prumo.core.feature.HomeEvent
 import com.henriquesebastiao.prumo.core.feature.Navigator
 import com.henriquesebastiao.prumo.core.feature.PrumoFeature
 import com.henriquesebastiao.prumo.core.feature.QuickAction
+import com.henriquesebastiao.prumo.core.model.ActivityItem
+import com.henriquesebastiao.prumo.core.model.UpcomingItem
 import com.henriquesebastiao.prumo.core.network.decodeOrNull
 import com.henriquesebastiao.prumo.feature.finance.model.FINANCE_MODULE_ID
 import com.henriquesebastiao.prumo.feature.finance.ui.AccountDetail
@@ -116,6 +119,12 @@ class FinanceFeature @Inject constructor() : PrumoFeature {
     ) {
         FinanceHomeCard(decodeOrNull(FinanceSummaryDto.serializer(), summary), hero, context.currency, onOpen, modifier)
     }
+
+    @Composable
+    override fun upcoming(item: UpcomingItem, context: HomeContext): HomeEvent? = financeUpcoming(item, context)
+
+    @Composable
+    override fun activity(item: ActivityItem, context: HomeContext): HomeEvent? = financeActivity(item, context)
 
     companion object {
         const val ID = FINANCE_MODULE_ID

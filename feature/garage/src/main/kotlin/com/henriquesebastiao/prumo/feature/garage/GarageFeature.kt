@@ -8,9 +8,12 @@ import com.henriquesebastiao.prumo.core.designsystem.color.Seeds
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.feature.HomeContext
+import com.henriquesebastiao.prumo.core.feature.HomeEvent
 import com.henriquesebastiao.prumo.core.feature.Navigator
 import com.henriquesebastiao.prumo.core.feature.PrumoFeature
 import com.henriquesebastiao.prumo.core.feature.QuickAction
+import com.henriquesebastiao.prumo.core.model.ActivityItem
+import com.henriquesebastiao.prumo.core.model.UpcomingItem
 import com.henriquesebastiao.prumo.core.network.decodeOrNull
 import com.henriquesebastiao.prumo.feature.garage.model.GARAGE_MODULE_ID
 import com.henriquesebastiao.prumo.feature.garage.ui.ArchivedVehicles
@@ -100,6 +103,12 @@ class GarageFeature @Inject constructor() : PrumoFeature {
     ) {
         GarageHomeCard(decodeOrNull(GarageSummaryDto.serializer(), summary), onOpen, modifier)
     }
+
+    @Composable
+    override fun upcoming(item: UpcomingItem, context: HomeContext): HomeEvent? = garageUpcoming(item)
+
+    @Composable
+    override fun activity(item: ActivityItem, context: HomeContext): HomeEvent? = garageActivity(item, context)
 
     /** A destination of the module, in its colors. */
     @Composable

@@ -130,6 +130,18 @@ data class ActivityItem(
     val data: Map<String, kotlinx.serialization.json.JsonPrimitive>,
 )
 
+/** A text value of an item's `data` ([UpcomingItem], [ActivityItem]), or null when absent or not text. */
+fun Map<String, kotlinx.serialization.json.JsonPrimitive>.text(key: String): String? =
+    this[key]?.takeIf { it.isString }?.content
+
+/** A whole number of an item's `data`, or null when absent, `null` or not a number. */
+fun Map<String, kotlinx.serialization.json.JsonPrimitive>.long(key: String): Long? =
+    this[key]?.takeUnless { it.isString }?.content?.toLongOrNull()
+
+/** A decimal of an item's `data` (a pace), or null when absent, `null` or not a number. */
+fun Map<String, kotlinx.serialization.json.JsonPrimitive>.double(key: String): Double? =
+    this[key]?.takeUnless { it.isString }?.content?.toDoubleOrNull()
+
 /** The part of the day the Home greets: "Bom dia", "Boa tarde", "Boa noite". */
 enum class DayPart {
     Morning,

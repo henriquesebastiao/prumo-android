@@ -139,6 +139,7 @@ private fun MainNavigation(
             entry<Home> {
                 HomeRoute(
                     onOpenModule = { navigator.navigate(it.entryKey) },
+                    onOpen = navigator::navigate,
                     onAction = { navigator.navigate(it.target) },
                     onSettings = { stack.add(Settings) },
                     onOrganizeModules = { stack.add(ModulesSettings) },

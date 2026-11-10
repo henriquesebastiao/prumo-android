@@ -127,6 +127,7 @@ XScreen ◄──────┘                            └── modelo (:c
 - O token é cifrado com AES-256-GCM (Tink) sob uma chave do Android Keystore e guardado no DataStore com o endereço do servidor e o usuário (`SessionStore`). Nada da sessão vai para o backup (`data_extraction_rules.xml`): a chave do Keystore não sai do aparelho.
 - `SessionRepository.state: StateFlow<SessionState>`: `Loading` (lendo o DataStore, a splash fica na tela), `SignedOut(reason)` ou `SignedIn(session)`. O `AuthInterceptor` lê o token desse estado em memória.
 - Sair: `POST /auth/logout` (o erro de rede não impede sair) e limpeza local. Sessão expirada (401): limpeza local e diálogo; o login seguinte volta ao mesmo servidor.
+- Exportar dados (`DataExportRepository`): `GET /me/export` (`@Streaming`) baixa o `.zip` pela sessão para o cache e o copia para o documento que o usuário criou no seletor do Android (`CreateDocument`); numa falha, o documento é apagado (D20).
 - Chave do Keystore perdida ou trocada (backup restaurado em outro aparelho): o token não decifra, a sessão é descartada e o app volta ao login.
 
 ## Módulos do Prumo no app
@@ -142,12 +143,14 @@ interface PrumoFeature {
     val entryKey: NavKey                 // destino inicial do módulo
     val quickActions: List<QuickAction>  // "Todas as ações" e a toolbar do Início; com sheet, abrem sobre ele
     fun EntryProviderScope<NavKey>.entries(navigator: Navigator)
-    @Composable fun HomeCard(summary: JsonObject, hero: Boolean, onOpen: () -> Unit, modifier: Modifier)
+    @Composable fun HomeCard(summary: JsonObject?, hero: Boolean, context: HomeContext, onOpen: () -> Unit, modifier: Modifier)
+    @Composable fun upcoming(item: UpcomingItem, context: HomeContext): HomeEvent?  // "Vem aí" (padrão: null)
+    @Composable fun activity(item: ActivityItem, context: HomeContext): HomeEvent?  // "Atividade recente"
 }
 ```
 
 - **Montagem** (`ModuleRegistry` no `:app`): a ordem e os ativos vêm do servidor; o app mostra a interseção. Módulo que o servidor tem e o app não conhece é ignorado; módulo que o app conhece e o servidor não tem (ou que o usuário desativou) fica oculto.
-- **Início**: `GET /api/v1/dashboard` devolve um resumo por módulo ativo, na ordem do usuário, como união discriminada por `module`. `:core:network` entrega cada resumo como `JsonObject`; o `PrumoFeature` do módulo decodifica o seu. O primeiro módulo da ordem é o card hero (D08).
+- **Início**: `GET /api/v1/dashboard` devolve um resumo por módulo ativo, na ordem do usuário, como união discriminada por `module`. `:core:network` entrega cada resumo como `JsonObject`; o `PrumoFeature` do módulo decodifica o seu. O primeiro módulo da ordem é o card hero (D08). Os itens `upcoming` e `activity` chegam como `UpcomingItem`/`ActivityItem` (`kind` estável e `data` com valores simples, lidos por `text`, `long` e `double`); o módulo de cada um escreve a linha (`HomeEvent`) e o Início mostra até 4 de cada lista (D20).
 - **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell, cada uma dentro do `ModuleTheme` do módulo.
 - **Ações rápidas**: uma `QuickAction` com `sheet` abre a folha do módulo sobre o Início (abastecimento, km); sem `sheet`, abre `target` (manutenção e troca de óleo abrem o formulário). A folha cria o seu ViewModel no destino que a mostra e recomeça vazia a cada abertura (um id de abertura guardado com `rememberSaveable`, que sobrevive à rotação).
 

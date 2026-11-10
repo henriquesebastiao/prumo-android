@@ -15,7 +15,9 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [x] **(servidor)** Seção "Servidor e app juntos" no `CLAUDE.md` e `commit-message.md` no `.gitignore`
 - [x] **(servidor)** `service: "prumo"` no `GET /api/health`, para reconhecer um servidor Prumo (A5)
 
-> **Fundação implementada em 2026-11-04 (sessão na nuvem) e verificada em 2026-11-09 (sessão local):** emulador `Pixel_9` (API 37) contra o `e2e_server.py` do servidor, telas comparadas com as pranchas renderizadas por `scripts/render-design.mjs`. Fluxos exercitados: servidor errado e certo (com a permissão de rede local), senha errada, login, token cifrado no DataStore, Início claro e escuro, Todas as ações, Configurações e as cinco subtelas, reordenar módulos por arraste, sessão expirada (sessão revogada pela API) e volta à mesma tela depois do login, servidor inacessível com dados em cache, sair. Não exercitados no emulador: troca de nome e de senha, estado vazio (só nos previews e testes). A verificação corrigiu: o círculo do rodapé do primeiro acesso, o `StatusChip` sem ícone, a app bar grande sem o título de 48 sp, os avatares das linhas sem o tom primary, os cards do Início, as abas em pílula, a toolbar dos módulos, o Campo de valor (D18), a barra de status no tema escuro da conta, o arraste dos módulos que não terminava e um build incremental que deixava o app sem Finanças (D17). "Vem aí", "Atividade recente" e a exportação dos dados ainda não foram feitos.
+> **Fundação implementada em 2026-11-04 (sessão na nuvem) e verificada em 2026-11-09 (sessão local):** emulador `Pixel_9` (API 37) contra o `e2e_server.py` do servidor, telas comparadas com as pranchas renderizadas por `scripts/render-design.mjs`. Fluxos exercitados: servidor errado e certo (com a permissão de rede local), senha errada, login, token cifrado no DataStore, Início claro e escuro, Todas as ações, Configurações e as cinco subtelas, reordenar módulos por arraste, sessão expirada (sessão revogada pela API) e volta à mesma tela depois do login, servidor inacessível com dados em cache, sair. Não exercitados no emulador: troca de nome e de senha, estado vazio (só nos previews e testes). A verificação corrigiu: o círculo do rodapé do primeiro acesso, o `StatusChip` sem ícone, a app bar grande sem o título de 48 sp, os avatares das linhas sem o tom primary, os cards do Início, as abas em pílula, a toolbar dos módulos, o Campo de valor (D18), a barra de status no tema escuro da conta, o arraste dos módulos que não terminava e um build incremental que deixava o app sem Finanças (D17).
+
+> **Paridade sem prancha feita em 2026-11-09 (sessão local, D20),** verificada no emulador `Pixel_9` (API 37) contra o `e2e_server.py`: "Vem aí" e "Atividade recente" no Início (claro e escuro), com o toque abrindo o veículo, a transação e o cartão; "Exportar dados" gravou um `.zip` válido em Downloads (`data.json` e os CSVs) e, com o servidor parado, mostrou "recusou a conexão" e apagou o arquivo vazio. O servidor passou a mandar `remaining_cents` em `finance.invoice_due`, para o app não subtrair. Não exercitados no emulador: o toque num item de Livros e de manutenção (cobertos pelos testes das descrições sobre o `dashboard.json` gravado).
 
 ### Design system (`:core:designsystem`)
 - [x] Tema: `MaterialExpressiveTheme` + `MotionScheme.expressive()`, esquemas claro, escuro e preto puro do seed do app, cor dinâmica, success/warning harmonizados
@@ -37,7 +39,7 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [x] Shell: Início como raiz, toolbar flutuante com ações fixadas, folha "Todas as ações", engrenagem para Configurações
 - [x] Início com os resumos de `GET /api/v1/dashboard` (um card por módulo, no tema do módulo)
 - [x] Configurações: conta (nome e senha), aparência (tema, preto puro, cor dinâmica), módulos (ativar e reordenar), sessões ativas, servidor, sair
-- [ ] Paridade com a web, sem prancha: "Vem aí" e "Atividade recente" no Início, exportação dos dados
+- [x] Paridade com a web, sem prancha: "Vem aí" e "Atividade recente" no Início, exportação dos dados
 - [x] Estados de carregando, vazio, erro, servidor inacessível e sessão expirada
 - [x] Verificação no emulador contra `make dev` e comparação com `design/v1/`
 
@@ -78,7 +80,7 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [x] Folhas: atualizar progresso ("Terminei" com a confirmação expressiva) e nova anotação
 - [x] Card do Início e ações rápidas
 - [x] Paridade com a web, sem prancha: busca, ordenação, todas as anotações, editar e excluir anotação (com a data), ritmo, previsão e páginas por semana, remover capa
-- [ ] Paridade com a web que falta: filtro "Não tenho" e o ano dos lidos (D19)
+- [x] Paridade com a web que faltava: filtro "Não tenho" e o ano dos lidos (D20; no emulador, com um lido de 2025 criado pela API)
 - [x] Novo componente: campo multilinha (e `CelebrationAvatar`, a morfose do herói)
 - [x] Revisão visual contra `design/v1/`
 

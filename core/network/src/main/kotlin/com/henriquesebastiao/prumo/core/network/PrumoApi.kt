@@ -10,6 +10,7 @@ import com.henriquesebastiao.prumo.core.network.dto.PreferencesUpdateDto
 import com.henriquesebastiao.prumo.core.network.dto.SessionListDto
 import com.henriquesebastiao.prumo.core.network.dto.UserDto
 import com.henriquesebastiao.prumo.core.network.dto.UserUpdateDto
+import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -17,6 +18,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Streaming
 
 /**
  * The system routes of the API (`docs/api.md`, "Autenticação" and "Sistema"). Paths are relative
@@ -44,6 +46,11 @@ interface PrumoApi {
 
     @PUT("api/v1/me/password")
     suspend fun changePassword(@Body body: PasswordChangeDto)
+
+    /** D38 of the server: a `.zip` with `data.json`, a CSV per table and the uploaded files. */
+    @Streaming
+    @GET("api/v1/me/export")
+    suspend fun export(): ResponseBody
 
     @GET("api/v1/me/preferences")
     suspend fun preferences(): PreferencesDto

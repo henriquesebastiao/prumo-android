@@ -76,12 +76,12 @@ data class BookInput(
 data class NoteInput(val content: String, val page: Int?, val notedOn: LocalDate? = null)
 
 /**
- * The filters of the shelf (`GET /reading/books`): a status, owning, a search on title and author,
- * and the order (the server's `sort`).
+ * The filters of the shelf (`GET /reading/books`): a status, owning ("Tenho" true, "Não tenho"
+ * false, either null), a search on title and author, and the order (the server's `sort`).
  */
 data class ShelfFilter(
     val status: BookStatus? = null,
-    val owned: Boolean = false,
+    val owned: Boolean? = null,
     val query: String = "",
     val order: ShelfOrder = ShelfOrder.Newest,
 )

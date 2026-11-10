@@ -49,6 +49,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
@@ -90,13 +91,46 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/** The year "Lidos" shows (the web's select): the latest with a finished book, one year, or all. */
+sealed interface ReadYear {
+    data object Latest : ReadYear
+
+    data object All : ReadYear
+
+    data class Of(val year: Int) : ReadYear
+}
+
 data class ShelfUiState(
     val loading: Boolean = true,
     val refreshing: Boolean = false,
     val error: AppError? = null,
     val books: List<Book> = emptyList(),
     val filter: ShelfFilter = ShelfFilter(),
+    val readYear: ReadYear = ReadYear.Latest,
 ) {
+    /** With "Lidos", the years in which the books were finished (`finished_on`), newest first. */
+    val readYears: List<Int>
+        get() = if (filter.status == BookStatus.Read) {
+            books.mapNotNull { it.finishedOn?.year }.distinct().sortedDescending()
+        } else {
+            emptyList()
+        }
+
+    /** The year "Lidos" shows, or null for every book. */
+    val shownYear: Int?
+        get() = when (val year = readYear) {
+            ReadYear.Latest -> readYears.firstOrNull()
+            ReadYear.All -> null
+            is ReadYear.Of -> year.year
+        }
+
+    /**
+     * The books on the grid. "Lidos" shows one year at a time, as the web does with the whole shelf
+     * the server sent: a choice of what to show, from the dates the server keeps.
+     */
+    val shown: List<Book>
+        get() = shownYear?.let { year -> books.filter { it.finishedOn?.year == year } } ?: books
+
     /**
      * The hero (board 01): the book being read that moved last, among those the filter shows. Which
      * one leads is the shelf's choice of what to show, not a rule of the domain.
@@ -137,12 +171,16 @@ class ShelfViewModel @Inject constructor(private val repository: ReadingReposito
     }
 
     /** A status chip: the statuses are exclusive, and the chosen one again shows every book. */
-    fun selectStatus(status: BookStatus) = setFilter {
-        it.copy(status = if (it.status == status) null else status)
+    fun selectStatus(status: BookStatus) {
+        mutableState.update { it.copy(readYear = ReadYear.Latest) }
+        setFilter { it.copy(status = if (it.status == status) null else status) }
     }
 
-    /** "Tenho": combines with any status (R1). */
-    fun toggleOwned() = setFilter { it.copy(owned = !it.owned) }
+    /** "Tenho" or "Não tenho": exclusive, and they combine with any status (R1). */
+    fun selectOwned(owned: Boolean) = setFilter { it.copy(owned = if (it.owned == owned) null else owned) }
+
+    /** The year of "Lidos": no new request, the shelf came whole. */
+    fun selectYear(year: ReadYear) = mutableState.update { it.copy(readYear = year) }
 
     /** The web's "Ordenar": newest, title or author, sorted by the server. */
     fun setOrder(order: ShelfOrder) = setFilter { it.copy(order = order) }
@@ -172,7 +210,8 @@ internal class ShelfEvents(
     val onAdd: () -> Unit,
     val onNotes: () -> Unit,
     val onStatus: (BookStatus) -> Unit,
-    val onOwned: () -> Unit,
+    val onOwned: (Boolean) -> Unit,
+    val onYear: (ReadYear) -> Unit,
     val onSearch: (String) -> Unit,
     val onRefresh: () -> Unit,
     val onOrder: (ShelfOrder) -> Unit,
@@ -194,7 +233,8 @@ internal fun ShelfRoute(
             onAdd = { navigator.navigate(BookEditorKey()) },
             onNotes = { navigator.navigate(ReadingNotes) },
             onStatus = viewModel::selectStatus,
-            onOwned = viewModel::toggleOwned,
+            onOwned = viewModel::selectOwned,
+            onYear = viewModel::selectYear,
             onSearch = viewModel::search,
             onRefresh = { viewModel.load(refresh = true) },
             onOrder = viewModel::setOrder,
@@ -314,25 +354,23 @@ private fun Shelf(state: ShelfUiState, searching: Boolean, events: ShelfEvents) 
                 )
             }
         }
-        item(key = "filters", span = full) { Filters(filter, events) }
+        item(key = "filters", span = full) { Filters(state, events) }
         state.readingNow?.let { book ->
             item(key = "now", span = full) { ReadingNow(book) { events.onOpen(book) } }
         }
         item(key = "header", span = full) {
+            val title = when {
+                filter.status != null -> R.string.reading_shelf
+                filter.owned == true -> R.string.reading_owned
+                filter.owned == false -> R.string.reading_not_owned
+                else -> R.string.reading_shelf
+            }
             SectionHeader(
-                stringResource(
-                    if (filter.owned &&
-                        filter.status == null
-                    ) {
-                        R.string.reading_owned
-                    } else {
-                        R.string.reading_shelf
-                    },
-                ),
-                trailing = pluralStringResource(R.plurals.reading_books_count, state.books.size, state.books.size),
+                stringResource(title),
+                trailing = pluralStringResource(R.plurals.reading_books_count, state.shown.size, state.shown.size),
             )
         }
-        if (state.books.isEmpty()) {
+        if (state.shown.isEmpty()) {
             item(key = "none", span = full) {
                 Text(
                     stringResource(R.string.reading_no_results),
@@ -341,7 +379,7 @@ private fun Shelf(state: ShelfUiState, searching: Boolean, events: ShelfEvents) 
                 )
             }
         }
-        items(state.books, key = { it.id }) { book -> ShelfItem(book) { events.onOpen(book) } }
+        items(state.shown, key = { it.id }) { book -> ShelfItem(book) { events.onOpen(book) } }
     }
 }
 
@@ -384,7 +422,8 @@ private fun OrderMenu(order: ShelfOrder, onOrder: (ShelfOrder) -> Unit) {
 }
 
 @Composable
-private fun Filters(filter: ShelfFilter, events: ShelfEvents) {
+private fun Filters(state: ShelfUiState, events: ShelfEvents) {
+    val filter = state.filter
     Row(
         Modifier.horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
@@ -400,19 +439,61 @@ private fun Filters(filter: ShelfFilter, events: ShelfEvents) {
                 onClick = { events.onStatus(status) },
                 label = { Text(stringResource(label)) },
             )
+            if (status == BookStatus.Read && filter.status == status && state.readYears.isNotEmpty()) {
+                YearChip(state.shownYear, state.readYears, events.onYear)
+            }
         }
-        // "Tenho" combines with any status (board 01): a rule sets it apart.
+        // "Tenho" and "Não tenho" combine with any status (board 01): a rule sets them apart.
         VerticalDivider(Modifier.height(24.dp), color = MaterialTheme.colorScheme.outlineVariant)
+        listOf(true to R.string.reading_owned, false to R.string.reading_not_owned).forEach { (owned, label) ->
+            val selected = filter.owned == owned
+            FilterChip(
+                selected = selected,
+                onClick = { events.onOwned(owned) },
+                label = { Text(stringResource(label)) },
+                leadingIcon = if (selected) {
+                    { Icon(painterResource(PrumoIcons.Check), contentDescription = null) }
+                } else {
+                    null
+                },
+            )
+        }
+    }
+}
+
+/** The year of "Lidos" (the web's select): the years with a finished book, then all of them. */
+@Composable
+private fun YearChip(year: Int?, years: List<Int>, onYear: (ReadYear) -> Unit) {
+    var open by remember { mutableStateOf(false) }
+    val label = year?.toString() ?: stringResource(R.string.reading_all_years)
+    val description = stringResource(R.string.reading_read_year, label)
+    Box {
         FilterChip(
-            selected = filter.owned,
-            onClick = events.onOwned,
-            label = { Text(stringResource(R.string.reading_owned)) },
-            leadingIcon = if (filter.owned) {
-                { Icon(painterResource(PrumoIcons.Check), contentDescription = null) }
-            } else {
-                null
-            },
+            selected = true,
+            onClick = { open = true },
+            label = { Text(label) },
+            trailingIcon = { Icon(painterResource(PrumoIcons.ArrowDropDown), contentDescription = null) },
+            modifier = Modifier.semantics { contentDescription = description },
         )
+        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+            val options = years.map { ReadYear.Of(it) to it.toString() } +
+                (ReadYear.All to stringResource(R.string.reading_all_years))
+            options.forEach { (option, text) ->
+                val checked = if (option is ReadYear.Of) option.year == year else year == null
+                DropdownMenuItem(
+                    text = { Text(text, style = MaterialTheme.typography.bodyLarge) },
+                    trailingIcon = if (checked) {
+                        { Icon(painterResource(PrumoIcons.Check), contentDescription = null) }
+                    } else {
+                        null
+                    },
+                    onClick = {
+                        open = false
+                        onYear(option)
+                    },
+                )
+            }
+        }
     }
 }
 
@@ -506,7 +587,7 @@ private fun ShelfPreview() {
             ShelfScreen(
                 state = ShelfUiState(loading = false, books = PreviewBooks.shelf),
                 onBack = {},
-                events = ShelfEvents({}, {}, {}, {}, {}, {}, {}, {}),
+                events = ShelfEvents({}, {}, {}, {}, {}, {}, {}, {}, {}),
                 actions = ReadingActions({}, {}, {}),
             )
         }
@@ -521,7 +602,7 @@ private fun EmptyShelfPreview() {
             ShelfScreen(
                 state = ShelfUiState(loading = false),
                 onBack = {},
-                events = ShelfEvents({}, {}, {}, {}, {}, {}, {}, {}),
+                events = ShelfEvents({}, {}, {}, {}, {}, {}, {}, {}, {}),
                 actions = ReadingActions({}, {}, {}),
             )
         }

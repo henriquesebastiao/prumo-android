@@ -48,6 +48,15 @@
     <string name="finance_percent">%1$d %%</string>
     <string name="finance_card_named">Cartão %1$s</string>
     <string name="finance_from_to">%1$s → %2$s</string>
+
+    <!-- The Home's lists (the web's finance.events) -->
+    <string name="finance_event_invoice_closing">Fatura %1$s fecha</string>
+    <string name="finance_event_invoice_due">Fatura %1$s vence</string>
+    <string name="finance_event_available_limit">Limite disponível %1$s</string>
+    <string name="finance_event_due_amount">%1$s até agora</string>
+    <string name="finance_event_due_remaining">Faltam %1$s</string>
+    <string name="finance_event_overdue">Vencida · faltam %1$s</string>
+    <string name="finance_event_transaction">%1$s · %2$s</string>
     <string name="finance_installment">%1$d/%2$d</string>
 
     <string name="finance_kind_income">Receita</string>

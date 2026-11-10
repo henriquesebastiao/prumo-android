@@ -45,6 +45,8 @@
     <string name="home_session_expired">Sessão expirada</string>
     <string name="home_settings">Configurações</string>
     <string name="home_organize_modules">Organizar módulos</string>
+    <string name="home_upcoming">Vem aí</string>
+    <string name="home_activity">Atividade recente</string>
     <string name="home_loading">Carregando o Início</string>
     <string name="home_cached_at">Dados de hoje, %1$s</string>
     <string name="home_no_modules_title">Nenhum módulo ativo</string>
@@ -78,6 +80,11 @@
     <string name="settings_server">Servidor</string>
     <string name="settings_server_connected">%1$s · conectado</string>
     <string name="settings_server_unreachable">%1$s · inacessível</string>
+    <string name="settings_export">Exportar dados</string>
+    <string name="settings_export_summary">Um .zip com tudo o que você registrou: JSON, uma planilha CSV por tabela e as capas dos livros. Senha e sessões não entram.</string>
+    <string name="settings_exporting">Preparando o arquivo…</string>
+    <string name="settings_export_saved">Dados exportados</string>
+    <string name="settings_export_not_written">Não foi possível gravar o arquivo escolhido. Tente outra pasta.</string>
     <string name="settings_sign_out">Sair</string>
     <string name="settings_sign_out_summary">Encerra a sessão neste aparelho</string>
     <string name="settings_version">Prumo para Android %1$s</string>
