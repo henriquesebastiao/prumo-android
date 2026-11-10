@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- A plumb bob ("prumo"): the string from the top and the weight, inside the 66 dp safe zone. -->
+<!--
+  "Cristal" (chosen on 2026-11-10, D22): the plumb bob's weight as a crystal of two faces hanging from
+  its string. 108 dp canvas, everything inside the 66 dp safe zone, so any launcher mask cuts only the
+  background. Also the splash's mark, on the same purple circle.
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- the string -->
+    <path
+        android:pathData="M54,25V37"
+        android:strokeWidth="3.5"
+        android:strokeColor="@color/launcher_foreground"
+        android:strokeLineCap="round" />
+    <!-- the light face -->
     <path
         android:fillColor="@color/launcher_foreground"
-        android:pathData="M52,26h4v20h-4z" />
+        android:pathData="M54,36L37,52L54,84Z"
+        android:strokeWidth="3"
+        android:strokeColor="@color/launcher_foreground"
+        android:strokeLineJoin="round" />
+    <!-- the lilac face -->
     <path
-        android:fillColor="@color/launcher_foreground"
-        android:pathData="M42,46h24a4,4 0,0 1,4 4v4L57.2,78.6a3.6,3.6 0,0 1,-6.4 0L38,54v-4a4,4 0,0 1,4 -4z" />
+        android:fillColor="@color/launcher_facet"
+        android:pathData="M54,36L71,52L54,84Z"
+        android:strokeWidth="3"
+        android:strokeColor="@color/launcher_facet"
+        android:strokeLineJoin="round" />
 </vector>

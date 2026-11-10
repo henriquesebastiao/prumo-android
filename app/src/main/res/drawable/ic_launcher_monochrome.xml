@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- "Cristal" for themed icons (Android 13+): one color, the second face at 55 % so the crystal keeps its volume. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
     <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M52,26h4v20h-4z" />
+        android:pathData="M54,25V37"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round" />
     <path
         android:fillColor="#FFFFFFFF"
-        android:pathData="M42,46h24a4,4 0,0 1,4 4v4L57.2,78.6a3.6,3.6 0,0 1,-6.4 0L38,54v-4a4,4 0,0 1,4 -4z" />
+        android:pathData="M54,36L37,52L54,84Z"
+        android:strokeWidth="3"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillAlpha="0.55"
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M54,36L71,52L54,84Z"
+        android:strokeAlpha="0.55"
+        android:strokeWidth="3"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineJoin="round" />
 </vector>

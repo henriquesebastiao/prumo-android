@@ -2,6 +2,8 @@
 <resources>
     <!-- The window behind the first frame and the splash: the app seed's light surface. -->
     <color name="window_background">#FFFFF7FF</color>
+    <!-- The app icon "Cristal" (D22): the seed's purple, a white face and a lilac one. -->
     <color name="launcher_background">#FF6A4F86</color>
     <color name="launcher_foreground">#FFFFFFFF</color>
+    <color name="launcher_facet">#FFCFB6F2</color>
 </resources>

@@ -6,10 +6,11 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <!-- SplashScreen API: the mark on the app's background while the session is read. -->
-    <style name="Theme.Prumo.Splash" parent="Theme.SplashScreen">
+    <!-- SplashScreen API: the app icon (its purple circle and the crystal) on the app's background while the session is read. -->
+    <style name="Theme.Prumo.Splash" parent="Theme.SplashScreen.IconBackground">
         <item name="windowSplashScreenBackground">@color/window_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/launcher_background</item>
         <item name="postSplashScreenTheme">@style/Theme.Prumo</item>
     </style>
 </resources>

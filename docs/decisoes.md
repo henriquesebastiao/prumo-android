@@ -167,6 +167,12 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 - Conta: entrar como outro usuário ou em outro servidor apaga as respostas da conta anterior (S2 do servidor); Sair e Trocar servidor apagam todas; uma sessão expirada as mantém, para o mesmo usuário que entra de novo. O banco já fica fora do backup.
 **Consequências:** sem tabela por entidade nem migração quando o servidor ganha campos (o JSON é lido pelos mesmos DTOs). Só há cópia do que já foi aberto com rede, e uma tela aberta sem rede e sem cópia mostra o erro de sempre. A sincronização incremental e a fila de pendentes, próximos itens da Fase 4, usam o mesmo banco.
 
+## D22 — Ícone do app "Cristal"
+**Status:** aceita · 2026-11
+**Contexto:** o ícone da fundação (um prumo maciço, branco no roxo do seed) não agradou ao mantenedor, e no splash o desenho branco ficava quase invisível sobre o fundo claro do app. Quatro variantes minimalistas, todas no seed `#6A4F86`, foram desenhadas com o design system e comparadas numa prancha (grandes, nas máscaras dos launchers, temáticas e no tamanho real): Cristal, Equilíbrio (o prumo dentro do cookie do M3), Pêndulo e Módulos.
+**Decisão:** o mantenedor escolheu o **Cristal**: o peso do prumo como um losango de duas faces (branca e lilás `#CFB6F2`) preso ao fio, sobre o roxo `#6A4F86`. Ícone adaptativo de 108 dp com o desenho na zona segura de 66 dp; o monocromático (ícones temáticos do Android 13+) tem a segunda face a 55 %. O splash mostra o mesmo ícone: o desenho sobre um círculo roxo (`windowSplashScreenIconBackgroundColor`).
+**Consequências:** as cores do ícone ficam em `app/src/main/res/values/colors.xml` (`launcher_*`); trocar o seed do app é trocar essas três também.
+
 ---
 
 ## Modelo
