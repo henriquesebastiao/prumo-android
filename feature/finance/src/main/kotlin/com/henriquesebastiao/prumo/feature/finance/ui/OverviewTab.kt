@@ -30,6 +30,7 @@ import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.BarPair
 import com.henriquesebastiao.prumo.core.designsystem.component.EmptyState
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
 import com.henriquesebastiao.prumo.core.designsystem.component.LegendRow
 import com.henriquesebastiao.prumo.core.designsystem.component.PairedBars
@@ -198,7 +199,7 @@ private fun BalanceCard(overview: Overview, context: FinanceContext, onAccounts:
         title = stringResource(R.string.finance_total_balance),
         onClick = onAccounts,
     ) {
-        Text(context.money(overview.totalBalanceCents), style = PrumoType.dataDisplay)
+        FitText(context.money(overview.totalBalanceCents), style = PrumoType.dataDisplay)
         if (overview.until != context.today) {
             Text(
                 stringResource(R.string.finance_until, Formats.date(overview.until)),
@@ -222,7 +223,7 @@ private fun BalanceCard(overview: Overview, context: FinanceContext, onAccounts:
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier.weight(1f),
                         )
-                        Text(context.money(balance.balanceCents), style = PrumoType.dataMedium)
+                        FitText(context.money(balance.balanceCents), style = PrumoType.dataMedium)
                     }
                 }
             }
@@ -265,7 +266,7 @@ private fun IncomeExpenseCard(overview: Overview, context: FinanceContext) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.weight(1f),
             )
-            Text(
+            FitText(
                 stringResource(
                     if (overview.resultCents >= 0) R.string.finance_result_left else R.string.finance_result_short,
                     context.money(kotlin.math.abs(overview.resultCents)),
@@ -359,7 +360,7 @@ private fun InvoicesCard(invoices: List<OpenInvoice>, context: FinanceContext, o
                     horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
                 ) {
                     StatusChip(invoice.status.label(), invoice.status.tone(), small = true)
-                    Text(
+                    FitText(
                         context.money(invoice.remainingCents),
                         style = PrumoType.dataMedium,
                         modifier = Modifier.weight(1f),

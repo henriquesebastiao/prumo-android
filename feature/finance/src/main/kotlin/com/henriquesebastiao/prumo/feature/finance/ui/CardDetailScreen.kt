@@ -35,6 +35,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
 import com.henriquesebastiao.prumo.core.designsystem.component.MenuOption
@@ -331,7 +332,7 @@ private fun CardContent(state: CardDetailUiState, events: CardDetailEvents) {
         }
         item {
             SectionCard(tone = SectionTone.Container) {
-                Text(context.money(invoice.amountCents), style = PrumoType.dataDisplay)
+                FitText(context.money(invoice.amountCents), style = PrumoType.dataDisplay)
                 Text(
                     stringResource(
                         R.string.finance_invoice_period,

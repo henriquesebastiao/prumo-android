@@ -38,6 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
 import com.henriquesebastiao.prumo.core.designsystem.component.MenuOption
@@ -384,7 +385,7 @@ private fun AccountContent(account: Account, state: AccountDetailUiState, events
                     horizontalArrangement = Arrangement.spacedBy(Spacing.md),
                 ) {
                     FinanceAvatar(account.color, account.icon, cookie = true)
-                    Text(context.money(account.balanceCents), style = PrumoType.dataDisplay)
+                    FitText(context.money(account.balanceCents), style = PrumoType.dataDisplay)
                 }
                 Text(
                     account.lastTransactionOn?.let {

@@ -109,20 +109,13 @@ private fun SectionHeaderRow(
         }
         Column(Modifier.weight(1f)) {
             if (overline != null) {
-                Text(
-                    overline,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = muted,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                FitText(overline, style = MaterialTheme.typography.labelMedium, color = muted, minFontSize = LABEL_MIN)
             }
             if (title != null) {
-                Text(
+                FitText(
                     title,
                     style = if (hero) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.titleLarge,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
+                    minFontSize = LABEL_MIN,
                     modifier = Modifier.semantics { heading() },
                 )
             }
@@ -203,30 +196,21 @@ fun KpiTile(
             Modifier.padding(horizontal = Spacing.md, vertical = Spacing.sm),
             verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
-            Text(
+            FitText(
                 label,
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
+                minFontSize = LABEL_MIN,
             )
-            Text(
-                value,
-                style = valueStyle,
-                color = valueColor,
-                maxLines = 1,
-                softWrap = false,
-                autoSize = TextAutoSize.StepBased(
-                    minFontSize = 11.sp,
-                    maxFontSize = valueStyle.fontSize,
-                    stepSize = 1.sp,
-                ),
-            )
+            FitText(value, style = valueStyle, color = valueColor)
         }
     }
 }
 
 private val HERO_PADDING = 20.dp
+
+/** A card's or tile's short label ("Veículos", "Gastos de novembro") shrinks this far before "…". */
+private val LABEL_MIN = 8.sp
 private const val MUTED_ALPHA = 0.78f
 private const val AVATAR_ALPHA = 0.14f
 
@@ -243,7 +227,7 @@ private fun ContainersPreview() {
                     overline = "Finanças",
                     title = "Saldo total",
                 ) {
-                    Text("R$ 8.742,35", style = PrumoType.dataDisplay)
+                    FitText("R$ 8.742,35", style = PrumoType.dataDisplay)
                     Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
                         KpiTile("R$ 1.482,90", "Gastos de novembro", Modifier.weight(1f))
                         KpiTile("R$ 1.064,22", "Fatura Nubank", Modifier.weight(1f))

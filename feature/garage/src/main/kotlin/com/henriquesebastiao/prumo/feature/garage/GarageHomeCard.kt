@@ -14,6 +14,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.SectionCard
@@ -71,7 +72,7 @@ private fun NextOilChange(next: NextDueDto) {
             else -> null
         }
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            if (value != null) Text(value, style = PrumoType.dataHeadline, maxLines = 1)
+            if (value != null) FitText(value, style = PrumoType.dataHeadline)
             Text(
                 when (next.status) {
                     "overdue" -> stringResource(R.string.garage_card_oil_overdue)

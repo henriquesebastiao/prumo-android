@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -177,28 +177,33 @@ fun ColorPicker(options: List<ColorOption>, selected: Int, onSelect: (Int) -> Un
 /** One choice of an [IconPicker]. */
 data class IconOption(val icon: Int, val label: String)
 
-/** Icons to choose from: the selected one filled and square, the others outlined. */
+/**
+ * Icons to choose from: the selected one filled and square, the others outlined. With [onMore], a
+ * last button ([moreLabel]) opens the whole set (an [IconChooser]).
+ */
 @Composable
-fun IconPicker(options: List<IconOption>, selected: Int, onSelect: (Int) -> Unit, modifier: Modifier = Modifier) {
+fun IconPicker(
+    options: List<IconOption>,
+    selected: Int,
+    onSelect: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    onMore: (() -> Unit)? = null,
+    moreLabel: String = "",
+) {
     FlowRow(
         modifier.fillMaxWidth().selectableGroup(),
         horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
         verticalArrangement = Arrangement.spacedBy(Spacing.sm),
     ) {
         options.forEachIndexed { index, option ->
-            val description = Modifier.semantics { contentDescription = option.label }
-            if (index == selected) {
-                FilledIconButton(
-                    onClick = { onSelect(index) },
-                    shape = MaterialTheme.shapes.medium,
-                    modifier = description.size(48.dp),
-                ) {
-                    Icon(painterResource(option.icon), contentDescription = null)
-                }
-            } else {
-                OutlinedIconButton(onClick = { onSelect(index) }, modifier = description.size(48.dp)) {
-                    Icon(painterResource(option.icon), contentDescription = null)
-                }
+            IconChoiceButton(option.icon, option.label, index == selected) { onSelect(index) }
+        }
+        if (onMore != null) {
+            FilledTonalIconButton(
+                onClick = onMore,
+                modifier = Modifier.size(48.dp).semantics { contentDescription = moreLabel },
+            ) {
+                Icon(painterResource(PrumoIcons.Apps), contentDescription = null)
             }
         }
     }

@@ -48,6 +48,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedList
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
@@ -447,7 +448,7 @@ private fun ProgressHero(state: BookDetailUiState, book: Book, events: BookDetai
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.Bottom,
         ) {
-            Text(
+            FitText(
                 stringResource(R.string.reading_percent, book.progressPercent),
                 style = MaterialTheme.typography.displayMediumEmphasized.copy(fontFeatureSettings = "tnum"),
             )
@@ -574,7 +575,7 @@ private fun WeekBars(weeks: List<WeekPages>) {
     ) {
         weeks.forEach { week ->
             Column(Modifier.weight(1f).fillMaxHeight(), verticalArrangement = Arrangement.Bottom) {
-                Text(
+                FitText(
                     week.pages.toString(),
                     style = PrumoType.dataSmall,
                     modifier = Modifier.align(Alignment.CenterHorizontally),

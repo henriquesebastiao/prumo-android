@@ -87,6 +87,7 @@ O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 - Ícones: Material Symbols Rounded como vetores em `:core:designsystem` (`PrumoIcons`), contorno em repouso e preenchido quando selecionado. Gere com `scripts/material_symbol.py`. Ícones de conta e categoria vêm do servidor como nomes Lucide e passam por `ServerIcons`.
 - Todo texto visível vai em `values/strings.xml` do módulo (só pt-BR, D07). Plurais com `one` e `other`. Nada de texto fixo em Kotlin.
 - Edge-to-edge: use `WindowInsets`. Toque mínimo de 48 dp. Telas funcionam de 360 dp para cima.
+- Valores (dinheiro, km, percentuais) e títulos nunca quebram linha nem perdem caractere: use `FitText`, que diminui a fonte até caber (D23). Teste com fonte grande (130 %) e 360 dp.
 - Cada tela e componente tem previews `@PhonePreviews` (claro e escuro, 360 e 412 dp), as telas montadas com dados de `PreviewData`.
 
 ## Testes e qualidade

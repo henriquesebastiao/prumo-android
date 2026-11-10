@@ -39,6 +39,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.henriquesebastiao.prumo.R
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.OnboardingFooter
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
@@ -96,7 +97,7 @@ fun LoginScreen(
                     .padding(horizontal = Spacing.xl, vertical = Spacing.xl),
                 verticalArrangement = Arrangement.spacedBy(Spacing.lg),
             ) {
-                Text(
+                FitText(
                     stringResource(R.string.login_title),
                     style = MaterialTheme.typography.displayMedium,
                     modifier = Modifier.semantics { heading() },

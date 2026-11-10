@@ -59,6 +59,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.designsystem.component.EmptyState
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoTopBar
@@ -534,7 +535,10 @@ private fun ReadingNow(book: Book, onOpen: () -> Unit) {
                     overflow = TextOverflow.Ellipsis,
                 )
                 Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-                    Text(stringResource(R.string.reading_percent, book.progressPercent), style = PrumoType.dataHeadline)
+                    FitText(
+                        stringResource(R.string.reading_percent, book.progressPercent),
+                        style = PrumoType.dataHeadline,
+                    )
                     Text(
                         stringResource(R.string.reading_page_of, book.currentPage, book.totalPages),
                         style = MaterialTheme.typography.bodySmall,

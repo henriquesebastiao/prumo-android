@@ -46,16 +46,12 @@ fun PrumoTopBar(
         LargeFlexibleTopAppBar(
             // Expanded, the page title of the design (48 sp bold); collapsed, the bar's own small title.
             title = {
+                // One line at any width or font size: "Configurações" steps down instead of wrapping.
                 val current = LocalTextStyle.current
-                Text(
+                FitText(
                     title,
-                    style = if (current.fontSize >
-                        SMALL_TITLE_MAX
-                    ) {
-                        MaterialTheme.typography.displayLarge
-                    } else {
-                        current
-                    },
+                    style = if (current.fontSize > SMALL_TITLE_MAX) MaterialTheme.typography.displayLarge else current,
+                    minFontSize = TITLE_MIN,
                 )
             },
             subtitle = subtitleText,
@@ -68,7 +64,7 @@ fun PrumoTopBar(
         )
     } else if (subtitleText != null) {
         TopAppBar(
-            title = { Text(title) },
+            title = { FitText(title, minFontSize = TITLE_MIN) },
             subtitle = subtitleText,
             modifier = modifier,
             navigationIcon = navigation,
@@ -78,7 +74,7 @@ fun PrumoTopBar(
         )
     } else {
         TopAppBar(
-            title = { Text(title) },
+            title = { FitText(title, minFontSize = TITLE_MIN) },
             modifier = modifier,
             navigationIcon = navigation,
             actions = actions,
@@ -92,6 +88,7 @@ fun PrumoTopBar(
 private val LARGE_EXPANDED = 160.dp
 private val LARGE_WITH_SUBTITLE = 188.dp
 private val SMALL_TITLE_MAX = 24.sp
+private val TITLE_MIN = 16.sp
 
 /** The round back button of every screen under the Home; [close] (✕) on forms. */
 @Composable

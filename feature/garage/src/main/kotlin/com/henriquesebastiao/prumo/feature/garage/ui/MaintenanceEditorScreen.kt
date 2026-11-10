@@ -34,6 +34,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.henriquesebastiao.prumo.core.designsystem.component.AutocompleteField
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupNote
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
@@ -210,7 +211,7 @@ private fun MaintenanceForm(
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            Text(Formats.money(parts + labor, currency), style = PrumoType.dataHeadline)
+            FitText(Formats.money(parts + labor, currency), style = PrumoType.dataHeadline)
         }
         GroupNote(
             stringResource(R.string.garage_total_hint, Formats.money(parts, currency), Formats.money(labor, currency)),

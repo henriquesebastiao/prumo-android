@@ -47,6 +47,7 @@ import androidx.navigation3.runtime.NavKey
 import com.henriquesebastiao.prumo.R
 import com.henriquesebastiao.prumo.core.designsystem.component.DateBadge
 import com.henriquesebastiao.prumo.core.designsystem.component.EmptyState
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.HeroHeader
@@ -54,6 +55,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.IconAvatar
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.RowAction
+import com.henriquesebastiao.prumo.core.designsystem.component.RowValue
 import com.henriquesebastiao.prumo.core.designsystem.component.SectionHeader
 import com.henriquesebastiao.prumo.core.designsystem.component.Tag
 import com.henriquesebastiao.prumo.core.designsystem.theme.ListStyle
@@ -183,7 +185,7 @@ private fun TopRow(sync: SyncStatus, onSettings: () -> Unit, onSignIn: () -> Uni
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
     ) {
-        Text(
+        FitText(
             stringResource(R.string.home_title),
             style = MaterialTheme.typography.headlineMediumEmphasized,
             modifier = Modifier.weight(1f).semantics { heading() },
@@ -355,9 +357,8 @@ private fun EventRow(
 ) {
     val value: (@Composable () -> Unit)? = event.value?.let { text ->
         {
-            Text(
+            RowValue(
                 text,
-                style = PrumoType.dataSmall,
                 color = if (event.positive) {
                     PrumoTheme.extendedColors.success
                 } else {

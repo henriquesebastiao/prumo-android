@@ -37,8 +37,12 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import com.henriquesebastiao.prumo.core.designsystem.component.BackButton
 import com.henriquesebastiao.prumo.core.designsystem.component.ChoiceGroup
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupNote
+import com.henriquesebastiao.prumo.core.designsystem.component.IconChoice
+import com.henriquesebastiao.prumo.core.designsystem.component.IconChoiceGroup
+import com.henriquesebastiao.prumo.core.designsystem.component.IconChooser
 import com.henriquesebastiao.prumo.core.designsystem.component.IconOption
 import com.henriquesebastiao.prumo.core.designsystem.component.IconPicker
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
@@ -74,7 +78,7 @@ data class CategorySheetUiState(
     val editing: Category? = null,
     val kind: CategoryKind = CategoryKind.Expense,
     val color: FinanceColor = FinanceColor.Blue,
-    val icon: String = CategoryIcons.first(),
+    val icon: String = "tag",
     val saving: Boolean = false,
     val saveError: AppError? = null,
     /** The category saved (its id), or removed (empty): the sheet closes. */
@@ -240,6 +244,8 @@ internal fun CategorySheetContent(
     modifier: Modifier = Modifier,
 ) {
     val editing = state.editing
+    // "Mais ícones" swaps the sheet's content for every icon, by group (D23); back returns to the form.
+    var choosingIcon by rememberSaveable { mutableStateOf(false) }
     Column(
         modifier
             .fillMaxWidth()
@@ -249,6 +255,13 @@ internal fun CategorySheetContent(
             .padding(bottom = Spacing.xl),
         verticalArrangement = Arrangement.spacedBy(Spacing.lg),
     ) {
+        if (choosingIcon) {
+            IconChoices(state.icon, onBack = { choosingIcon = false }) {
+                events.onIconChange(it)
+                choosingIcon = false
+            }
+            return@Column
+        }
         Text(
             stringResource(if (editing == null) R.string.finance_new_category else R.string.finance_edit_category),
             style = MaterialTheme.typography.titleLarge,
@@ -296,11 +309,20 @@ internal fun CategorySheetContent(
                 )
                 if (locked) GroupNote(stringResource(R.string.finance_kind_locked))
                 Text(stringResource(R.string.finance_icon), style = MaterialTheme.typography.labelLarge)
-                val icons = if (state.icon in CategoryIcons) CategoryIcons else CategoryIcons + state.icon
+                // The common ones and the chosen one; the last button opens all of them.
+                val icons = if (state.icon in
+                    QuickCategoryIcons
+                ) {
+                    QuickCategoryIcons
+                } else {
+                    listOf(state.icon) + QuickCategoryIcons
+                }
                 IconPicker(
                     options = icons.map { IconOption(ServerIcons.of(it), iconLabel(it)) },
                     selected = icons.indexOf(state.icon),
                     onSelect = { events.onIconChange(icons[it]) },
+                    onMore = { choosingIcon = true },
+                    moreLabel = stringResource(R.string.finance_icons_more),
                 )
                 ColorField(state.color, events.onColorChange)
                 if (editing != null) {
@@ -338,6 +360,31 @@ internal fun CategorySheetContent(
             }
         }
     }
+}
+
+/** Every category icon, by group, with a search; [onSelect] picks one and returns to the form. */
+@Composable
+private fun IconChoices(selected: String, onBack: () -> Unit, onSelect: (String) -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+        BackButton(onBack)
+        Text(
+            stringResource(R.string.finance_icons_title),
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.semantics { heading() },
+        )
+    }
+    IconChooser(
+        groups = CategoryIconGroups.map { group ->
+            IconChoiceGroup(
+                stringResource(group.title),
+                group.names.map { IconChoice(it, ServerIcons.of(it), iconLabel(it)) },
+            )
+        },
+        selected = selected,
+        onSelect = onSelect,
+        searchLabel = stringResource(R.string.finance_icons_search),
+        emptyText = stringResource(R.string.finance_icons_none),
+    )
 }
 
 @PhonePreviews

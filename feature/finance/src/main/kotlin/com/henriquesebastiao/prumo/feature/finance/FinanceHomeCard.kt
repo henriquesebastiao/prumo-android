@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
@@ -55,10 +56,9 @@ internal fun FinanceHomeCard(
             onClick = onOpen,
         ) {
             if (summary != null) {
-                Text(
+                FitText(
                     Formats.money(summary.totalBalanceCents, currency),
                     style = if (hero) PrumoType.dataDisplay else PrumoType.dataLarge,
-                    maxLines = 1,
                 )
                 if (hero) Details(summary, currency)
             }

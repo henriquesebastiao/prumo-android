@@ -173,6 +173,14 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 **Decisão:** o mantenedor escolheu o **Cristal**: o peso do prumo como um losango de duas faces (branca e lilás `#CFB6F2`) preso ao fio, sobre o roxo `#6A4F86`. Ícone adaptativo de 108 dp com o desenho na zona segura de 66 dp; o monocromático (ícones temáticos do Android 13+) tem a segunda face a 55 %. O splash mostra o mesmo ícone: o desenho sobre um círculo roxo (`windowSplashScreenIconBackgroundColor`).
 **Consequências:** as cores do ícone ficam em `app/src/main/res/values/colors.xml` (`launcher_*`); trocar o seed do app é trocar essas três também.
 
+## D23 — Valores e títulos numa linha só, e 80 ícones de categoria
+**Status:** aceita · 2026-11
+**Contexto:** num aparelho com tela mais estreita ou fonte maior, o saldo total do Início perdia o último dígito (uma linha cortada), o saldo das contas e o título de Configurações quebravam em duas linhas. O mantenedor pediu que nada disso aconteça: o que não cabe diminui. Pediu também uma variedade bem maior de ícones de categoria.
+**Decisão:**
+- `FitText` (`:core:designsystem`): uma linha, sem quebra e sem corte; a fonte desce de 1 em 1 sp até um mínimo (11 sp nos valores, 16 sp nos títulos da barra, 24 sp na saudação) e só abaixo dele vira reticências. Usado em todo valor (dinheiro, km, percentuais, contagens), nos títulos da barra superior (grande e pequena), na saudação do Início, nos títulos e rótulos de cartão e no `KpiTile` (rótulos até 8 sp). O valor à direita de uma linha de lista (`RowValue`) tem no máximo 96 dp: um valor grande diminui em vez de espremer o nome e a linha de apoio em várias linhas. Nomes e frases (título de livro, descrição de transação, textos de apoio) continuam podendo ocupar duas linhas.
+- Ícones de categoria: 80 nomes do Lucide em oito grupos (casa, alimentação, transporte, saúde e cuidado, lazer, pessoal e família, trabalho e estudo, dinheiro e contas), os mesmos da web (D45 do servidor; o ícone continua um nome livre na API, sem mudança no contrato). A folha da categoria mostra sete escolhas rápidas (mais o ícone atual) e "Mais ícones", que troca o conteúdo da folha pelo seletor completo (`IconChooser`): os grupos e uma busca pelo nome em pt-BR que ignora acentos ("farmacia" acha Farmácia). Cada nome é desenhado pelo Material Symbol mais próximo (`ServerIcons`). `ticket` (Lazer) passou a ser o ingresso (`confirmation_number`), e `party-popper` (Festas) ficou com o confete. Uma categoria nova começa com `tag` (Outros), o padrão do servidor.
+**Consequências:** um valor muito longo numa tela estreita fica menor, nunca cortado nem em duas linhas. Um ícone novo precisa entrar no app (`ServerIcons`, `CategoryIconGroups`, o rótulo `finance_icon_*`) e na web; um cliente que não o conhece mostra o ícone genérico.
+
 ---
 
 ## Modelo

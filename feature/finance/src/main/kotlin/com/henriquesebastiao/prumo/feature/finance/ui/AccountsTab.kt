@@ -28,6 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.EmptyState
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupNote
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
@@ -35,6 +36,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoTopBar
 import com.henriquesebastiao.prumo.core.designsystem.component.RowAction
+import com.henriquesebastiao.prumo.core.designsystem.component.RowValue
 import com.henriquesebastiao.prumo.core.designsystem.theme.ListStyle
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
@@ -138,7 +140,7 @@ internal fun accountRow(account: Account, context: FinanceContext, onClick: () -
         action = RowAction.Click(
             onClick = onClick,
             chevron = false,
-            trailing = { Text(context.money(account.balanceCents), style = PrumoType.dataSmall) },
+            trailing = { RowValue(context.money(account.balanceCents)) },
         ),
         leading = { FinanceAvatar(account.color, account.icon) },
     )
@@ -181,7 +183,7 @@ internal fun AccountsTab(state: AccountsUiState, events: AccountsEvents, modifie
                             style = MaterialTheme.typography.titleMedium,
                             modifier = Modifier.weight(1f),
                         )
-                        Text(state.context.money(state.totalBalanceCents), style = PrumoType.dataMedium)
+                        FitText(state.context.money(state.totalBalanceCents), style = PrumoType.dataMedium)
                     }
                 }
                 item { GroupNote(stringResource(R.string.finance_accounts_note)) }

@@ -41,6 +41,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
 import com.henriquesebastiao.prumo.core.designsystem.component.ErrorCard
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
@@ -283,7 +284,7 @@ private fun KmCard(vehicle: Vehicle, context: GarageContext, onUpdate: () -> Uni
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                Text(Formats.km(vehicle.currentKm), style = PrumoType.dataHeadline)
+                FitText(Formats.km(vehicle.currentKm), style = PrumoType.dataHeadline)
                 Text(
                     stringResource(R.string.garage_updated_at, whenText(vehicle.currentKmAt, context)),
                     style = MaterialTheme.typography.bodySmall,

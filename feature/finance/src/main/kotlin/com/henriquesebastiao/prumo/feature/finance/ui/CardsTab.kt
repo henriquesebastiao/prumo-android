@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.henriquesebastiao.prumo.core.designsystem.component.EmptyState
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedListItem
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
@@ -110,11 +111,9 @@ private fun CardSummary(card: CreditCard, context: FinanceContext, onClick: () -
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
             // Board 12: the amount on one line, beside the status (it never breaks in the middle).
-            Text(
+            FitText(
                 context.money(invoice.amountCents),
                 style = PrumoType.dataHeadline,
-                maxLines = 1,
-                softWrap = false,
                 modifier = Modifier.weight(1f, fill = false),
             )
             StatusChip(invoice.status.label(), invoice.status.tone())

@@ -17,6 +17,10 @@ object PrumoIcons {
 
     @DrawableRes val AddPhotoAlternate = R.drawable.ic_add_photo_alternate
 
+    @DrawableRes val Apartment = R.drawable.ic_apartment
+
+    @DrawableRes val Apps = R.drawable.ic_apps
+
     @DrawableRes val Archive = R.drawable.ic_archive
 
     @DrawableRes val ArrowBack = R.drawable.ic_arrow_back
@@ -27,7 +31,15 @@ object PrumoIcons {
 
     @DrawableRes val AutoStories = R.drawable.ic_auto_stories
 
+    @DrawableRes val BakeryDining = R.drawable.ic_bakery_dining
+
+    @DrawableRes val Balance = R.drawable.ic_balance
+
     @DrawableRes val BarChart = R.drawable.ic_bar_chart
+
+    @DrawableRes val BeachAccess = R.drawable.ic_beach_access
+
+    @DrawableRes val Bolt = R.drawable.ic_bolt
 
     @DrawableRes val Bookmark = R.drawable.ic_bookmark
 
@@ -35,9 +47,13 @@ object PrumoIcons {
 
     @DrawableRes val Build = R.drawable.ic_build
 
+    @DrawableRes val Cake = R.drawable.ic_cake
+
     @DrawableRes val Calculate = R.drawable.ic_calculate
 
     @DrawableRes val CalendarMonth = R.drawable.ic_calendar_month
+
+    @DrawableRes val Camping = R.drawable.ic_camping
 
     @DrawableRes val Category = R.drawable.ic_category
 
@@ -53,6 +69,12 @@ object PrumoIcons {
 
     @DrawableRes val ChevronRight = R.drawable.ic_chevron_right
 
+    @DrawableRes val ChildCare = R.drawable.ic_child_care
+
+    @DrawableRes val Church = R.drawable.ic_church
+
+    @DrawableRes val CleaningServices = R.drawable.ic_cleaning_services
+
     @DrawableRes val Close = R.drawable.ic_close
 
     @DrawableRes val CloudAlert = R.drawable.ic_cloud_alert
@@ -67,7 +89,11 @@ object PrumoIcons {
 
     @DrawableRes val Computer = R.drawable.ic_computer
 
+    @DrawableRes val ConfirmationNumber = R.drawable.ic_confirmation_number
+
     @DrawableRes val Construction = R.drawable.ic_construction
+
+    @DrawableRes val ContentCut = R.drawable.ic_content_cut
 
     @DrawableRes val Contrast = R.drawable.ic_contrast
 
@@ -77,7 +103,13 @@ object PrumoIcons {
 
     @DrawableRes val Delete = R.drawable.ic_delete
 
+    @DrawableRes val Dentistry = R.drawable.ic_dentistry
+
+    @DrawableRes val Description = R.drawable.ic_description
+
     @DrawableRes val Devices = R.drawable.ic_devices
+
+    @DrawableRes val Diamond = R.drawable.ic_diamond
 
     @DrawableRes val DirectionsBus = R.drawable.ic_directions_bus
 
@@ -91,9 +123,9 @@ object PrumoIcons {
 
     @DrawableRes val DoneAll = R.drawable.ic_done_all
 
-    @DrawableRes val Download = R.drawable.ic_download
-
     @DrawableRes val DonutSmall = R.drawable.ic_donut_small
+
+    @DrawableRes val Download = R.drawable.ic_download
 
     @DrawableRes val DragIndicator = R.drawable.ic_drag_indicator
 
@@ -101,15 +133,25 @@ object PrumoIcons {
 
     @DrawableRes val EditNote = R.drawable.ic_edit_note
 
+    @DrawableRes val EmojiEvents = R.drawable.ic_emoji_events
+
     @DrawableRes val Error = R.drawable.ic_error
 
     @DrawableRes val ErrorFilled = R.drawable.ic_error_filled
 
     @DrawableRes val Event = R.drawable.ic_event
 
+    @DrawableRes val Eyeglasses = R.drawable.ic_eyeglasses
+
+    @DrawableRes val FitnessCenter = R.drawable.ic_fitness_center
+
     @DrawableRes val Flight = R.drawable.ic_flight
 
     @DrawableRes val FormatColorFill = R.drawable.ic_format_color_fill
+
+    @DrawableRes val Group = R.drawable.ic_group
+
+    @DrawableRes val Handyman = R.drawable.ic_handyman
 
     @DrawableRes val HealthAndSafety = R.drawable.ic_health_and_safety
 
@@ -119,11 +161,15 @@ object PrumoIcons {
 
     @DrawableRes val Home = R.drawable.ic_home
 
+    @DrawableRes val Icecream = R.drawable.ic_icecream
+
     @DrawableRes val Image = R.drawable.ic_image
 
     @DrawableRes val Info = R.drawable.ic_info
 
     @DrawableRes val Inventory2 = R.drawable.ic_inventory_2
+
+    @DrawableRes val Key = R.drawable.ic_key
 
     @DrawableRes val LibraryAdd = R.drawable.ic_library_add
 
@@ -131,7 +177,19 @@ object PrumoIcons {
 
     @DrawableRes val Link = R.drawable.ic_link
 
+    @DrawableRes val LocalCafe = R.drawable.ic_local_cafe
+
+    @DrawableRes val LocalFireDepartment = R.drawable.ic_local_fire_department
+
     @DrawableRes val LocalGasStation = R.drawable.ic_local_gas_station
+
+    @DrawableRes val LocalLaundryService = R.drawable.ic_local_laundry_service
+
+    @DrawableRes val LocalParking = R.drawable.ic_local_parking
+
+    @DrawableRes val LocalPizza = R.drawable.ic_local_pizza
+
+    @DrawableRes val LocalTaxi = R.drawable.ic_local_taxi
 
     @DrawableRes val Lock = R.drawable.ic_lock
 
@@ -141,17 +199,29 @@ object PrumoIcons {
 
     @DrawableRes val Logout = R.drawable.ic_logout
 
+    @DrawableRes val Map = R.drawable.ic_map
+
+    @DrawableRes val Medication = R.drawable.ic_medication
+
     @DrawableRes val MenuBook = R.drawable.ic_menu_book
 
     @DrawableRes val MoreHoriz = R.drawable.ic_more_horiz
 
     @DrawableRes val MoreVert = R.drawable.ic_more_vert
 
+    @DrawableRes val Movie = R.drawable.ic_movie
+
+    @DrawableRes val MusicNote = R.drawable.ic_music_note
+
     @DrawableRes val NetworkCheck = R.drawable.ic_network_check
 
     @DrawableRes val Notes = R.drawable.ic_notes
 
+    @DrawableRes val Nutrition = R.drawable.ic_nutrition
+
     @DrawableRes val OilBarrel = R.drawable.ic_oil_barrel
+
+    @DrawableRes val Package = R.drawable.ic_package_2
 
     @DrawableRes val Paid = R.drawable.ic_paid
 
@@ -159,11 +229,17 @@ object PrumoIcons {
 
     @DrawableRes val Payments = R.drawable.ic_payments
 
+    @DrawableRes val PedalBike = R.drawable.ic_pedal_bike
+
+    @DrawableRes val Percent = R.drawable.ic_percent
+
     @DrawableRes val Person = R.drawable.ic_person
 
     @DrawableRes val Pets = R.drawable.ic_pets
 
     @DrawableRes val PhotoCamera = R.drawable.ic_photo_camera
+
+    @DrawableRes val Psychology = R.drawable.ic_psychology
 
     @DrawableRes val ReceiptLong = R.drawable.ic_receipt_long
 
@@ -185,13 +261,25 @@ object PrumoIcons {
 
     @DrawableRes val Settings = R.drawable.ic_settings
 
+    @DrawableRes val Shield = R.drawable.ic_shield
+
     @DrawableRes val ShoppingBag = R.drawable.ic_shopping_bag
+
+    @DrawableRes val ShoppingCart = R.drawable.ic_shopping_cart
 
     @DrawableRes val Smartphone = R.drawable.ic_smartphone
 
     @DrawableRes val Sort = R.drawable.ic_sort
 
+    @DrawableRes val Spa = R.drawable.ic_spa
+
     @DrawableRes val Speed = R.drawable.ic_speed
+
+    @DrawableRes val SportsBar = R.drawable.ic_sports_bar
+
+    @DrawableRes val SportsEsports = R.drawable.ic_sports_esports
+
+    @DrawableRes val Stethoscope = R.drawable.ic_stethoscope
 
     @DrawableRes val StickyNote2 = R.drawable.ic_sticky_note_2
 
@@ -203,9 +291,13 @@ object PrumoIcons {
 
     @DrawableRes val SwapVert = R.drawable.ic_swap_vert
 
+    @DrawableRes val Train = R.drawable.ic_train
+
     @DrawableRes val TrendingUp = R.drawable.ic_trending_up
 
     @DrawableRes val Tune = R.drawable.ic_tune
+
+    @DrawableRes val Tv = R.drawable.ic_tv
 
     @DrawableRes val TwoWheeler = R.drawable.ic_two_wheeler
 
@@ -215,6 +307,8 @@ object PrumoIcons {
 
     @DrawableRes val VisibilityOff = R.drawable.ic_visibility_off
 
+    @DrawableRes val VolunteerActivism = R.drawable.ic_volunteer_activism
+
     @DrawableRes val Wallet = R.drawable.ic_wallet
 
     @DrawableRes val Warning = R.drawable.ic_warning
@@ -223,7 +317,11 @@ object PrumoIcons {
 
     @DrawableRes val WaterDrop = R.drawable.ic_water_drop
 
+    @DrawableRes val Weekend = R.drawable.ic_weekend
+
     @DrawableRes val Widgets = R.drawable.ic_widgets
+
+    @DrawableRes val Wifi = R.drawable.ic_wifi
 
     @DrawableRes val Work = R.drawable.ic_work
 }

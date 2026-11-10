@@ -1,5 +1,6 @@
 package com.henriquesebastiao.prumo.feature.finance.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
@@ -43,57 +44,228 @@ internal fun Preferences?.financeContext(clock: Clock): FinanceContext {
 /** The icons the pickers offer, as the web's (C11, D16): Lucide names stored by the server. */
 internal val AccountIcons = listOf("landmark", "vault", "wallet", "trending-up", "credit-card")
 
-internal val CategoryIcons = listOf(
-    "fuel",
-    "utensils",
-    "house",
-    "ticket",
-    "briefcase",
-    "code-xml",
-    "wrench",
-    "bus",
-    "heart-pulse",
-    "graduation-cap",
-    "shopping-bag",
-    "repeat",
-    "trending-up",
-    "tag",
-    "paw-print",
-    "gift",
-    "plane",
-    "shirt",
-    "banknote",
+/** A group of the category icons' chooser: its title and the icons' names, in the web's order (D23). */
+internal data class IconGroup(@param:StringRes val title: Int, val names: List<String>)
+
+internal val CategoryIconGroups = listOf(
+    IconGroup(
+        R.string.finance_icons_home,
+        listOf(
+            "house",
+            "key",
+            "building",
+            "zap",
+            "droplet",
+            "flame",
+            "wifi",
+            "smartphone",
+            "tv",
+            "sofa",
+            "hammer",
+            "spray-can",
+            "washing-machine",
+        ),
+    ),
+    IconGroup(
+        R.string.finance_icons_food,
+        listOf(
+            "utensils",
+            "shopping-cart",
+            "coffee",
+            "pizza",
+            "croissant",
+            "apple",
+            "beer",
+            "ice-cream-cone",
+            "cake",
+        ),
+    ),
+    IconGroup(
+        R.string.finance_icons_transport,
+        listOf(
+            "car",
+            "fuel",
+            "bus",
+            "train-front",
+            "car-taxi-front",
+            "bike",
+            "square-parking",
+            "wrench",
+            "plane",
+            "map",
+        ),
+    ),
+    IconGroup(
+        R.string.finance_icons_health,
+        listOf(
+            "heart-pulse",
+            "pill",
+            "stethoscope",
+            "toothbrush",
+            "dumbbell",
+            "brain",
+            "scissors",
+            "sparkles",
+            "glasses",
+        ),
+    ),
+    IconGroup(
+        R.string.finance_icons_leisure,
+        listOf(
+            "ticket",
+            "film",
+            "music",
+            "gamepad-2",
+            "book",
+            "party-popper",
+            "trophy",
+            "tent",
+            "tree-palm",
+            "camera",
+            "palette",
+        ),
+    ),
+    IconGroup(
+        R.string.finance_icons_personal,
+        listOf(
+            "shirt",
+            "gem",
+            "baby",
+            "users",
+            "paw-print",
+            "gift",
+            "heart-handshake",
+            "church",
+        ),
+    ),
+    IconGroup(
+        R.string.finance_icons_work,
+        listOf(
+            "briefcase",
+            "laptop",
+            "code-xml",
+            "graduation-cap",
+            "book-open",
+        ),
+    ),
+    IconGroup(
+        R.string.finance_icons_money,
+        listOf(
+            "banknote",
+            "trending-up",
+            "piggy-bank",
+            "coins",
+            "receipt",
+            "credit-card",
+            "repeat",
+            "scale",
+            "percent",
+            "shield",
+            "file-text",
+            "shopping-bag",
+            "store",
+            "package",
+            "tag",
+        ),
+    ),
 )
 
+internal val CategoryIcons: List<String> = CategoryIconGroups.flatMap { it.names }
+
+/** The icons the category sheet shows before "Mais ícones": the most common expenses and incomes. */
+internal val QuickCategoryIcons =
+    listOf("utensils", "shopping-cart", "house", "car", "heart-pulse", "ticket", "banknote")
+
+private val IconLabels = mapOf(
+    "apple" to R.string.finance_icon_apple,
+    "baby" to R.string.finance_icon_baby,
+    "banknote" to R.string.finance_icon_banknote,
+    "beer" to R.string.finance_icon_beer,
+    "bike" to R.string.finance_icon_bike,
+    "book" to R.string.finance_icon_book,
+    "book-open" to R.string.finance_icon_book_open,
+    "brain" to R.string.finance_icon_brain,
+    "briefcase" to R.string.finance_icon_briefcase,
+    "building" to R.string.finance_icon_building,
+    "bus" to R.string.finance_icon_bus,
+    "cake" to R.string.finance_icon_cake,
+    "camera" to R.string.finance_icon_camera,
+    "car" to R.string.finance_icon_car,
+    "car-taxi-front" to R.string.finance_icon_car_taxi_front,
+    "church" to R.string.finance_icon_church,
+    "code-xml" to R.string.finance_icon_code_xml,
+    "coffee" to R.string.finance_icon_coffee,
+    "coins" to R.string.finance_icon_coins,
+    "credit-card" to R.string.finance_icon_credit_card,
+    "croissant" to R.string.finance_icon_croissant,
+    "droplet" to R.string.finance_icon_droplet,
+    "dumbbell" to R.string.finance_icon_dumbbell,
+    "file-text" to R.string.finance_icon_file_text,
+    "film" to R.string.finance_icon_film,
+    "flame" to R.string.finance_icon_flame,
+    "fuel" to R.string.finance_icon_fuel,
+    "gamepad-2" to R.string.finance_icon_gamepad_2,
+    "gem" to R.string.finance_icon_gem,
+    "gift" to R.string.finance_icon_gift,
+    "glasses" to R.string.finance_icon_glasses,
+    "graduation-cap" to R.string.finance_icon_graduation_cap,
+    "hammer" to R.string.finance_icon_hammer,
+    "heart-handshake" to R.string.finance_icon_heart_handshake,
+    "heart-pulse" to R.string.finance_icon_heart_pulse,
+    "house" to R.string.finance_icon_house,
+    "ice-cream-cone" to R.string.finance_icon_ice_cream_cone,
+    "key" to R.string.finance_icon_key,
+    "landmark" to R.string.finance_icon_landmark,
+    "laptop" to R.string.finance_icon_laptop,
+    "map" to R.string.finance_icon_map,
+    "music" to R.string.finance_icon_music,
+    "package" to R.string.finance_icon_package,
+    "palette" to R.string.finance_icon_palette,
+    "party-popper" to R.string.finance_icon_party_popper,
+    "paw-print" to R.string.finance_icon_paw_print,
+    "percent" to R.string.finance_icon_percent,
+    "piggy-bank" to R.string.finance_icon_piggy_bank,
+    "pill" to R.string.finance_icon_pill,
+    "pizza" to R.string.finance_icon_pizza,
+    "plane" to R.string.finance_icon_plane,
+    "receipt" to R.string.finance_icon_receipt,
+    "repeat" to R.string.finance_icon_repeat,
+    "scale" to R.string.finance_icon_scale,
+    "scissors" to R.string.finance_icon_scissors,
+    "shield" to R.string.finance_icon_shield,
+    "shirt" to R.string.finance_icon_shirt,
+    "shopping-bag" to R.string.finance_icon_shopping_bag,
+    "shopping-cart" to R.string.finance_icon_shopping_cart,
+    "smartphone" to R.string.finance_icon_smartphone,
+    "sofa" to R.string.finance_icon_sofa,
+    "sparkles" to R.string.finance_icon_sparkles,
+    "spray-can" to R.string.finance_icon_spray_can,
+    "square-parking" to R.string.finance_icon_square_parking,
+    "stethoscope" to R.string.finance_icon_stethoscope,
+    "store" to R.string.finance_icon_store,
+    "tag" to R.string.finance_icon_tag,
+    "tent" to R.string.finance_icon_tent,
+    "ticket" to R.string.finance_icon_ticket,
+    "toothbrush" to R.string.finance_icon_toothbrush,
+    "train-front" to R.string.finance_icon_train_front,
+    "tree-palm" to R.string.finance_icon_tree_palm,
+    "trending-up" to R.string.finance_icon_trending_up,
+    "trophy" to R.string.finance_icon_trophy,
+    "tv" to R.string.finance_icon_tv,
+    "users" to R.string.finance_icon_users,
+    "utensils" to R.string.finance_icon_utensils,
+    "vault" to R.string.finance_icon_vault,
+    "wallet" to R.string.finance_icon_wallet,
+    "washing-machine" to R.string.finance_icon_washing_machine,
+    "wifi" to R.string.finance_icon_wifi,
+    "wrench" to R.string.finance_icon_wrench,
+    "zap" to R.string.finance_icon_zap,
+)
+
+/** The icon's name in pt-BR ("Mercado"), for the chooser's search and screen readers. */
 @Composable
 @ReadOnlyComposable
-internal fun iconLabel(name: String): String = stringResource(
-    when (name) {
-        "landmark" -> R.string.finance_icon_landmark
-        "vault" -> R.string.finance_icon_vault
-        "wallet" -> R.string.finance_icon_wallet
-        "trending-up" -> R.string.finance_icon_trending_up
-        "credit-card" -> R.string.finance_icon_credit_card
-        "fuel" -> R.string.finance_icon_fuel
-        "utensils" -> R.string.finance_icon_utensils
-        "house" -> R.string.finance_icon_house
-        "ticket" -> R.string.finance_icon_ticket
-        "briefcase" -> R.string.finance_icon_briefcase
-        "code-xml" -> R.string.finance_icon_code_xml
-        "wrench" -> R.string.finance_icon_wrench
-        "bus" -> R.string.finance_icon_bus
-        "heart-pulse" -> R.string.finance_icon_heart_pulse
-        "graduation-cap" -> R.string.finance_icon_graduation_cap
-        "shopping-bag" -> R.string.finance_icon_shopping_bag
-        "repeat" -> R.string.finance_icon_repeat
-        "paw-print" -> R.string.finance_icon_paw_print
-        "gift" -> R.string.finance_icon_gift
-        "plane" -> R.string.finance_icon_plane
-        "shirt" -> R.string.finance_icon_shirt
-        "banknote" -> R.string.finance_icon_banknote
-        else -> R.string.finance_icon_tag
-    },
-)
+internal fun iconLabel(name: String): String = stringResource(IconLabels[name] ?: R.string.finance_icon_tag)
 
 @Composable
 @ReadOnlyComposable

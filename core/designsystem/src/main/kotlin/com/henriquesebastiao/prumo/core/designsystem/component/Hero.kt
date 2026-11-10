@@ -20,7 +20,7 @@ import com.henriquesebastiao.prumo.core.designsystem.theme.Spacing
 
 /**
  * The wide display title of the welcome ("Prumo") and of the Home's greeting ([small]: "Boa tarde"),
- * with an optional subtitle under it. One per screen. A long word steps the title down. [centered]
+ * with an optional subtitle under it. One per screen, on one line: a long word steps the title down. [centered]
  * centers both (the welcome).
  */
 @Composable
@@ -38,12 +38,11 @@ fun HeroHeader(
         horizontalAlignment = if (centered) Alignment.CenterHorizontally else Alignment.Start,
     ) {
         val style = if (small) PrumoType.heroSmall else PrumoType.hero
-        Text(
+        FitText(
             title,
             style = style,
-            maxLines = 2,
             textAlign = align,
-            autoSize = TextAutoSize.StepBased(minFontSize = 28.sp, maxFontSize = style.fontSize, stepSize = 2.sp),
+            minFontSize = 24.sp,
             modifier = Modifier.semantics { heading() },
         )
         if (subtitle != null) {

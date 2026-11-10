@@ -34,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedList
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
@@ -286,7 +287,7 @@ private fun TransactionContent(transaction: Transaction, state: TransactionDetai
     ) {
         SectionCard(tone = SectionTone.Container, hero = true) {
             SeededAvatar(transaction.seed(), transaction.icon(), cookie = true, size = 56.dp)
-            Text(
+            FitText(
                 signedAmount(transaction.kind, transaction.amountCents, context.currency),
                 style = PrumoType.dataDisplay,
                 color = amountColor(transaction.kind, transaction.amountCents),

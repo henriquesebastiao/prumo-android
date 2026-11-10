@@ -6,9 +6,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.GroupedRow
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.RowAction
+import com.henriquesebastiao.prumo.core.designsystem.component.RowValue
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoType
 import com.henriquesebastiao.prumo.core.model.Formats
 import com.henriquesebastiao.prumo.feature.garage.R
@@ -45,7 +47,9 @@ internal fun maintenanceRow(
         action = RowAction.Click(
             onClick = onClick,
             chevron = false,
-            trailing = { Text(Formats.money(maintenance.totalCents, context.currency), style = PrumoType.dataSmall) },
+            trailing = {
+                RowValue(Formats.money(maintenance.totalCents, context.currency))
+            },
         ),
     )
 }

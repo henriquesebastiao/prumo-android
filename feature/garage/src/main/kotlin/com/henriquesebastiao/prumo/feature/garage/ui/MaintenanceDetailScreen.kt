@@ -36,6 +36,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.henriquesebastiao.prumo.core.data.repository.AccountRepository
 import com.henriquesebastiao.prumo.core.designsystem.component.ConfirmDialog
+import com.henriquesebastiao.prumo.core.designsystem.component.FitText
 import com.henriquesebastiao.prumo.core.designsystem.component.KpiTile
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
@@ -338,7 +339,7 @@ private fun Values(maintenance: Maintenance, currency: String) {
                 style = MaterialTheme.typography.titleMediumEmphasized,
                 modifier = Modifier.weight(1f),
             )
-            Text(Formats.money(maintenance.totalCents, currency), style = PrumoType.dataLarge)
+            FitText(Formats.money(maintenance.totalCents, currency), style = PrumoType.dataLarge)
         }
     }
 }
@@ -360,7 +361,7 @@ private fun ValueRow(label: String, value: String, detail: String? = null, muted
                 )
             }
         }
-        Text(value, style = PrumoType.dataMedium)
+        FitText(value, style = PrumoType.dataMedium)
     }
 }
 

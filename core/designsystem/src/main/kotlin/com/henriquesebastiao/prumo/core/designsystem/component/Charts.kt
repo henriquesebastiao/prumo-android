@@ -129,9 +129,9 @@ fun LegendRow(color: Color, label: String, value: String, share: String?, modifi
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f),
         )
-        Text(value, style = PrumoType.dataSmall)
+        FitText(value, style = PrumoType.dataSmall)
         if (share != null) {
-            Text(
+            FitText(
                 share,
                 style = PrumoType.dataSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
