@@ -42,6 +42,14 @@ class ReadingViewModelsTest {
     }
 
     @Test
+    fun pullingAsksTheServerAndLoadsAgain() = runTest {
+        val vm = ShelfViewModel(repository)
+        vm.pull()
+        assertEquals(1, repository.expired)
+        assertFalse(vm.state.value.refreshing)
+    }
+
+    @Test
     fun theStatusFiltersExcludeEachOtherAndOwningCombines() = runTest {
         val vm = ShelfViewModel(repository)
 

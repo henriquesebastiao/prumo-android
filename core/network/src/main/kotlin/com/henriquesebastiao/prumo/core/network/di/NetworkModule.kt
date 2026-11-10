@@ -1,6 +1,7 @@
 package com.henriquesebastiao.prumo.core.network.di
 
 import com.henriquesebastiao.prumo.core.network.AuthInterceptor
+import com.henriquesebastiao.prumo.core.network.CachingInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +13,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 
-/** The client of the API calls: bearer on the session's server, the usual timeouts. */
+/**
+ * The client of the API calls: answers kept on the device (D21), the bearer on the session's server and
+ * the usual timeouts.
+ */
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ApiClient
@@ -37,10 +41,12 @@ object NetworkModule {
     @Provides
     @Singleton
     @ApiClient
-    fun apiClient(auth: AuthInterceptor): OkHttpClient = OkHttpClient.Builder()
+    fun apiClient(cache: CachingInterceptor, auth: AuthInterceptor): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(CONNECT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(READ_SECONDS, TimeUnit.SECONDS)
         .writeTimeout(READ_SECONDS, TimeUnit.SECONDS)
+        // First: an answer from the device needs no token; one from the server goes through auth.
+        .addInterceptor(cache)
         .addInterceptor(auth)
         .build()
 

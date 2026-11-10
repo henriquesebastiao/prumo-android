@@ -72,6 +72,12 @@ class RecordsViewModel @AssistedInject constructor(
 
     fun refresh() = load(more = false)
 
+    /** Pull to refresh (and "Tentar novamente"): asks the server first, not the device's copy (D21). */
+    fun pull() {
+        repository.expireCache()
+        refresh()
+    }
+
     fun loadMore() = load(more = true)
 
     private fun load(more: Boolean) {
@@ -114,7 +120,7 @@ internal fun RecordsRoute(
         onOpenFueling = { sheet = SheetRequest(SheetKind.Fueling, it.vehicle.id, it.id) },
         onOpenMaintenance = { navigator.navigate(MaintenanceDetail(it.vehicle.id, it.id)) },
         onLoadMore = viewModel::loadMore,
-        onRefresh = viewModel::refresh,
+        onRefresh = viewModel::pull,
         modifier = modifier,
     )
     GarageSheet(sheet, onDismiss = { sheet = null })

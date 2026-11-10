@@ -9,6 +9,7 @@ import com.henriquesebastiao.prumo.core.network.ActiveSession
 import com.henriquesebastiao.prumo.core.network.ApiFactory
 import com.henriquesebastiao.prumo.core.network.SessionGateway
 import com.henriquesebastiao.prumo.core.network.testing.Fixtures
+import com.henriquesebastiao.prumo.core.network.testing.NoCache
 import com.henriquesebastiao.prumo.feature.reading.model.BookInput
 import com.henriquesebastiao.prumo.feature.reading.model.BookStatus
 import com.henriquesebastiao.prumo.feature.reading.model.CoverImage
@@ -50,7 +51,7 @@ class ReadingRepositoryTest {
 
             override fun onUnauthorized(token: String) = Unit
         }
-        repository = DefaultReadingRepository(ServerCalls(ApiFactory(OkHttpClient()), gateway), changes)
+        repository = DefaultReadingRepository(ServerCalls(ApiFactory(OkHttpClient()), gateway, NoCache), changes)
     }
 
     @After

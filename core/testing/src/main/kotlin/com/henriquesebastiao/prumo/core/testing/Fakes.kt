@@ -23,6 +23,8 @@ import com.henriquesebastiao.prumo.core.model.ServerCheck
 import com.henriquesebastiao.prumo.core.model.SessionClient
 import com.henriquesebastiao.prumo.core.model.ThemeMode
 import com.henriquesebastiao.prumo.core.model.User
+import com.henriquesebastiao.prumo.core.network.CachedResponse
+import com.henriquesebastiao.prumo.core.network.ResponseCache
 import java.time.Instant
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -184,5 +186,31 @@ class FakeDevicePreferences(initial: DevicePreferences = DevicePreferences()) : 
 
     override suspend fun setPinnedActions(ids: List<String>) {
         mutable.value = mutable.value.copy(pinnedActions = ids)
+    }
+}
+
+/** The device's copy of the server's answers, in memory; counts each [expire] (a pull to refresh). */
+class FakeResponseCache : ResponseCache {
+    val responses = mutableMapOf<String, CachedResponse>()
+    var expired = 0
+    val changedPaths = mutableListOf<String>()
+
+    override fun read(path: String): CachedResponse? = responses[path]
+
+    override fun write(path: String, body: String, fetchedAt: Instant, stale: Boolean) {
+        responses[path] = CachedResponse(body, fetchedAt, stale)
+    }
+
+    override fun remove(path: String) {
+        responses -= path
+    }
+
+    override fun expire() {
+        expired++
+        responses.replaceAll { _, response -> response.copy(stale = true) }
+    }
+
+    override fun changed(path: String) {
+        changedPaths += path
     }
 }

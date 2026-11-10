@@ -14,13 +14,17 @@ import com.henriquesebastiao.prumo.core.data.repository.DefaultDashboardReposito
 import com.henriquesebastiao.prumo.core.data.repository.DefaultDataExportRepository
 import com.henriquesebastiao.prumo.core.data.repository.DefaultServerRepository
 import com.henriquesebastiao.prumo.core.data.repository.DevicePreferencesRepository
+import com.henriquesebastiao.prumo.core.data.repository.ResponseStore
 import com.henriquesebastiao.prumo.core.data.repository.ServerRepository
+import com.henriquesebastiao.prumo.core.data.repository.ServerStatusRepository
 import com.henriquesebastiao.prumo.core.data.session.AndroidDeviceInfo
 import com.henriquesebastiao.prumo.core.data.session.DefaultSessionRepository
 import com.henriquesebastiao.prumo.core.data.session.DeviceInfo
 import com.henriquesebastiao.prumo.core.data.session.KeystoreTokenCipher
 import com.henriquesebastiao.prumo.core.data.session.SessionRepository
 import com.henriquesebastiao.prumo.core.data.session.TokenCipher
+import com.henriquesebastiao.prumo.core.network.ResponseCache
+import com.henriquesebastiao.prumo.core.network.ServerReachability
 import com.henriquesebastiao.prumo.core.network.SessionGateway
 import dagger.Binds
 import dagger.Module
@@ -99,4 +103,10 @@ abstract class DataBindingsModule {
 
     @Binds
     abstract fun dataExport(impl: DefaultDataExportRepository): DataExportRepository
+
+    @Binds
+    abstract fun responseCache(impl: ResponseStore): ResponseCache
+
+    @Binds
+    abstract fun serverReachability(impl: ServerStatusRepository): ServerReachability
 }

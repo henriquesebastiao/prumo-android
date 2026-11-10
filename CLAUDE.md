@@ -7,7 +7,7 @@ O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 ## Mapa do repositório
 
 - `app/`: Activity, Application (Hilt), shell de navegação, telas de sistema (primeiro acesso, Início, Configurações) e montagem dos módulos
-- `core/`: `model`, `network`, `data`, `designsystem`, `ui`, `feature`, `testing` (ver "Módulos e regras de dependência")
+- `core/`: `model`, `network`, `data`, `database`, `designsystem`, `ui`, `feature`, `testing` (ver "Módulos e regras de dependência")
 - `feature/`: um módulo Gradle por módulo do Prumo (`finance`, `garage`, `reading`)
 - `build-logic/`: plugins de convenção do Gradle; versões só em `gradle/libs.versions.toml`
 - `design/`: exportações do Claude Design, versionadas em `design/v1/`… É **somente referência visual**: nunca importe nada daqui no código. A versão ativa está em `design/README.md`
@@ -53,12 +53,13 @@ O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 :app ──► :feature:* ──► :core:feature ──► :core:designsystem
                     ──► :core:ui ───────► :core:designsystem, :core:model
                     ──► :core:data ─────► :core:network ──► :core:model
+                                      ──► :core:database (Room)
 :core:testing (fakes, só em testes)
 ```
 
 - `:core:model` e `:core:network` são JVM puro: sem imports do Android. Testes rápidos e baratos; ponha lógica aqui sempre que ela viver sem Android. Eles também rodam no Android, então nada de APIs do JVM mais novas que o API 26 (o Android lint não olha estes módulos).
 - `:core:network` conhece o formato do fio (DTOs, Retrofit, OkHttp). DTOs não saem dele, exceto os resumos do Início, que chegam como `JsonObject` ao `PrumoFeature` de cada módulo.
-- `:core:data` guarda a sessão (Tink + DataStore), as preferências do aparelho e os repositórios do sistema. Repositórios expõem `Flow`/`StateFlow`; a interface nunca chama a API direto.
+- `:core:data` guarda a sessão (Tink + DataStore), as preferências do aparelho, os repositórios do sistema e a cópia das respostas do servidor no Room (`:core:database`, D21: o `CachingInterceptor` responde dela, e pull-to-refresh chama `expireCache()` antes de recarregar). Repositórios expõem `Flow`/`StateFlow`; a interface nunca chama a API direto.
 - `:core:designsystem` tem tema, tokens, ícones e componentes; `:core:ui` tem os estados de carregando, vazio, erro e sem conexão, os textos de erro por `code` e os formatadores Compose.
 - `:core:feature` define o contrato `PrumoFeature`. Cada `:feature:<id>` implementa o seu e o registra no Hilt (`@IntoSet`).
 - `:feature:X` nunca depende de outro `:feature:*`: o plugin `prumo.android.feature` falha o build. Integração entre módulos é do servidor (eventos).

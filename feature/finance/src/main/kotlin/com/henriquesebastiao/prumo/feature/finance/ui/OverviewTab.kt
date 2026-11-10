@@ -92,6 +92,12 @@ class OverviewViewModel @Inject constructor(
         viewModelScope.launch { repository.changes.collect { load() } }
     }
 
+    /** Pull to refresh in any tab: every read of Finanças asks the server first (D21). */
+    fun pull() {
+        repository.expireCache()
+        load()
+    }
+
     /** The overview of the selected month (F12); what is on screen stays while it loads. */
     fun load() {
         val month = mutableState.value.month

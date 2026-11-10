@@ -7,6 +7,7 @@ import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.core.network.ActiveSession
 import com.henriquesebastiao.prumo.core.network.ApiFactory
 import com.henriquesebastiao.prumo.core.network.SessionGateway
+import com.henriquesebastiao.prumo.core.network.testing.NoCache
 import java.io.ByteArrayOutputStream
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -44,7 +45,11 @@ class DataExportRepositoryTest {
 
             override fun onUnauthorized(token: String) = Unit
         }
-        return DefaultDataExportRepository(context, ServerCalls(ApiFactory(OkHttpClient()), gateway), dispatcher)
+        return DefaultDataExportRepository(
+            context,
+            ServerCalls(ApiFactory(OkHttpClient()), gateway, NoCache),
+            dispatcher,
+        )
     }
 
     @Test

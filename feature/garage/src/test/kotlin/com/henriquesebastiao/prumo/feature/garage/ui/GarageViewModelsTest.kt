@@ -35,6 +35,15 @@ class GarageViewModelsTest {
     private val strada = GaragePreview.strada
 
     @Test
+    fun pullingAsksTheServerAndLoadsAgain() = runTest {
+        val vm = VehicleListViewModel(archived = false, repository, account, clock)
+        repository.vehicles = listOf(cg)
+        vm.pull()
+        assertEquals(1, repository.expired)
+        assertEquals(listOf(cg.id), vm.state.value.vehicles.map { it.id })
+    }
+
+    @Test
     fun theListLoadsAndReloadsAfterAWrite() = runTest {
         val vm = VehicleListViewModel(archived = false, repository, account, clock)
         assertEquals(listOf(cg.id, strada.id), vm.state.value.vehicles.map { it.id })

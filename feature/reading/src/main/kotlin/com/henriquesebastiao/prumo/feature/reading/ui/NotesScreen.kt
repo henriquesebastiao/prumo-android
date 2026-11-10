@@ -80,6 +80,12 @@ class NotesViewModel @Inject constructor(private val repository: ReadingReposito
         viewModelScope.launch { repository.changes.collect { load(refresh = true) } }
     }
 
+    /** Pull to refresh (and "Tentar novamente"): asks the server first, not the device's copy (D21). */
+    fun pull() {
+        repository.expireCache()
+        load(refresh = true)
+    }
+
     fun load(refresh: Boolean = false) {
         loading?.cancel()
         mutableState.update {
@@ -147,7 +153,7 @@ internal fun NotesRoute(
             onSearch = viewModel::search,
             onOpen = { sheet = SheetRequest(SheetKind.Note, it.bookId, it.id) },
             onLoadMore = viewModel::loadMore,
-            onRefresh = { viewModel.load(refresh = true) },
+            onRefresh = viewModel::pull,
         ),
         onBack = navigator::back,
         modifier = modifier,

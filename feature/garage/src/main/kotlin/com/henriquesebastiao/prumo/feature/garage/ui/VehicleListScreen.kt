@@ -94,6 +94,12 @@ class VehicleListViewModel @AssistedInject constructor(
         viewModelScope.launch { repository.changes.collect { load() } }
     }
 
+    /** Pull to refresh (and "Tentar novamente"): asks the server first, not the device's copy (D21). */
+    fun pull() {
+        repository.expireCache()
+        load()
+    }
+
     /** Loads the vehicles; what is on screen stays while it loads. */
     fun load() {
         mutableState.update { it.copy(refreshing = !it.loading, error = null) }
@@ -142,7 +148,7 @@ internal fun VehicleListRoute(
             onOilChange = { navigator.navigate(MaintenanceEditor(oilChange = true)) },
             onFueling = { sheet = SheetRequest(SheetKind.Fueling) },
         ),
-        onRefresh = viewModel::load,
+        onRefresh = viewModel::pull,
         modifier = modifier,
     )
     GarageSheet(sheet, onDismiss = { sheet = null })

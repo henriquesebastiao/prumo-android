@@ -156,6 +156,12 @@ class ShelfViewModel @Inject constructor(private val repository: ReadingReposito
         viewModelScope.launch { repository.changes.collect { load(refresh = true) } }
     }
 
+    /** Pull to refresh (and "Tentar novamente"): asks the server first, not the device's copy (D21). */
+    fun pull() {
+        repository.expireCache()
+        load(refresh = true)
+    }
+
     fun load(refresh: Boolean = false) {
         loading?.cancel()
         mutableState.update { it.copy(loading = !refresh && it.books.isEmpty(), refreshing = refresh, error = null) }
@@ -236,7 +242,7 @@ internal fun ShelfRoute(
             onOwned = viewModel::selectOwned,
             onYear = viewModel::selectYear,
             onSearch = viewModel::search,
-            onRefresh = { viewModel.load(refresh = true) },
+            onRefresh = viewModel::pull,
             onOrder = viewModel::setOrder,
         ),
         actions = ReadingActions(

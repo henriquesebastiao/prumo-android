@@ -26,6 +26,13 @@ class FakeReadingRepository(var books: List<Book> = PreviewBooks.shelf, var note
     private val mutableChanges = MutableSharedFlow<Unit>(extraBufferCapacity = 8)
     override val changes = mutableChanges
 
+    /** Pulls to refresh. */
+    var expired = 0
+
+    override fun expireCache() {
+        expired++
+    }
+
     override var lastBookId: String? = null
 
     var failure: AppError? = null

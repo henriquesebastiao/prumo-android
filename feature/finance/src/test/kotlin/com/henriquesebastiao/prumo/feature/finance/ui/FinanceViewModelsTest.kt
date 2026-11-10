@@ -35,6 +35,14 @@ class FinanceViewModelsTest {
     private val repository = FakeFinanceRepository()
 
     @Test
+    fun pullingAsksTheServerFirst() = runTest {
+        val vm = OverviewViewModel(repository, account, clock)
+        vm.pull()
+        assertEquals(1, repository.expired)
+        assertEquals(2, repository.overviewMonths.size)
+    }
+
+    @Test
     fun theOverviewMovesBetweenMonths() = runTest {
         val vm = OverviewViewModel(repository, account, clock)
         assertEquals(YearMonth.of(2026, 11), vm.state.value.month)

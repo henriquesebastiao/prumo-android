@@ -33,6 +33,9 @@ interface ReadingRepository {
     /** Emits after each successful write of Livros. */
     val changes: Flow<Unit>
 
+    /** Pull to refresh: the next reads ask the server before the device's copy (D21). */
+    fun expireCache()
+
     /** The book last used in a sheet during this run of the app, or null (as Veículos does, D15). */
     var lastBookId: String?
 
@@ -85,6 +88,8 @@ class DefaultReadingRepository @Inject constructor(
     private val dataChanges: DataChanges,
 ) : ReadingRepository {
     override val changes: Flow<Unit> = dataChanges.changes.filter { it == READING_MODULE_ID }.map { }
+
+    override fun expireCache() = calls.expireCache()
 
     @Volatile
     override var lastBookId: String? = null

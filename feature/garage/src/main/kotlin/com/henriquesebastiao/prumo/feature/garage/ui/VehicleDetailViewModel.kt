@@ -39,6 +39,8 @@ data class HistoryList<T>(
 
 data class VehicleDetailUiState(
     val loading: Boolean = true,
+    /** A pull to refresh, until the vehicle comes back. */
+    val refreshing: Boolean = false,
     val error: AppError? = null,
     val vehicle: Vehicle? = null,
     val tab: HistoryTab = HistoryTab.Maintenances,
@@ -87,11 +89,23 @@ class VehicleDetailViewModel @AssistedInject constructor(
         }
         viewModelScope.launch {
             when (val outcome = repository.vehicle(vehicleId)) {
-                is Outcome.Ok -> mutableState.update { it.copy(loading = false, vehicle = outcome.value) }
-                is Outcome.Failed -> mutableState.update { it.copy(loading = false, error = outcome.error) }
+                is Outcome.Ok -> mutableState.update {
+                    it.copy(loading = false, refreshing = false, vehicle = outcome.value)
+                }
+
+                is Outcome.Failed -> mutableState.update {
+                    it.copy(loading = false, refreshing = false, error = outcome.error)
+                }
             }
         }
         load(mutableState.value.tab, more = false)
+    }
+
+    /** Pull to refresh: asks the server first, not the device's copy (D21). */
+    fun pull() {
+        mutableState.update { it.copy(refreshing = true) }
+        repository.expireCache()
+        refresh()
     }
 
     fun selectTab(tab: HistoryTab) {

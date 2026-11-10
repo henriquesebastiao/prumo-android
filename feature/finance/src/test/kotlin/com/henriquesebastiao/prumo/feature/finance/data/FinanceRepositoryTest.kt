@@ -9,6 +9,7 @@ import com.henriquesebastiao.prumo.core.network.ActiveSession
 import com.henriquesebastiao.prumo.core.network.ApiFactory
 import com.henriquesebastiao.prumo.core.network.SessionGateway
 import com.henriquesebastiao.prumo.core.network.testing.Fixtures
+import com.henriquesebastiao.prumo.core.network.testing.NoCache
 import com.henriquesebastiao.prumo.feature.finance.model.CardInput
 import com.henriquesebastiao.prumo.feature.finance.model.FinanceColor
 import com.henriquesebastiao.prumo.feature.finance.model.PaymentInput
@@ -48,7 +49,7 @@ class FinanceRepositoryTest {
 
             override fun onUnauthorized(token: String) = Unit
         }
-        repository = DefaultFinanceRepository(ServerCalls(ApiFactory(OkHttpClient()), gateway), changes)
+        repository = DefaultFinanceRepository(ServerCalls(ApiFactory(OkHttpClient()), gateway, NoCache), changes)
     }
 
     @After

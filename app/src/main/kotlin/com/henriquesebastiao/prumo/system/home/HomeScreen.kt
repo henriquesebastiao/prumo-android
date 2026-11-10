@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FloatingToolbarDefaults
 import androidx.compose.material3.HorizontalFloatingToolbar
@@ -88,7 +89,7 @@ fun HomeRoute(
     LaunchedEffect(Unit) { viewModel.refresh() }
     HomeScreen(
         state = state,
-        onRefresh = viewModel::refresh,
+        onRefresh = viewModel::pull,
         onOpenModule = onOpenModule,
         onOpen = onOpen,
         onAction = onAction,
@@ -224,8 +225,16 @@ private fun Cards(
     onOrganizeModules: () -> Unit,
     onRetry: () -> Unit,
 ) {
+    val list = rememberLazyListState()
+    // The card goes in above the hero, and the keyed list keeps the hero where it was: with the list at
+    // its top (the device's copy shown first, D21), bring the card into view.
+    val unreachable = state.sync == SyncStatus.Unreachable
+    LaunchedEffect(unreachable) {
+        if (unreachable && list.firstVisibleItemIndex <= 1) list.animateScrollToItem(0)
+    }
     LazyColumn(
         Modifier.fillMaxSize(),
+        state = list,
         contentPadding = PaddingValues(
             start = Spacing.screen,
             end = Spacing.screen,

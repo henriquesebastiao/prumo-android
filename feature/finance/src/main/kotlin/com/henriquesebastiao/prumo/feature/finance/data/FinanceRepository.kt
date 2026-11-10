@@ -40,6 +40,9 @@ interface FinanceRepository {
     /** Emits after each successful write of Finanças. */
     val changes: Flow<Unit>
 
+    /** Pull to refresh: the next reads ask the server before the device's copy (D21). */
+    fun expireCache()
+
     /** The account last used in a form during this run of the app (A9, D16), or null. */
     var lastAccountId: String?
 
@@ -124,6 +127,8 @@ class DefaultFinanceRepository @Inject constructor(
     private val dataChanges: DataChanges,
 ) : FinanceRepository {
     override val changes: Flow<Unit> = dataChanges.changes.filter { it == FINANCE_MODULE_ID }.map { }
+
+    override fun expireCache() = calls.expireCache()
 
     @Volatile
     override var lastAccountId: String? = null

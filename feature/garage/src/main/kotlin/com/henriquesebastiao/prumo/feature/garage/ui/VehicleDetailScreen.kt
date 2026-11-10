@@ -23,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -84,6 +85,7 @@ internal class VehicleDetailEvents(
     val onOpenMaintenance: (Maintenance) -> Unit,
     val onOpenFueling: (Fueling) -> Unit,
     val onDeleteReading: (String) -> Unit,
+    val onRefresh: () -> Unit = {},
 )
 
 @Composable
@@ -114,6 +116,7 @@ internal fun VehicleDetailRoute(
             onTab = viewModel::selectTab,
             onLoadMore = viewModel::loadMore,
             onRetry = viewModel::refresh,
+            onRefresh = viewModel::pull,
             onOpenMaintenance = { navigator.navigate(MaintenanceDetail(it.vehicle.id, it.id)) },
             onOpenFueling = { sheet = SheetRequest(SheetKind.Fueling, it.vehicle.id, it.id) },
             onDeleteReading = viewModel::deleteReading,
@@ -169,17 +172,19 @@ internal fun VehicleDetailScreen(
 
                 vehicle == null -> ErrorState(state.error ?: AppError.Unexpected(), onRetry = events.onRetry)
 
-                else -> LazyColumn(
-                    Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(
-                        start = Spacing.screen,
-                        end = Spacing.screen,
-                        top = Spacing.sm,
-                        bottom = TOOLBAR_SPACE,
-                    ),
-                ) {
-                    overview(vehicle, state, actions, events)
-                    history(state, events, onDeleteReading = { deleteReading = it })
+                else -> PullToRefreshBox(isRefreshing = state.refreshing, onRefresh = events.onRefresh) {
+                    LazyColumn(
+                        Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(
+                            start = Spacing.screen,
+                            end = Spacing.screen,
+                            top = Spacing.sm,
+                            bottom = TOOLBAR_SPACE,
+                        ),
+                    ) {
+                        overview(vehicle, state, actions, events)
+                        history(state, events, onDeleteReading = { deleteReading = it })
+                    }
                 }
             }
             if (vehicle != null && !vehicle.archived) {

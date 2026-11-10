@@ -155,6 +155,18 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 - Estante: "Tenho" e "Não tenho" são exclusivos entre si (o mesmo de novo mostra os dois) e combinam com qualquer status. Com "Lidos", um chip com menu escolhe o ano (`finished_on`): começa no mais recente, como a web, e tem "Todos os anos". O filtro de ano é sobre a estante inteira que já veio (até 200 livros, como a web), sem nova requisição.
 **Consequências:** um módulo novo pode publicar itens no Início sem mudar o `:app`. Os itens do Início só existem com rede até a Fase 4 (cache).
 
+## D21 — As respostas do servidor guardadas no Room
+**Status:** aceita · 2026-11
+**Contexto:** a Fase 4 pede telas que abrem com dados e funcionam sem o servidor (pranchas 08 e 11: "com dados em cache, eles aparecem na hora e o indicador vira pull-to-refresh"; "mostra os últimos dados em cache, com a hora"). Os valores derivados (saldos, faturas, status do óleo, ritmo de leitura, totais de um filtro) são do servidor e não mudam o `updated_at` dos registros (D41 do servidor): guardar registros soltos e montar as telas com eles faria o app recalcular ou mostrar derivados velhos. As telas leem por repositórios que devolvem `Outcome`.
+**Decisão:**
+- O Room (`:core:database`, `prumo.db`) guarda a última resposta de cada `GET` ao servidor da sessão, inteira e como chegou (o JSON), por conta (`usuário@endereço`) e por caminho com a query. Nada é recalculado nem mesclado: a tela sempre recebe uma resposta inteira do servidor.
+- A regra fica num interceptor do OkHttp (`CachingInterceptor`, `:core:network`), e repositórios e telas não mudam de assinatura. Uma resposta guardada há menos de 30 s responde na hora. Uma mais velha também, e é conferida em segundo plano; se o servidor responde outra coisa, `DataChanges` avisa o módulo do caminho e as telas abertas dele e o Início recarregam. Depois de uma gravação que deu certo (ou de um pull-to-refresh), toda resposta guardada fica velha: a próxima leitura pergunta ao servidor primeiro e só usa a cópia se ele não responde (sem conexão, recusa, tempo esgotado, ou `502`–`504` de um proxy na frente da API parada). Um `404` apaga a cópia daquele caminho.
+- Não são guardados: sessões (`/auth/`), a exportação e `/sync/`. Imagens também não (as capas têm a cache do Coil).
+- Pull-to-refresh marca a cópia como velha e recarrega: Início, Veículos (lista, detalhe, abastecimentos e manutenções), Finanças (as quatro abas) e Livros (estante, detalhe, anotações). As demais telas recarregam pela conferência em segundo plano.
+- O ícone de nuvem do Início segue a última requisição ao servidor (`ServerStatusRepository`): "Servidor inacessível" e "Dados de hoje, 13:05", a hora em que o servidor mandou o resumo guardado.
+- Conta: entrar como outro usuário ou em outro servidor apaga as respostas da conta anterior (S2 do servidor); Sair e Trocar servidor apagam todas; uma sessão expirada as mantém, para o mesmo usuário que entra de novo. O banco já fica fora do backup.
+**Consequências:** sem tabela por entidade nem migração quando o servidor ganha campos (o JSON é lido pelos mesmos DTOs). Só há cópia do que já foi aberto com rede, e uma tela aberta sem rede e sem cópia mostra o erro de sempre. A sincronização incremental e a fila de pendentes, próximos itens da Fase 4, usam o mesmo banco.
+
 ---
 
 ## Modelo

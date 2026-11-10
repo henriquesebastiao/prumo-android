@@ -7,6 +7,8 @@ import com.henriquesebastiao.prumo.core.data.repository.DashboardRepository
 import com.henriquesebastiao.prumo.core.data.repository.DataChanges
 import com.henriquesebastiao.prumo.core.data.repository.DevicePreferencesRepository
 import com.henriquesebastiao.prumo.core.data.repository.LoadedDashboard
+import com.henriquesebastiao.prumo.core.data.repository.ServerStatus
+import com.henriquesebastiao.prumo.core.data.repository.ServerStatusRepository
 import com.henriquesebastiao.prumo.core.data.session.SessionRepository
 import com.henriquesebastiao.prumo.core.data.session.SessionState
 import com.henriquesebastiao.prumo.core.data.session.SignOutReason
@@ -21,6 +23,7 @@ import com.henriquesebastiao.prumo.core.model.Preferences
 import com.henriquesebastiao.prumo.core.model.ServerAddress
 import com.henriquesebastiao.prumo.core.model.UpcomingItem
 import com.henriquesebastiao.prumo.core.model.errorOrNull
+import com.henriquesebastiao.prumo.core.network.ResponseCache
 import com.henriquesebastiao.prumo.system.ModuleRegistry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.Clock
@@ -70,7 +73,8 @@ data class HomeUiState(
     val refreshing: Boolean = false,
 )
 
-private data class LoadStatus(val loading: Boolean = true, val error: AppError? = null)
+/** The last load, and whether the server stopped answering (a request served from the device's copy, D21). */
+private data class LoadStatus(val loading: Boolean = true, val error: AppError? = null, val serverDown: Boolean = false)
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -81,6 +85,8 @@ class HomeViewModel @Inject constructor(
     sessions: SessionRepository,
     private val clock: Clock,
     changes: DataChanges,
+    private val cache: ResponseCache,
+    server: ServerStatusRepository,
 ) : ViewModel() {
     private val status = MutableStateFlow(LoadStatus())
 
@@ -94,7 +100,7 @@ class HomeViewModel @Inject constructor(
         dashboard.last,
         devicePreferences.preferences,
         sessions.state,
-        status,
+        combine(status, server.status) { load, answer -> load.copy(serverDown = answer is ServerStatus.NotAnswering) },
     ) { prefs, last, device, session, load -> build(prefs, last, device, session, load) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), HomeUiState())
 
@@ -106,6 +112,12 @@ class HomeViewModel @Inject constructor(
             val home = dashboard.refresh()
             status.value = LoadStatus(loading = false, error = home.errorOrNull() ?: prefs.errorOrNull())
         }
+    }
+
+    /** Pull to refresh (and "Tentar novamente"): asks the server first, not the device's copy. */
+    fun pull() {
+        cache.expire()
+        refresh()
     }
 
     /** Pins [id] to the toolbar, or unpins it (four at most). */
@@ -154,7 +166,7 @@ class HomeViewModel @Inject constructor(
             server = signedIn?.session?.baseUrl?.let(ServerAddress::display).orEmpty(),
             sync = when {
                 expired || load.error == AppError.SessionExpired -> SyncStatus.SessionExpired
-                load.error is AppError.Unreachable -> SyncStatus.Unreachable
+                load.error is AppError.Unreachable || load.serverDown -> SyncStatus.Unreachable
                 else -> SyncStatus.Synced
             },
             refreshing = load.loading && hasData,

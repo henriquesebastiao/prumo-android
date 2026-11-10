@@ -23,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -94,6 +95,8 @@ import kotlinx.coroutines.launch
 
 data class BookDetailUiState(
     val loading: Boolean = true,
+    /** A pull to refresh, until the book comes back. */
+    val refreshing: Boolean = false,
     val error: AppError? = null,
     val detail: BookDetail? = null,
     val notes: List<Note> = emptyList(),
@@ -123,6 +126,13 @@ class BookDetailViewModel @AssistedInject constructor(
         viewModelScope.launch { repository.changes.collect { if (!mutableState.value.gone) refresh() } }
     }
 
+    /** Pull to refresh: asks the server first, not the device's copy (D21). */
+    fun pull() {
+        mutableState.update { it.copy(refreshing = true) }
+        repository.expireCache()
+        refresh()
+    }
+
     fun refresh() {
         mutableState.update { it.copy(error = null) }
         viewModelScope.launch {
@@ -131,10 +141,17 @@ class BookDetailViewModel @AssistedInject constructor(
                     val before = it.detail?.book?.status
                     val finished =
                         before != null && before != BookStatus.Read && outcome.value.book.status == BookStatus.Read
-                    it.copy(loading = false, detail = outcome.value, celebrating = it.celebrating || finished)
+                    it.copy(
+                        loading = false,
+                        refreshing = false,
+                        detail = outcome.value,
+                        celebrating = it.celebrating || finished,
+                    )
                 }
 
-                is Outcome.Failed -> mutableState.update { it.copy(loading = false, error = outcome.error) }
+                is Outcome.Failed -> mutableState.update {
+                    it.copy(loading = false, refreshing = false, error = outcome.error)
+                }
             }
         }
         viewModelScope.launch {
@@ -215,6 +232,7 @@ internal class BookDetailEvents(
     val onNote: (Note) -> Unit,
     val onRetry: () -> Unit,
     val onActionErrorShown: () -> Unit,
+    val onRefresh: () -> Unit = {},
 )
 
 @Composable
@@ -241,6 +259,7 @@ internal fun BookDetailRoute(
             onMarkRead = viewModel::markRead,
             onNote = { sheet = SheetRequest(SheetKind.Note, bookId, it.id) },
             onRetry = viewModel::refresh,
+            onRefresh = viewModel::pull,
             onActionErrorShown = viewModel::onActionErrorShown,
         ),
         actions = ReadingActions(
@@ -317,7 +336,9 @@ internal fun BookDetailScreen(
                 book == null -> ErrorState(state.error ?: AppError.Unexpected(), onRetry = events.onRetry)
 
                 else -> {
-                    BookContent(state, book, events)
+                    PullToRefreshBox(isRefreshing = state.refreshing, onRefresh = events.onRefresh) {
+                        BookContent(state, book, events)
+                    }
                     ReadingToolbar(actions, Modifier.align(Alignment.BottomCenter).padding(bottom = Spacing.lg))
                 }
             }

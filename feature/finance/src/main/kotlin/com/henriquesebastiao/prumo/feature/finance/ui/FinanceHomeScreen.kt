@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -21,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -83,6 +85,20 @@ internal fun FinanceHomeRoute(
     FinanceHomeScreen(
         tab = tab,
         onTab = { tab = it },
+        // A reload with data on screen (a pull, a record saved) shows the indicator over it.
+        refreshing = when (tab) {
+            FinanceTab.Overview -> overviewState.loading && overviewState.overview != null
+
+            FinanceTab.Transactions -> pages.loadState.refresh is LoadState.Loading && pages.itemCount > 0
+
+            FinanceTab.Accounts, FinanceTab.Cards ->
+                accountsState.loading && (accountsState.accounts.isNotEmpty() || accountsState.cards.isNotEmpty())
+        },
+        onRefresh = {
+            overview.pull()
+            accounts.load()
+            pages.refresh()
+        },
         tabs = FinanceTabs(overviewState, transactionsState, transactions.query, pages, accountsState),
         events = FinanceTabEvents(
             overview = OverviewEvents(
@@ -139,6 +155,8 @@ internal fun FinanceHomeScreen(
     onBack: () -> Unit,
     onCategories: () -> Unit,
     modifier: Modifier = Modifier,
+    refreshing: Boolean = false,
+    onRefresh: () -> Unit = {},
 ) {
     // The large title (board 01) collapses into the small bar as a tab's list scrolls (board 02).
     val scroll = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -170,21 +188,23 @@ internal fun FinanceHomeScreen(
                     onSelect = onTab,
                     modifier = Modifier.padding(horizontal = Spacing.screen, vertical = Spacing.sm),
                 )
-                val content = Modifier.weight(1f)
-                when (tab) {
-                    FinanceTab.Overview -> OverviewTab(tabs.overview, events.overview, content)
+                PullToRefreshBox(isRefreshing = refreshing, onRefresh = onRefresh, modifier = Modifier.weight(1f)) {
+                    val content = Modifier.fillMaxSize()
+                    when (tab) {
+                        FinanceTab.Overview -> OverviewTab(tabs.overview, events.overview, content)
 
-                    FinanceTab.Transactions -> TransactionsTab(
-                        tabs.transactions,
-                        tabs.query,
-                        tabs.pages,
-                        events.transactions,
-                        content,
-                    )
+                        FinanceTab.Transactions -> TransactionsTab(
+                            tabs.transactions,
+                            tabs.query,
+                            tabs.pages,
+                            events.transactions,
+                            content,
+                        )
 
-                    FinanceTab.Accounts -> AccountsTab(tabs.accounts, events.accounts, content)
+                        FinanceTab.Accounts -> AccountsTab(tabs.accounts, events.accounts, content)
 
-                    FinanceTab.Cards -> CardsTab(tabs.accounts, events.cards, content)
+                        FinanceTab.Cards -> CardsTab(tabs.accounts, events.cards, content)
+                    }
                 }
             }
             FinanceToolbar(actions, Modifier.align(Alignment.BottomCenter).padding(bottom = Spacing.lg))

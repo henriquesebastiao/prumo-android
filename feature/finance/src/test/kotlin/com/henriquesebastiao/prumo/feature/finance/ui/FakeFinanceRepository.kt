@@ -34,6 +34,13 @@ class FakeFinanceRepository(
     private val mutableChanges = MutableSharedFlow<Unit>(extraBufferCapacity = 8)
     override val changes = mutableChanges
 
+    /** Pulls to refresh. */
+    var expired = 0
+
+    override fun expireCache() {
+        expired++
+    }
+
     override var lastAccountId: String? = null
 
     var failure: AppError? = null

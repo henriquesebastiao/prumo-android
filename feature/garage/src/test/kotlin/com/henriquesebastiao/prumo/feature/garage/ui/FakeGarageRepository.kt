@@ -43,6 +43,13 @@ class FakeGarageRepository(
     private val mutableChanges = MutableSharedFlow<Unit>(extraBufferCapacity = 8)
     override val changes = mutableChanges
 
+    /** Pulls to refresh. */
+    var expired = 0
+
+    override fun expireCache() {
+        expired++
+    }
+
     override var lastVehicleId: String? = null
 
     /** The error of the next writes; null makes them work. */

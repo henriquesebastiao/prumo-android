@@ -1,6 +1,7 @@
 package com.henriquesebastiao.prumo.system.home
 
 import com.henriquesebastiao.prumo.core.data.repository.DataChanges
+import com.henriquesebastiao.prumo.core.data.repository.ServerStatusRepository
 import com.henriquesebastiao.prumo.core.model.ActivityItem
 import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.core.model.Dashboard
@@ -11,6 +12,7 @@ import com.henriquesebastiao.prumo.core.model.UpcomingItem
 import com.henriquesebastiao.prumo.core.testing.FakeAccountRepository
 import com.henriquesebastiao.prumo.core.testing.FakeDashboardRepository
 import com.henriquesebastiao.prumo.core.testing.FakeDevicePreferences
+import com.henriquesebastiao.prumo.core.testing.FakeResponseCache
 import com.henriquesebastiao.prumo.core.testing.FakeSessionRepository
 import com.henriquesebastiao.prumo.core.testing.MainDispatcherRule
 import com.henriquesebastiao.prumo.feature.finance.FinanceFeature
@@ -37,6 +39,10 @@ class HomeViewModelTest {
 
     private val changes = DataChanges()
 
+    private val cache = FakeResponseCache()
+
+    private val server = ServerStatusRepository()
+
     private val registry = ModuleRegistry(setOf(FinanceFeature(), GarageFeature(), ReadingFeature()))
 
     // 17/11/2026 at 14:30 in São Paulo (UTC-3), as the design boards; 17:30 in UTC.
@@ -50,7 +56,17 @@ class HomeViewModelTest {
             Dashboard(listOf(summary("finance"), summary("garage"), summary("reading")), emptyList(), emptyList()),
         ),
         devicePreferences: FakeDevicePreferences = FakeDevicePreferences(),
-    ) = HomeViewModel(account, dashboard, devicePreferences, registry, FakeSessionRepository(), clock, changes)
+    ) = HomeViewModel(
+        account,
+        dashboard,
+        devicePreferences,
+        registry,
+        FakeSessionRepository(),
+        clock,
+        changes,
+        cache,
+        server,
+    )
 
     @Test
     fun theCardsFollowTheUsersOrderAndSkipWhatTheAppDoesNotKnow() = runTest {
@@ -110,6 +126,28 @@ class HomeViewModelTest {
         assertNull(state.error)
         assertEquals(SyncStatus.Unreachable, state.sync)
         assertEquals(listOf("finance", "garage", "reading"), state.cards.map { it.feature.id })
+    }
+
+    @Test
+    fun anAnswerFromTheDevicesCopyShowsTheServerUnreachable() = runTest {
+        val vm = viewModel()
+        backgroundScope.launch { vm.state.collect {} }
+        vm.refresh()
+        assertEquals(SyncStatus.Synced, vm.state.first { !it.loading }.sync)
+
+        // The dashboard came from Room: the request behind it found no server (D21).
+        server.unanswered(UnreachableCause.Refused)
+        assertEquals(SyncStatus.Unreachable, vm.state.first { it.sync != SyncStatus.Synced }.sync)
+        server.answered()
+        assertEquals(SyncStatus.Synced, vm.state.first { it.sync == SyncStatus.Synced }.sync)
+    }
+
+    @Test
+    fun pullingAsksTheServerFirst() = runTest {
+        val vm = viewModel()
+        backgroundScope.launch { vm.state.collect {} }
+        vm.pull()
+        assertEquals(1, cache.expired)
     }
 
     @Test

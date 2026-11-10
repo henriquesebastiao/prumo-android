@@ -40,6 +40,9 @@ interface GarageRepository {
     /** Emits after each successful write of Veículos. */
     val changes: Flow<Unit>
 
+    /** Pull to refresh: the next reads ask the server before the device's copy (D21). */
+    fun expireCache()
+
     /** The vehicle last used in a form during this run of the app (C9, D15), or null. */
     var lastVehicleId: String?
 
@@ -115,6 +118,8 @@ class DefaultGarageRepository @Inject constructor(
     private val dataChanges: DataChanges,
 ) : GarageRepository {
     override val changes: Flow<Unit> = dataChanges.changes.filter { it == GARAGE_MODULE_ID }.map { }
+
+    override fun expireCache() = calls.expireCache()
 
     @Volatile
     override var lastVehicleId: String? = null

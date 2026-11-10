@@ -85,7 +85,9 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [x] Revisão visual contra `design/v1/`
 
 ## Fase 4 — Offline e sincronização
-- [ ] Room como cache: telas leem do banco local e atualizam por pull-to-refresh
+
+> **Cópia no aparelho feita em 2026-11-10 (sessão local, D21),** verificada no emulador `Pixel_9` (API 37) contra o `e2e_server.py`: com o servidor no ar, Início, Veículos (lista e detalhe), as abas de Finanças e Livros (estante e detalhe) encheram a tabela `responses` (13 respostas, uma conta); com o servidor parado e o app reaberto, todas essas telas abriram com os dados, o Início mostrou "Servidor inacessível" e "Dados de hoje, 04:58" depois do pull-to-refresh, e um veículo nunca aberto mostrou o erro de servidor inacessível. Com o servidor de volta: +1 página no livro apareceu na hora na estante e no Início; uma leitura de km gravada pela API apareceu na lista de veículos pela conferência em segundo plano; Sair apagou as respostas guardadas (15 → 0). A verificação corrigiu: a leitura do Room na thread principal (o Início e o pull-to-refresh derrubavam o app) e o cartão de servidor inacessível escondido acima do card hero.
+- [x] Room como cache: telas leem do banco local e atualizam por pull-to-refresh (D21: a última resposta de cada `GET`, inteira, por conta)
 - [ ] Sincronização incremental com `updated_since` e `/sync/deletions` (refaz a carga completa em `410`)
 - [ ] Fila de registros pendentes com ids UUID v7 do app (criação idempotente) e envio pelo WorkManager quando há rede
 - [ ] Estados: sem conexão com pendentes, servidor inacessível com dados em cache, ícone de nuvem no Início, pendentes em Sair e Trocar servidor
