@@ -1,0 +1,59 @@
+{
+  "id": "01a05c69-4d00-736b-9ef8-ade4a50dfa80",
+  "name": "Ler a Bíblia",
+  "kind": "build",
+  "color": "amber",
+  "icon": "book-open",
+  "started_on": "2026-09-01",
+  "measure": "check",
+  "target_value": null,
+  "unit": null,
+  "archived_at": null,
+  "frequency": {
+    "id": "01a05c69-4d01-77d3-bf8d-6b464b5d9796",
+    "valid_from": "2026-09-01",
+    "valid_until": null,
+    "state": "current",
+    "kind": "daily",
+    "times_per_week": null,
+    "weekdays": null
+  },
+  "paused": false,
+  "rate_percent": 100,
+  "current_streak": 40,
+  "best_streak": 40,
+  "streak_unit": "day",
+  "week": null,
+  "today": {
+    "scheduled": true,
+    "done": false,
+    "value": null
+  },
+  "clean_since": null,
+  "clean_days": null,
+  "best_clean_days": null,
+  "relapses_30d": null,
+  "created_at": "2026-09-01T10:00:00.000671Z",
+  "updated_at": "2026-09-01T10:00:00.000675Z",
+  "frequencies": [
+    {
+      "id": "01a05c69-4d01-77d3-bf8d-6b464b5d9796",
+      "valid_from": "2026-09-01",
+      "valid_until": null,
+      "state": "current",
+      "kind": "daily",
+      "times_per_week": null,
+      "weekdays": null
+    }
+  ],
+  "pauses": [
+    {
+      "id": "01a13f01-1d03-73e1-acac-e555587b72c3",
+      "starts_on": "2026-10-20",
+      "ends_on": "2026-10-24",
+      "created_at": "2026-10-15T10:00:00.004475Z",
+      "updated_at": "2026-10-15T10:00:00.004481Z"
+    }
+  ],
+  "relapses": []
+}

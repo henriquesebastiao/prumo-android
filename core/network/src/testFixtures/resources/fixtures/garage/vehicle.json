@@ -1,5 +1,5 @@
 {
-  "id": "019a9bfc-6249-7745-8a9a-5b2d7c43482d",
+  "id": "019a9bfc-6249-73cd-9afe-c6d1896c6316",
   "kind": "motorcycle",
   "name": "Honda CG 160 Fan",
   "brand": "Honda",
@@ -18,7 +18,7 @@
     "interval_km": 1000,
     "interval_months": 3,
     "last": {
-      "maintenance_id": "01a1ca4a-f63a-72a0-b3b5-6c87766b8e68",
+      "maintenance_id": "01a1cb5a-1fe2-75d4-b30f-29bbabbc5a13",
       "performed_at": "2026-10-21T13:00:00Z",
       "km": 17640,
       "oil_type": "4T 20W-50 semissintético"
@@ -33,7 +33,7 @@
   },
   "stats": {
     "last_fueling": {
-      "id": "01a1ca4a-f64a-77a3-aad8-5e16481f390b",
+      "id": "01a1cb5a-1ff1-7329-8486-987ac6ded759",
       "fueled_at": "2026-11-16T21:10:00Z",
       "volume_ml": 7300,
       "total_cents": 4636,
@@ -44,27 +44,27 @@
     "avg_consumption_km_l": 40.3,
     "recent_consumption": [
       {
-        "fueling_id": "01a1ca4a-f633-74c5-b7d5-91739ff2dee2",
+        "fueling_id": "01a1cb5a-1fdb-7333-858b-fd7d07a43161",
         "fueled_at": "2026-10-07T12:00:00Z",
         "km_l": 41.21
       },
       {
-        "fueling_id": "01a1ca4a-f637-73d0-ad70-1a201133b383",
+        "fueling_id": "01a1cb5a-1fdf-7627-b4e5-024bef0034ba",
         "fueled_at": "2026-10-17T12:00:00Z",
         "km_l": 40.11
       },
       {
-        "fueling_id": "01a1ca4a-f63e-7209-8ead-b5747b952ef4",
+        "fueling_id": "01a1cb5a-1fe6-7142-9757-1d927229b691",
         "fueled_at": "2026-10-27T12:00:00Z",
         "km_l": 39.89
       },
       {
-        "fueling_id": "01a1ca4a-f641-719a-829e-d1d526ca4616",
+        "fueling_id": "01a1cb5a-1fe8-7651-9d33-ae36128390b2",
         "fueled_at": "2026-11-06T12:00:00Z",
         "km_l": 40.58
       },
       {
-        "fueling_id": "01a1ca4a-f64a-77a3-aad8-5e16481f390b",
+        "fueling_id": "01a1cb5a-1ff1-7329-8486-987ac6ded759",
         "fueled_at": "2026-11-16T21:10:00Z",
         "km_l": 39.73
       }
@@ -75,6 +75,6 @@
     "month_fuelings_count": 2,
     "month_maintenances_count": 0
   },
-  "created_at": "2025-11-19T12:00:00.074353Z",
-  "updated_at": "2026-11-17T10:42:00.001826Z"
+  "created_at": "2025-11-19T12:00:00.074609Z",
+  "updated_at": "2026-11-17T10:42:00.001867Z"
 }

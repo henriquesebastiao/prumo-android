@@ -170,6 +170,30 @@ def record_studies(base, token):
     save("studies/error_invalid_obsidian_uri.json", refused)
 
 
+def record_habits(base, token):
+    """Hábitos (fixtures/habits/): reads, plus a refused future day (nothing is saved)."""
+
+    def get(path):
+        status, payload, _ = call(base, "GET", path, token=token)
+        assert status == 200, f"{path} answered {status}"
+        return payload
+
+    root = "/api/v1/habits"
+    save("habits/today.json", get(f"{root}/today"))
+    habits = get(f"{root}?archived=all&limit=200")
+    save("habits/habits.json", habits)
+    bible = next(item for item in habits["items"] if item["name"] == "Ler a Bíblia")
+    quit_habit = next(item for item in habits["items"] if item["kind"] == "quit")
+    save("habits/habit.json", get(f"{root}/{bible['id']}"))
+    save("habits/habit_quit.json", get(f"{root}/{quit_habit['id']}"))
+    calendar = get(f"{root}/{bible['id']}/calendar")
+    save("habits/calendar.json", calendar)
+    tomorrow = calendar["days"][[d["on"] for d in calendar["days"]].index(calendar["today"]) + 1]["on"]
+    status, refused, _ = call(base, "PUT", f"{root}/{bible['id']}/entries/{tomorrow}", token=token, body={})
+    assert status == 422, f"a future day answered {status}"
+    save("habits/error_future_date.json", refused)
+
+
 def main():
     base = (sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8001").rstrip("/")
     username = sys.argv[2] if len(sys.argv) > 2 else "henrique"
@@ -223,6 +247,7 @@ def main():
     record_finance(base, token)
     record_reading(base, token)
     record_studies(base, token)
+    record_habits(base, token)
 
     status, missing, _ = call(base, "GET", "/api/v1/auth/sessions", token="not-a-token")
     assert status == 401, f"a bad token answered {status}"

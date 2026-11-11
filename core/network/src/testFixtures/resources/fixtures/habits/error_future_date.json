@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "habits.future_date",
+    "message": "A day in the future cannot be marked."
+  }
+}

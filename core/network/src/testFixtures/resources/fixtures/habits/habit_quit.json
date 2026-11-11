@@ -1,0 +1,51 @@
+{
+  "id": "01a05c69-4d03-75d8-8fc5-9c570d03af1e",
+  "name": "Redes sociais antes de dormir",
+  "kind": "quit",
+  "color": "red",
+  "icon": "smartphone",
+  "started_on": "2026-08-01",
+  "measure": null,
+  "target_value": null,
+  "unit": null,
+  "archived_at": null,
+  "frequency": null,
+  "paused": false,
+  "rate_percent": null,
+  "current_streak": null,
+  "best_streak": null,
+  "streak_unit": null,
+  "week": null,
+  "today": null,
+  "clean_since": "2026-11-09T02:30:00Z",
+  "clean_days": 8,
+  "best_clean_days": 42,
+  "relapses_30d": 1,
+  "created_at": "2026-09-01T10:00:00.004067Z",
+  "updated_at": "2026-09-01T10:00:00.004071Z",
+  "frequencies": [],
+  "pauses": [],
+  "relapses": [
+    {
+      "id": "01a1ea8e-f67d-73d4-8f93-60989db6c355",
+      "occurred_at": "2026-11-09T02:30:00Z",
+      "note": "Domingo entediado.",
+      "created_at": "2026-11-17T17:30:00.190046Z",
+      "updated_at": "2026-11-17T17:30:00.190050Z"
+    },
+    {
+      "id": "01a1ea8e-f67c-7736-b94d-4d7523dbd1ed",
+      "occurred_at": "2026-10-04T01:30:00Z",
+      "note": "Noite de prova, fiquei ansioso.",
+      "created_at": "2026-11-17T17:30:00.189093Z",
+      "updated_at": "2026-11-17T17:30:00.189097Z"
+    },
+    {
+      "id": "01a1ea8e-f67a-70a5-a62b-e76bed2070cd",
+      "occurred_at": "2026-09-13T02:00:00Z",
+      "note": null,
+      "created_at": "2026-11-17T17:30:00.187504Z",
+      "updated_at": "2026-11-17T17:30:00.187508Z"
+    }
+  ]
+}

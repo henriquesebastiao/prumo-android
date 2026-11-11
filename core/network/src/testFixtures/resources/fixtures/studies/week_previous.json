@@ -10,7 +10,7 @@
       "rows": [
         {
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -26,7 +26,7 @@
         },
         {
           "subject": {
-            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "id": "01a0ea3f-1d83-725f-ad03-a9ff2774a37c",
             "name": "Cálculo II",
             "color": "blue"
           },
@@ -52,7 +52,7 @@
       "rows": [
         {
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -68,7 +68,7 @@
         },
         {
           "subject": {
-            "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+            "id": "01a0ea3f-1d86-75ba-abb3-6a32b762be97",
             "name": "FastAPI",
             "color": "green"
           },
@@ -84,7 +84,7 @@
         },
         {
           "subject": {
-            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "id": "01a0ea3f-1d83-725f-ad03-a9ff2774a37c",
             "name": "Cálculo II",
             "color": "blue"
           },
@@ -105,7 +105,7 @@
       "rows": [
         {
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -121,7 +121,7 @@
         },
         {
           "subject": {
-            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "id": "01a0ea3f-1d83-725f-ad03-a9ff2774a37c",
             "name": "Cálculo II",
             "color": "blue"
           },
@@ -147,7 +147,7 @@
       "rows": [
         {
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -163,7 +163,7 @@
         },
         {
           "subject": {
-            "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+            "id": "01a0ea3f-1d86-75ba-abb3-6a32b762be97",
             "name": "FastAPI",
             "color": "green"
           },
@@ -189,7 +189,7 @@
       "rows": [
         {
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -215,7 +215,7 @@
       "rows": [
         {
           "subject": {
-            "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+            "id": "01a0ea3f-1d85-7373-929a-c1d0cdbcdec9",
             "name": "Estruturas de Dados",
             "color": "blue"
           },
@@ -241,7 +241,7 @@
       "rows": [
         {
           "subject": {
-            "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+            "id": "01a0ea3f-1d85-7373-929a-c1d0cdbcdec9",
             "name": "Estruturas de Dados",
             "color": "blue"
           },
@@ -263,7 +263,7 @@
   "by_subject": [
     {
       "subject": {
-        "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+        "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
         "name": "Inglês",
         "color": "orange"
       },
@@ -272,7 +272,7 @@
     },
     {
       "subject": {
-        "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+        "id": "01a0ea3f-1d83-725f-ad03-a9ff2774a37c",
         "name": "Cálculo II",
         "color": "blue"
       },
@@ -281,7 +281,7 @@
     },
     {
       "subject": {
-        "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+        "id": "01a0ea3f-1d85-7373-929a-c1d0cdbcdec9",
         "name": "Estruturas de Dados",
         "color": "blue"
       },
@@ -290,7 +290,7 @@
     },
     {
       "subject": {
-        "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+        "id": "01a0ea3f-1d86-75ba-abb3-6a32b762be97",
         "name": "FastAPI",
         "color": "green"
       },

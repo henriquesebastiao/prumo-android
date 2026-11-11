@@ -1,7 +1,7 @@
 {
-  "id": "01a1ca4a-f63a-72a0-b3b5-6c87766b8e68",
+  "id": "01a1cb5a-1fe2-75d4-b30f-29bbabbc5a13",
   "vehicle": {
-    "id": "019a9bfc-6249-7745-8a9a-5b2d7c43482d",
+    "id": "019a9bfc-6249-73cd-9afe-c6d1896c6316",
     "name": "Honda CG 160 Fan",
     "kind": "motorcycle"
   },
@@ -18,13 +18,13 @@
   "next_oil_change_on": "2027-01-21",
   "items": [
     {
-      "id": "01a1ca4a-f63b-7220-aa03-373088062604",
+      "id": "01a1cb5a-1fe3-72d3-b978-f7201536264f",
       "description": "Óleo 4T 20W-50 semissintético",
       "quantity": 1,
       "unit_price_cents": 3890,
       "total_cents": 3890
     }
   ],
-  "created_at": "2026-11-11T11:07:52.763448Z",
-  "updated_at": "2026-11-11T11:07:52.763449Z"
+  "created_at": "2026-11-11T16:04:03.683187Z",
+  "updated_at": "2026-11-11T16:04:03.683189Z"
 }

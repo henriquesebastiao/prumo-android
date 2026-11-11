@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="habits_name">Hábitos</string>
+    <string name="habits_description">Hábitos a praticar, com sequência e taxa, e a abandonar, com o tempo sem</string>
+
+    <string name="habits_action_check_in">Marcar hábitos</string>
+    <string name="habits_action_check_in_short">Hábitos</string>
+    <string name="habits_new_habit">Novo hábito</string>
+    <string name="habits_edit">Editar</string>
+    <string name="habits_archive">Arquivar</string>
+    <string name="habits_unarchive">Desarquivar</string>
+    <string name="habits_delete">Excluir</string>
+    <string name="habits_save">Salvar</string>
+    <string name="habits_loading">Carregando os hábitos</string>
+    <string name="habits_join">%1$s · %2$s</string>
+    <string name="habits_field_invalid">Confira este valor.</string>
+
+    <string name="habits_tab_today">Hoje</string>
+    <string name="habits_tab_list">Hábitos</string>
+
+    <!-- Hoje -->
+    <string name="habits_today_progress">%1$d de %2$d hoje</string>
+    <string name="habits_today_all_done">Tudo feito hoje.</string>
+    <string name="habits_today_empty">Nada para hoje</string>
+    <string name="habits_today_empty_hint">Os hábitos agendados para hoje aparecem aqui. Crie um em Hábitos.</string>
+    <string name="habits_today_week">%1$d de %2$d esta semana</string>
+    <string name="habits_today_week_done">Semana cumprida</string>
+    <string name="habits_mark">Marcar %1$s</string>
+    <string name="habits_unmark">Desmarcar %1$s</string>
+    <string name="habits_increase">Mais %1$s</string>
+    <string name="habits_decrease">Menos %1$s</string>
+    <string name="habits_amount">%1$s&#160;/&#160;%2$s&#160;%3$s</string>
+
+    <!-- Hábitos -->
+    <string name="habits_list_build">Para praticar</string>
+    <string name="habits_list_quit">Para abandonar</string>
+    <string name="habits_list_empty">Nenhum hábito ainda</string>
+    <string name="habits_list_empty_hint">Crie um hábito para praticar (ler, beber água, academia) ou para abandonar.</string>
+    <string name="habits_rate">%1$d%% cumprido</string>
+    <string name="habits_no_rate">sem dados ainda</string>
+    <string name="habits_streak">sequência de %1$s</string>
+    <string name="habits_paused">Pausado</string>
+    <string name="habits_archived">Arquivado</string>
+    <string name="habits_show_archived">Mostrar arquivados</string>
+    <string name="habits_hide_archived">Ocultar arquivados</string>
+    <string name="habits_clean">%1$s sem</string>
+    <string name="habits_no_relapses_30d">nenhuma recaída em 30 dias</string>
+    <plurals name="habits_days">
+        <item quantity="one">%1$d&#160;dia</item>
+        <item quantity="other">%1$d&#160;dias</item>
+    </plurals>
+    <plurals name="habits_weeks">
+        <item quantity="one">%1$d&#160;semana</item>
+        <item quantity="other">%1$d&#160;semanas</item>
+    </plurals>
+    <plurals name="habits_relapses_30d">
+        <item quantity="one">%1$d recaída em 30 dias</item>
+        <item quantity="other">%1$d recaídas em 30 dias</item>
+    </plurals>
+
+    <!-- Frequência (H2) -->
+    <string name="habits_freq_daily">Todo dia</string>
+    <string name="habits_freq_weekly">%1$d× por semana</string>
+    <string name="habits_freq_workdays">Dias úteis</string>
+    <string name="habits_freq_list">%1$s e %2$s</string>
+    <string name="habits_freq_current">Vigente desde %1$s</string>
+    <string name="habits_freq_future">A partir de %1$s</string>
+    <string name="habits_freq_past">%1$s a %2$s</string>
+    <string name="habits_freq_kind_daily">Todo dia</string>
+    <string name="habits_freq_kind_weekly">X por semana</string>
+    <string name="habits_freq_kind_weekdays">Dias da semana</string>
+    <string name="habits_freq_locked">A frequência em vigor não muda: mudar cria uma versão a partir de hoje ou de uma data futura.</string>
+    <string name="habits_change_frequency">Mudar a frequência</string>
+    <string name="habits_edit_version">Editar esta versão</string>
+    <string name="habits_delete_version">Excluir esta versão</string>
+
+    <!-- Um hábito -->
+    <string name="habits_rate_label">Taxa</string>
+    <string name="habits_rate_hint">últimos 30 dias</string>
+    <string name="habits_rate_hint_weeks">últimas 4 semanas</string>
+    <string name="habits_streak_label">Sequência</string>
+    <string name="habits_best_label">Melhor</string>
+    <string name="habits_week_label">Esta semana</string>
+    <string name="habits_calendar">Calendário</string>
+    <string name="habits_previous_month">Mês anterior</string>
+    <string name="habits_next_month">Próximo mês</string>
+    <string name="habits_frequencies">Frequência</string>
+    <string name="habits_pauses">Pausas</string>
+    <string name="habits_no_pauses">Nenhuma pausa.</string>
+    <string name="habits_pause_open">Desde %1$s, em aberto</string>
+    <string name="habits_pause_range">%1$s a %2$s</string>
+    <string name="habits_add_pause">Pausar</string>
+    <string name="habits_end_pause">Encerrar hoje</string>
+    <string name="habits_delete_pause">Excluir pausa</string>
+    <string name="habits_clean_label">Tempo sem</string>
+    <string name="habits_clean_since">desde %1$s</string>
+    <string name="habits_best_clean">Maior período sem</string>
+    <string name="habits_relapses_30d_label">Recaídas em 30 dias</string>
+    <string name="habits_relapses">Recaídas</string>
+    <string name="habits_no_relapses">Nenhuma recaída registrada.</string>
+    <string name="habits_log_relapse">Registrar recaída</string>
+    <string name="habits_delete_relapse">Excluir recaída</string>
+    <string name="habits_started">Começou em %1$s</string>
+    <string name="habits_delete_title">Excluir o hábito?</string>
+    <string name="habits_delete_body">%1$s será apagado com todo o histórico. Isso não pode ser desfeito.</string>
+    <string name="habits_more">Mais ações</string>
+
+    <!-- Calendar states -->
+    <string name="habits_day_done">Cumprido</string>
+    <string name="habits_day_partial">Parcial</string>
+    <string name="habits_day_missed">Perdido</string>
+    <string name="habits_day_pending">Em aberto</string>
+    <string name="habits_day_paused">Pausa</string>
+    <string name="habits_day_unscheduled">Não agendado</string>
+    <string name="habits_day_future">Ainda não chegou</string>
+
+    <!-- Editor -->
+    <string name="habits_editor_new">Novo hábito</string>
+    <string name="habits_editor_edit">Editar hábito</string>
+    <string name="habits_kind">Tipo</string>
+    <string name="habits_kind_build">Praticar</string>
+    <string name="habits_kind_quit">Abandonar</string>
+    <string name="habits_kind_build_hint">Algo que você quer fazer com frequência.</string>
+    <string name="habits_kind_quit_hint">Algo que você quer deixar de fazer.</string>
+    <string name="habits_habit_name">Nome</string>
+    <string name="habits_icon">Ícone</string>
+    <string name="habits_color">Cor</string>
+    <string name="habits_measure">Como medir</string>
+    <string name="habits_measure_check">Feito ou não</string>
+    <string name="habits_measure_quantity">Quantidade</string>
+    <string name="habits_target">Meta por dia</string>
+    <string name="habits_unit">Unidade</string>
+    <string name="habits_unit_hint">Curta: ml, páginas, min.</string>
+    <string name="habits_started_on">Começa em</string>
+    <string name="habits_frequency">Frequência</string>
+    <string name="habits_times_per_week">Vezes por semana</string>
+    <string name="habits_weekdays">Dias da semana</string>
+    <string name="habits_fewer_times">Menos vezes</string>
+    <string name="habits_more_times">Mais vezes</string>
+
+    <!-- Sheets -->
+    <string name="habits_frequency_new">Nova versão da frequência</string>
+    <string name="habits_frequency_edit">Editar versão da frequência</string>
+    <string name="habits_valid_from">Vale a partir de</string>
+    <string name="habits_valid_from_hint">Hoje ou uma data futura.</string>
+    <string name="habits_pause_new">Pausar hábito</string>
+    <string name="habits_starts_on">Início</string>
+    <string name="habits_ends_on">Fim (opcional)</string>
+    <string name="habits_ends_on_hint">Sem fim, a pausa fica em aberto.</string>
+    <string name="habits_occurred_at">Quando</string>
+    <string name="habits_note">O que veio antes (opcional)</string>
+    <string name="habits_entry_title">%1$s em %2$s</string>
+    <string name="habits_value">Quantidade</string>
+    <string name="habits_clear">Desmarcar</string>
+
+    <!-- The labels of HABIT_ICONS, in its order (the web's habits.icons). -->
+    <string-array name="habits_icon_labels">
+        <item>Brilho</item>
+        <item>Leitura</item>
+        <item>Livro</item>
+        <item>Água</item>
+        <item>Academia</item>
+        <item>Bicicleta</item>
+        <item>Saúde</item>
+        <item>Mente</item>
+        <item>Fruta</item>
+        <item>Refeição</item>
+        <item>Café</item>
+        <item>Bebida</item>
+        <item>Celular</item>
+        <item>TV</item>
+        <item>Jogos</item>
+        <item>Música</item>
+        <item>Arte</item>
+        <item>Foto</item>
+        <item>Remédio</item>
+        <item>Dentes</item>
+        <item>Estudo</item>
+        <item>Código</item>
+        <item>Trabalho</item>
+        <item>Economia</item>
+        <item>Pet</item>
+        <item>Fé</item>
+        <item>Fogo</item>
+        <item>Sono</item>
+        <item>Manhã</item>
+        <item>Conquista</item>
+    </string-array>
+
+    <!-- Colors -->
+    <string name="habits_color_green">Verde</string>
+    <string name="habits_color_teal">Verde-azulado</string>
+    <string name="habits_color_cyan">Ciano</string>
+    <string name="habits_color_blue">Azul</string>
+    <string name="habits_color_indigo">Anil</string>
+    <string name="habits_color_violet">Violeta</string>
+    <string name="habits_color_pink">Rosa</string>
+    <string name="habits_color_red">Vermelho</string>
+    <string name="habits_color_orange">Laranja</string>
+    <string name="habits_color_amber">Âmbar</string>
+    <string name="habits_color_gray">Cinza</string>
+
+    <!-- Início -->
+    <string name="habits_card_today">%1$d de %2$d hoje</string>
+    <string name="habits_card_none">Nada agendado para hoje</string>
+    <string name="habits_card_empty">Crie um hábito para acompanhar aqui.</string>
+    <string name="habits_card_more">+%1$d</string>
+
+    <!-- Errors of Hábitos (docs/api.md of the server) -->
+    <string name="habits_error_future_date">Essa data ainda não chegou.</string>
+    <string name="habits_error_before_start">O hábito ainda não tinha começado nessa data.</string>
+    <string name="habits_error_not_build">Isso só vale para hábitos a praticar.</string>
+    <string name="habits_error_not_quit">Recaídas só valem para hábitos a abandonar.</string>
+    <string name="habits_error_frequency_locked">Essa frequência já está em vigor e não muda. Crie uma versão a partir de hoje ou de uma data futura.</string>
+    <string name="habits_error_frequency_date_taken">Já existe uma versão da frequência começando nessa data.</string>
+    <string name="habits_error_pause_overlap">Essa pausa encosta em outra. Ajuste as datas.</string>
+    <string name="habits_error_invalid_measure">Uma quantidade precisa de meta e unidade.</string>
+</resources>

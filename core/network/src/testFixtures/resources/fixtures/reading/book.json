@@ -1,5 +1,5 @@
 {
-  "id": "01a17a8c-a4c0-7205-b882-e7efb0fd3984",
+  "id": "01a17a8c-a4c0-7763-aaea-d8b534dac20a",
   "title": "Código Limpo",
   "author": "Robert C. Martin",
   "total_pages": 425,
@@ -10,12 +10,12 @@
   "finished_on": null,
   "has_cover": false,
   "cover_updated_at": null,
-  "created_at": "2026-10-26T23:30:00.000193Z",
+  "created_at": "2026-10-26T23:30:00.000180Z",
   "progress_percent": 50,
   "remaining_pages": 213,
   "pace_pages_per_day": 10.4,
   "forecast_finish_on": "2026-12-08",
-  "last_progress_at": "2026-11-16T01:05:00.000017Z",
+  "last_progress_at": "2026-11-16T01:05:00.000016Z",
   "notes_count": 4,
   "weekly_pages": [
     {

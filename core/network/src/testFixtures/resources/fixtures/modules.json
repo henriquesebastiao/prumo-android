@@ -23,6 +23,12 @@
       "version": "0.1.0",
       "enabled": true,
       "position": 3
+    },
+    {
+      "id": "habits",
+      "version": "0.1.0",
+      "enabled": true,
+      "position": 4
     }
   ]
 }

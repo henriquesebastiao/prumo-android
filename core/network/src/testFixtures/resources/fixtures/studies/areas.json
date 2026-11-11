@@ -1,31 +1,31 @@
 {
   "items": [
     {
-      "id": "01a0ea3f-1d81-7029-bdf3-59e470466550",
+      "id": "01a0ea3f-1d81-763e-9750-8f84370fbead",
       "name": "Desenvolvimento",
       "color": "green",
       "archived_at": null,
       "subjects_count": 2,
-      "created_at": "2026-09-28T23:00:00.001770Z",
-      "updated_at": "2026-09-28T23:00:00.001775Z"
+      "created_at": "2026-09-28T23:00:00.001740Z",
+      "updated_at": "2026-09-28T23:00:00.001745Z"
     },
     {
-      "id": "01a0ea3f-1d80-7308-b7f0-779956091f9b",
+      "id": "01a0ea3f-1d80-74d5-ace6-35b984dbe947",
       "name": "Faculdade",
       "color": "blue",
       "archived_at": null,
       "subjects_count": 2,
-      "created_at": "2026-09-28T23:00:00.000587Z",
-      "updated_at": "2026-09-28T23:00:00.000592Z"
+      "created_at": "2026-09-28T23:00:00.000563Z",
+      "updated_at": "2026-09-28T23:00:00.000568Z"
     },
     {
-      "id": "01a0ea3f-1d82-743f-a41b-31a5a4f04409",
+      "id": "01a0ea3f-1d82-734a-a150-52e39e4a9175",
       "name": "Inglês",
       "color": "orange",
       "archived_at": null,
       "subjects_count": 1,
-      "created_at": "2026-09-28T23:00:00.002443Z",
-      "updated_at": "2026-09-28T23:00:00.002447Z"
+      "created_at": "2026-09-28T23:00:00.002278Z",
+      "updated_at": "2026-09-28T23:00:00.002281Z"
     }
   ],
   "total": 3,

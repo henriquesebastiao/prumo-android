@@ -2,7 +2,7 @@
   "month": "2026-11",
   "items": [
     {
-      "id": "019a9bfc-6246-75ce-a669-04a682a7ec7a",
+      "id": "019a9bfc-6247-7461-8811-b8f4dc3b0d34",
       "kind": "income",
       "name": "Salário",
       "color": "green",
@@ -13,7 +13,7 @@
       "month_total_cents": 380000
     },
     {
-      "id": "019a9bfc-6246-75ce-a669-04a7340f0efe",
+      "id": "019a9bfc-6247-7461-8811-b8f54c983484",
       "kind": "income",
       "name": "Freelance",
       "color": "teal",
@@ -24,7 +24,7 @@
       "month_total_cents": 150000
     },
     {
-      "id": "019a9bfc-6246-75ce-a669-04a85c7eb580",
+      "id": "019a9bfc-6247-7461-8811-b8f617c030bc",
       "kind": "income",
       "name": "Rendimentos",
       "color": "cyan",
@@ -35,7 +35,7 @@
       "month_total_cents": 0
     },
     {
-      "id": "019a9bfc-6246-75ce-a669-04a9c84b611a",
+      "id": "019a9bfc-6247-7461-8811-b8f7848fe89f",
       "kind": "income",
       "name": "Outros",
       "color": "gray",

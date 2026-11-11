@@ -1,7 +1,7 @@
 package com.henriquesebastiao.prumo.core.designsystem.component
 
 /**
- * The icons the server stores by name (accounts and categories; D33 of the server) are the web's,
+ * The icons the server stores by name (accounts, categories and habits; D33 of the server) are the web's,
  * Lucide names (`landmark`, `utensils`, `heart-pulse`): each one's closest Material Symbol here. A
  * name the app doesn't know draws the generic [PrumoIcons.Category], as the web does. The web's
  * `ui/icons.ts` and `modules/finance/helpers.ts` list the same names (D23).
@@ -107,6 +107,9 @@ object ServerIcons {
         "store" to PrumoIcons.Storefront,
         "package" to PrumoIcons.Package,
         "tag" to PrumoIcons.Sell,
+        // Habits (the web's modules/habits/helpers.ts)
+        "moon" to PrumoIcons.DarkMode,
+        "sun" to PrumoIcons.LightMode,
     )
 
     /** Every name the app draws, for tests and pickers. */

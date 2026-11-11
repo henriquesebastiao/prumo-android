@@ -65,6 +65,8 @@ object PrumoIcons {
 
     @DrawableRes val Checkroom = R.drawable.ic_checkroom
 
+    @DrawableRes val Checklist = R.drawable.ic_checklist
+
     @DrawableRes val ChevronLeft = R.drawable.ic_chevron_left
 
     @DrawableRes val ChevronRight = R.drawable.ic_chevron_right
@@ -226,6 +228,8 @@ object PrumoIcons {
     @DrawableRes val Package = R.drawable.ic_package_2
 
     @DrawableRes val Paid = R.drawable.ic_paid
+
+    @DrawableRes val PauseCircle = R.drawable.ic_pause_circle
 
     @DrawableRes val Palette = R.drawable.ic_palette
 

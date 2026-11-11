@@ -1,56 +1,56 @@
 {
   "items": [
     {
-      "id": "01a1e1e7-6240-7035-9d31-ab011cc18502",
+      "id": "01a1e1e7-6240-73a7-a12e-e020cb17b74a",
       "book": {
-        "id": "01a17a8c-a4c0-7205-b882-e7efb0fd3984",
+        "id": "01a17a8c-a4c0-7763-aaea-d8b534dac20a",
         "title": "Código Limpo",
         "author": "Robert C. Martin"
       },
       "content": "Capítulo sobre tratamento de erros: revisar como a minha API devolve falhas e trocar códigos de retorno por exceções específicas.",
       "page": 212,
       "noted_on": "2026-11-15",
-      "created_at": "2026-11-16T01:10:00.000546Z",
-      "updated_at": "2026-11-16T01:10:00.000550Z"
+      "created_at": "2026-11-16T01:10:00.000468Z",
+      "updated_at": "2026-11-16T01:10:00.000471Z"
     },
     {
-      "id": "01a1c827-9640-70dd-a734-4fdf4c089ce9",
+      "id": "01a1c827-9640-7627-ac87-d1f5ebb28fe9",
       "book": {
-        "id": "01a17a8c-a4c0-7205-b882-e7efb0fd3984",
+        "id": "01a17a8c-a4c0-7763-aaea-d8b534dac20a",
         "title": "Código Limpo",
         "author": "Robert C. Martin"
       },
       "content": "Objetos escondem dados e mostram comportamento; estruturas de dados fazem o contrário. Bom critério para separar models de schemas.",
       "page": 176,
       "noted_on": "2026-11-10",
-      "created_at": "2026-11-11T01:10:00.000570Z",
-      "updated_at": "2026-11-11T01:10:00.000573Z"
+      "created_at": "2026-11-11T01:10:00.000484Z",
+      "updated_at": "2026-11-11T01:10:00.000487Z"
     },
     {
-      "id": "01a19ef4-b640-708e-8f51-f5f566d70204",
+      "id": "01a19ef4-b640-7065-a4df-c8e3e1d2a991",
       "book": {
-        "id": "01a17a8c-a4c0-7205-b882-e7efb0fd3984",
+        "id": "01a17a8c-a4c0-7763-aaea-d8b534dac20a",
         "title": "Código Limpo",
         "author": "Robert C. Martin"
       },
       "content": "Funções pequenas, com um só nível de abstração. Testar isso no próximo refactor.",
       "page": 98,
       "noted_on": "2026-11-02",
-      "created_at": "2026-11-03T01:10:00.000563Z",
-      "updated_at": "2026-11-03T01:10:00.000566Z"
+      "created_at": "2026-11-03T01:10:00.000489Z",
+      "updated_at": "2026-11-03T01:10:00.000493Z"
     },
     {
-      "id": "01a18005-6680-70a8-b511-3a6f9a851666",
+      "id": "01a18005-6680-704d-8b49-b926bafe6896",
       "book": {
-        "id": "01a17a8c-a4c0-7205-b882-e7efb0fd3984",
+        "id": "01a17a8c-a4c0-7763-aaea-d8b534dac20a",
         "title": "Código Limpo",
         "author": "Robert C. Martin"
       },
       "content": "Ir juntando exemplos de nomes ruins que encontro no código do dia a dia.",
       "page": null,
       "noted_on": "2026-10-27",
-      "created_at": "2026-10-28T01:00:00.000551Z",
-      "updated_at": "2026-10-28T01:00:00.000555Z"
+      "created_at": "2026-10-28T01:00:00.000500Z",
+      "updated_at": "2026-10-28T01:00:00.000503Z"
     }
   ]
 }

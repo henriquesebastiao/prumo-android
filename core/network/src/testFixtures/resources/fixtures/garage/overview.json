@@ -6,7 +6,7 @@
   "vehicles_km": [
     {
       "vehicle": {
-        "id": "019a9bfc-6249-7745-8a9a-5b2d7c43482d",
+        "id": "019a9bfc-6249-73cd-9afe-c6d1896c6316",
         "name": "Honda CG 160 Fan",
         "kind": "motorcycle"
       },
@@ -14,7 +14,7 @@
     },
     {
       "vehicle": {
-        "id": "019aa122-be00-7632-8b89-cda68bf9785d",
+        "id": "019aa122-be00-70c4-833f-f7aa923452e3",
         "name": "Fiat Strada Freedom",
         "kind": "car"
       },
@@ -23,7 +23,7 @@
   ],
   "next_due": {
     "vehicle": {
-      "id": "019a9bfc-6249-7745-8a9a-5b2d7c43482d",
+      "id": "019a9bfc-6249-73cd-9afe-c6d1896c6316",
       "name": "Honda CG 160 Fan",
       "kind": "motorcycle"
     },

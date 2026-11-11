@@ -2,15 +2,15 @@
   "today": "2026-11-17",
   "items": [
     {
-      "id": "01a1e6cd-a800-70db-924c-a300d995ab15",
+      "id": "01a1e6cd-a800-77ba-8cc5-a61c9fc32685",
       "valid_from": "2026-11-23",
       "valid_until": null,
       "state": "future",
       "blocks": [
         {
-          "id": "01a1e6cd-a802-7199-a49f-ec41abe456fb",
+          "id": "01a1e6cd-a801-7579-b125-31c2aabcdfb3",
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -25,9 +25,9 @@
           "duration_minutes": 30
         },
         {
-          "id": "01a1e6cd-a802-7199-a49f-ec429c8ddb08",
+          "id": "01a1e6cd-a802-720f-aeef-caf15c132e31",
           "subject": {
-            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "id": "01a0ea3f-1d83-725f-ad03-a9ff2774a37c",
             "name": "Cálculo II",
             "color": "blue"
           },
@@ -39,9 +39,9 @@
           "duration_minutes": 60
         },
         {
-          "id": "01a1e6cd-a802-7199-a49f-ec435b842d21",
+          "id": "01a1e6cd-a802-720f-aeef-caf205ccd610",
           "subject": {
-            "id": "01a0ea3f-1d88-75bb-82c8-05e7358eb272",
+            "id": "01a0ea3f-1d87-726e-8d03-7e11cdac00df",
             "name": "Kotlin e Compose",
             "color": "green"
           },
@@ -53,9 +53,9 @@
           "duration_minutes": 45
         },
         {
-          "id": "01a1e6cd-a802-7199-a49f-ec449783d885",
+          "id": "01a1e6cd-a802-720f-aeef-caf328b792cd",
           "subject": {
-            "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+            "id": "01a0ea3f-1d85-7373-929a-c1d0cdbcdec9",
             "name": "Estruturas de Dados",
             "color": "blue"
           },
@@ -66,19 +66,19 @@
           "duration_minutes": 90
         }
       ],
-      "created_at": "2026-11-17T00:00:00.001074Z",
-      "updated_at": "2026-11-17T00:00:00.001079Z"
+      "created_at": "2026-11-17T00:00:00.000975Z",
+      "updated_at": "2026-11-17T00:00:00.000979Z"
     },
     {
-      "id": "01a198e9-7880-750b-814c-e00154e5ff62",
+      "id": "01a198e9-7880-74bf-b4de-f1dbbcb30af8",
       "valid_from": "2026-11-02",
       "valid_until": "2026-11-22",
       "state": "current",
       "blocks": [
         {
-          "id": "01a198e9-7882-7229-ae88-3cafc89a00d4",
+          "id": "01a198e9-7882-722e-be3c-712bb74f4b81",
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -93,9 +93,9 @@
           "duration_minutes": 30
         },
         {
-          "id": "01a198e9-7882-7229-ae88-3cb0db24b3b8",
+          "id": "01a198e9-7882-722e-be3c-712cf459eccd",
           "subject": {
-            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "id": "01a0ea3f-1d83-725f-ad03-a9ff2774a37c",
             "name": "Cálculo II",
             "color": "blue"
           },
@@ -107,9 +107,9 @@
           "duration_minutes": 60
         },
         {
-          "id": "01a198e9-7882-7229-ae88-3cb18863f0e9",
+          "id": "01a198e9-7882-722e-be3c-712d205df9fa",
           "subject": {
-            "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+            "id": "01a0ea3f-1d86-75ba-abb3-6a32b762be97",
             "name": "FastAPI",
             "color": "green"
           },
@@ -121,9 +121,9 @@
           "duration_minutes": 45
         },
         {
-          "id": "01a198e9-7882-7229-ae88-3cb208a71bf6",
+          "id": "01a198e9-7882-722e-be3c-712e2e277306",
           "subject": {
-            "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+            "id": "01a0ea3f-1d85-7373-929a-c1d0cdbcdec9",
             "name": "Estruturas de Dados",
             "color": "blue"
           },
@@ -134,19 +134,19 @@
           "duration_minutes": 90
         }
       ],
-      "created_at": "2026-11-01T21:00:00.001100Z",
-      "updated_at": "2026-11-01T21:00:00.001105Z"
+      "created_at": "2026-11-01T21:00:00.001140Z",
+      "updated_at": "2026-11-01T21:00:00.001145Z"
     },
     {
-      "id": "01a0f9b2-3182-74d4-9209-34e400557b0d",
+      "id": "01a0f9b2-3182-74a9-bd8f-126cdfaab31f",
       "valid_from": "2026-10-05",
       "valid_until": "2026-11-01",
       "state": "past",
       "blocks": [
         {
-          "id": "01a0f9b2-3185-75cd-814f-02dfebe375ee",
+          "id": "01a0f9b2-3185-716b-a510-92da155dfc91",
           "subject": {
-            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "id": "01a0ea3f-1d88-72d4-b998-41a1c028806d",
             "name": "Inglês",
             "color": "orange"
           },
@@ -161,9 +161,9 @@
           "duration_minutes": 30
         },
         {
-          "id": "01a0f9b2-3185-75cd-814f-02e0eed330f1",
+          "id": "01a0f9b2-3185-716b-a510-92db07e70ba1",
           "subject": {
-            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "id": "01a0ea3f-1d83-725f-ad03-a9ff2774a37c",
             "name": "Cálculo II",
             "color": "blue"
           },
@@ -175,9 +175,9 @@
           "duration_minutes": 60
         },
         {
-          "id": "01a0f9b2-3185-75cd-814f-02e15ab1b4f5",
+          "id": "01a0f9b2-3185-716b-a510-92dcd0de64fc",
           "subject": {
-            "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+            "id": "01a0ea3f-1d85-7373-929a-c1d0cdbcdec9",
             "name": "Estruturas de Dados",
             "color": "blue"
           },
@@ -188,8 +188,8 @@
           "duration_minutes": 60
         }
       ],
-      "created_at": "2026-10-01T23:00:00.002941Z",
-      "updated_at": "2026-10-01T23:00:00.002946Z"
+      "created_at": "2026-10-01T23:00:00.002881Z",
+      "updated_at": "2026-10-01T23:00:00.002887Z"
     }
   ]
 }

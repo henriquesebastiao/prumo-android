@@ -6,7 +6,7 @@
   "accounts": [
     {
       "account": {
-        "id": "01a1ea85-ce00-7071-8081-306fd0af56f1",
+        "id": "01a1ea85-ce00-7454-9e5b-8fd02cb68739",
         "name": "Nubank",
         "kind": "checking",
         "color": "violet",
@@ -16,7 +16,7 @@
     },
     {
       "account": {
-        "id": "01a1ea85-ce01-71f4-b852-a692092b054c",
+        "id": "01a1ea85-ce02-71fb-9f8e-42e6f2b46fb1",
         "name": "Inter",
         "kind": "checking",
         "color": "orange",
@@ -26,7 +26,7 @@
     },
     {
       "account": {
-        "id": "01a1ea85-ce02-72bf-ac27-821a03d445ac",
+        "id": "01a1ea85-ce03-7344-a968-20fd7f9b8167",
         "name": "Carteira",
         "kind": "cash",
         "color": "green",
@@ -74,7 +74,7 @@
   "expenses_by_category": [
     {
       "category": {
-        "id": "019a9bfc-6246-75ce-a669-049d2b283ab0",
+        "id": "019a9bfc-6247-7461-8811-b8eb7e320fcb",
         "name": "Moradia",
         "kind": "expense",
         "color": "blue",
@@ -86,7 +86,7 @@
     },
     {
       "category": {
-        "id": "019a9bfc-6246-75ce-a669-049cfc1d48f0",
+        "id": "019a9bfc-6247-7461-8811-b8eac697642e",
         "name": "Alimentação",
         "kind": "expense",
         "color": "orange",
@@ -98,7 +98,7 @@
     },
     {
       "category": {
-        "id": "019a9bfc-6246-75ce-a669-049f42bde528",
+        "id": "019a9bfc-6247-7461-8811-b8edbef5e2de",
         "name": "Combustível",
         "kind": "expense",
         "color": "gray",
@@ -110,7 +110,7 @@
     },
     {
       "category": {
-        "id": "019a9bfc-6246-75ce-a669-04a2deeb42fc",
+        "id": "019a9bfc-6247-7461-8811-b8f05041a518",
         "name": "Lazer",
         "kind": "expense",
         "color": "pink",
@@ -124,7 +124,7 @@
   "income_by_category": [
     {
       "category": {
-        "id": "019a9bfc-6246-75ce-a669-04a682a7ec7a",
+        "id": "019a9bfc-6247-7461-8811-b8f4dc3b0d34",
         "name": "Salário",
         "kind": "income",
         "color": "green",
@@ -136,7 +136,7 @@
     },
     {
       "category": {
-        "id": "019a9bfc-6246-75ce-a669-04a7340f0efe",
+        "id": "019a9bfc-6247-7461-8811-b8f54c983484",
         "name": "Freelance",
         "kind": "income",
         "color": "teal",
@@ -150,7 +150,7 @@
   "open_invoices": [
     {
       "card": {
-        "id": "01a1ea85-ce04-7087-92ca-262816eac536",
+        "id": "01a1ea85-ce05-707c-b90e-2d797f18de2c",
         "name": "Nubank",
         "color": "green"
       },

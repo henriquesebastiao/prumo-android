@@ -1,0 +1,158 @@
+{
+  "month": "2026-11",
+  "today": "2026-11-17",
+  "days": [
+    {
+      "on": "2026-11-01",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-02",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-03",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-04",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-05",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-06",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-07",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-08",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-09",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-10",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-11",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-12",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-13",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-14",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-15",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-16",
+      "status": "done",
+      "value": 1
+    },
+    {
+      "on": "2026-11-17",
+      "status": "pending",
+      "value": null
+    },
+    {
+      "on": "2026-11-18",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-19",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-20",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-21",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-22",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-23",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-24",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-25",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-26",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-27",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-28",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-29",
+      "status": "future",
+      "value": null
+    },
+    {
+      "on": "2026-11-30",
+      "status": "future",
+      "value": null
+    }
+  ],
+  "previous_month": "2026-10",
+  "next_month": null
+}

@@ -1,5 +1,5 @@
 {
-  "id": "01a1ea85-ce00-7071-8081-306fd0af56f1",
+  "id": "01a1ea85-ce00-7454-9e5b-8fd02cb68739",
   "name": "Nubank",
   "kind": "checking",
   "initial_balance_cents": -628649,
@@ -7,7 +7,7 @@
   "icon": "landmark",
   "include_in_total": true,
   "archived_at": null,
-  "created_at": "2026-11-17T17:20:00.000729Z",
+  "created_at": "2026-11-17T17:20:00.000862Z",
   "balance_cents": 481237,
   "last_transaction_on": "2026-11-16",
   "month_transactions_count": 8,

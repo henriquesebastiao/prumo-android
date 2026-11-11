@@ -1,13 +1,13 @@
 {
   "items": [
     {
-      "id": "01a1ea85-ce04-7087-92ca-262816eac536",
+      "id": "01a1ea85-ce05-707c-b90e-2d797f18de2c",
       "name": "Nubank",
       "limit_cents": 500000,
       "closing_day": 3,
       "due_day": 10,
       "payment_account": {
-        "id": "01a1ea85-ce00-7071-8081-306fd0af56f1",
+        "id": "01a1ea85-ce00-7454-9e5b-8fd02cb68739",
         "name": "Nubank",
         "kind": "checking",
         "color": "violet",
@@ -15,7 +15,7 @@
       },
       "color": "green",
       "archived_at": null,
-      "created_at": "2026-11-17T17:20:00.005035Z",
+      "created_at": "2026-11-17T17:20:00.006708Z",
       "used_cents": 128460,
       "available_limit_cents": 371540,
       "current_invoice": {

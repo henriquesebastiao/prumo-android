@@ -1,0 +1,70 @@
+{
+  "today": "2026-11-17",
+  "items": [
+    {
+      "habit": {
+        "id": "01a10b81-8500-7100-84da-412ff579f204",
+        "name": "Academia",
+        "color": "orange",
+        "icon": "dumbbell",
+        "measure": "check",
+        "target_value": null,
+        "unit": null
+      },
+      "done": false,
+      "value": null,
+      "week": {
+        "done": 1,
+        "target": 3
+      },
+      "settled": false
+    },
+    {
+      "habit": {
+        "id": "01a13f01-1d00-7767-809d-c0a4a5d06161",
+        "name": "Anki",
+        "color": "blue",
+        "icon": "graduation-cap",
+        "measure": "check",
+        "target_value": null,
+        "unit": null
+      },
+      "done": false,
+      "value": null,
+      "week": null,
+      "settled": false
+    },
+    {
+      "habit": {
+        "id": "01a13f01-1d01-7387-92d6-4792ba470747",
+        "name": "Beber água",
+        "color": "cyan",
+        "icon": "droplet",
+        "measure": "quantity",
+        "target_value": 2000,
+        "unit": "ml"
+      },
+      "done": false,
+      "value": 1250,
+      "week": null,
+      "settled": false
+    },
+    {
+      "habit": {
+        "id": "01a05c69-4d00-736b-9ef8-ade4a50dfa80",
+        "name": "Ler a Bíblia",
+        "color": "amber",
+        "icon": "book-open",
+        "measure": "check",
+        "target_value": null,
+        "unit": null
+      },
+      "done": false,
+      "value": null,
+      "week": null,
+      "settled": false
+    }
+  ],
+  "done": 0,
+  "scheduled": 4
+}

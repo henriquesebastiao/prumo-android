@@ -48,6 +48,7 @@ dependencies {
     implementation(projects.feature.garage)
     implementation(projects.feature.reading)
     implementation(projects.feature.studies)
+    implementation(projects.feature.habits)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)

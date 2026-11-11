@@ -108,10 +108,10 @@ Aprovado em 2026-11-10 (D24; D46 do servidor), feita antes do restante das Fases
 
 ## Fase 7 — Hábitos (`habits`)
 Aprovado em 2026-11-10 (D24; D47 do servidor), só depois de alguns dias de uso de Estudos.
-- [ ] `:feature:habits`: Hoje, Hábitos, detalhe com calendário do mês, editor, folhas de marcação, frequência, pausa e recaída
-- [ ] Card do Início e ação rápida "Marcar hábitos"
-- [ ] Novo componente: `MonthCalendar`
-- [ ] Testes e verificação no emulador
+- [x] `:feature:habits`: Hoje, Hábitos, detalhe com calendário do mês, editor, folhas de marcação, frequência, pausa e recaída
+- [x] Card do Início e ação rápida "Marcar hábitos"
+- [x] Novo componente: `MonthCalendar`
+- [x] Testes (contrato, repositório com fixtures gravadas, ViewModels, telas) e verificação no emulador: `Pixel_9` (API 37) contra o `e2e_server.py` (Hoje, marcar e desmarcar, quantidade, lista, detalhe com calendário e um dia passado desmarcado e marcado de novo, outubro com a pausa, nova versão da frequência recusada antes do hoje do servidor e criada em 23/11, pausa aberta encerrada e excluída, recaída registrada e excluída) e contra `make dev` com o usuário de Estudos (um hábito `check`, um de quantidade e um a abandonar criados do zero, marcar e desmarcar, início mudado para 01/11 e um dia passado marcado, dia futuro sem toque, frequência 3× por semana a partir de hoje, pausa, recaída, ação rápida no Início, módulo desligado e religado); claro e escuro, 360 dp e fonte 130 % — 2026-11-11
 
 ## Ideias (sem ordem definida)
 

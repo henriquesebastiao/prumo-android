@@ -20,6 +20,7 @@ object Seeds {
     const val GARAGE: Int = 0xFF1F5F8B.toInt()
     const val READING: Int = 0xFF8A4B2E.toInt()
     const val STUDIES: Int = 0xFF1C6B74.toInt()
+    const val HABITS: Int = 0xFF7A5A14.toInt()
     const val SUCCESS: Int = 0xFF3B8A3E.toInt()
     const val WARNING: Int = 0xFFB5651D.toInt()
 }
