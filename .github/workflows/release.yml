@@ -1,0 +1,129 @@
+name: Release APK
+
+# When a release is published on GitHub, build the app, sign it with the release key
+# and attach the APK (and its checksum) to that release's assets (D25).
+#
+# Publish a release whose tag is `v<versionName>`, e.g. `v0.2.0` for
+# `versionName = "0.2.0"` in app/build.gradle.kts. The build fails early when they differ.
+#
+# Needs these repository secrets (Settings > Secrets and variables > Actions):
+#   ANDROID_KEYSTORE_BASE64    the release keystore, base64-encoded (`base64 -w0 release.jks`)
+#   ANDROID_KEYSTORE_PASSWORD  its password
+#   ANDROID_KEY_ALIAS          the key's alias
+#   ANDROID_KEY_PASSWORD       the key's password
+
+on:
+  release:
+    types: [published]
+  # Re-run for an existing release (e.g. after fixing a secret): Actions > Run workflow, give its tag.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag of the release to build and attach the APK to (e.g. v0.2.0)
+        required: true
+
+permissions:
+  contents: write # attach the APK to the release
+
+concurrency:
+  group: release-${{ github.event.release.tag_name || inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  apk:
+    name: Build and attach the APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check the release key is configured
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          # Without the real key the build would fall back to the debug key, and users couldn't
+          # update from one release to the next. Better to stop here.
+          missing=0
+          check() { [ -n "$2" ] || { echo "::error::Secret $1 is not set"; missing=1; }; }
+          check ANDROID_KEYSTORE_BASE64 "$KEYSTORE"
+          check ANDROID_KEYSTORE_PASSWORD "$STORE_PASSWORD"
+          check ANDROID_KEY_ALIAS "$KEY_ALIAS"
+          check ANDROID_KEY_PASSWORD "$KEY_PASSWORD"
+          exit $missing
+
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Check the tag matches the app's version
+        run: |
+          version=$(sed -nE 's/^[[:space:]]*versionName = "([^"]+)".*/\1/p' app/build.gradle.kts)
+          code=$(sed -nE 's/^[[:space:]]*versionCode = ([0-9]+).*/\1/p' app/build.gradle.kts)
+          echo "app/build.gradle.kts: versionName=$version versionCode=$code"
+          if [ "$TAG" != "v$version" ]; then
+            echo "::error file=app/build.gradle.kts::The release tag is '$TAG' but versionName is '$version'. Set versionName = \"${TAG#v}\" (and raise versionCode) in app/build.gradle.kts, move the tag, and publish again."
+            exit 1
+          fi
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      # The runner image has the Android SDK and its licenses; the Android Gradle plugin downloads
+      # the platform and build tools the build asks for (compileSdk 37, build tools 37.0.0).
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Decode the keystore
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: echo "$KEYSTORE" | base64 -d > "$RUNNER_TEMP/release.jks"
+
+      - name: Build the release APK
+        env:
+          PRUMO_KEYSTORE_FILE: ${{ runner.temp }}/release.jks
+          PRUMO_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          PRUMO_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          PRUMO_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew :app:assembleRelease --no-daemon --stacktrace
+
+      - name: Check the APK is signed with the release key
+        run: |
+          apk=app/build/outputs/apk/release/app-release.apk
+          apksigner=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)apksigner
+          "$apksigner" verify --verbose --print-certs "$apk" | tee "$RUNNER_TEMP/certs.txt"
+          if grep -qi "Android Debug" "$RUNNER_TEMP/certs.txt"; then
+            echo "::error::The APK is signed with the debug key"
+            exit 1
+          fi
+
+      - name: Name the assets
+        id: assets
+        run: |
+          name="prumo-$TAG.apk"
+          cp app/build/outputs/apk/release/app-release.apk "$name"
+          sha256sum "$name" > "$name.sha256"
+          echo "apk=$name" >> "$GITHUB_OUTPUT"
+          cat "$name.sha256"
+
+      - name: Attach to the release
+        env:
+          APK: ${{ steps.assets.outputs.apk }}
+        run: gh release upload "$TAG" "$APK" "$APK.sha256" --clobber
+
+      - name: Keep R8's mapping file
+        # Needed to read a stack trace from this exact build; kept 90 days, not published.
+        uses: actions/upload-artifact@v7
+        with:
+          name: mapping-${{ env.TAG }}
+          path: app/build/outputs/mapping/release/mapping.txt
+          retention-days: 90
+
+      - name: Remove the keystore
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.jks"

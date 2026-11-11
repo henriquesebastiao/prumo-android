@@ -15,6 +15,21 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // The release key comes from the environment (the GitHub Actions release workflow sets these;
+    // see .github/workflows/release.yml and D25). Without it, a local `assembleRelease` is signed
+    // with the debug key: it installs, but can't be updated by a release signed with the real key.
+    val releaseKeystore = providers.environmentVariable("PRUMO_KEYSTORE_FILE").orNull
+    signingConfigs {
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = providers.environmentVariable("PRUMO_KEYSTORE_PASSWORD").get()
+                keyAlias = providers.environmentVariable("PRUMO_KEY_ALIAS").get()
+                keyPassword = providers.environmentVariable("PRUMO_KEY_PASSWORD").get()
+            }
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -23,8 +38,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            // No release key yet (publishing is in "Ideias" of the ROADMAP): signed with the debug key.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         }
     }
 

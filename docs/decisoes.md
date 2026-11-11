@@ -188,6 +188,12 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 **Consequências:** nenhum cálculo no app; com o cache (D21) as telas abrem com a última resposta e uma gravação faz a leitura seguinte perguntar ao servidor. A fila de pendentes continua na Fase 4.
 **Na Fase 7:** Hábitos abre em Hoje (marcar com um toque, a quantidade com − e +, enviada depois de uma pausa curta para que uma sequência de toques seja uma gravação) e Hábitos; o detalhe tem o `MonthCalendar`, em que um dia até hoje é marcado com um toque (um dia futuro não é tocável) e a quantidade de um dia passado abre uma folha. Marcar usa o "hoje" que o servidor manda (`/habits/today`, o calendário), nunca o relógio do aparelho; os campos de data das folhas só começam no hoje do fuso do usuário. Os ícones de hábito são a lista da web (nomes livres, D33 do servidor) desenhada por `ServerIcons`, que ganhou `moon` e `sun`.
 
+## D25 — APK assinado anexado a cada release do GitHub
+**Status:** aceita · 2026-11
+**Contexto:** o build de release era assinado com a chave de debug (a publicação estava em "Ideias" do ROADMAP). O mantenedor pediu um CI que gere o APK a cada release publicada e o anexe a ela, como no Downtify Android.
+**Decisão:** `.github/workflows/release.yml` roda quando uma release é publicada (ou à mão, com a tag, em *Run workflow*): confere que a tag é `v<versionName>` de `app/build.gradle.kts`, monta `:app:assembleRelease` com a chave de release, confere com o `apksigner` que o APK não saiu com a chave de debug e anexa `prumo-<tag>.apk` e o `.sha256` à release; o `mapping.txt` do R8 fica 90 dias como artefato do run, sem publicar. A chave vem de quatro secrets do repositório (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`), que o workflow passa ao Gradle como `PRUMO_KEYSTORE_FILE`, `PRUMO_KEYSTORE_PASSWORD`, `PRUMO_KEY_ALIAS` e `PRUMO_KEY_PASSWORD`. Sem `PRUMO_KEYSTORE_FILE` (um `assembleRelease` local, o CI dos pull requests), o release continua assinado com a chave de debug.
+**Consequências:** publicar uma versão é subir `versionName` e `versionCode`, e publicar a release com a tag `v<versionName>`. A chave de release não pode se perder nem mudar: um APK assinado com outra chave não atualiza o app instalado. Um APK de release montado localmente não atualiza o publicado (e vice-versa). F-Droid continua em "Ideias".
+
 ---
 
 ## Modelo

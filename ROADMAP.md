@@ -11,6 +11,7 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [x] Módulos `:core:*`, `:feature:*` (vazios) e `:app`; regra de build que impede `:feature:*` de depender de outro `:feature:*`
 - [x] detekt (com compose-rules), Spotless (ktlint), Android lint, `.editorconfig`, `.gitignore` com `commit-message.md`
 - [x] CI no GitHub Actions: Spotless, detekt, build, testes de unidade
+- [x] CI de release: cada release publicada no GitHub ganha o APK assinado com a chave de release e o `.sha256` (D25)
 - [x] `docs/arquitetura.md` e `docs/decisoes.md` do app
 - [x] **(servidor)** Seção "Servidor e app juntos" no `CLAUDE.md` e `commit-message.md` no `.gitignore`
 - [x] **(servidor)** `service: "prumo"` no `GET /api/health`, para reconhecer um servidor Prumo (A5)
@@ -116,4 +117,4 @@ Aprovado em 2026-11-10 (D24; D47 do servidor), só depois de alguns dias de uso 
 ## Ideias (sem ordem definida)
 
 - Pranchas para as telas de paridade com a web que o design v1 não cobre (`docs/design-v1.md`, seção 7)
-- Publicação (assinatura, CI de release, F-Droid)
+- Publicação no F-Droid (a assinatura e o CI de release já existem, D25)

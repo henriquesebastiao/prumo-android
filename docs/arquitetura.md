@@ -78,6 +78,7 @@ Sem biblioteca para UUID v7 (`kotlin.uuid.Uuid.generateV7()`, da stdlib) nem par
 - Android SDK em `~/Android/Sdk` (`sdk.dir` no `local.properties`, fora do git), com `platforms;android-37`, `build-tools;37.0.0` e `platform-tools`. Emulador `Pixel_9` com API 37 (imagem com Play Store). Sem janela, ele precisa de `-skip-adb-auth`, ou o adb fica `unauthorized` sem diálogo para aceitar: `~/Android/Sdk/emulator/emulator -avd Pixel_9 -no-window -no-audio -no-snapshot-save -gpu swiftshader_indirect -skip-adb-auth`.
 - `ksp.incremental=false` (D17): o KSP incremental chegou a deixar o Hilt sem um `PrumoFeature`.
 - O CI (GitHub Actions) roda `./gradlew spotlessCheck detekt` e `./gradlew build` em cada pull request para a `main`.
+- Uma release publicada no GitHub (tag `v<versionName>`) dispara `.github/workflows/release.yml`, que monta o APK de release assinado com a chave dos secrets do repositório e o anexa à release com o `.sha256` (D25). Sem as variáveis `PRUMO_KEYSTORE_*`, `assembleRelease` assina com a chave de debug.
 
 ## Camadas
 
