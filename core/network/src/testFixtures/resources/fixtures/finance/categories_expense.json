@@ -2,7 +2,7 @@
   "month": "2026-11",
   "items": [
     {
-      "id": "019a9bfc-628e-75cd-8047-63b5c84ee0f3",
+      "id": "019a9bfc-6246-75ce-a669-049cfc1d48f0",
       "kind": "expense",
       "name": "Alimentação",
       "color": "orange",
@@ -13,7 +13,7 @@
       "month_total_cents": 74285
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63b65d8e7f53",
+      "id": "019a9bfc-6246-75ce-a669-049d2b283ab0",
       "kind": "expense",
       "name": "Moradia",
       "color": "blue",
@@ -24,7 +24,7 @@
       "month_total_cents": 138630
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63b765ae6fff",
+      "id": "019a9bfc-6246-75ce-a669-049e41de5c8c",
       "kind": "expense",
       "name": "Transporte",
       "color": "indigo",
@@ -35,7 +35,7 @@
       "month_total_cents": 0
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63b8d38641e1",
+      "id": "019a9bfc-6246-75ce-a669-049f42bde528",
       "kind": "expense",
       "name": "Combustível",
       "color": "gray",
@@ -46,7 +46,7 @@
       "month_total_cents": 27104
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63b94fecba9e",
+      "id": "019a9bfc-6246-75ce-a669-04a0e99d1802",
       "kind": "expense",
       "name": "Saúde",
       "color": "red",
@@ -57,7 +57,7 @@
       "month_total_cents": 0
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63baec561f22",
+      "id": "019a9bfc-6246-75ce-a669-04a1d005c3e2",
       "kind": "expense",
       "name": "Educação",
       "color": "violet",
@@ -68,7 +68,7 @@
       "month_total_cents": 0
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63bb53cd4d72",
+      "id": "019a9bfc-6246-75ce-a669-04a2deeb42fc",
       "kind": "expense",
       "name": "Lazer",
       "color": "pink",
@@ -79,7 +79,7 @@
       "month_total_cents": 16400
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63bc1fdb0e0c",
+      "id": "019a9bfc-6246-75ce-a669-04a3d2b212b3",
       "kind": "expense",
       "name": "Compras",
       "color": "amber",
@@ -90,7 +90,7 @@
       "month_total_cents": 0
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63bddcc6cd74",
+      "id": "019a9bfc-6246-75ce-a669-04a43b3ed318",
       "kind": "expense",
       "name": "Assinaturas",
       "color": "cyan",
@@ -101,7 +101,7 @@
       "month_total_cents": 0
     },
     {
-      "id": "019a9bfc-628e-75cd-8047-63be3947bc0a",
+      "id": "019a9bfc-6246-75ce-a669-04a568b6f47b",
       "kind": "expense",
       "name": "Outros",
       "color": "gray",

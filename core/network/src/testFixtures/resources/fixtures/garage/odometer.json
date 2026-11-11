@@ -1,130 +1,130 @@
 {
   "items": [
     {
-      "id": "01a1e919-6cc1-7122-9ca6-e7edb160fefb",
+      "id": "01a1e919-6cc0-7440-87f9-1c91d251c5ba",
       "km": 18420,
       "recorded_at": "2026-11-17T10:42:00Z",
       "source": "manual",
       "source_id": null,
-      "created_at": "2026-11-17T10:42:00.001787Z",
-      "updated_at": "2026-11-17T10:42:00.001793Z"
+      "created_at": "2026-11-17T10:42:00.001039Z",
+      "updated_at": "2026-11-17T10:42:00.001045Z"
     },
     {
-      "id": "01a1a616-4df9-736e-a921-ff3ebad564ef",
+      "id": "01a1ca4a-f64c-72de-b785-171b210122e2",
       "km": 18400,
       "recorded_at": "2026-11-16T21:10:00Z",
       "source": "fueling",
-      "source_id": "01a1a616-4df7-71c3-9b45-8fd83bc7b585",
-      "created_at": "2026-11-04T10:24:02.041691Z",
-      "updated_at": "2026-11-04T10:24:02.041695Z"
+      "source_id": "01a1ca4a-f64a-77a3-aad8-5e16481f390b",
+      "created_at": "2026-11-11T11:07:52.780239Z",
+      "updated_at": "2026-11-11T11:07:52.780240Z"
     },
     {
-      "id": "01a1a616-4deb-7627-8d3f-bb468f94ba94",
+      "id": "01a1ca4a-f643-75f9-8c4c-329f7ac00d67",
       "km": 18110,
       "recorded_at": "2026-11-06T12:00:00Z",
       "source": "fueling",
-      "source_id": "01a1a616-4de8-755e-a71b-9e84ace02237",
-      "created_at": "2026-11-04T10:24:02.027931Z",
-      "updated_at": "2026-11-04T10:24:02.027934Z"
+      "source_id": "01a1ca4a-f641-719a-829e-d1d526ca4616",
+      "created_at": "2026-11-11T11:07:52.771563Z",
+      "updated_at": "2026-11-11T11:07:52.771564Z"
     },
     {
-      "id": "01a1a616-4de6-7585-ae00-05dfce2fdbea",
+      "id": "01a1ca4a-f640-73bd-aa4c-544bd3b01d7e",
       "km": 17800,
       "recorded_at": "2026-10-27T12:00:00Z",
       "source": "fueling",
-      "source_id": "01a1a616-4de3-717a-a269-72827fad83c6",
-      "created_at": "2026-11-04T10:24:02.022376Z",
-      "updated_at": "2026-11-04T10:24:02.022380Z"
+      "source_id": "01a1ca4a-f63e-7209-8ead-b5747b952ef4",
+      "created_at": "2026-11-11T11:07:52.768254Z",
+      "updated_at": "2026-11-11T11:07:52.768256Z"
     },
     {
-      "id": "01a1a616-4de1-7059-b956-4d00945be89e",
+      "id": "01a1ca4a-f63d-7539-85a6-7a006a7e4433",
       "km": 17640,
       "recorded_at": "2026-10-21T13:00:00Z",
       "source": "maintenance",
-      "source_id": "01a1a616-4ddd-7374-96fe-e15bc4fb1996",
-      "created_at": "2026-11-04T10:24:02.017743Z",
-      "updated_at": "2026-11-04T10:24:02.017746Z"
+      "source_id": "01a1ca4a-f63a-72a0-b3b5-6c87766b8e68",
+      "created_at": "2026-11-11T11:07:52.765293Z",
+      "updated_at": "2026-11-11T11:07:52.765295Z"
     },
     {
-      "id": "01a1a616-4dda-744f-bc34-069b391bbb86",
+      "id": "01a1ca4a-f639-77b5-bc8c-7570118a4a9e",
       "km": 17500,
       "recorded_at": "2026-10-17T12:00:00Z",
       "source": "fueling",
-      "source_id": "01a1a616-4dd7-733c-a001-bcd852d923bb",
-      "created_at": "2026-11-04T10:24:02.010657Z",
-      "updated_at": "2026-11-04T10:24:02.010661Z"
+      "source_id": "01a1ca4a-f637-73d0-ad70-1a201133b383",
+      "created_at": "2026-11-11T11:07:52.761353Z",
+      "updated_at": "2026-11-11T11:07:52.761355Z"
     },
     {
-      "id": "01a1a616-4dd5-7721-9c64-f38af214e026",
+      "id": "01a1ca4a-f635-7789-8c9b-2c938a126808",
       "km": 17200,
       "recorded_at": "2026-10-07T12:00:00Z",
       "source": "fueling",
-      "source_id": "01a1a616-4dd2-7715-8045-ab781eef2282",
-      "created_at": "2026-11-04T10:24:02.005283Z",
-      "updated_at": "2026-11-04T10:24:02.005286Z"
+      "source_id": "01a1ca4a-f633-74c5-b7d5-91739ff2dee2",
+      "created_at": "2026-11-11T11:07:52.757258Z",
+      "updated_at": "2026-11-11T11:07:52.757261Z"
     },
     {
-      "id": "01a1a616-4dd0-712d-8579-642cc06c7f77",
+      "id": "01a1ca4a-f631-7703-b29f-1e502fa2f9c1",
       "km": 16900,
       "recorded_at": "2026-09-27T12:00:00Z",
       "source": "fueling",
-      "source_id": "01a1a616-4dcc-7339-8a5c-fd26dea329ae",
-      "created_at": "2026-11-04T10:24:02.000610Z",
-      "updated_at": "2026-11-04T10:24:02.000613Z"
+      "source_id": "01a1ca4a-f62e-703c-b7c7-f24f0a46d1f2",
+      "created_at": "2026-11-11T11:07:52.753668Z",
+      "updated_at": "2026-11-11T11:07:52.753670Z"
     },
     {
-      "id": "01a1a616-4dc9-71de-83f5-dc5e9b494f66",
+      "id": "01a1ca4a-f62c-72af-9d9c-711a343769d8",
       "km": 16640,
       "recorded_at": "2026-09-12T13:00:00Z",
       "source": "maintenance",
-      "source_id": "01a1a616-4dc5-758d-aa43-b609131c5af6",
-      "created_at": "2026-11-04T10:24:01.993625Z",
-      "updated_at": "2026-11-04T10:24:01.993629Z"
+      "source_id": "01a1ca4a-f629-72f0-8a6b-12f4e715c5a5",
+      "created_at": "2026-11-11T11:07:52.748921Z",
+      "updated_at": "2026-11-11T11:07:52.748923Z"
     },
     {
-      "id": "01a1a616-4dc2-7527-bcb8-f2a8462ec5a9",
+      "id": "01a1ca4a-f628-759f-9a03-e369594e9a86",
       "km": 16180,
       "recorded_at": "2026-09-03T13:30:00Z",
       "source": "maintenance",
-      "source_id": "01a1a616-4dbf-7256-8f97-5162cf61c5ed",
-      "created_at": "2026-11-04T10:24:01.986696Z",
-      "updated_at": "2026-11-04T10:24:01.986700Z"
+      "source_id": "01a1ca4a-f625-773c-b5ab-ddd029ae3ae0",
+      "created_at": "2026-11-11T11:07:52.744403Z",
+      "updated_at": "2026-11-11T11:07:52.744405Z"
     },
     {
-      "id": "01a1a616-4dbb-707d-bf86-3b0c9dd81cae",
+      "id": "01a1ca4a-f623-7390-8c4a-8705ad1e82cb",
       "km": 14620,
       "recorded_at": "2026-07-14T13:30:00Z",
       "source": "maintenance",
-      "source_id": "01a1a616-4db8-7517-ad36-14bc8606d41f",
-      "created_at": "2026-11-04T10:24:01.980152Z",
-      "updated_at": "2026-11-04T10:24:01.980155Z"
+      "source_id": "01a1ca4a-f620-714b-93d9-776f1671001d",
+      "created_at": "2026-11-11T11:07:52.739390Z",
+      "updated_at": "2026-11-11T11:07:52.739392Z"
     },
     {
-      "id": "01a1a616-4db4-7653-95cc-7c538a4b713b",
+      "id": "01a1ca4a-f61e-738b-8426-3ac1fe9636bb",
       "km": 13900,
       "recorded_at": "2026-06-20T13:00:00Z",
       "source": "maintenance",
-      "source_id": "01a1a616-4db0-7136-ad36-d56e3dd0a07b",
-      "created_at": "2026-11-04T10:24:01.973176Z",
-      "updated_at": "2026-11-04T10:24:01.973180Z"
+      "source_id": "01a1ca4a-f61b-7301-ab7a-642d5fd1c770",
+      "created_at": "2026-11-11T11:07:52.734657Z",
+      "updated_at": "2026-11-11T11:07:52.734659Z"
     },
     {
-      "id": "01a1a616-4dad-7044-b4ec-5b9a26fe6cf9",
+      "id": "01a1ca4a-f619-7344-b6f7-31fab4cb832b",
       "km": 13050,
       "recorded_at": "2026-05-22T13:30:00Z",
       "source": "maintenance",
-      "source_id": "01a1a616-4da9-7608-aaf2-85d842226c39",
-      "created_at": "2026-11-04T10:24:01.966089Z",
-      "updated_at": "2026-11-04T10:24:01.966092Z"
+      "source_id": "01a1ca4a-f616-745a-9337-2a6b2bd1814c",
+      "created_at": "2026-11-11T11:07:52.729714Z",
+      "updated_at": "2026-11-11T11:07:52.729716Z"
     },
     {
-      "id": "019a9bfc-6292-77c9-a20c-0d6e0372ee0f",
+      "id": "019a9bfc-624c-7427-ba0d-f6bc44d35a0c",
       "km": 11000,
-      "recorded_at": "2025-11-19T12:00:00.142087Z",
+      "recorded_at": "2025-11-19T12:00:00.073248Z",
       "source": "manual",
       "source_id": null,
-      "created_at": "2025-11-19T12:00:00.146356Z",
-      "updated_at": "2025-11-19T12:00:00.146362Z"
+      "created_at": "2025-11-19T12:00:00.076026Z",
+      "updated_at": "2025-11-19T12:00:00.076030Z"
     }
   ],
   "total": 14,

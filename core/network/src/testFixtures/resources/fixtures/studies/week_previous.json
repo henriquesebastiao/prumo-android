@@ -1,0 +1,303 @@
+{
+  "start": "2026-11-09",
+  "end": "2026-11-15",
+  "today": "2026-11-17",
+  "days": [
+    {
+      "on": "2026-11-09",
+      "today": "2026-11-17",
+      "is_today": false,
+      "rows": [
+        {
+          "subject": {
+            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "name": "Inglês",
+            "color": "orange"
+          },
+          "goal_minutes": 30,
+          "done_minutes": 30,
+          "status": "met",
+          "blocks": [
+            {
+              "starts_at": "07:00:00",
+              "duration_minutes": 30
+            }
+          ]
+        },
+        {
+          "subject": {
+            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "name": "Cálculo II",
+            "color": "blue"
+          },
+          "goal_minutes": 60,
+          "done_minutes": 60,
+          "status": "met",
+          "blocks": [
+            {
+              "starts_at": "19:00:00",
+              "duration_minutes": 60
+            }
+          ]
+        }
+      ],
+      "done_minutes": 90,
+      "planned_minutes": 90,
+      "met": true
+    },
+    {
+      "on": "2026-11-10",
+      "today": "2026-11-17",
+      "is_today": false,
+      "rows": [
+        {
+          "subject": {
+            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "name": "Inglês",
+            "color": "orange"
+          },
+          "goal_minutes": 30,
+          "done_minutes": 30,
+          "status": "met",
+          "blocks": [
+            {
+              "starts_at": "07:00:00",
+              "duration_minutes": 30
+            }
+          ]
+        },
+        {
+          "subject": {
+            "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+            "name": "FastAPI",
+            "color": "green"
+          },
+          "goal_minutes": 45,
+          "done_minutes": 45,
+          "status": "met",
+          "blocks": [
+            {
+              "starts_at": "20:00:00",
+              "duration_minutes": 45
+            }
+          ]
+        },
+        {
+          "subject": {
+            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "name": "Cálculo II",
+            "color": "blue"
+          },
+          "goal_minutes": 0,
+          "done_minutes": 40,
+          "status": "extra",
+          "blocks": []
+        }
+      ],
+      "done_minutes": 115,
+      "planned_minutes": 75,
+      "met": true
+    },
+    {
+      "on": "2026-11-11",
+      "today": "2026-11-17",
+      "is_today": false,
+      "rows": [
+        {
+          "subject": {
+            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "name": "Inglês",
+            "color": "orange"
+          },
+          "goal_minutes": 30,
+          "done_minutes": 30,
+          "status": "met",
+          "blocks": [
+            {
+              "starts_at": "07:00:00",
+              "duration_minutes": 30
+            }
+          ]
+        },
+        {
+          "subject": {
+            "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+            "name": "Cálculo II",
+            "color": "blue"
+          },
+          "goal_minutes": 60,
+          "done_minutes": 30,
+          "status": "partial",
+          "blocks": [
+            {
+              "starts_at": "19:00:00",
+              "duration_minutes": 60
+            }
+          ]
+        }
+      ],
+      "done_minutes": 60,
+      "planned_minutes": 90,
+      "met": false
+    },
+    {
+      "on": "2026-11-12",
+      "today": "2026-11-17",
+      "is_today": false,
+      "rows": [
+        {
+          "subject": {
+            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "name": "Inglês",
+            "color": "orange"
+          },
+          "goal_minutes": 30,
+          "done_minutes": 0,
+          "status": "missed",
+          "blocks": [
+            {
+              "starts_at": "07:00:00",
+              "duration_minutes": 30
+            }
+          ]
+        },
+        {
+          "subject": {
+            "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+            "name": "FastAPI",
+            "color": "green"
+          },
+          "goal_minutes": 45,
+          "done_minutes": 0,
+          "status": "missed",
+          "blocks": [
+            {
+              "starts_at": "20:00:00",
+              "duration_minutes": 45
+            }
+          ]
+        }
+      ],
+      "done_minutes": 0,
+      "planned_minutes": 75,
+      "met": false
+    },
+    {
+      "on": "2026-11-13",
+      "today": "2026-11-17",
+      "is_today": false,
+      "rows": [
+        {
+          "subject": {
+            "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+            "name": "Inglês",
+            "color": "orange"
+          },
+          "goal_minutes": 30,
+          "done_minutes": 30,
+          "status": "met",
+          "blocks": [
+            {
+              "starts_at": "07:00:00",
+              "duration_minutes": 30
+            }
+          ]
+        }
+      ],
+      "done_minutes": 30,
+      "planned_minutes": 30,
+      "met": true
+    },
+    {
+      "on": "2026-11-14",
+      "today": "2026-11-17",
+      "is_today": false,
+      "rows": [
+        {
+          "subject": {
+            "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+            "name": "Estruturas de Dados",
+            "color": "blue"
+          },
+          "goal_minutes": 90,
+          "done_minutes": 60,
+          "status": "partial",
+          "blocks": [
+            {
+              "starts_at": "09:00:00",
+              "duration_minutes": 90
+            }
+          ]
+        }
+      ],
+      "done_minutes": 60,
+      "planned_minutes": 90,
+      "met": false
+    },
+    {
+      "on": "2026-11-15",
+      "today": "2026-11-17",
+      "is_today": false,
+      "rows": [
+        {
+          "subject": {
+            "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+            "name": "Estruturas de Dados",
+            "color": "blue"
+          },
+          "goal_minutes": 0,
+          "done_minutes": 45,
+          "status": "extra",
+          "blocks": []
+        }
+      ],
+      "done_minutes": 45,
+      "planned_minutes": 0,
+      "met": null
+    }
+  ],
+  "days_met": 3,
+  "days_planned": 6,
+  "minutes_done": 400,
+  "minutes_planned": 450,
+  "by_subject": [
+    {
+      "subject": {
+        "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+        "name": "Inglês",
+        "color": "orange"
+      },
+      "minutes_done": 120,
+      "minutes_planned": 150
+    },
+    {
+      "subject": {
+        "id": "01a0ea3f-1d84-7469-a5bc-7a4d9e6dff0f",
+        "name": "Cálculo II",
+        "color": "blue"
+      },
+      "minutes_done": 130,
+      "minutes_planned": 120
+    },
+    {
+      "subject": {
+        "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+        "name": "Estruturas de Dados",
+        "color": "blue"
+      },
+      "minutes_done": 105,
+      "minutes_planned": 90
+    },
+    {
+      "subject": {
+        "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+        "name": "FastAPI",
+        "color": "green"
+      },
+      "minutes_done": 45,
+      "minutes_planned": 90
+    }
+  ],
+  "previous_start": "2026-11-02",
+  "next_start": "2026-11-16"
+}

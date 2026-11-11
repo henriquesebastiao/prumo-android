@@ -35,7 +35,7 @@ class DashboardTest {
     fun theHomeKeepsEachSummaryForItsModuleInTheUsersOrder() = runTest {
         enqueue("dashboard.json")
         val dashboard = (apiCall { api.dashboard() } as Outcome.Ok).value.toModel()
-        assertEquals(listOf("finance", "garage", "reading"), dashboard.summaries.map { it.module })
+        assertEquals(listOf("finance", "garage", "reading", "studies"), dashboard.summaries.map { it.module })
         assertEquals(JsonPrimitive(715_427), dashboard.summaries.first().json["total_balance_cents"])
 
         val oil = dashboard.upcoming.first { it.kind == "garage.oil_change" }
@@ -61,7 +61,7 @@ class DashboardTest {
         enqueue("preferences.json")
         val prefs = (apiCall { api.preferences() } as Outcome.Ok).value.toModel()
         assertEquals(ThemeMode.System, prefs.theme)
-        assertEquals(listOf("finance", "garage", "reading"), prefs.enabledModules)
+        assertEquals(listOf("finance", "garage", "reading", "studies"), prefs.enabledModules)
 
         enqueue("sessions.json")
         val session = (apiCall { api.sessions() } as Outcome.Ok).value.items.single().toModel()
@@ -71,7 +71,7 @@ class DashboardTest {
 
         enqueue("modules.json")
         val modules = (apiCall { api.modules() } as Outcome.Ok).value.items.map { it.toModel() }
-        assertEquals(listOf(0, 1, 2), modules.map { it.position })
+        assertEquals(listOf(0, 1, 2, 3), modules.map { it.position })
 
         enqueue("me.json")
         assertEquals("henrique", (apiCall { api.me() } as Outcome.Ok).value.toModel().username)

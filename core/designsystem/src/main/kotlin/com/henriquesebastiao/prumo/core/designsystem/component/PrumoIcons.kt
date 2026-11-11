@@ -221,6 +221,8 @@ object PrumoIcons {
 
     @DrawableRes val OilBarrel = R.drawable.ic_oil_barrel
 
+    @DrawableRes val OpenInNew = R.drawable.ic_open_in_new
+
     @DrawableRes val Package = R.drawable.ic_package_2
 
     @DrawableRes val Paid = R.drawable.ic_paid
@@ -291,6 +293,8 @@ object PrumoIcons {
 
     @DrawableRes val SwapVert = R.drawable.ic_swap_vert
 
+    @DrawableRes val Timer = R.drawable.ic_timer
+
     @DrawableRes val Train = R.drawable.ic_train
 
     @DrawableRes val TrendingUp = R.drawable.ic_trending_up
@@ -302,6 +306,8 @@ object PrumoIcons {
     @DrawableRes val TwoWheeler = R.drawable.ic_two_wheeler
 
     @DrawableRes val Unarchive = R.drawable.ic_unarchive
+
+    @DrawableRes val ViewWeek = R.drawable.ic_view_week
 
     @DrawableRes val Visibility = R.drawable.ic_visibility
 

@@ -12,8 +12,10 @@ import com.henriquesebastiao.prumo.core.network.testing.Fixtures
 import com.henriquesebastiao.prumo.core.network.toModel
 import com.henriquesebastiao.prumo.feature.finance.ui.CardDetail
 import com.henriquesebastiao.prumo.feature.finance.ui.TransactionDetail
+import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -62,7 +64,7 @@ class FinanceEventsTest {
         val old = events[3]!!
         assertEquals("Fatura Nubank fecha", closing.title)
         assertEquals("Limite disponível R$ 3.715,40", closing.subtitle.plain())
-        assertEquals(CardDetail("01a1ea85-ce05-77f7-b6ef-0ee13f0bd35d"), closing.target)
+        assertEquals(CardDetail(Fixtures.idOf("finance/credit_cards.json", "name", "Nubank")), closing.target)
         assertEquals("Fatura Nubank vence", open.title)
         assertEquals("R$ 1.284,60 até agora", open.subtitle.plain())
         assertEquals("Vencida · faltam R$ 1.000,00", late.subtitle.plain())
@@ -71,9 +73,17 @@ class FinanceEventsTest {
 
     @Test
     fun transactionsReadSignedWithWhereTheyWent() {
+        // Estudos's sessions leave the day-only "Streaming" out of the latest ten: the fuel, on that day.
+        val fuelItem = dashboard.activity.first { it.subject.startsWith("Posto") }
+        val dayOnly = fuelItem.copy(
+            occurredAt = Instant.parse("2026-11-15T03:00:00Z"),
+            data = fuelItem.data + ("occurred_time" to JsonNull),
+        )
         var events: List<HomeEvent> = emptyList()
+        var day: HomeEvent? = null
         compose.setContent {
             events = dashboard.activity.filter { it.module == "finance" }.mapNotNull { financeActivity(it, context) }
+            day = financeActivity(dayOnly, context)
         }
         compose.waitForIdle()
 
@@ -82,11 +92,14 @@ class FinanceEventsTest {
         assertEquals("Hoje, 08:10 · Carteira", bakery.subtitle)
         assertEquals("−R$ 18,50", bakery.value.plain())
         assertFalse(bakery.positive)
-        assertEquals(TransactionDetail("01a1ea85-ce66-777d-b905-ca3e9079aeae"), bakery.target)
+        assertEquals(
+            TransactionDetail(Fixtures.idOf("finance/transactions.json", "description", "Padaria")),
+            bakery.target,
+        )
         val fuel = events.first { it.title.startsWith("Posto") }
         assertEquals("Ontem, 18:10 · Cartão Nubank", fuel.subtitle)
         // Without a time of its own, only the day.
-        assertEquals("15/11 · Cartão Nubank", events.first { it.title.startsWith("Streaming") }.subtitle)
+        assertEquals("15/11 · Cartão Nubank", day!!.subtitle)
     }
 
     @Test

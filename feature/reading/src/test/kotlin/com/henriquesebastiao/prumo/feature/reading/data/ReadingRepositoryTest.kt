@@ -41,7 +41,7 @@ class ReadingRepositoryTest {
     private val changes = DataChanges()
     private lateinit var repository: DefaultReadingRepository
 
-    private val cleanCode = "01a17a8c-a4c0-7100-a052-1cc1102fb28e"
+    private val cleanCode = Fixtures.idOf("reading/books.json", "title", "Código Limpo")
 
     @Before
     fun setUp() {

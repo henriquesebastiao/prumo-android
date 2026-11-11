@@ -28,6 +28,8 @@ class GarageEventsTest {
     @get:Rule
     val compose = createComposeRule()
 
+    private fun honda() = Fixtures.idOf("garage/vehicles.json", "name", "Honda CG 160 Fan")
+
     private val dashboard: Dashboard =
         NetworkJson.decodeFromString(DashboardDto.serializer(), Fixtures.read("dashboard.json")).toModel()
 
@@ -45,7 +47,7 @@ class GarageEventsTest {
         val honda = events[0]!!
         assertEquals("Troca de óleo · Honda CG 160 Fan", honda.title)
         assertEquals("Estimativa pelo ritmo de 30 km/dia", honda.subtitle)
-        assertEquals(VehicleDetail("019a9bfc-6251-74f2-b541-29704cecc87c"), honda.target)
+        assertEquals(VehicleDetail(honda()), honda.target)
         assertEquals("Vence por data (12 meses)", events[1]!!.subtitle)
     }
 
@@ -57,7 +59,8 @@ class GarageEventsTest {
         }
         compose.waitForIdle()
 
-        val (odometer, fueling, other) = events.map { it!!.plain() }
+        // The latest ten items of every module: Estudos's sessions leave two of Veículos.
+        val (odometer, fueling) = events.map { it!!.plain() }
         assertEquals("Km atualizado · Honda CG 160 Fan", odometer.title)
         // 10:42 UTC is 07:42 in São Paulo.
         assertEquals("Hoje, 07:42", odometer.subtitle)
@@ -65,8 +68,7 @@ class GarageEventsTest {
         assertEquals("Abastecimento · Honda CG 160 Fan", fueling.title)
         assertEquals("Ontem, 18:10 · 7,3 L", fueling.subtitle)
         assertEquals("R$ 46,36", fueling.value)
-        assertEquals(VehicleDetail("019a9bfc-6251-74f2-b541-29704cecc87c"), fueling.target)
-        assertEquals("15/11, 19:20", other.subtitle)
+        assertEquals(VehicleDetail(honda()), fueling.target)
     }
 
     @Test

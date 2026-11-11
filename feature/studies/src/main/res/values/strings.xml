@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="studies_name">Estudos</string>
+    <string name="studies_description">Plano semanal, sessões de estudo e matérias com a nota no Obsidian</string>
+
+    <string name="studies_action_log">Registrar estudo</string>
+    <string name="studies_action_log_short">Estudei</string>
+    <string name="studies_new_area">Nova área</string>
+    <string name="studies_new_subject">Nova matéria</string>
+    <string name="studies_edit">Editar</string>
+    <string name="studies_archive">Arquivar</string>
+    <string name="studies_unarchive">Desarquivar</string>
+    <string name="studies_delete">Excluir</string>
+    <string name="studies_save">Salvar</string>
+    <string name="studies_loading">Carregando os estudos</string>
+    <string name="studies_join">%1$s · %2$s</string>
+    <string name="studies_field_invalid">Confira este valor.</string>
+
+    <!-- Durations: 45 min, 1h, 1h 30, with no-break spaces: a value never breaks (D23). -->
+    <string name="studies_minutes">%1$d&#160;min</string>
+    <string name="studies_hours">%1$dh</string>
+    <string name="studies_hours_minutes">%1$dh&#160;%2$02d</string>
+
+    <!-- Tabs (D24) -->
+    <string name="studies_tab_today">Hoje</string>
+    <string name="studies_tab_week">Semana</string>
+    <string name="studies_tab_subjects">Matérias</string>
+    <string name="studies_tab_plan">Plano</string>
+
+    <!-- E4: a subject's status on a day -->
+    <string name="studies_status_met">Cumprido</string>
+    <string name="studies_status_partial">Parcial</string>
+    <string name="studies_status_missed">Perdido</string>
+    <string name="studies_status_in_progress">Em andamento</string>
+    <string name="studies_status_extra">Extra</string>
+
+    <!-- Hoje -->
+    <string name="studies_today_progress">de %1$s planejados para hoje</string>
+    <string name="studies_today_no_plan">Nenhum bloco planejado para hoje.</string>
+    <string name="studies_today_no_plan_hint">Monte o plano semanal para ver aqui o que estudar em cada dia.</string>
+    <string name="studies_today_met">Tudo cumprido hoje. Bom trabalho.</string>
+    <string name="studies_today_rows">Matérias de hoje</string>
+    <string name="studies_row_goal">meta %1$s</string>
+    <string name="studies_row_no_goal">sem meta</string>
+    <string name="studies_row_done">%1$s feitos</string>
+    <string name="studies_row_nothing">nada ainda</string>
+    <string name="studies_row_at">às %1$s</string>
+
+    <!-- Semana (E6) -->
+    <string name="studies_week_this">Esta semana</string>
+    <string name="studies_week_of">%1$s a %2$s</string>
+    <string name="studies_week_previous">Semana anterior</string>
+    <string name="studies_week_next">Próxima semana</string>
+    <string name="studies_week_days_met">Dias cumpridos</string>
+    <string name="studies_week_days_of">%1$d de %2$d</string>
+    <string name="studies_week_minutes">Minutos</string>
+    <string name="studies_week_minutes_of">%1$s de %2$s</string>
+    <string name="studies_week_by_subject">Por matéria</string>
+    <string name="studies_week_empty">Nenhum estudo registrado nem planejado nesta semana.</string>
+    <string name="studies_day_title">%1$s, %2$s</string>
+    <string name="studies_day_met">Dia cumprido</string>
+    <string name="studies_day_missed">Dia perdido</string>
+    <string name="studies_day_partial">Dia parcial</string>
+    <string name="studies_day_open">Em andamento</string>
+    <string name="studies_day_free">Livre</string>
+    <string name="studies_day_nothing">Nada planejado nem registrado neste dia.</string>
+
+    <!-- Matérias -->
+    <plurals name="studies_subjects_count">
+        <item quantity="one">%1$d matéria</item>
+        <item quantity="other">%1$d matérias</item>
+    </plurals>
+    <plurals name="studies_areas_count">
+        <item quantity="one">%1$d área</item>
+        <item quantity="other">%1$d áreas</item>
+    </plurals>
+    <plurals name="studies_topics_count">
+        <item quantity="one">%1$d tópico</item>
+        <item quantity="other">%1$d tópicos</item>
+    </plurals>
+    <plurals name="studies_sessions_count">
+        <item quantity="one">%1$d sessão</item>
+        <item quantity="other">%1$d sessões</item>
+    </plurals>
+    <string name="studies_subjects_none">nenhuma matéria</string>
+    <string name="studies_overview">%1$s em %2$s · %3$s este mês</string>
+    <string name="studies_subject_this_week">%1$s esta semana</string>
+    <string name="studies_subject_none_this_week">nada esta semana</string>
+    <string name="studies_subject_last">última sessão %1$s</string>
+    <string name="studies_subject_no_sessions">sem sessões ainda</string>
+    <string name="studies_archived">Arquivada</string>
+    <string name="studies_show_archived">Mostrar arquivadas</string>
+    <string name="studies_hide_archived">Ocultar arquivadas</string>
+    <string name="studies_subjects_empty">Nenhuma área ainda</string>
+    <string name="studies_subjects_empty_hint">Crie uma área (Faculdade, Desenvolvimento, Inglês…) e as matérias dentro dela.</string>
+    <string name="studies_area_no_subjects">Nenhuma matéria nesta área.</string>
+    <string name="studies_area_actions">Ações de %1$s</string>
+    <string name="studies_delete_area_title">Excluir a área?</string>
+    <string name="studies_delete_area_body">%1$s será apagada. Só uma área sem matérias pode ser excluída.</string>
+
+    <!-- Uma matéria -->
+    <string name="studies_open_obsidian">Abrir no Obsidian</string>
+    <string name="studies_obsidian_missing">Sem link do Obsidian. Edite a matéria para adicionar.</string>
+    <string name="studies_obsidian_no_app">Nenhum app abre este link. Instale o Obsidian para abrir a nota.</string>
+    <string name="studies_subject_week_label">Esta semana</string>
+    <string name="studies_subject_last_label">Última sessão</string>
+    <string name="studies_subject_never">nenhuma</string>
+    <string name="studies_topics">Tópicos</string>
+    <string name="studies_no_topics">Os tópicos aparecem aqui conforme você registra sessões com eles.</string>
+    <string name="studies_weekly">Minutos por semana</string>
+    <string name="studies_weekly_empty">Registre sessões para ver os minutos por semana.</string>
+    <string name="studies_weekly_label">semana de %1$s: %2$s</string>
+    <string name="studies_recent">Sessões recentes</string>
+    <string name="studies_no_recent">Nenhuma sessão registrada nesta matéria.</string>
+    <string name="studies_delete_subject_title">Excluir a matéria?</string>
+    <string name="studies_delete_subject_body">%1$s será apagada com os tópicos, as sessões e os blocos do plano. Isso não pode ser desfeito.</string>
+    <string name="studies_delete_topic">Excluir tópico %1$s</string>
+    <string name="studies_delete_topic_title">Excluir o tópico?</string>
+    <string name="studies_delete_topic_body">%1$s sai da lista de tópicos da matéria.</string>
+
+    <!-- Plano (E1) -->
+    <string name="studies_plan_current_since">Vigente desde %1$s</string>
+    <string name="studies_plan_future_from">Começa em %1$s</string>
+    <string name="studies_plan_past_range">%1$s a %2$s</string>
+    <string name="studies_plan_current">Vigente</string>
+    <string name="studies_plan_future">Próxima versão</string>
+    <string name="studies_plan_previous">Versões anteriores</string>
+    <string name="studies_plan_empty">Nenhum plano ainda</string>
+    <string name="studies_plan_empty_hint">Diga o que estudar em cada dia da semana e por quanto tempo. O Hoje e a Semana seguem o plano.</string>
+    <string name="studies_plan_no_blocks">Esta versão não tem blocos.</string>
+    <string name="studies_plan_edit_version">Editar esta versão</string>
+    <string name="studies_plan_change">Mudar o plano</string>
+    <string name="studies_plan_new">Montar plano</string>
+    <string name="studies_plan_locked_note">A versão em vigor não muda: mudar o plano cria uma versão a partir de hoje ou de uma data futura.</string>
+    <string name="studies_plan_delete_title">Excluir esta versão?</string>
+    <string name="studies_plan_delete_body">A versão que começa em %1$s será apagada. O plano anterior volta a valer a partir dessa data.</string>
+    <string name="studies_plan_editor_new">Nova versão do plano</string>
+    <string name="studies_plan_editor_edit">Editar versão do plano</string>
+    <string name="studies_plan_valid_from">Vale a partir de</string>
+    <string name="studies_plan_valid_from_hint">Hoje ou uma data futura; a sugestão é a próxima segunda.</string>
+    <string name="studies_plan_blocks">Blocos</string>
+    <string name="studies_plan_add_block">Adicionar bloco</string>
+    <string name="studies_plan_remove_block">Remover bloco %1$d</string>
+    <string name="studies_plan_block">Bloco %1$d</string>
+    <string name="studies_plan_weekdays">Dias da semana</string>
+    <string name="studies_plan_starts_at">Horário (opcional)</string>
+    <string name="studies_plan_duration">Duração</string>
+    <string name="studies_plan_no_blocks_form">Adicione pelo menos um bloco.</string>
+    <string name="studies_plan_save">Salvar plano</string>
+    <string name="studies_plan_no_subjects">Crie uma matéria antes de montar o plano.</string>
+
+    <!-- Registrar estudo -->
+    <string name="studies_session_edit">Editar sessão</string>
+    <string name="studies_subject">Matéria</string>
+    <string name="studies_topic">Tópico (opcional)</string>
+    <string name="studies_topic_create">Criar tópico “%1$s”</string>
+    <string name="studies_topic_new">novo</string>
+    <string name="studies_duration">Duração</string>
+    <string name="studies_minutes_suffix">min</string>
+    <string name="studies_other_duration">Outra</string>
+    <string name="studies_start">Início</string>
+    <string name="studies_start_hint">Padrão: terminei agora.</string>
+    <string name="studies_no_subjects">Crie uma matéria antes de registrar estudo.</string>
+    <string name="studies_delete_session">Excluir sessão</string>
+    <string name="studies_delete_session_title">Excluir a sessão?</string>
+    <string name="studies_delete_session_body">A sessão sai do histórico e dos minutos da semana.</string>
+
+    <!-- Área e matéria -->
+    <string name="studies_edit_area">Editar área</string>
+    <string name="studies_edit_subject">Editar matéria</string>
+    <string name="studies_area">Área</string>
+    <string name="studies_area_name">Nome da área</string>
+    <string name="studies_subject_name">Nome da matéria</string>
+    <string name="studies_color">Cor</string>
+    <string name="studies_obsidian">Link do Obsidian (opcional)</string>
+    <string name="studies_obsidian_hint">Cole o link da nota (Copiar URL do Obsidian): começa com obsidian://.</string>
+    <string name="studies_no_areas">Crie uma área antes da matéria.</string>
+    <string name="studies_color_green">Verde</string>
+    <string name="studies_color_teal">Verde-azulado</string>
+    <string name="studies_color_cyan">Ciano</string>
+    <string name="studies_color_blue">Azul</string>
+    <string name="studies_color_indigo">Anil</string>
+    <string name="studies_color_violet">Violeta</string>
+    <string name="studies_color_pink">Rosa</string>
+    <string name="studies_color_red">Vermelho</string>
+    <string name="studies_color_orange">Laranja</string>
+    <string name="studies_color_amber">Âmbar</string>
+    <string name="studies_color_gray">Cinza</string>
+
+    <!-- Início -->
+    <string name="studies_card_today">de %1$s hoje</string>
+    <string name="studies_card_no_plan">Nada planejado para hoje</string>
+    <string name="studies_card_week">Semana: %1$s · %2$s</string>
+    <plurals name="studies_card_week_days">
+        <item quantity="one">%1$d de %2$d dia</item>
+        <item quantity="other">%1$d de %2$d dias</item>
+    </plurals>
+    <string name="studies_card_empty">Monte o plano e registre o que estudou.</string>
+    <string name="studies_event_session">Estudo · %1$s</string>
+
+    <!-- Errors of Estudos (docs/api.md of the server) -->
+    <string name="studies_error_invalid_obsidian_uri">Use um link do Obsidian, que começa com obsidian://.</string>
+    <string name="studies_error_plan_locked">Essa versão do plano já está em vigor e não muda. Crie uma versão a partir de hoje ou de uma data futura.</string>
+    <string name="studies_error_plan_date_taken">Já existe uma versão do plano começando nessa data.</string>
+    <string name="studies_error_subject_archived">A matéria está arquivada. Desarquive para registrar estudo nela.</string>
+    <string name="studies_error_area_in_use">A área ainda tem matérias. Mova ou exclua as matérias antes.</string>
+    <string name="studies_error_topic_in_use">O tópico tem sessões registradas.</string>
+</resources>

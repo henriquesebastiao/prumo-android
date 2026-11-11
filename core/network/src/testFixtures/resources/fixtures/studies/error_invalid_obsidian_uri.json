@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "studies.invalid_obsidian_uri",
+    "message": "Only obsidian:// links are accepted."
+  }
+}

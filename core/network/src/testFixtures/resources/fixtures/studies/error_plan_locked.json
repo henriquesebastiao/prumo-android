@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "studies.plan_locked",
+    "message": "A plan version already in force cannot change."
+  }
+}

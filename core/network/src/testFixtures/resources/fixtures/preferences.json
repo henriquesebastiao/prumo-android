@@ -6,8 +6,9 @@
   "enabled_modules": [
     "finance",
     "garage",
-    "reading"
+    "reading",
+    "studies"
   ],
-  "created_at": "2025-11-19T12:00:00.236410Z",
-  "updated_at": "2025-11-19T12:00:00.236422Z"
+  "created_at": "2025-11-19T12:00:00.067729Z",
+  "updated_at": "2025-11-19T12:00:00.067738Z"
 }

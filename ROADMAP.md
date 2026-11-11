@@ -99,6 +99,20 @@ As fases são executadas em ordem e cada uma termina com uma revisão antes da p
 - [ ] Widget Glance 4×2 e 2×2 com a próxima troca de óleo e atalhos para as folhas de registro
 - [ ] Revisão em tablet e dobrável
 
+## Fase 6 — Estudos (`studies`)
+Aprovado em 2026-11-10 (D24; D46 do servidor), feita antes do restante das Fases 4 e 5 por decisão do mantenedor. Sem prancha: telas compostas com o design system.
+- [x] `:feature:studies`: DTOs e contrato, repositório, Hoje, Semana, Matérias (áreas, detalhe da matéria com tópicos, Obsidian e minutos por semana), Plano (versões e editor), folha "Registrar estudo"
+- [x] Card do Início, "Atividade recente" e ação rápida
+- [x] Novos componentes: `WeekdayChips`, `DayStrip`
+- [x] Testes (contrato, ViewModels, telas) e verificação no emulador: `Pixel_9` (API 37) contra o `e2e_server.py` (Hoje, Semana e a anterior, Matérias, matéria, Plano, edição da versão futura, nova versão recusada na data ocupada e criada em outra, exclusão, sessão com tópico novo atualizando Hoje, Semana e Início) e contra `make dev` com um usuário novo (área, matéria com link recusado e corrigido, plano a partir de hoje, sessões pela toolbar e pela ação rápida do Início, módulo desligado e religado em Configurações); claro e escuro, 360 dp e fonte 130 %; "Abrir no Obsidian" sem o app mostra o aviso (com o Obsidian instalado não foi verificado: não há APK sem a Play Store) — 2026-11-11
+
+## Fase 7 — Hábitos (`habits`)
+Aprovado em 2026-11-10 (D24; D47 do servidor), só depois de alguns dias de uso de Estudos.
+- [ ] `:feature:habits`: Hoje, Hábitos, detalhe com calendário do mês, editor, folhas de marcação, frequência, pausa e recaída
+- [ ] Card do Início e ação rápida "Marcar hábitos"
+- [ ] Novo componente: `MonthCalendar`
+- [ ] Testes e verificação no emulador
+
 ## Ideias (sem ordem definida)
 
 - Pranchas para as telas de paridade com a web que o design v1 não cobre (`docs/design-v1.md`, seção 7)

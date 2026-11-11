@@ -25,7 +25,7 @@
       "transactions_count": 4,
       "last_payment_on": "2026-11-10",
       "last_payment_account": {
-        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "id": "01a1ea85-ce00-7071-8081-306fd0af56f1",
         "name": "Nubank",
         "kind": "checking",
         "color": "violet",
@@ -44,7 +44,7 @@
       "transactions_count": 4,
       "last_payment_on": "2026-10-09",
       "last_payment_account": {
-        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "id": "01a1ea85-ce00-7071-8081-306fd0af56f1",
         "name": "Nubank",
         "kind": "checking",
         "color": "violet",
@@ -63,7 +63,7 @@
       "transactions_count": 4,
       "last_payment_on": "2026-09-10",
       "last_payment_account": {
-        "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+        "id": "01a1ea85-ce00-7071-8081-306fd0af56f1",
         "name": "Nubank",
         "kind": "checking",
         "color": "violet",

@@ -6,4 +6,24 @@
     <string name="designsystem_previous">Anterior</string>
     <string name="designsystem_next">Próximo</string>
     <string name="designsystem_more">Mais ações</string>
+    <!-- Monday first, as the server's weekdays (0 = Monday). -->
+    <string-array name="designsystem_weekdays_short">
+        <item>Seg</item>
+        <item>Ter</item>
+        <item>Qua</item>
+        <item>Qui</item>
+        <item>Sex</item>
+        <item>Sáb</item>
+        <item>Dom</item>
+    </string-array>
+    <string-array name="designsystem_weekdays_long">
+        <item>segunda-feira</item>
+        <item>terça-feira</item>
+        <item>quarta-feira</item>
+        <item>quinta-feira</item>
+        <item>sexta-feira</item>
+        <item>sábado</item>
+        <item>domingo</item>
+    </string-array>
+    <string name="designsystem_today">hoje</string>
 </resources>

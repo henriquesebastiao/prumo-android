@@ -1,0 +1,42 @@
+{
+  "on": "2026-11-17",
+  "today": "2026-11-17",
+  "is_today": true,
+  "rows": [
+    {
+      "subject": {
+        "id": "01a0ea3f-1d89-7391-b5d4-3e20cb089424",
+        "name": "Inglês",
+        "color": "orange"
+      },
+      "goal_minutes": 30,
+      "done_minutes": 30,
+      "status": "met",
+      "blocks": [
+        {
+          "starts_at": "07:00:00",
+          "duration_minutes": 30
+        }
+      ]
+    },
+    {
+      "subject": {
+        "id": "01a0ea3f-1d87-722f-b3dc-0709823ebf0c",
+        "name": "FastAPI",
+        "color": "green"
+      },
+      "goal_minutes": 45,
+      "done_minutes": 0,
+      "status": "in_progress",
+      "blocks": [
+        {
+          "starts_at": "20:00:00",
+          "duration_minutes": 45
+        }
+      ]
+    }
+  ],
+  "done_minutes": 30,
+  "planned_minutes": 75,
+  "met": false
+}

@@ -1,0 +1,128 @@
+{
+  "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+  "area_id": "01a0ea3f-1d80-7308-b7f0-779956091f9b",
+  "area_name": "Faculdade",
+  "name": "Estruturas de Dados",
+  "color": "blue",
+  "obsidian_uri": "obsidian://open?vault=Estudos&file=Faculdade%2FEstruturas%20de%20Dados",
+  "archived_at": null,
+  "topics_count": 2,
+  "last_session_at": "2026-11-15T19:00:00Z",
+  "minutes_this_week": 0,
+  "created_at": "2026-09-28T23:00:00.006444Z",
+  "updated_at": "2026-09-28T23:00:00.006449Z",
+  "topics": [
+    {
+      "id": "01a1da40-27c0-704e-88de-249304c68947",
+      "name": "Grafos",
+      "sessions_count": 2,
+      "created_at": "2026-11-14T13:30:00.000015Z"
+    },
+    {
+      "id": "01a1921d-f800-7565-aadd-aafdfad04e0a",
+      "name": "Árvores",
+      "sessions_count": 2,
+      "created_at": "2026-10-31T13:20:00.000011Z"
+    }
+  ],
+  "weekly_minutes": [
+    {
+      "week_start": "2026-09-28",
+      "minutes": 0
+    },
+    {
+      "week_start": "2026-10-05",
+      "minutes": 0
+    },
+    {
+      "week_start": "2026-10-12",
+      "minutes": 0
+    },
+    {
+      "week_start": "2026-10-19",
+      "minutes": 0
+    },
+    {
+      "week_start": "2026-10-26",
+      "minutes": 60
+    },
+    {
+      "week_start": "2026-11-02",
+      "minutes": 90
+    },
+    {
+      "week_start": "2026-11-09",
+      "minutes": 105
+    },
+    {
+      "week_start": "2026-11-16",
+      "minutes": 0
+    }
+  ],
+  "recent_sessions": [
+    {
+      "id": "01a1e0bd-d660-741f-be16-ac537e7011df",
+      "subject": {
+        "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+        "name": "Estruturas de Dados",
+        "color": "blue"
+      },
+      "topic": {
+        "id": "01a1da40-27c0-704e-88de-249304c68947",
+        "name": "Grafos"
+      },
+      "started_at": "2026-11-15T19:00:00Z",
+      "duration_minutes": 45,
+      "created_at": "2026-11-15T19:45:00.000219Z",
+      "updated_at": "2026-11-15T19:45:00.000225Z"
+    },
+    {
+      "id": "01a1da40-27c0-704e-88de-249478347cf9",
+      "subject": {
+        "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+        "name": "Estruturas de Dados",
+        "color": "blue"
+      },
+      "topic": {
+        "id": "01a1da40-27c0-704e-88de-249304c68947",
+        "name": "Grafos"
+      },
+      "started_at": "2026-11-14T12:30:00Z",
+      "duration_minutes": 60,
+      "created_at": "2026-11-14T13:30:00.000601Z",
+      "updated_at": "2026-11-14T13:30:00.000606Z"
+    },
+    {
+      "id": "01a1b63c-cb80-763e-a2a7-cd40ecb6ae48",
+      "subject": {
+        "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+        "name": "Estruturas de Dados",
+        "color": "blue"
+      },
+      "topic": {
+        "id": "01a1921d-f800-7565-aadd-aafdfad04e0a",
+        "name": "Árvores"
+      },
+      "started_at": "2026-11-07T12:10:00Z",
+      "duration_minutes": 90,
+      "created_at": "2026-11-07T13:40:00.000166Z",
+      "updated_at": "2026-11-07T13:40:00.000171Z"
+    },
+    {
+      "id": "01a1921d-f800-7565-aadd-aafe04d4fc52",
+      "subject": {
+        "id": "01a0ea3f-1d86-73f5-ab7b-9ffdac649cdd",
+        "name": "Estruturas de Dados",
+        "color": "blue"
+      },
+      "topic": {
+        "id": "01a1921d-f800-7565-aadd-aafdfad04e0a",
+        "name": "Árvores"
+      },
+      "started_at": "2026-10-31T12:20:00Z",
+      "duration_minutes": 60,
+      "created_at": "2026-10-31T13:20:00.000548Z",
+      "updated_at": "2026-10-31T13:20:00.000552Z"
+    }
+  ]
+}

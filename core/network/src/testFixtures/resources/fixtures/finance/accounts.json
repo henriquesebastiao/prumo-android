@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "01a1ea85-ce00-7419-a2ff-cb56d164ea33",
+      "id": "01a1ea85-ce00-7071-8081-306fd0af56f1",
       "name": "Nubank",
       "kind": "checking",
       "initial_balance_cents": -628649,
@@ -9,14 +9,14 @@
       "icon": "landmark",
       "include_in_total": true,
       "archived_at": null,
-      "created_at": "2026-11-17T17:20:00.000977Z",
+      "created_at": "2026-11-17T17:20:00.000729Z",
       "balance_cents": 481237,
       "last_transaction_on": "2026-11-16",
       "month_transactions_count": 8,
       "transactions_count": 26
     },
     {
-      "id": "01a1ea85-ce03-7246-8389-e4cbf16b335c",
+      "id": "01a1ea85-ce01-71f4-b852-a692092b054c",
       "name": "Inter",
       "kind": "checking",
       "initial_balance_cents": 75690,
@@ -24,14 +24,14 @@
       "icon": "landmark",
       "include_in_total": true,
       "archived_at": null,
-      "created_at": "2026-11-17T17:20:00.004000Z",
+      "created_at": "2026-11-17T17:20:00.001962Z",
       "balance_cents": 215690,
       "last_transaction_on": "2026-11-12",
       "month_transactions_count": 3,
       "transactions_count": 13
     },
     {
-      "id": "01a1ea85-ce05-7626-9960-c6c5cd9c4009",
+      "id": "01a1ea85-ce02-72bf-ac27-821a03d445ac",
       "name": "Carteira",
       "kind": "cash",
       "initial_balance_cents": 8980,
@@ -39,7 +39,7 @@
       "icon": "wallet",
       "include_in_total": true,
       "archived_at": null,
-      "created_at": "2026-11-17T17:20:00.005980Z",
+      "created_at": "2026-11-17T17:20:00.002650Z",
       "balance_cents": 18500,
       "last_transaction_on": "2026-11-17",
       "month_transactions_count": 4,

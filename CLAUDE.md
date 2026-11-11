@@ -1,6 +1,6 @@
 # Prumo Android
 
-App Android nativo do Prumo, o sistema open source e self-hosted de organização pessoal em módulos (Finanças, Veículos, Livros e outros no futuro). O servidor (API FastAPI e web Vue) fica em `~/git/prumo`; este app é um cliente da mesma API, com as mesmas funcionalidades da web e nenhum cálculo de regra de negócio.
+App Android nativo do Prumo, o sistema open source e self-hosted de organização pessoal em módulos (Finanças, Veículos, Livros, Estudos e outros no futuro). O servidor (API FastAPI e web Vue) fica em `~/git/prumo`; este app é um cliente da mesma API, com as mesmas funcionalidades da web e nenhum cálculo de regra de negócio.
 
 O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 
@@ -8,7 +8,7 @@ O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 
 - `app/`: Activity, Application (Hilt), shell de navegação, telas de sistema (primeiro acesso, Início, Configurações) e montagem dos módulos
 - `core/`: `model`, `network`, `data`, `database`, `designsystem`, `ui`, `feature`, `testing` (ver "Módulos e regras de dependência")
-- `feature/`: um módulo Gradle por módulo do Prumo (`finance`, `garage`, `reading`)
+- `feature/`: um módulo Gradle por módulo do Prumo (`finance`, `garage`, `reading`, `studies`)
 - `build-logic/`: plugins de convenção do Gradle; versões só em `gradle/libs.versions.toml`
 - `design/`: exportações do Claude Design, versionadas em `design/v1/`… É **somente referência visual**: nunca importe nada daqui no código. A versão ativa está em `design/README.md`
 - `config/detekt/`: regras do detekt
@@ -81,7 +81,7 @@ O estado atual e a próxima tarefa estão sempre no `ROADMAP.md`.
 
 - Componentes reais do Material 3 (Expressive); nada de imitação. Cores vêm de `MaterialTheme.colorScheme`: nunca hex numa tela. Tokens e componentes vivem em `:core:designsystem`; um redesign muda o design system, não as telas.
 - O tema é `PrumoTheme` (`MaterialExpressiveTheme` + `MotionScheme.expressive()`): esquema `SchemeTonalSpot` gerado do seed do app (`#6A4F86`), claro, escuro e preto puro; cor dinâmica ligada por padrão no Android 12+. Anime pelo `MaterialTheme.motionScheme` (molas espaciais para tamanho, posição e cantos; de efeito para cor e opacidade).
-- Cada módulo tem o seu seed (Finanças `#2E6B4F`, Veículos `#1F5F8B`, Livros `#8A4B2E`) e é desenhado dentro de `ModuleTheme(seed)`, um tema aninhado harmonizado com a cor dinâmica. success e warning são `PrumoTheme.extendedColors`.
+- Cada módulo tem o seu seed (Finanças `#2E6B4F`, Veículos `#1F5F8B`, Livros `#8A4B2E`, Estudos `#1C6B74`) e é desenhado dentro de `ModuleTheme(seed)`, um tema aninhado harmonizado com a cor dinâmica. success e warning são `PrumoTheme.extendedColors`.
 - Tipografia: Google Sans Flex arredondada (`ROND 100`) empacotada em `res/font` (sem fontes baixáveis), escala v3; `PrumoType.hero` (wdth 151) para o título largo; `PrumoType.data*` em JetBrains Mono com algarismos tabulares para valores. Não defina `fontFamily` numa tela.
 - Formas, espaço e listas: `PrumoShapes`, `PrumoShape` (seção 24, hero 32, folha 28), `ListStyle` (segmented 24/8 gap 4, separated 24 gap 8) e `Spacing` (grade de 4 dp, margem 16).
 - Ícones: Material Symbols Rounded como vetores em `:core:designsystem` (`PrumoIcons`), contorno em repouso e preenchido quando selecionado. Gere com `scripts/material_symbol.py`. Ícones de conta e categoria vêm do servidor como nomes Lucide e passam por `ServerIcons`.

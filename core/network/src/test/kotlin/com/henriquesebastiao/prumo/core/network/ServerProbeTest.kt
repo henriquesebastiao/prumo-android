@@ -34,7 +34,7 @@ class ServerProbeTest {
         server.enqueue(response(200, Fixtures.read("health.json")))
         val result = probe.check(baseUrl)
         assertTrue(result is ServerCheck.Found)
-        assertEquals("0.0.0", (result as ServerCheck.Found).version)
+        assertEquals("0.2.0", (result as ServerCheck.Found).version)
         assertEquals("/api/health", server.takeRequest().url.encodedPath)
     }
 

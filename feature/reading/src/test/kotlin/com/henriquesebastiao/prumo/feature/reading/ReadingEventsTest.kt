@@ -59,7 +59,7 @@ class ReadingEventsTest {
         assertEquals("Anotação · Código Limpo", note!!.title)
         // 01:10 UTC on the 16th is still the 15th in São Paulo.
         assertEquals(true, note.subtitle!!.startsWith("15/11, 22:10 · Capítulo sobre tratamento de erros"))
-        assertEquals(BookDetailKey("01a17a8c-a4c0-7193-ae39-2e9431a570a6"), note.target)
+        assertEquals(BookDetailKey(Fixtures.idOf("reading/books.json", "title", "Código Limpo")), note.target)
         assertEquals("Leitura · Código Limpo", read!!.title)
         assertEquals("15/11, 22:05 · até a página 212", read.subtitle)
         assertEquals("+14 p.", read.value)

@@ -32,8 +32,9 @@ O app é um cliente da API do Prumo (`~/git/prumo`), equivalente à web: mesmas 
 :core:testing         fakes dos repositórios e regras de teste
 :core:database        Room (prumo.db): as respostas do servidor guardadas no aparelho (D21)
 :feature:garage       cada módulo com sua API (Retrofit), DTOs, modelos, repositório e
-:feature:finance      telas (data/, model/, ui/). Veículos (Fase 1), Finanças (Fase 2)
-:feature:reading      e Livros (Fase 3) estão prontos
+:feature:finance      telas (data/, model/, ui/). Veículos (Fase 1), Finanças (Fase 2),
+:feature:reading      Livros (Fase 3) e Estudos (Fase 6, D24) estão prontos
+:feature:studies
 ```
 
 Plugins de convenção (`build-logic/convention`):

@@ -136,6 +136,40 @@ def record_reading(base, token):
     save("reading/error_page_out_of_range.json", refused)
 
 
+def record_studies(base, token):
+    """Estudos (fixtures/studies/): reads, plus a refused plan change and link (nothing is saved)."""
+
+    def get(path):
+        status, payload, _ = call(base, "GET", path, token=token)
+        assert status == 200, f"{path} answered {status}"
+        return payload
+
+    root = "/api/v1/studies"
+    save("studies/day.json", get(f"{root}/day"))
+    week = get(f"{root}/week")
+    save("studies/week.json", week)
+    save("studies/week_previous.json", get(f"{root}/week?start={week['previous_start']}"))
+    save("studies/overview.json", get(f"{root}/overview"))
+    save("studies/areas.json", get(f"{root}/areas?limit=200"))
+    subjects = get(f"{root}/subjects?limit=200")
+    save("studies/subjects.json", subjects)
+    subject = next(item for item in subjects["items"] if item["obsidian_uri"])
+    save("studies/subject.json", get(f"{root}/subjects/{subject['id']}"))
+    save("studies/topics.json", get(f"{root}/subjects/{subject['id']}/topics"))
+    plans = get(f"{root}/plans")
+    save("studies/plans.json", plans)
+    current = next(item for item in plans["items"] if item["state"] == "current")
+    status, locked, _ = call(
+        base, "PUT", f"{root}/plans/{current['id']}", token=token, body={"blocks": []}
+    )
+    assert status in (409, 422), f"a plan in force answered {status}"
+    save("studies/error_plan_locked.json", locked)
+    body = {"area_id": subject["area_id"], "name": "Link inválido", "obsidian_uri": "https://x.dev"}
+    status, refused, _ = call(base, "POST", f"{root}/subjects", token=token, body=body)
+    assert status == 422, f"a link that isn't obsidian:// answered {status}"
+    save("studies/error_invalid_obsidian_uri.json", refused)
+
+
 def main():
     base = (sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8001").rstrip("/")
     username = sys.argv[2] if len(sys.argv) > 2 else "henrique"
@@ -188,6 +222,7 @@ def main():
     record_garage(base, token)
     record_finance(base, token)
     record_reading(base, token)
+    record_studies(base, token)
 
     status, missing, _ = call(base, "GET", "/api/v1/auth/sessions", token="not-a-token")
     assert status == 401, f"a bad token answered {status}"

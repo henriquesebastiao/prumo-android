@@ -181,6 +181,12 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 - Ícones de categoria: 80 nomes do Lucide em oito grupos (casa, alimentação, transporte, saúde e cuidado, lazer, pessoal e família, trabalho e estudo, dinheiro e contas), os mesmos da web (D45 do servidor; o ícone continua um nome livre na API, sem mudança no contrato). A folha da categoria mostra sete escolhas rápidas (mais o ícone atual) e "Mais ícones", que troca o conteúdo da folha pelo seletor completo (`IconChooser`): os grupos e uma busca pelo nome em pt-BR que ignora acentos ("farmacia" acha Farmácia). Cada nome é desenhado pelo Material Symbol mais próximo (`ServerIcons`). `ticket` (Lazer) passou a ser o ingresso (`confirmation_number`), e `party-popper` (Festas) ficou com o confete. Uma categoria nova começa com `tag` (Outros), o padrão do servidor.
 **Consequências:** um valor muito longo numa tela estreita fica menor, nunca cortado nem em duas linhas. Um ícone novo precisa entrar no app (`ServerIcons`, `CategoryIconGroups`, o rótulo `finance_icon_*`) e na web; um cliente que não o conhece mostra o ícone genérico.
 
+## D24 — Estudos e Hábitos sem prancha
+**Status:** aceita · 2026-11
+**Contexto:** os módulos Estudos (`studies`, D46 do servidor) e Hábitos (`habits`, D47) não têm pranchas no design v1. O link do Obsidian precisa abrir outro app; os dois módulos precisam de um calendário e de uma seleção de dias da semana que o design system não tinha.
+**Decisão:** as telas são compostas com o design system, como na paridade sem prancha (D20): Estudos abre em abas em pílula (Hoje, Semana, Matérias, Plano) com a toolbar "Registrar estudo"; Hábitos, em Hoje e Hábitos. Os componentes novos vão para o `:core:designsystem` com previews: `WeekdayChips` (dias da semana), `DayStrip` (os 7 dias com status) e, na Fase 7, `MonthCalendar`. O link do Obsidian abre por `Intent.ACTION_VIEW` com a URI; sem app que a abra, um snackbar diz isso. Todo derivado (meta, feito, status, semana, minutos por semana; taxa, sequência, dias sem) vem do servidor; "terminei agora" é só o valor padrão do campo de início (agora menos a duração). As fases entram no ROADMAP como 6 e 7, feitas antes do restante das Fases 4 e 5 por decisão do mantenedor.
+**Consequências:** nenhum cálculo no app; com o cache (D21) as telas abrem com a última resposta e uma gravação faz a leitura seguinte perguntar ao servidor. A fila de pendentes continua na Fase 4.
+
 ---
 
 ## Modelo
