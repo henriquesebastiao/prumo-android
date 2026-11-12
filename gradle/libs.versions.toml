@@ -9,7 +9,7 @@ androidxHilt = "1.4.0"
 composeBom = "2026.09.00"
 # The BOM pins material3 1.4.0, without FloatingToolbar, ButtonGroup, LoadingIndicator, ToggleButton and
 # SegmentedListItem. Fixed to the beta until 1.5 is stable (docs/decisoes.md, D03).
-material3 = "1.5.0-beta02"
+material3 = "1.5.0-rc01"
 material3Adaptive = "1.3.0"
 navigation3 = "1.2.0"
 lifecycle = "2.11.0"
