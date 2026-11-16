@@ -4,6 +4,8 @@ import com.henriquesebastiao.prumo.core.feature.PrumoFeature
 import com.henriquesebastiao.prumo.feature.habits.HabitsFeature
 import com.henriquesebastiao.prumo.feature.habits.data.DefaultHabitsRepository
 import com.henriquesebastiao.prumo.feature.habits.data.HabitsRepository
+import com.henriquesebastiao.prumo.feature.habits.widget.GlanceHabitsWidgetUpdater
+import com.henriquesebastiao.prumo.feature.habits.widget.HabitsWidgetUpdater
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,4 +21,7 @@ abstract class HabitsModule {
 
     @Binds
     abstract fun repository(repository: DefaultHabitsRepository): HabitsRepository
+
+    @Binds
+    abstract fun widgetUpdater(updater: GlanceHabitsWidgetUpdater): HabitsWidgetUpdater
 }

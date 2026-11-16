@@ -182,6 +182,7 @@ interface PrumoFeature {
 - **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell, cada uma dentro do `ModuleTheme` do módulo.
 - **Ações rápidas**: uma `QuickAction` com `sheet` abre a folha do módulo sobre o Início (abastecimento, km); sem `sheet`, abre `target` (manutenção e troca de óleo abrem o formulário). A folha cria o seu ViewModel no destino que a mostra e recomeça vazia a cada abertura (um id de abertura guardado com `rememberSaveable`, que sobrevive à rotação).
 - **Atalhos do ícone** (D26): uma `QuickAction` com `launcherShortcut = true` vira também um atalho dinâmico do ícone do app (`LauncherShortcuts`, `ShortcutManagerCompat`), publicado pelo `AppViewModel` conforme os módulos ativos e apagado ao sair. O atalho abre a `MainActivity` com a ação `com.henriquesebastiao.prumo.QUICK_ACTION` e o id; o shell volta ao Início e o Início abre a folha da ação.
+- **Widget** (D27): o de Hábitos é Glance, no próprio `:feature:habits` (receiver no manifesto do módulo). Lê e grava pelo repositório do módulo (um `EntryPoint` do Hilt), e o repositório pede ao widget para recarregar depois de cada gravação.
 - **Card que grava**: o `HomeCard` pode ter o seu próprio ViewModel do módulo (`hiltViewModel` dentro do card, como o de Hábitos). A gravação passa pelo repositório do módulo, que avisa o `DataChanges`, e o Início recarrega o resumo; o contrato não muda.
 
 ## Navegação

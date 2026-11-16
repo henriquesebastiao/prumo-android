@@ -14,6 +14,7 @@ import com.henriquesebastiao.prumo.feature.habits.model.Habit
 import com.henriquesebastiao.prumo.feature.habits.model.HabitDetail
 import com.henriquesebastiao.prumo.feature.habits.model.HabitInput
 import com.henriquesebastiao.prumo.feature.habits.model.HabitsDay
+import com.henriquesebastiao.prumo.feature.habits.widget.HabitsWidgetUpdater
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
@@ -92,6 +93,7 @@ interface HabitsRepository {
 class DefaultHabitsRepository @Inject constructor(
     private val calls: ServerCalls,
     private val dataChanges: DataChanges,
+    private val widget: HabitsWidgetUpdater,
 ) : HabitsRepository {
     override val changes: Flow<Unit> = dataChanges.changes.filter { it == HABITS_MODULE_ID }.map { }
 
@@ -100,9 +102,11 @@ class DefaultHabitsRepository @Inject constructor(
     private suspend fun <T> api(block: suspend HabitsApi.() -> T): Outcome<T> =
         calls.module(HabitsApi::class.java, block)
 
-    /** A write: tells the screens and the Home when it worked. */
-    private suspend fun <T> write(block: suspend HabitsApi.() -> T): Outcome<T> =
-        api(block).onOk { dataChanges.changed(HABITS_MODULE_ID) }
+    /** A write: tells the screens, the Home and the widget when it worked. */
+    private suspend fun <T> write(block: suspend HabitsApi.() -> T): Outcome<T> = api(block).onOk {
+        dataChanges.changed(HABITS_MODULE_ID)
+        widget.refresh()
+    }
 
     override suspend fun day(on: LocalDate?) = api { day(on?.toString()) }.map { it.toModel() }
 

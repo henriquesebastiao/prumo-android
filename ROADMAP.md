@@ -122,7 +122,7 @@ Aprovado em 2026-11-16.
 - [x] Lista com busca, filtros por tipo e cadência, horário, próxima ocorrência e reordenação; editor das frequências novas e horário
 - [x] Novos componentes: `ReorderableColumn` (extraído de Módulos), `MonthDayChips`
 - [x] Verificação no emulador `Pixel_9` (API 37) contra o `e2e_server.py` — 2026-11-16
-- [ ] Widget Glance com os pendentes de hoje e check direto (opcional; precisa de aprovação e de dependência nova)
+- [x] Widget Glance com os pendentes de hoje e check direto (D27), verificado no emulador: adicionado pela tela inicial, marcar e "+" pelo widget gravados no servidor, marcação feita no app refletida no widget, processo frio, cabeçalho abrindo "Marcar hábitos" — 2026-11-16
 
 ## Ideias (sem ordem definida)
 

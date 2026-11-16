@@ -258,6 +258,15 @@
     <string name="habits_quit_strip">Hábitos a abandonar</string>
     <string name="habits_card_see_all">Ver todos</string>
 
+    <!-- The widget of the home screen (D27) -->
+    <string name="habits_widget_name">Hábitos de hoje</string>
+    <string name="habits_widget_description">Os hábitos que faltam hoje, para marcar sem abrir o app.</string>
+    <string name="habits_widget_all_done">Tudo feito por hoje.</string>
+    <string name="habits_widget_nothing">Nada para hoje.</string>
+    <string name="habits_widget_signed_out">Entre no Prumo para ver os hábitos.</string>
+    <string name="habits_widget_unreachable">Servidor inacessível. Toque para abrir o app.</string>
+    <string name="habits_widget_failed">Não deu para carregar os hábitos.</string>
+
     <!-- Sheets -->
     <string name="habits_frequency_new">Nova versão da frequência</string>
     <string name="habits_frequency_edit">Editar versão da frequência</string>

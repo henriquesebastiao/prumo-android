@@ -99,7 +99,16 @@ data class QuickAction(
     val target: NavKey,
     val sheet: (@Composable (onDismiss: () -> Unit) -> Unit)? = null,
     val launcherShortcut: Boolean = false,
-)
+) {
+    companion object {
+        /**
+         * The intent action that opens a quick action's sheet over the Home (a shortcut of the
+         * app's icon, a widget), with the action's id in [EXTRA_ID].
+         */
+        const val LAUNCH_ACTION = "com.henriquesebastiao.prumo.QUICK_ACTION"
+        const val EXTRA_ID = "action_id"
+    }
+}
 
 /** What a module may ask of the app's navigation. */
 interface Navigator {

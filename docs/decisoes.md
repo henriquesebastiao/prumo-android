@@ -207,6 +207,16 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 - `weekly` de um servidor antigo é lido como `per_period` semanal; o app nunca o envia.
 **Consequências:** o app só desenha o que o servidor agrupou e ordenou. O widget Glance segue fora, à espera de aprovação (precisa de dependência nova).
 
+## D27 — Widget de Hábitos com Glance
+**Status:** aceita · 2026-11
+**Contexto:** a Etapa 4 do pedido de Hábitos (D26), aprovada pelo mantenedor em 2026-11-16: os pendentes de hoje na tela inicial, com check direto. O app não tinha biblioteca de widget.
+**Decisão:** Glance (`androidx.glance:glance-appwidget` e `glance-material3`, 1.2.0, a estável; `glance-appwidget-testing` nos testes), no `:feature:habits`, sem regra local:
+- O widget (4×2 por padrão, redimensionável) mostra o cabeçalho com "N de M hoje" e os abertos do dia na ordem do servidor (`timeline` e `untimed` de `GET /habits/day`): nome, horário, "passou do horário" e a quantidade. Um `check` marca pelo checkbox; uma quantidade, pelo "+" (um passo, como no card do Início). Tocar no cabeçalho abre "Marcar hábitos" sobre o Início (a mesma intenção do atalho do ícone, com as constantes em `QuickAction`). "Neste período" e os feitos ficam no app.
+- Toda gravação de Hábitos (no app ou no widget) chama `HabitsWidgetUpdater`, que pede ao widget para carregar o dia de novo; fora isso, `updatePeriodMillis` de 30 min. Enquanto a sessão do Glance vive, `update()` só recompõe: o recarregamento é uma chave do estado do widget (`Refresh`) observada na composição.
+- O widget pode subir o processo do app: antes de pedir o dia, espera a sessão criptografada sair de `Loading`. Sem sessão, diz para entrar no Prumo; com o servidor fora, diz que está inacessível (e a cópia do aparelho, D21, responde quando houver).
+- Cores do módulo (`seedColorScheme` do seed de Hábitos, claro e escuro), não a cor dinâmica.
+**Consequências:** uma dependência a mais (com WorkManager e DataStore de transitivos). Sem prévia desenhada no seletor de widgets (só a descrição). Com o módulo desligado em Configurações o widget continua mostrando os hábitos, se o usuário o deixar na tela.
+
 ---
 
 ## Modelo

@@ -24,8 +24,8 @@ interface LauncherShortcuts {
     fun clear()
 
     companion object {
-        const val ACTION_QUICK_ACTION = "com.henriquesebastiao.prumo.QUICK_ACTION"
-        const val EXTRA_ACTION_ID = "action_id"
+        const val ACTION_QUICK_ACTION = QuickAction.LAUNCH_ACTION
+        const val EXTRA_ACTION_ID = QuickAction.EXTRA_ID
 
         fun intent(context: Context, actionId: String): Intent = Intent(context, MainActivity::class.java)
             .setAction(ACTION_QUICK_ACTION)

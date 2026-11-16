@@ -40,7 +40,7 @@ class HabitsFeature @Inject constructor() : PrumoFeature {
 
     override val quickActions = listOf(
         QuickAction(
-            "habits.check_in",
+            CHECK_IN,
             R.string.habits_action_check_in,
             R.string.habits_action_check_in_short,
             PrumoIcons.Checklist,
@@ -69,6 +69,9 @@ class HabitsFeature @Inject constructor() : PrumoFeature {
 
     companion object {
         const val ID = HABITS_MODULE_ID
+
+        /** "Marcar hábitos": the quick action, its shortcut and the widget's header. */
+        const val CHECK_IN = "habits.check_in"
         val SEED = Seeds.HABITS
     }
 }

@@ -48,6 +48,9 @@ import org.junit.Test
 class HabitsRepositoryTest {
     private val server = MockWebServer()
     private val changes = DataChanges()
+
+    /** How many times a write asked the widget to show the new day. */
+    private var widgetRefreshes = 0
     private lateinit var repository: DefaultHabitsRepository
 
     @Before
@@ -58,7 +61,10 @@ class HabitsRepositoryTest {
 
             override fun onUnauthorized(token: String) = Unit
         }
-        repository = DefaultHabitsRepository(ServerCalls(ApiFactory(OkHttpClient()), gateway, NoCache), changes)
+        repository = DefaultHabitsRepository(
+            ServerCalls(ApiFactory(OkHttpClient()), gateway, NoCache),
+            changes,
+        ) { widgetRefreshes++ }
     }
 
     @After
@@ -213,6 +219,7 @@ class HabitsRepositoryTest {
             assertTrue(repository.mark("h1", LocalDate.of(2026, 11, 17), 1250) is Outcome.Ok)
             assertEquals("habits", awaitItem())
         }
+        assertEquals(1, widgetRefreshes)
         val request = server.takeRequest()
         assertEquals("PUT", request.method)
         assertEquals("/api/v1/habits/h1/entries/2026-11-17", request.url.encodedPath)
