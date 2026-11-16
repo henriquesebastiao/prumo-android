@@ -181,6 +181,8 @@ interface PrumoFeature {
 - **Início**: `GET /api/v1/dashboard` devolve um resumo por módulo ativo, na ordem do usuário, como união discriminada por `module`. `:core:network` entrega cada resumo como `JsonObject`; o `PrumoFeature` do módulo decodifica o seu. O primeiro módulo da ordem é o card hero (D08). Os itens `upcoming` e `activity` chegam como `UpcomingItem`/`ActivityItem` (`kind` estável e `data` com valores simples, lidos por `text`, `long` e `double`); o módulo de cada um escreve a linha (`HomeEvent`) e o Início mostra até 4 de cada lista (D20).
 - **Navegação**: cada módulo registra as suas entradas no `NavDisplay` do shell, cada uma dentro do `ModuleTheme` do módulo.
 - **Ações rápidas**: uma `QuickAction` com `sheet` abre a folha do módulo sobre o Início (abastecimento, km); sem `sheet`, abre `target` (manutenção e troca de óleo abrem o formulário). A folha cria o seu ViewModel no destino que a mostra e recomeça vazia a cada abertura (um id de abertura guardado com `rememberSaveable`, que sobrevive à rotação).
+- **Atalhos do ícone** (D26): uma `QuickAction` com `launcherShortcut = true` vira também um atalho dinâmico do ícone do app (`LauncherShortcuts`, `ShortcutManagerCompat`), publicado pelo `AppViewModel` conforme os módulos ativos e apagado ao sair. O atalho abre a `MainActivity` com a ação `com.henriquesebastiao.prumo.QUICK_ACTION` e o id; o shell volta ao Início e o Início abre a folha da ação.
+- **Card que grava**: o `HomeCard` pode ter o seu próprio ViewModel do módulo (`hiltViewModel` dentro do card, como o de Hábitos). A gravação passa pelo repositório do módulo, que avisa o `DataChanges`, e o Início recarrega o resumo; o contrato não muda.
 
 ## Navegação
 

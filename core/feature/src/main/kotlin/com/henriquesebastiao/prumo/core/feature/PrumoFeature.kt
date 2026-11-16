@@ -88,7 +88,8 @@ data class HomeEvent(
  * A quick record of a module ("Registrar abastecimento"). With a [sheet], it opens over the current
  * screen (the Home), which closes it through `onDismiss`; without one, it opens [target]. [labelRes]
  * is the long label (toolbar, accessibility), [shortLabelRes] the one under the icon in "Todas as
- * ações".
+ * ações". [launcherShortcut]: also a shortcut of the app's icon (a long press on the launcher), which
+ * opens the [sheet] over the Home while the module is enabled.
  */
 data class QuickAction(
     val id: String,
@@ -97,6 +98,7 @@ data class QuickAction(
     @param:DrawableRes val icon: Int,
     val target: NavKey,
     val sheet: (@Composable (onDismiss: () -> Unit) -> Unit)? = null,
+    val launcherShortcut: Boolean = false,
 )
 
 /** What a module may ask of the app's navigation. */

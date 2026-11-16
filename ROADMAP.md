@@ -114,6 +114,16 @@ Aprovado em 2026-11-10 (D24; D47 do servidor), só depois de alguns dias de uso 
 - [x] Novo componente: `MonthCalendar`
 - [x] Testes (contrato, repositório com fixtures gravadas, ViewModels, telas) e verificação no emulador: `Pixel_9` (API 37) contra o `e2e_server.py` (Hoje, marcar e desmarcar, quantidade, lista, detalhe com calendário e um dia passado desmarcado e marcado de novo, outubro com a pausa, nova versão da frequência recusada antes do hoje do servidor e criada em 23/11, pausa aberta encerrada e excluída, recaída registrada e excluída) e contra `make dev` com o usuário de Estudos (um hábito `check`, um de quantidade e um a abandonar criados do zero, marcar e desmarcar, início mudado para 01/11 e um dia passado marcado, dia futuro sem toque, frequência 3× por semana a partir de hoje, pausa, recaída, ação rápida no Início, módulo desligado e religado); claro e escuro, 360 dp e fonte 130 % — 2026-11-11
 
+### Frequências, Hoje e horários (D26; D48 do servidor)
+Aprovado em 2026-11-16.
+- [x] DTOs, contrato e fixtures gravadas do `e2e_server.py` (`habits/day.json`, `day_past.json`, resumo do Início com `upcoming`)
+- [x] Hoje em seções (com horário e "agora", sem horário arrastável, neste período, feitos, faixa dos que se quer abandonar), dias anteriores e "Desfazer"
+- [x] Card do Início que marca, busca em "Marcar hábitos", atalho no ícone do app
+- [x] Lista com busca, filtros por tipo e cadência, horário, próxima ocorrência e reordenação; editor das frequências novas e horário
+- [x] Novos componentes: `ReorderableColumn` (extraído de Módulos), `MonthDayChips`
+- [x] Verificação no emulador `Pixel_9` (API 37) contra o `e2e_server.py` — 2026-11-16
+- [ ] Widget Glance com os pendentes de hoje e check direto (opcional; precisa de aprovação e de dependência nova)
+
 ## Ideias (sem ordem definida)
 
 - Pranchas para as telas de paridade com a web que o design v1 não cobre (`docs/design-v1.md`, seção 7)

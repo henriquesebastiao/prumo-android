@@ -445,7 +445,10 @@ private fun Header(habit: Habit) {
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                habit.frequency?.let { frequencyText(it) }
+                habit.frequency?.let { frequency ->
+                    val text = frequencyText(frequency)
+                    habit.timeOfDay?.let { stringResource(R.string.habits_freq_joined, Formats.time(it), text) } ?: text
+                }
                     ?: stringResource(
                         if (habit.kind ==
                             HabitKind.Quit
@@ -476,23 +479,34 @@ private fun BuildTotals(habit: Habit) {
                 modifier = Modifier.weight(1f),
             )
             KpiTile(
-                value = streakText(habit.currentStreak ?: 0, habit.streakInWeeks),
+                value = streakText(habit.currentStreak ?: 0, habit.streakUnit),
                 label = stringResource(R.string.habits_streak_label),
                 modifier = Modifier.weight(1f),
             )
             KpiTile(
-                value = streakText(habit.bestStreak ?: 0, habit.streakInWeeks),
+                value = streakText(habit.bestStreak ?: 0, habit.streakUnit),
                 label = stringResource(R.string.habits_best_label),
                 modifier = Modifier.weight(1f),
             )
         }
-        Hint(stringResource(if (habit.streakInWeeks) R.string.habits_rate_hint_weeks else R.string.habits_rate_hint))
-        habit.week?.let { week ->
-            KpiTile(
-                value = stringResource(R.string.habits_today_week, week.done, week.target),
-                label = stringResource(R.string.habits_week_label),
-                modifier = Modifier.fillMaxWidth(),
-            )
+        Hint(rateWindow(habit.streakUnit))
+        if (habit.period != null || habit.nextDue != null) {
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                habit.period?.let { period ->
+                    KpiTile(
+                        value = "${period.done}/${period.target}",
+                        label = periodText(period),
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+                habit.nextDue?.let { due ->
+                    KpiTile(
+                        value = dueText(due),
+                        label = stringResource(R.string.habits_next_due_label),
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+            }
         }
     }
 }

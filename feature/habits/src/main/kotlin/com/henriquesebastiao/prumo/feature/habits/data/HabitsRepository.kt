@@ -13,7 +13,7 @@ import com.henriquesebastiao.prumo.feature.habits.model.HABITS_MODULE_ID
 import com.henriquesebastiao.prumo.feature.habits.model.Habit
 import com.henriquesebastiao.prumo.feature.habits.model.HabitDetail
 import com.henriquesebastiao.prumo.feature.habits.model.HabitInput
-import com.henriquesebastiao.prumo.feature.habits.model.HabitsToday
+import com.henriquesebastiao.prumo.feature.habits.model.HabitsDay
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
@@ -35,10 +35,13 @@ interface HabitsRepository {
     /** Pull to refresh: the next reads ask the server before the device's copy (D21). */
     fun expireCache()
 
-    /** H2: what today asks, with the user's today. */
-    suspend fun today(): Outcome<HabitsToday>
+    /** H9: the habits of [on] (today without it), grouped and ordered by the server. */
+    suspend fun day(on: LocalDate? = null): Outcome<HabitsDay>
 
-    /** By name, both kinds. */
+    /** H10: the habits of [ids] take, in this order, the places they held. */
+    suspend fun reorder(ids: List<String>): Outcome<Unit>
+
+    /** In the order of H10 (time, manual order, name), both kinds. */
     suspend fun habits(filter: ArchivedFilter = ArchivedFilter.Active): Outcome<List<Habit>>
 
     suspend fun habit(id: String): Outcome<HabitDetail>
@@ -101,7 +104,11 @@ class DefaultHabitsRepository @Inject constructor(
     private suspend fun <T> write(block: suspend HabitsApi.() -> T): Outcome<T> =
         api(block).onOk { dataChanges.changed(HABITS_MODULE_ID) }
 
-    override suspend fun today() = api { today() }.map { it.toModel() }
+    override suspend fun day(on: LocalDate?) = api { day(on?.toString()) }.map { it.toModel() }
+
+    override suspend fun reorder(ids: List<String>) = write {
+        reorder(requestBody(OrderDto.serializer(), OrderDto(ids)))
+    }
 
     override suspend fun habits(filter: ArchivedFilter) = api {
         habits(filter.wire, HabitsRepository.ALL)
@@ -135,15 +142,12 @@ class DefaultHabitsRepository @Inject constructor(
     }.map { it.toModel() }
 
     override suspend fun createFrequency(habitId: String, validFrom: LocalDate, input: FrequencyInput) = write {
-        val fields = input.toFields()
-        val body = FrequencyCreateDto(validFrom.toString(), fields.kind, fields.timesPerWeek, fields.weekdays)
+        val body = input.toFields().createDto(validFrom)
         createFrequency(habitId, requestBody(FrequencyCreateDto.serializer(), body))
     }.map { }
 
     override suspend fun updateFrequency(id: String, input: FrequencyInput) = write {
-        val fields = input.toFields()
-        val body = FrequencyUpdateDto(fields.kind, fields.timesPerWeek, fields.weekdays)
-        updateFrequency(id, requestBody(FrequencyUpdateDto.serializer(), body))
+        updateFrequency(id, requestBody(FrequencyFieldsDto.serializer(), input.toFields()))
     }.map { }
 
     override suspend fun deleteFrequency(id: String) = write { deleteFrequency(id) }

@@ -26,4 +26,7 @@
         <item>domingo</item>
     </string-array>
     <string name="designsystem_today">hoje</string>
+    <string name="designsystem_drag">Arrastar %1$s</string>
+    <string name="designsystem_move_up">Mover para cima</string>
+    <string name="designsystem_move_down">Mover para baixo</string>
 </resources>

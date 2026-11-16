@@ -3,7 +3,7 @@
   "info": {
     "title": "Prumo API",
     "description": "API of Prumo. The web app and the Android app are clients of this contract.",
-    "version": "0.2.0"
+    "version": "0.3.0"
   },
   "paths": {
     "/api/health": {
@@ -10932,13 +10932,104 @@
         }
       }
     },
+    "/api/v1/habits/day": {
+      "get": {
+        "tags": [
+          "habits"
+        ],
+        "summary": "Read Day",
+        "description": "The habits of a day, grouped and ordered (H9, H10): the timeline with times, the untimed\nones, the periods still open, the ones met on the day and the habits to quit.",
+        "operationId": "habits_read_day",
+        "security": [
+          {
+            "HTTPBearer": []
+          },
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "on",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Today by default; never in the future.",
+              "title": "On"
+            },
+            "description": "Today by default; never in the future."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitsDay"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/habits/today": {
       "get": {
         "tags": [
           "habits"
         ],
         "summary": "Read Today",
-        "description": "The habits that ask something of today, with their entry and week (H2, H6).",
+        "description": "The habits that ask something of today, with their entry and week (H2, H6). Use `/day`.",
         "operationId": "habits_read_today",
         "responses": {
           "200": {
@@ -10950,6 +11041,80 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "HTTPBearer": []
+          },
+          {
+            "APIKeyCookie": []
+          }
+        ]
+      }
+    },
+    "/api/v1/habits/order": {
+      "put": {
+        "tags": [
+          "habits"
+        ],
+        "summary": "Reorder Habits",
+        "description": "The listed habits take, in this order, the places they held (H10); repeating is safe.",
+        "operationId": "habits_reorder_habits",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HabitOrder"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
           },
           "401": {
             "description": "Unauthorized",
@@ -11575,7 +11740,7 @@
           "habits"
         ],
         "summary": "List Habits",
-        "description": "By name, with the derived values of each kind (H4-H7).",
+        "description": "In the order of H10 (time, manual order, name), with the derived values (H4-H7).",
         "operationId": "habits_list_habits",
         "security": [
           {
@@ -14061,6 +14226,18 @@
         "title": "BookUpdate",
         "description": "Status changes fill empty dates like the progress does (R3, R4)."
       },
+      "Cadence": {
+        "type": "string",
+        "enum": [
+          "daily",
+          "weekly",
+          "fortnightly",
+          "monthly",
+          "longer"
+        ],
+        "title": "Cadence",
+        "description": "How often a frequency comes back, for filters and labels."
+      },
       "CalendarStatus": {
         "type": "string",
         "enum": [
@@ -15806,6 +15983,20 @@
               }
             ],
             "description": "Only in `build`: the first version, from `started_on`."
+          },
+          "time_of_day": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "`HH:MM`, wall-clock time in the user's zone."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Of Day",
+            "description": "Optional time (H10)."
           }
         },
         "type": "object",
@@ -15814,6 +16005,103 @@
           "kind"
         ],
         "title": "HabitCreate"
+      },
+      "HabitDayItem": {
+        "properties": {
+          "habit": {
+            "$ref": "#/components/schemas/HabitRef"
+          },
+          "done": {
+            "type": "boolean",
+            "title": "Done",
+            "description": "H1: today is met."
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "week": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HabitWeek"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "In `weekly`."
+          },
+          "settled": {
+            "type": "boolean",
+            "title": "Settled",
+            "description": "Nothing left for today: today met, or the week met."
+          },
+          "late": {
+            "type": "boolean",
+            "title": "Late",
+            "description": "Open with a time already past (only today)."
+          },
+          "period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HabitPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "In `per_period`, from the day of the view."
+          },
+          "promoted": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "preferred_day",
+                  "due_soon"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Promoted",
+            "description": "Why a `per_period` habit is in the day: its preferred day came, or few days are left."
+          },
+          "due_in_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due In Days",
+            "description": "With `due_soon`: days until the period ends."
+          }
+        },
+        "type": "object",
+        "required": [
+          "habit",
+          "done",
+          "value",
+          "week",
+          "settled",
+          "late",
+          "period",
+          "promoted",
+          "due_in_days"
+        ],
+        "title": "HabitDayItem",
+        "description": "A habit of a day (H9), with its time, its period and why a period rose to the day."
       },
       "HabitDetail": {
         "properties": {
@@ -15896,6 +16184,23 @@
             ],
             "title": "Archived At"
           },
+          "time_of_day": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Of Day",
+            "description": "`HH:MM` in the user's zone, or null."
+          },
+          "position": {
+            "type": "integer",
+            "title": "Position",
+            "description": "Manual order (H10)."
+          },
           "frequency": {
             "anyOf": [
               {
@@ -15953,14 +16258,18 @@
                 "type": "string",
                 "enum": [
                   "day",
-                  "week"
+                  "occurrence",
+                  "week",
+                  "fortnight",
+                  "month"
                 ]
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Streak Unit"
+            "title": "Streak Unit",
+            "description": "`day` (daily or weekly fixed dates), `occurrence` (sparser fixed dates) or the period of `per_period`."
           },
           "week": {
             "anyOf": [
@@ -15971,7 +16280,31 @@
                 "type": "null"
               }
             ],
-            "description": "H6, in `weekly`."
+            "description": "Deprecated: H6 when the period is a week."
+          },
+          "period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HabitPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "H6, in `per_period`."
+          },
+          "next_due": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Due",
+            "description": "The next day that asks something; null if none."
           },
           "today": {
             "anyOf": [
@@ -16075,6 +16408,8 @@
           "target_value",
           "unit",
           "archived_at",
+          "time_of_day",
+          "position",
           "frequency",
           "paused",
           "rate_percent",
@@ -16082,6 +16417,8 @@
           "best_streak",
           "streak_unit",
           "week",
+          "period",
+          "next_due",
           "today",
           "clean_since",
           "clean_days",
@@ -16157,20 +16494,6 @@
           "kind": {
             "$ref": "#/components/schemas/HabitFrequencyKind"
           },
-          "times_per_week": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 7.0,
-                "minimum": 1.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Times Per Week",
-            "description": "In `weekly`."
-          },
           "weekdays": {
             "anyOf": [
               {
@@ -16188,6 +16511,150 @@
             ],
             "title": "Weekdays",
             "description": "In `weekdays`."
+          },
+          "every_n_weeks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 52.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Weeks",
+            "description": "In `weekdays`: every N weeks; 1 by default."
+          },
+          "month_days": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer",
+                  "maximum": 31.0,
+                  "minimum": 1.0
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Days",
+            "description": "In `month_days`; a day the month lacks falls on its last day."
+          },
+          "month_last_day": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Last Day",
+            "description": "In `month_days`: the last day of the month too."
+          },
+          "week_of_month": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  -1
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Week Of Month",
+            "description": "In `month_weekday`: 1 to 4, or -1 for the last."
+          },
+          "weekday": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 6.0,
+                "minimum": 0.0,
+                "description": "0 = Monday … 6 = Sunday."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weekday",
+            "description": "In `month_weekday`."
+          },
+          "every_n_months": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 12.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Months",
+            "description": "In `month_days` and `month_weekday`: every N months; 1 by default."
+          },
+          "times": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 28.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times",
+            "description": "In `per_period`: days met in each period."
+          },
+          "period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Period"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "In `per_period`."
+          },
+          "preferred_day": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 31.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Day",
+            "description": "In `per_period`, display only: a weekday (0-6) in `week` and `fortnight`, a day of the month (1-31) in `month`."
+          },
+          "times_per_week": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 7.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times Per Week",
+            "description": "Deprecated: `weekly` only; use `per_period`."
           },
           "id": {
             "anyOf": [
@@ -16221,20 +16688,6 @@
           "kind": {
             "$ref": "#/components/schemas/HabitFrequencyKind"
           },
-          "times_per_week": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 7.0,
-                "minimum": 1.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Times Per Week",
-            "description": "In `weekly`."
-          },
           "weekdays": {
             "anyOf": [
               {
@@ -16252,20 +16705,168 @@
             ],
             "title": "Weekdays",
             "description": "In `weekdays`."
+          },
+          "every_n_weeks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 52.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Weeks",
+            "description": "In `weekdays`: every N weeks; 1 by default."
+          },
+          "month_days": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer",
+                  "maximum": 31.0,
+                  "minimum": 1.0
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Days",
+            "description": "In `month_days`; a day the month lacks falls on its last day."
+          },
+          "month_last_day": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Last Day",
+            "description": "In `month_days`: the last day of the month too."
+          },
+          "week_of_month": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  -1
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Week Of Month",
+            "description": "In `month_weekday`: 1 to 4, or -1 for the last."
+          },
+          "weekday": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 6.0,
+                "minimum": 0.0,
+                "description": "0 = Monday … 6 = Sunday."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weekday",
+            "description": "In `month_weekday`."
+          },
+          "every_n_months": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 12.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Months",
+            "description": "In `month_days` and `month_weekday`: every N months; 1 by default."
+          },
+          "times": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 28.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times",
+            "description": "In `per_period`: days met in each period."
+          },
+          "period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Period"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "In `per_period`."
+          },
+          "preferred_day": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 31.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Day",
+            "description": "In `per_period`, display only: a weekday (0-6) in `week` and `fortnight`, a day of the month (1-31) in `month`."
+          },
+          "times_per_week": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 7.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times Per Week",
+            "description": "Deprecated: `weekly` only; use `per_period`."
           }
         },
         "type": "object",
         "required": [
           "kind"
         ],
-        "title": "HabitFrequencyFields"
+        "title": "HabitFrequencyFields",
+        "description": "The shape of each kind (H2). `weekly` with `times_per_week` is still accepted from apps\nbefore D48 and becomes `per_period` with `period = week`."
       },
       "HabitFrequencyKind": {
         "type": "string",
         "enum": [
           "daily",
           "weekly",
-          "weekdays"
+          "weekdays",
+          "month_days",
+          "month_weekday",
+          "per_period"
         ],
         "title": "HabitFrequencyKind"
       },
@@ -16304,18 +16905,12 @@
             "title": "State"
           },
           "kind": {
-            "$ref": "#/components/schemas/HabitFrequencyKind"
+            "$ref": "#/components/schemas/HabitFrequencyKind",
+            "description": "Never `weekly` (input only, deprecated)."
           },
-          "times_per_week": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Times Per Week"
+          "cadence": {
+            "$ref": "#/components/schemas/Cadence",
+            "description": "How often it comes back, for filters and labels."
           },
           "weekdays": {
             "anyOf": [
@@ -16330,6 +16925,119 @@
               }
             ],
             "title": "Weekdays"
+          },
+          "every_n_weeks": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Weeks"
+          },
+          "month_days": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Days"
+          },
+          "month_last_day": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Last Day"
+          },
+          "week_of_month": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Week Of Month"
+          },
+          "weekday": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weekday"
+          },
+          "every_n_months": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Months"
+          },
+          "times": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times"
+          },
+          "period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Period"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "preferred_day": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Day"
+          },
+          "times_per_week": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times Per Week",
+            "description": "Deprecated: `times` when `period` is `week`."
           }
         },
         "type": "object",
@@ -16339,8 +17047,18 @@
           "valid_until",
           "state",
           "kind",
-          "times_per_week",
-          "weekdays"
+          "cadence",
+          "weekdays",
+          "every_n_weeks",
+          "month_days",
+          "month_last_day",
+          "week_of_month",
+          "weekday",
+          "every_n_months",
+          "times",
+          "period",
+          "preferred_day",
+          "times_per_week"
         ],
         "title": "HabitFrequencyRead"
       },
@@ -16348,20 +17066,6 @@
         "properties": {
           "kind": {
             "$ref": "#/components/schemas/HabitFrequencyKind"
-          },
-          "times_per_week": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 7.0,
-                "minimum": 1.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Times Per Week",
-            "description": "In `weekly`."
           },
           "weekdays": {
             "anyOf": [
@@ -16380,6 +17084,150 @@
             ],
             "title": "Weekdays",
             "description": "In `weekdays`."
+          },
+          "every_n_weeks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 52.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Weeks",
+            "description": "In `weekdays`: every N weeks; 1 by default."
+          },
+          "month_days": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer",
+                  "maximum": 31.0,
+                  "minimum": 1.0
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Days",
+            "description": "In `month_days`; a day the month lacks falls on its last day."
+          },
+          "month_last_day": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month Last Day",
+            "description": "In `month_days`: the last day of the month too."
+          },
+          "week_of_month": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  -1
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Week Of Month",
+            "description": "In `month_weekday`: 1 to 4, or -1 for the last."
+          },
+          "weekday": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 6.0,
+                "minimum": 0.0,
+                "description": "0 = Monday … 6 = Sunday."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weekday",
+            "description": "In `month_weekday`."
+          },
+          "every_n_months": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 12.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Every N Months",
+            "description": "In `month_days` and `month_weekday`: every N months; 1 by default."
+          },
+          "times": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 28.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times",
+            "description": "In `per_period`: days met in each period."
+          },
+          "period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Period"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "In `per_period`."
+          },
+          "preferred_day": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 31.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Day",
+            "description": "In `per_period`, display only: a weekday (0-6) in `week` and `fortnight`, a day of the month (1-31) in `month`."
+          },
+          "times_per_week": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 7.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Times Per Week",
+            "description": "Deprecated: `weekly` only; use `per_period`."
           }
         },
         "type": "object",
@@ -16388,6 +17236,26 @@
         ],
         "title": "HabitFrequencyUpdate",
         "description": "Replaces a version that has not started yet."
+      },
+      "HabitOrder": {
+        "properties": {
+          "ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 500,
+            "minItems": 1,
+            "title": "Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ids"
+        ],
+        "title": "HabitOrder",
+        "description": "The new order of some habits: they take, in this order, the places they held (H10)."
       },
       "HabitPauseCreate": {
         "properties": {
@@ -16505,6 +17373,55 @@
         "type": "object",
         "title": "HabitPauseUpdate"
       },
+      "HabitPeriod": {
+        "properties": {
+          "period": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "starts_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Starts On"
+          },
+          "ends_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Ends On"
+          },
+          "done": {
+            "type": "integer",
+            "title": "Done",
+            "description": "Days met in the period."
+          },
+          "target": {
+            "type": "integer",
+            "title": "Target",
+            "description": "Days the period asks (H2)."
+          },
+          "days_left": {
+            "type": "integer",
+            "title": "Days Left",
+            "description": "Days from the reference day to the end, both included."
+          },
+          "neutral": {
+            "type": "boolean",
+            "title": "Neutral",
+            "description": "H2a: out of the rate; breaks no streak."
+          }
+        },
+        "type": "object",
+        "required": [
+          "period",
+          "starts_on",
+          "ends_on",
+          "done",
+          "target",
+          "days_left",
+          "neutral"
+        ],
+        "title": "HabitPeriod",
+        "description": "H6: the `per_period` period in progress."
+      },
       "HabitRead": {
         "properties": {
           "id": {
@@ -16586,6 +17503,23 @@
             ],
             "title": "Archived At"
           },
+          "time_of_day": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Of Day",
+            "description": "`HH:MM` in the user's zone, or null."
+          },
+          "position": {
+            "type": "integer",
+            "title": "Position",
+            "description": "Manual order (H10)."
+          },
           "frequency": {
             "anyOf": [
               {
@@ -16643,14 +17577,18 @@
                 "type": "string",
                 "enum": [
                   "day",
-                  "week"
+                  "occurrence",
+                  "week",
+                  "fortnight",
+                  "month"
                 ]
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Streak Unit"
+            "title": "Streak Unit",
+            "description": "`day` (daily or weekly fixed dates), `occurrence` (sparser fixed dates) or the period of `per_period`."
           },
           "week": {
             "anyOf": [
@@ -16661,7 +17599,31 @@
                 "type": "null"
               }
             ],
-            "description": "H6, in `weekly`."
+            "description": "Deprecated: H6 when the period is a week."
+          },
+          "period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HabitPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "H6, in `per_period`."
+          },
+          "next_due": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Due",
+            "description": "The next day that asks something; null if none."
           },
           "today": {
             "anyOf": [
@@ -16741,6 +17703,8 @@
           "target_value",
           "unit",
           "archived_at",
+          "time_of_day",
+          "position",
           "frequency",
           "paused",
           "rate_percent",
@@ -16748,6 +17712,8 @@
           "best_streak",
           "streak_unit",
           "week",
+          "period",
+          "next_due",
           "today",
           "clean_since",
           "clean_days",
@@ -16813,6 +17779,18 @@
               }
             ],
             "title": "Unit"
+          },
+          "time_of_day": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Of Day",
+            "description": "`HH:MM`, or null."
           }
         },
         "type": "object",
@@ -16823,7 +17801,8 @@
           "icon",
           "measure",
           "target_value",
-          "unit"
+          "unit",
+          "time_of_day"
         ],
         "title": "HabitRef"
       },
@@ -16997,6 +17976,20 @@
               }
             ],
             "title": "Unit"
+          },
+          "time_of_day": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "`HH:MM`, wall-clock time in the user's zone."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Of Day",
+            "description": "`null` clears it."
           }
         },
         "type": "object",
@@ -17021,6 +18014,97 @@
         ],
         "title": "HabitWeek",
         "description": "H6: days met this week over what the week asks."
+      },
+      "HabitsDay": {
+        "properties": {
+          "on": {
+            "type": "string",
+            "format": "date",
+            "title": "On"
+          },
+          "today": {
+            "type": "string",
+            "format": "date",
+            "title": "Today"
+          },
+          "now": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Now",
+            "description": "`HH:MM` in the user's zone, only when `on` is today."
+          },
+          "done": {
+            "type": "integer",
+            "title": "Done",
+            "description": "Met on the day: `done_items`."
+          },
+          "scheduled": {
+            "type": "integer",
+            "title": "Scheduled",
+            "description": "`timeline`, `untimed` and `done_items`."
+          },
+          "timeline": {
+            "items": {
+              "$ref": "#/components/schemas/HabitDayItem"
+            },
+            "type": "array",
+            "title": "Timeline",
+            "description": "Open, with a time, by time."
+          },
+          "untimed": {
+            "items": {
+              "$ref": "#/components/schemas/HabitDayItem"
+            },
+            "type": "array",
+            "title": "Untimed",
+            "description": "Open, without a time, in the manual order."
+          },
+          "period": {
+            "items": {
+              "$ref": "#/components/schemas/HabitDayItem"
+            },
+            "type": "array",
+            "title": "Period",
+            "description": "`per_period` still open in their period and not promoted to the day."
+          },
+          "done_items": {
+            "items": {
+              "$ref": "#/components/schemas/HabitDayItem"
+            },
+            "type": "array",
+            "title": "Done Items",
+            "description": "Met on the day, in the same order."
+          },
+          "quit": {
+            "items": {
+              "$ref": "#/components/schemas/HabitsSummaryQuit"
+            },
+            "type": "array",
+            "title": "Quit",
+            "description": "Habits to quit, with the days without."
+          }
+        },
+        "type": "object",
+        "required": [
+          "on",
+          "today",
+          "now",
+          "done",
+          "scheduled",
+          "timeline",
+          "untimed",
+          "period",
+          "done_items",
+          "quit"
+        ],
+        "title": "HabitsDay",
+        "description": "A day of habits (H9), grouped and ordered by the server (H10)."
       },
       "HabitsSummary": {
         "properties": {
@@ -17051,6 +18135,14 @@
             "title": "Pending",
             "description": "Up to 3 habits still open today."
           },
+          "upcoming": {
+            "items": {
+              "$ref": "#/components/schemas/HabitDayItem"
+            },
+            "type": "array",
+            "title": "Upcoming",
+            "description": "Up to 5 open today, in the order of the day (timeline, then untimed)."
+          },
           "pending_more": {
             "type": "integer",
             "title": "Pending More",
@@ -17070,6 +18162,7 @@
           "done_today",
           "scheduled_today",
           "pending",
+          "upcoming",
           "pending_more",
           "quit"
         ],
@@ -17140,7 +18233,8 @@
           "done",
           "scheduled"
         ],
-        "title": "HabitsToday"
+        "title": "HabitsToday",
+        "description": "Deprecated: `GET /habits/day` groups and orders the day (H9)."
       },
       "Health": {
         "properties": {
@@ -19160,6 +20254,15 @@
           "new_password"
         ],
         "title": "PasswordChange"
+      },
+      "Period": {
+        "type": "string",
+        "enum": [
+          "week",
+          "fortnight",
+          "month"
+        ],
+        "title": "Period"
       },
       "PlanBlocksWrite": {
         "properties": {

@@ -194,6 +194,19 @@ As decisões D01 a D08 foram pedidas ao mantenedor no fim da Etapa 1 (análise d
 **Decisão:** `.github/workflows/release.yml` roda quando uma release é publicada (ou à mão, com a tag, em *Run workflow*): confere que a tag é `v<versionName>` de `app/build.gradle.kts`, monta `:app:assembleRelease` com a chave de release, confere com o `apksigner` que o APK não saiu com a chave de debug e anexa `prumo-<tag>.apk` e o `.sha256` à release; o `mapping.txt` do R8 fica 90 dias como artefato do run, sem publicar. A chave vem de quatro secrets do repositório (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`), que o workflow passa ao Gradle como `PRUMO_KEYSTORE_FILE`, `PRUMO_KEYSTORE_PASSWORD`, `PRUMO_KEY_ALIAS` e `PRUMO_KEY_PASSWORD`. Sem `PRUMO_KEYSTORE_FILE` (um `assembleRelease` local, o CI dos pull requests), o release continua assinado com a chave de debug.
 **Consequências:** publicar uma versão é subir `versionName` e `versionCode`, e publicar a release com a tag `v<versionName>`. A chave de release não pode se perder nem mudar: um APK assinado com outra chave não atualiza o app instalado. Um APK de release montado localmente não atualiza o publicado (e vice-versa). F-Droid continua em "Ideias".
 
+## D26 — Hábitos: o dia agrupado pelo servidor, card que marca, atalho no ícone
+**Status:** aceita · 2026-11
+**Contexto:** o servidor ganhou recorrências além da semana, horário, ordem manual e o dia já agrupado (D48 do servidor, aprovado em 2026-11-16). O mantenedor pediu ver e marcar sem caçar na lista: Hoje como entrada, marcar pelo Início e por um atalho do ícone, busca na folha "Marcar hábitos".
+**Decisão:**
+- Hoje desenha `GET /habits/day` como vem: herói com o dia (setas e seletor para dias anteriores, "Voltar para hoje"), faixa dos hábitos a abandonar no topo (chips com os dias sem; tocar abre o hábito), "Com horário" com a marca "agora · HH:MM" entre o passado e o que vem, "Sem horário" arrastável, "Neste período" e "Feitos hoje" recolhidos. Marcar um `check` mostra um snackbar longo com "Desfazer" (snackbar com ação não some em 4 s); a linha muda de seção quando a resposta do servidor chega (as chaves por seção animam a troca). Nada da regra de seções roda no app.
+- A busca (nome sem acento nem maiúsculas, `Normalizer` + `\p{Mn}`) é filtro de exibição no cliente, sobre a lista que o servidor já mandou; a lista de gerenciamento filtra por tipo e pela `cadence` que o servidor dá.
+- O arrastar de Configurações → Módulos virou `ReorderableColumn` em `:core:designsystem`, sem dependência: o mesmo gesto e as ações de acessibilidade "Mover para cima/baixo", usados em Módulos, em "Sem horário" de Hoje e na lista de Hábitos (só os sem horário; com filtro ativo, não arrasta).
+- O card do Início mostra os próximos abertos (`upcoming`, 5 no herói, 3 num card de meia largura) com o check na linha e "+" para quantidade; grava pelo repositório do módulo e o Início recarrega pelo `DataChanges` (o contrato `PrumoFeature` não mudou).
+- Atalho do ícone: `QuickAction.launcherShortcut`, publicado como atalho dinâmico conforme os módulos ativos (some com o módulo desligado e ao sair), em vez de um `shortcuts.xml` estático.
+- O editor de frequência é um só (`FrequencyFields`), no cadastro e na folha de versão: chips para o tipo, `WeekdayChips`, `MonthDayChips` (novo no design system), passos para "a cada N" e vezes, e o dia preferido. O app não mostra a próxima ocorrência antes de salvar (seria regra no cliente); o detalhe mostra `next_due` depois.
+- `weekly` de um servidor antigo é lido como `per_period` semanal; o app nunca o envia.
+**Consequências:** o app só desenha o que o servidor agrupou e ordenou. O widget Glance segue fora, à espera de aprovação (precisa de dependência nova).
+
 ---
 
 ## Modelo

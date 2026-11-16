@@ -11,6 +11,7 @@ import com.henriquesebastiao.prumo.core.network.SessionGateway
 import com.henriquesebastiao.prumo.core.network.testing.Fixtures
 import com.henriquesebastiao.prumo.core.network.testing.NoCache
 import com.henriquesebastiao.prumo.feature.habits.model.ArchivedFilter
+import com.henriquesebastiao.prumo.feature.habits.model.Cadence
 import com.henriquesebastiao.prumo.feature.habits.model.DayState
 import com.henriquesebastiao.prumo.feature.habits.model.FrequencyInput
 import com.henriquesebastiao.prumo.feature.habits.model.FrequencyKind
@@ -18,9 +19,13 @@ import com.henriquesebastiao.prumo.feature.habits.model.HabitColor
 import com.henriquesebastiao.prumo.feature.habits.model.HabitInput
 import com.henriquesebastiao.prumo.feature.habits.model.HabitKind
 import com.henriquesebastiao.prumo.feature.habits.model.Measure
+import com.henriquesebastiao.prumo.feature.habits.model.Period
+import com.henriquesebastiao.prumo.feature.habits.model.Promotion
+import com.henriquesebastiao.prumo.feature.habits.model.StreakUnit
 import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.YearMonth
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
@@ -73,22 +78,53 @@ class HabitsRepositoryTest {
     }
 
     @Test
-    fun todayComesWithWhatEachHabitAsks() = runTest {
-        server.enqueue(json(200, Fixtures.read("habits/today.json")))
+    fun theDayComesGroupedAndOrderedByTheServer() = runTest {
+        server.enqueue(json(200, Fixtures.read("habits/day.json")))
+        server.enqueue(json(200, Fixtures.read("habits/day_past.json")))
 
-        val today = (repository.today() as Outcome.Ok).value
+        val day = (repository.day() as Outcome.Ok).value
 
-        assertEquals("/api/v1/habits/today", server.takeRequest().url.encodedPath)
-        assertEquals(LocalDate.of(2026, 11, 17), today.today)
-        assertEquals(4, today.scheduled)
-        val water = today.items.first { it.habit.name == "Beber água" }
+        val request = server.takeRequest().url
+        assertEquals("/api/v1/habits/day", request.encodedPath)
+        assertNull(request.queryParameter("on"))
+        assertEquals(LocalDate.of(2026, 11, 17), day.on)
+        assertTrue(day.isToday)
+        assertEquals(LocalTime.of(14, 30), day.now)
+        assertEquals(1 to 6, day.done to day.scheduled)
+        assertEquals(listOf("Alongar", "Regar as plantas"), day.timeline.map { it.habit.name })
+        assertTrue(day.timeline.first().late)
+        assertEquals(LocalTime.of(7, 0), day.timeline.first().habit.timeOfDay)
+        assertEquals(listOf("Tarefa do mês", "Anki", "Beber água"), day.untimed.map { it.habit.name })
+        assertEquals(Promotion.PreferredDay, day.untimed.first().promoted)
+        val water = day.untimed.first { it.habit.name == "Beber água" }
         assertEquals(Measure.Quantity, water.habit.measure)
         assertEquals(1250, water.value)
         assertEquals(2000, water.habit.targetValue)
-        assertEquals("ml", water.habit.unit)
-        val gym = today.items.first { it.habit.name == "Academia" }
-        assertEquals(1, gym.week?.done)
-        assertEquals(3, gym.week?.target)
+        val gym = day.period.single()
+        assertEquals(Period.Week, gym.period?.period)
+        assertEquals(1 to 3, gym.period?.done to gym.period?.target)
+        assertEquals(6, gym.period?.daysLeft)
+        assertEquals(listOf("Ler a Bíblia"), day.doneItems.map { it.habit.name })
+        assertEquals(8, day.quit.single().cleanDays)
+
+        val yesterday = (repository.day(LocalDate.of(2026, 11, 16)) as Outcome.Ok).value
+        assertEquals("2026-11-16", server.takeRequest().url.queryParameter("on"))
+        assertFalse(yesterday.isToday)
+        assertNull(yesterday.now)
+    }
+
+    @Test
+    fun reorderingSendsTheIdsInTheirNewOrder() = runTest {
+        server.enqueue(MockResponse.Builder().code(204).build())
+
+        changes.changes.test {
+            assertTrue(repository.reorder(listOf("b", "a")) is Outcome.Ok)
+            assertEquals("habits", awaitItem())
+        }
+        val request = server.takeRequest()
+        assertEquals("PUT", request.method)
+        assertEquals("/api/v1/habits/order", request.url.encodedPath)
+        assertEquals("""{"ids":["b","a"]}""", request.body!!.utf8())
     }
 
     @Test
@@ -100,14 +136,36 @@ class HabitsRepositoryTest {
         val url = server.takeRequest().url
         assertEquals("all", url.queryParameter("archived"))
         assertEquals("200", url.queryParameter("limit"))
+        // In the server's order (H10): with a time first, by time.
+        assertEquals(listOf("Ler a Bíblia", "Alongar", "Regar as plantas"), habits.take(3).map { it.name })
         val bible = habits.first { it.name == "Ler a Bíblia" }
-        assertEquals(40, bible.currentStreak)
+        assertEquals(41, bible.currentStreak)
         assertEquals(100, bible.ratePercent)
-        assertEquals(FrequencyKind.Daily, bible.frequency?.kind)
+        assertEquals(LocalTime.of(5, 15), bible.timeOfDay)
+        assertEquals(FrequencyKind.Daily, bible.frequency?.rule?.kind)
+        assertEquals(Cadence.Daily, bible.frequency?.cadence)
+        assertEquals(LocalDate.of(2026, 11, 18), bible.nextDue)
         val anki = habits.first { it.name == "Anki" }
-        assertEquals(DayOfWeek.entries.take(5), anki.frequency?.weekdays)
+        assertEquals(DayOfWeek.entries.take(5).toSet(), anki.frequency?.rule?.weekdays)
         val gym = habits.first { it.name == "Academia" }
-        assertTrue(gym.streakInWeeks)
+        assertEquals(StreakUnit.Week, gym.streakUnit)
+        assertEquals(FrequencyKind.PerPeriod, gym.frequency?.rule?.kind)
+        assertEquals(3, gym.frequency?.rule?.times)
+        assertEquals(Period.Week, gym.period?.period)
+        val sheets = habits.first { it.name == "Trocar roupa de cama" }
+        assertEquals(2, sheets.frequency?.rule?.everyNWeeks)
+        assertEquals(StreakUnit.Occurrence, sheets.streakUnit)
+        assertEquals(LocalDate.of(2026, 11, 21), sheets.nextDue)
+        val tank = habits.first { it.name == "Limpar caixa d'água" }
+        assertEquals(setOf(5), tank.frequency?.rule?.monthDays)
+        assertEquals(3, tank.frequency?.rule?.everyNMonths)
+        assertEquals(LocalDate.of(2027, 2, 5), tank.nextDue)
+        val review = habits.first { it.name == "Revisão mensal" }
+        assertEquals(DayOfWeek.SUNDAY, review.frequency?.rule?.weekday)
+        assertEquals(1, review.frequency?.rule?.weekOfMonth)
+        val chore = habits.first { it.name == "Tarefa do mês" }
+        assertEquals(15, chore.frequency?.rule?.preferredDay)
+        assertEquals(Period.Month, chore.frequency?.rule?.period)
         assertTrue(habits.first { it.name == "Meditar" }.archived)
         val quit = habits.first { it.kind == HabitKind.Quit }
         assertEquals(8, quit.cleanDays)
@@ -140,7 +198,9 @@ class HabitsRepositoryTest {
         assertEquals("2026-11", server.takeRequest().url.queryParameter("month"))
         assertNull(month.next)
         assertEquals(YearMonth.of(2026, 10), month.previous)
-        assertEquals(DayState.Pending, month.days.first { it.on == month.today }.state)
+        // The demo server has today's reading done already.
+        assertEquals(DayState.Done, month.days.first { it.on == month.today }.state)
+        assertEquals(DayState.Future, month.days.first { it.on == month.today.plusDays(1) }.state)
         assertEquals(DayState.Done, month.days.first { it.on == LocalDate.of(2026, 11, 16) }.state)
     }
 
@@ -190,17 +250,22 @@ class HabitsRepositoryTest {
                 unit = "ml",
                 frequency = FrequencyInput(
                     FrequencyKind.Weekdays,
-                    weekdays = listOf(DayOfWeek.FRIDAY, DayOfWeek.MONDAY),
+                    weekdays = setOf(DayOfWeek.FRIDAY, DayOfWeek.MONDAY),
+                    everyNWeeks = 2,
                 ),
+                timeOfDay = LocalTime.of(7, 5),
             ),
         )
         val build = sentBody()
         assertEquals("quantity", build["measure"]!!.jsonPrimitive.content)
         assertEquals("2000", build["target_value"]!!.jsonPrimitive.content)
+        assertEquals("07:05", build["time_of_day"]!!.jsonPrimitive.content)
         val frequency = build["frequency"]!!.jsonObject
         assertEquals("weekdays", frequency["kind"]!!.jsonPrimitive.content)
         assertEquals("[0,4]", frequency["weekdays"].toString())
-        assertEquals(JsonNull, frequency["times_per_week"])
+        assertEquals("2", frequency["every_n_weeks"]!!.jsonPrimitive.content)
+        assertEquals(JsonNull, frequency["times"])
+        assertFalse("times_per_week" in frequency)
 
         repository.createHabit(
             HabitInput(
@@ -216,6 +281,33 @@ class HabitsRepositoryTest {
         assertEquals("quit", quit["kind"]!!.jsonPrimitive.content)
         assertFalse("measure" in quit)
         assertFalse("frequency" in quit)
+        assertFalse("time_of_day" in quit)
+    }
+
+    @Test
+    fun aPeriodVersionNeverSendsWeeklyAndAnEditClearsTheTime() = runTest {
+        server.enqueue(
+            json(201, Json.parseToJsonElement(Fixtures.read("habits/habit.json")).jsonObject["frequency"].toString()),
+        )
+        server.enqueue(json(200, habitJson()))
+
+        val monthly =
+            FrequencyInput(kind = FrequencyKind.PerPeriod, times = 40, period = Period.Month, preferredDay = 15)
+        repository.createFrequency("h1", LocalDate.of(2026, 11, 23), monthly)
+        val version = sentBody()
+        assertEquals("2026-11-23", version["valid_from"]!!.jsonPrimitive.content)
+        assertEquals("per_period", version["kind"]!!.jsonPrimitive.content)
+        assertEquals("month", version["period"]!!.jsonPrimitive.content)
+        // Never more than the period's days (the server would refuse it).
+        assertEquals("28", version["times"]!!.jsonPrimitive.content)
+        assertEquals("15", version["preferred_day"]!!.jsonPrimitive.content)
+
+        repository.updateHabit(
+            "h1",
+            HabitInput("Ler", HabitKind.Build, HabitColor.Amber, "book", LocalDate.of(2026, 9, 1)),
+            quantity = false,
+        )
+        assertEquals(JsonNull, sentBody()["time_of_day"])
     }
 
     @Test

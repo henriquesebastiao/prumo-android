@@ -1,5 +1,6 @@
 package com.henriquesebastiao.prumo.feature.habits
 
+import com.henriquesebastiao.prumo.feature.habits.data.DayItemDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -8,11 +9,15 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HabitsSummaryDto(
     val module: String = "habits",
+    /** The user's today: the day the card marks. */
+    val today: String? = null,
     @SerialName("done_today") val doneToday: Int,
     @SerialName("scheduled_today") val scheduledToday: Int,
     /** Up to 3 habits still open today. */
     val pending: List<SummaryHabitDto>,
     @SerialName("pending_more") val pendingMore: Int,
+    /** Up to 5 open today, in the order of the day, to mark from the card (D48 of the server). */
+    val upcoming: List<DayItemDto> = emptyList(),
     val quit: List<SummaryQuitDto>,
 )
 

@@ -61,6 +61,7 @@ import com.henriquesebastiao.prumo.core.ui.DateField
 import com.henriquesebastiao.prumo.core.ui.ErrorState
 import com.henriquesebastiao.prumo.core.ui.IntegerTransformation
 import com.henriquesebastiao.prumo.core.ui.LoadingState
+import com.henriquesebastiao.prumo.core.ui.TimeField
 import com.henriquesebastiao.prumo.feature.habits.HabitsFeature
 import com.henriquesebastiao.prumo.feature.habits.R
 import com.henriquesebastiao.prumo.feature.habits.data.HabitsRepository
@@ -78,6 +79,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.Clock
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.LocalTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -93,9 +95,9 @@ data class HabitEditorUiState(
     val color: HabitColor = HabitColor.Amber,
     val icon: String = HABIT_ICONS.first(),
     val startedOn: LocalDate = LocalDate.of(2026, 11, 17),
-    val frequency: FrequencyKind = FrequencyKind.Daily,
-    val timesPerWeek: Int = DEFAULT_TIMES,
-    val weekdays: Set<DayOfWeek> = DayOfWeek.entries.take(WORKDAYS).toSet(),
+    val frequency: FrequencyInput = FrequencyInput(),
+    /** H10: wall-clock time in the user's zone, or none. */
+    val timeOfDay: LocalTime? = null,
     val saving: Boolean = false,
     val saveError: AppError? = null,
     val done: Boolean = false,
@@ -103,11 +105,6 @@ data class HabitEditorUiState(
 ) {
     val isBuild: Boolean get() = kind == HabitKind.Build
     val isQuantity: Boolean get() = isBuild && measure == Measure.Quantity
-
-    companion object {
-        const val DEFAULT_TIMES = 3
-        const val WORKDAYS = 5
-    }
 }
 
 /** A new habit or its edit: the kind and the measure only when it is created. */
@@ -159,6 +156,7 @@ class HabitEditorViewModel @AssistedInject constructor(
                             color = habit.color,
                             icon = habit.icon,
                             startedOn = habit.startedOn,
+                            timeOfDay = habit.timeOfDay,
                         )
                     }
                 }
@@ -184,20 +182,15 @@ class HabitEditorViewModel @AssistedInject constructor(
 
     fun onStartedOn(date: LocalDate) = mutableState.update { it.copy(startedOn = date, saveError = null) }
 
-    fun onFrequency(kind: FrequencyKind) = mutableState.update { it.copy(frequency = kind, saveError = null) }
+    fun onFrequency(rule: FrequencyInput) = mutableState.update { it.copy(frequency = rule, saveError = null) }
 
-    fun onTimes(times: Int) = mutableState.update { it.copy(timesPerWeek = times.coerceIn(1, DAYS_IN_WEEK)) }
-
-    fun onWeekday(day: DayOfWeek) = mutableState.update {
-        it.copy(weekdays = if (day in it.weekdays) it.weekdays - day else it.weekdays + day, saveError = null)
-    }
+    fun onTimeOfDay(time: LocalTime?) = mutableState.update { it.copy(timeOfDay = time, saveError = null) }
 
     val canSave: Boolean
         get() {
             val state = mutableState.value
             val quantityOk = !state.isQuantity || ((Inputs.number(target) ?: 0L) > 0 && unit.isNotBlank())
-            val daysOk = state.editingId != null || !state.isBuild || state.frequency != FrequencyKind.Weekdays ||
-                state.weekdays.isNotEmpty()
+            val daysOk = state.editingId != null || !state.isBuild || state.frequency.valid
             return name.isNotBlank() && quantityOk && daysOk
         }
 
@@ -213,9 +206,8 @@ class HabitEditorViewModel @AssistedInject constructor(
             measure = state.measure.takeIf { state.isBuild },
             targetValue = Inputs.number(target)?.toInt().takeIf { state.isQuantity },
             unit = unit.trim().takeIf { state.isQuantity },
-            frequency = FrequencyInput(state.frequency, state.timesPerWeek, state.weekdays.toList()).takeIf {
-                state.isBuild
-            },
+            frequency = state.frequency.takeIf { state.isBuild },
+            timeOfDay = state.timeOfDay,
         )
         mutableState.update { it.copy(saving = true, saveError = null) }
         viewModelScope.launch {
@@ -245,10 +237,6 @@ class HabitEditorViewModel @AssistedInject constructor(
     interface Factory {
         fun create(habitId: String?): HabitEditorViewModel
     }
-
-    private companion object {
-        const val DAYS_IN_WEEK = 7
-    }
 }
 
 @Suppress("LongParameterList")
@@ -261,9 +249,8 @@ internal class HabitEditorEvents(
     val onColor: (HabitColor) -> Unit,
     val onIcon: (String) -> Unit,
     val onStartedOn: (LocalDate) -> Unit,
-    val onFrequency: (FrequencyKind) -> Unit,
-    val onTimes: (Int) -> Unit,
-    val onWeekday: (DayOfWeek) -> Unit,
+    val onFrequency: (FrequencyInput) -> Unit,
+    val onTimeOfDay: (LocalTime?) -> Unit,
     val onSave: () -> Unit,
     val onRetry: () -> Unit,
 )
@@ -296,8 +283,7 @@ internal fun HabitEditorRoute(
             onIcon = viewModel::onIcon,
             onStartedOn = viewModel::onStartedOn,
             onFrequency = viewModel::onFrequency,
-            onTimes = viewModel::onTimes,
-            onWeekday = viewModel::onWeekday,
+            onTimeOfDay = viewModel::onTimeOfDay,
             onSave = viewModel::save,
             onRetry = viewModel::load,
         ),
@@ -448,26 +434,24 @@ private fun Form(state: HabitEditorUiState, fields: HabitEditorFields, events: H
                 )
             }
         }
-        if (state.isBuild && creating) {
-            Label(stringResource(R.string.habits_frequency))
-            ChoiceGroup(
-                options = FrequencyKind.entries,
-                selected = state.frequency,
-                label = { it.label() },
-                onSelect = events.onFrequency,
-            )
-            when (state.frequency) {
-                FrequencyKind.Weekly -> TimesStepper(state.timesPerWeek, events.onTimes)
-                FrequencyKind.Weekdays -> WeekdayChips(state.weekdays, events.onWeekday)
-                FrequencyKind.Daily -> Unit
-            }
-        }
+        if (state.isBuild && creating) FrequencyFields(state.frequency, events.onFrequency)
         DateField(
             value = state.startedOn,
             onValueChange = events.onStartedOn,
             label = stringResource(R.string.habits_started_on),
             supportingText = fieldError(state.saveError, "started_on"),
             today = state.today,
+        )
+        TimeField(
+            value = state.timeOfDay,
+            onValueChange = events.onTimeOfDay,
+            onClear = { events.onTimeOfDay(null) },
+            label = stringResource(R.string.habits_time_of_day),
+        )
+        Text(
+            stringResource(R.string.habits_time_of_day_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         state.saveError?.takeIf { !it.isFieldError() }?.let {
             Text(habitsErrorText(it), color = MaterialTheme.colorScheme.error)
@@ -485,31 +469,8 @@ private fun Label(text: String) {
     Text(text, style = MaterialTheme.typography.labelLarge)
 }
 
-/** "Vezes por semana": 1 to 7, with − and +. */
-@Composable
-internal fun TimesStepper(times: Int, onTimes: (Int) -> Unit) {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.md)) {
-        Text(
-            stringResource(R.string.habits_times_per_week),
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.weight(1f),
-        )
-        IconButton(onClick = { onTimes(times - 1) }, enabled = times > 1) {
-            Icon(
-                painterResource(PrumoIcons.DoNotDisturbOn),
-                contentDescription = stringResource(R.string.habits_fewer_times),
-            )
-        }
-        FitText(times.toString(), style = PrumoType.dataLarge)
-        IconButton(onClick = { onTimes(times + 1) }, enabled = times < MAX_TIMES) {
-            Icon(painterResource(PrumoIcons.Add), contentDescription = stringResource(R.string.habits_more_times))
-        }
-    }
-}
-
 private const val TARGET_DIGITS = 6
 private const val UNIT_MAX = 12
-private const val MAX_TIMES = 7
 
 @PhonePreviews
 @Composable

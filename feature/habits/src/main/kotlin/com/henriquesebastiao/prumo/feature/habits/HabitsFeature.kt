@@ -46,6 +46,7 @@ class HabitsFeature @Inject constructor() : PrumoFeature {
             PrumoIcons.Checklist,
             HabitsHome(),
             sheet = { onDismiss -> HabitsSheet(SheetRequest(SheetKind.CheckIn), onDismiss) },
+            launcherShortcut = true,
         ),
     )
 
@@ -63,7 +64,7 @@ class HabitsFeature @Inject constructor() : PrumoFeature {
         onOpen: () -> Unit,
         modifier: Modifier,
     ) {
-        HabitsHomeCard(decodeOrNull(HabitsSummaryDto.serializer(), summary), onOpen, modifier)
+        HabitsHomeCardRoute(decodeOrNull(HabitsSummaryDto.serializer(), summary), hero, onOpen, modifier)
     }
 
     companion object {

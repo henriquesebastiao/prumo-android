@@ -124,9 +124,6 @@
     <string name="modules_body">Arraste pela alça para mudar a ordem no Início e em Todas as ações. Desativar esconde o módulo do app; os dados continuam no servidor.</string>
     <string name="modules_disabled">Desativado · dados mantidos no servidor</string>
     <string name="modules_enabled">Módulo ativo</string>
-    <string name="modules_drag">Arrastar %1$s</string>
-    <string name="modules_move_up">Mover para cima</string>
-    <string name="modules_move_down">Mover para baixo</string>
     <string name="modules_not_in_app">Instalado no servidor; chega ao app numa versão futura.</string>
 
     <string name="sessions_title">Sessões ativas</string>

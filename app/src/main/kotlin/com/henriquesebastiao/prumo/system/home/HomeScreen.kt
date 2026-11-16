@@ -84,6 +84,8 @@ fun HomeRoute(
     onOrganizeModules: () -> Unit,
     onSignIn: () -> Unit,
     modifier: Modifier = Modifier,
+    launchAction: String? = null,
+    onLaunchActionOpened: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -100,6 +102,8 @@ fun HomeRoute(
         onOrganizeModules = onOrganizeModules,
         onSignIn = onSignIn,
         modifier = modifier,
+        launchAction = launchAction,
+        onLaunchActionOpened = onLaunchActionOpened,
     )
 }
 
@@ -120,10 +124,20 @@ fun HomeScreen(
     onOrganizeModules: () -> Unit,
     onSignIn: () -> Unit,
     modifier: Modifier = Modifier,
+    launchAction: String? = null,
+    onLaunchActionOpened: () -> Unit = {},
 ) {
     var showAllActions by rememberSaveable { mutableStateOf(false) }
     // A module's sheet open over the Home ("Registrar abastecimento"), by the action's id.
     var sheetAction by rememberSaveable { mutableStateOf<String?>(null) }
+    // A shortcut of the app's icon: its sheet, once the enabled modules (and their actions) are known.
+    LaunchedEffect(launchAction, state.groups) {
+        val action = state.groups.flatMap { it.actions }.firstOrNull { it.id == launchAction }
+        if (action?.sheet != null) {
+            sheetAction = action.id
+            onLaunchActionOpened()
+        }
+    }
     val act: (QuickAction) -> Unit = { action ->
         if (action.sheet != null) sheetAction = action.id else onAction(action)
     }

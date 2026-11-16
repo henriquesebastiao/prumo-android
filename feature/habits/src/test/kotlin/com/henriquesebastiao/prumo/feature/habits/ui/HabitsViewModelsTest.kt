@@ -4,17 +4,20 @@ import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.core.testing.FakeAccountRepository
 import com.henriquesebastiao.prumo.core.testing.MainDispatcherRule
 import com.henriquesebastiao.prumo.feature.habits.model.ArchivedFilter
+import com.henriquesebastiao.prumo.feature.habits.model.Cadence
 import com.henriquesebastiao.prumo.feature.habits.model.FrequencyInput
 import com.henriquesebastiao.prumo.feature.habits.model.FrequencyKind
 import com.henriquesebastiao.prumo.feature.habits.model.HabitColor
 import com.henriquesebastiao.prumo.feature.habits.model.HabitInput
 import com.henriquesebastiao.prumo.feature.habits.model.HabitKind
 import com.henriquesebastiao.prumo.feature.habits.model.Measure
+import com.henriquesebastiao.prumo.feature.habits.model.Period
 import java.time.Clock
 import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.YearMonth
 import java.time.ZoneOffset
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,20 +41,44 @@ class HabitsViewModelsTest {
     private val day = LocalDate.of(2026, 11, 17)
 
     @Test
-    fun todayMarksAndUnmarksByTheServersToday() = runTest {
+    fun todayMarksAndUnmarksByTheServersDayAndOffersToUndo() = runTest {
         val vm = TodayViewModel(repository)
-        val anki = vm.state.value.today!!.items.first { it.habit.name == "Anki" }
+        val anki = vm.state.value.day!!.all.first { it.habit.name == "Anki" }
         vm.toggle(anki)
         assertEquals("mark h-anki $day 1", repository.sent.last())
-        val bible = vm.state.value.today!!.items.first { it.habit.name == "Ler a Bíblia" }
+        assertEquals(UndoRequest("h-anki", "Anki", day), vm.state.value.undo)
+        vm.undo()
+        assertEquals("unmark h-anki $day", repository.sent.last())
+        assertEquals(null, vm.state.value.undo)
+        val bible = vm.state.value.day!!.doneItems.single()
         vm.toggle(bible)
         assertEquals("unmark h-bible $day", repository.sent.last())
+        // Unmarking has nothing to undo.
+        assertEquals(null, vm.state.value.undo)
+    }
+
+    @Test
+    fun anEarlierDayAsksTheServerAndTodayGoesBack() = runTest {
+        val vm = TodayViewModel(repository)
+        vm.onDay(day.minusDays(1))
+        assertEquals(day.minusDays(1), repository.days.last())
+        // A day from today on is today again.
+        vm.onDay(day.plusDays(3))
+        assertEquals(null, repository.days.last())
+        assertEquals(null, vm.state.value.selected)
+    }
+
+    @Test
+    fun theHabitsWithoutATimeAreReordered() = runTest {
+        val vm = TodayViewModel(repository)
+        vm.reorder(listOf("h-water", "h-anki", "h-chore"))
+        assertEquals("order [h-water, h-anki, h-chore]", repository.sent.last())
     }
 
     @Test
     fun aQuantityIsSentOnceAfterARunOfSteps() = runTest {
         val vm = TodayViewModel(repository)
-        val water = vm.state.value.today!!.items.first { it.habit.name == "Beber água" }
+        val water = vm.state.value.day!!.all.first { it.habit.name == "Beber água" }
         vm.step(water, up = true)
         vm.step(water, up = true)
         assertEquals(1750, vm.state.value.drafts[water.habit.id])
@@ -65,17 +92,26 @@ class HabitsViewModelsTest {
     fun aRefusedMarkIsShown() = runTest {
         repository.failure = AppError.Api(422, "habits.before_start")
         val vm = TodayViewModel(repository)
-        vm.toggle(vm.state.value.today!!.items.first())
+        vm.toggle(vm.state.value.day!!.all.first())
         assertEquals("habits.before_start", (vm.state.value.actionError as AppError.Api).code)
         vm.onActionErrorShown()
         assertEquals(null, vm.state.value.actionError)
     }
 
     @Test
-    fun theListSplitsBothKindsAndShowsTheArchivedOnDemand() = runTest {
+    fun theListSearchesFiltersAndShowsTheArchivedOnDemand() = runTest {
         val vm = ListViewModel(repository)
-        assertEquals(4, vm.state.value.build.size)
-        assertEquals(listOf("Redes sociais antes de dormir"), vm.state.value.quit.map { it.name })
+        assertEquals(8, vm.state.value.shown("").size)
+        assertEquals(listOf("Beber água"), vm.state.value.shown(" AGUA").map { it.name })
+        vm.onKind(HabitKind.Quit)
+        assertEquals(listOf("Redes sociais antes de dormir"), vm.state.value.shown("").map { it.name })
+        vm.onKind(null)
+        vm.onCadence(Cadence.Fortnightly)
+        assertEquals(listOf("Trocar roupa de cama"), vm.state.value.shown("").map { it.name })
+        vm.onQuery("anki")
+        assertEquals("anki", vm.query)
+        vm.reorder(listOf("h-anki", "h-water"))
+        assertEquals("order [h-anki, h-water]", repository.sent.last())
         vm.toggleArchived()
         assertEquals(ArchivedFilter.All, repository.filters.last())
         vm.pull()
@@ -116,16 +152,19 @@ class HabitsViewModelsTest {
         vm.onUnitChange("ml")
         vm.onIcon("droplet")
         vm.onColor(HabitColor.Cyan)
-        vm.onFrequency(FrequencyKind.Weekly)
-        vm.onTimes(9)
+        vm.onFrequency(FrequencyInput(kind = FrequencyKind.MonthDays, monthDays = emptySet()))
+        assertFalse(vm.canSave)
+        val tank = FrequencyInput(kind = FrequencyKind.MonthDays, monthDays = setOf(5), everyNMonths = 3)
+        vm.onFrequency(tank)
+        vm.onTimeOfDay(LocalTime.of(18, 0))
         assertTrue(vm.canSave)
         vm.save()
         val input = repository.sent.single() as HabitInput
         assertEquals("Beber água", input.name)
         assertEquals(2000, input.targetValue)
         assertEquals("ml", input.unit)
-        assertEquals(FrequencyInput(FrequencyKind.Weekly, 7, DayOfWeek.entries.take(5)).kind, input.frequency?.kind)
-        assertEquals(7, input.frequency?.timesPerWeek)
+        assertEquals(tank, input.frequency)
+        assertEquals(LocalTime.of(18, 0), input.timeOfDay)
         assertTrue(vm.state.value.done)
     }
 
@@ -160,8 +199,7 @@ class HabitsViewModelsTest {
     fun theSheetsSendFrequencyPauseRelapseAndADaysValue() = runTest {
         val vm = HabitSheetViewModel(repository, account, clock)
         vm.start(1, HabitsPreview.bible.id)
-        vm.onKind(FrequencyKind.Weekdays)
-        vm.onWeekday(DayOfWeek.MONDAY)
+        vm.onRule(FrequencyInput(kind = FrequencyKind.Weekdays, weekdays = DayOfWeek.entries.drop(1).take(4).toSet()))
         vm.onValidFrom(LocalDate.of(2026, 11, 23))
         vm.saveFrequency()
         val (habitId, from, frequency) = repository.sent.last() as Triple<*, *, *>
@@ -188,18 +226,17 @@ class HabitsViewModelsTest {
 
     @Test
     fun aFutureVersionLoadsForItsEdit() = runTest {
+        val fortnight = FrequencyInput(kind = FrequencyKind.PerPeriod, times = 4, period = Period.Fortnight)
         val future = HabitsPreview.bible.frequency!!.copy(
             id = "f-next",
             validFrom = LocalDate.of(2026, 11, 23),
-            kind = FrequencyKind.Weekly,
-            timesPerWeek = 4,
+            rule = fortnight,
         )
         repository.details =
             mapOf(HabitsPreview.bible.id to HabitsPreview.bibleDetail.copy(frequencies = listOf(future)))
         val vm = HabitSheetViewModel(repository, account, clock)
         vm.start(1, HabitsPreview.bible.id, frequencyId = "f-next")
-        assertEquals(FrequencyKind.Weekly, vm.state.value.kind)
-        assertEquals(4, vm.state.value.timesPerWeek)
+        assertEquals(fortnight, vm.state.value.rule)
         vm.saveFrequency()
         assertEquals("f-next", (repository.sent.last() as Pair<*, *>).first)
     }

@@ -1,5 +1,6 @@
 package com.henriquesebastiao.prumo
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,6 +17,7 @@ import com.henriquesebastiao.prumo.core.data.session.SessionState
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.model.ThemeMode
 import com.henriquesebastiao.prumo.navigation.PrumoApp
+import com.henriquesebastiao.prumo.system.LauncherShortcuts
 import com.henriquesebastiao.prumo.system.ModuleRegistry
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,8 +35,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         // The splash stays while the encrypted session is read.
         splash.setKeepOnScreenCondition { viewModel.state.value.session == SessionState.Loading }
+        if (savedInstanceState == null) viewModel.onLaunchAction(LauncherShortcuts.actionOf(intent))
         setContent {
             val state by viewModel.state.collectAsStateWithLifecycle()
+            val launchAction by viewModel.launchAction.collectAsStateWithLifecycle()
             val dark = when (state.theme) {
                 ThemeMode.System -> isSystemInDarkTheme()
                 ThemeMode.Light -> false
@@ -50,8 +54,18 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
             PrumoTheme(darkTheme = dark, dynamicColor = state.device.dynamicColor, pureBlack = state.device.pureBlack) {
-                PrumoApp(state.session, registry)
+                PrumoApp(
+                    state.session,
+                    registry,
+                    launchAction = launchAction,
+                    onLaunchActionOpened = viewModel::onLaunchActionOpened,
+                )
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        viewModel.onLaunchAction(LauncherShortcuts.actionOf(intent))
     }
 }

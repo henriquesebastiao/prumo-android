@@ -20,9 +20,12 @@ import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
 import com.henriquesebastiao.prumo.core.designsystem.theme.PrumoTheme
 import com.henriquesebastiao.prumo.core.model.AppError
 import com.henriquesebastiao.prumo.feature.habits.HabitsFeature
-import com.henriquesebastiao.prumo.feature.habits.model.TodayItem
+import com.henriquesebastiao.prumo.feature.habits.model.DayItem
+import com.henriquesebastiao.prumo.feature.habits.model.FrequencyInput
+import com.henriquesebastiao.prumo.feature.habits.model.FrequencyKind
 import java.time.LocalDate
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -63,20 +66,67 @@ class HabitsScreensTest {
     }
 
     @Test
-    fun todayShowsEachHabitWithItsControl() {
-        var toggled: TodayItem? = null
-        var stepped: Pair<TodayItem, Boolean>? = null
-        val events = TodayEvents({ toggled = it }, { item, up -> stepped = item to up }, {}, {})
-        home(HabitsTab.Today, today = TodayUiState(loading = false, today = HabitsPreview.today), events = events)
+    fun todayShowsTheSectionsOfTheDayWithTheirControls() {
+        var toggled: DayItem? = null
+        var stepped: Pair<DayItem, Boolean>? = null
+        var day: LocalDate? = LocalDate.MIN
+        val events = TodayEvents({ toggled = it }, { item, up -> stepped = item to up }, {}, {}, { day = it })
+        home(HabitsTab.Today, today = TodayUiState(loading = false, day = HabitsPreview.day), events = events)
 
-        compose.onNodeWithText("1 de 4 hoje").assertIsDisplayed()
-        compose.onNodeWithText("1 de 3 esta semana").assertIsDisplayed()
-        compose.onNodeWithText("1.250\u00A0/\u00A02.000\u00A0ml").assertIsDisplayed()
+        compose.onNodeWithText("1 de 5 hoje").assertIsDisplayed()
+        compose.onNodeWithText("Redes sociais antes de dormir · 8 dias sem").assertIsDisplayed()
+        compose.onNodeWithText("Com horário").assertIsDisplayed()
+        compose.onNodeWithText("passou do horário").assertIsDisplayed()
+        compose.onNodeWithText("agora · 14:30").assertIsDisplayed()
+        compose.onNodeWithContentDescription("Dia anterior").performClick()
+        assertEquals(LocalDate.of(2026, 11, 16), day)
+        list().performScrollToNode(hasText("Anki"))
         compose.onNodeWithText("Anki").performClick()
         assertEquals("Anki", toggled?.habit?.name)
+        compose.onNodeWithText("0 de 1 neste mês · faltam 14 dias · dia preferido").assertExists()
+        list().performScrollToNode(hasText("Neste período · 1"))
+        compose.onNodeWithText("Neste período · 1").performClick()
+        list().performScrollToNode(hasText("1 de 3 nesta semana · faltam 6 dias"))
         compose.onNodeWithContentDescription("Mais Beber água").performClick()
         assertEquals("Beber água" to true, stepped?.let { it.first.habit.name to it.second })
         compose.onNodeWithContentDescription("Marcar hábitos").assertIsDisplayed()
+    }
+
+    @Test
+    fun aMarkCanBeUndoneFromTheSnackbar() {
+        var undone = false
+        val undo = UndoRequest("h-anki", "Anki", LocalDate.of(2026, 11, 17))
+        show {
+            HabitsHomeScreen(
+                tab = HabitsTab.Today,
+                onTab = {},
+                today = TodayUiState(loading = false, day = HabitsPreview.day, undo = undo),
+                list = ListUiState(),
+                todayEvents = HabitsPreview.todayEvents,
+                listEvents = HabitsPreview.listEvents,
+                actions = HabitsActions({}, onNewHabit = {}),
+                onBack = {},
+                onUndo = { undone = true },
+            )
+        }
+        compose.onNodeWithText("Anki marcado").assertIsDisplayed()
+        compose.onNodeWithText("Desfazer").performClick()
+        compose.waitForIdle()
+        assertTrue(undone)
+    }
+
+    @Test
+    fun theCheckInSheetSearchesWithoutAccents() {
+        show {
+            CheckInContent(
+                state = TodayUiState(loading = false, day = HabitsPreview.day),
+                query = "AGUA",
+                onQuery = {},
+                events = HabitsPreview.todayEvents,
+            )
+        }
+        compose.onNodeWithText("Beber água").assertIsDisplayed()
+        compose.onNodeWithText("Anki").assertDoesNotExist()
     }
 
     @Test
@@ -85,7 +135,7 @@ class HabitsScreensTest {
             HabitsTab.Today,
             today = TodayUiState(
                 loading = false,
-                today = HabitsPreview.today,
+                day = HabitsPreview.day,
                 actionError = AppError.Api(422, "habits.future_date"),
             ),
         )
@@ -93,7 +143,7 @@ class HabitsScreensTest {
     }
 
     @Test
-    fun theListShowsRateStreakAndTimeWithout() {
+    fun theListShowsFrequencyRateStreakNextDayAndTimeWithout() {
         var opened = ""
         home(
             HabitsTab.List,
@@ -101,8 +151,14 @@ class HabitsScreensTest {
             listEvents = ListEvents({ opened = it.id }, {}, {}, {}),
         )
         compose.onNodeWithText("Para praticar").assertIsDisplayed()
-        compose.onNodeWithText("Todo dia · 100% cumprido · sequência de 40 dias").assertIsDisplayed()
-        compose.onNodeWithText("3× por semana · 75% cumprido · sequência de 3 semanas").assertIsDisplayed()
+        compose.onNodeWithText("05:15").assertIsDisplayed()
+        compose.onNodeWithText(
+            "Todo dia · 100% cumprido · sequência de 41\u00A0dias · próxima: qua, 18/11",
+        ).assertIsDisplayed()
+        list().performScrollToNode(hasText("Trocar roupa de cama"))
+        compose.onNodeWithText(
+            "Quinzenal · sábado · 100% cumprido · sequência de 3\u00A0vezes · próxima: sáb, 21/11",
+        ).assertIsDisplayed()
         list().performScrollToNode(hasText("Para abandonar"))
         compose.onNodeWithText("8 dias sem · 1 recaída em 30 dias").assertIsDisplayed()
         compose.onNodeWithText("Redes sociais antes de dormir").performClick()
@@ -176,11 +232,8 @@ class HabitsScreensTest {
     fun theFrequencySheetAsksTheDaysAndTheStart() {
         show {
             FrequencyContent(
-                SheetUiState(
-                    kind = com.henriquesebastiao.prumo.feature.habits.model.FrequencyKind.Weekdays,
-                    weekdays = emptySet(),
-                ),
-                FrequencyEvents({}, {}, {}, {}, {}),
+                SheetUiState(rule = FrequencyInput(kind = FrequencyKind.Weekdays, weekdays = emptySet())),
+                FrequencyEvents({}, {}, {}),
             )
         }
         compose.onNodeWithText("Nova versão da frequência").assertIsDisplayed()
@@ -216,6 +269,6 @@ class HabitsSmallScreenTest {
             }
         }
         compose.onNodeWithContentDescription("domingo, 29").assertIsDisplayed()
-        compose.onAllNodesWithText("40 dias")[0].assertIsDisplayed()
+        compose.onAllNodesWithText("41 dias")[0].assertIsDisplayed()
     }
 }

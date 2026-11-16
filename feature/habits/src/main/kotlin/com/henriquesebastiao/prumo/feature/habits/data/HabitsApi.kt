@@ -13,9 +13,13 @@ import retrofit2.http.Query
 /** Hábitos on the server (`/api/v1/habits`, docs/api.md of the server, "Hábitos"). */
 @Suppress("TooManyFunctions")
 interface HabitsApi {
-    /** H2: the habits that ask something of today, without the paused ones. */
-    @GET("api/v1/habits/today")
-    suspend fun today(): TodayDto
+    /** H9: the habits of [on] (today without it), grouped and ordered by the server. */
+    @GET("api/v1/habits/day")
+    suspend fun day(@Query("on") on: String?): DayDto
+
+    /** H10: the habits of the body take, in its order, the places they held. */
+    @PUT("api/v1/habits/order")
+    suspend fun reorder(@Body body: JsonObject)
 
     @GET("api/v1/habits")
     suspend fun habits(@Query("archived") archived: String, @Query("limit") limit: Int): PageDto<HabitDto>

@@ -170,6 +170,13 @@ def record_studies(base, token):
     save("studies/error_invalid_obsidian_uri.json", refused)
 
 
+def calendar_day(day, shift):
+    """The ISO day [shift] days from [day]."""
+    import datetime
+
+    return (datetime.date.fromisoformat(day) + datetime.timedelta(days=shift)).isoformat()
+
+
 def record_habits(base, token):
     """Hábitos (fixtures/habits/): reads, plus a refused future day (nothing is saved)."""
 
@@ -179,7 +186,10 @@ def record_habits(base, token):
         return payload
 
     root = "/api/v1/habits"
-    save("habits/today.json", get(f"{root}/today"))
+    day = get(f"{root}/day")
+    save("habits/day.json", day)
+    yesterday = calendar_day(day["today"], -1)
+    save("habits/day_past.json", get(f"{root}/day?on={yesterday}"))
     habits = get(f"{root}?archived=all&limit=200")
     save("habits/habits.json", habits)
     bible = next(item for item in habits["items"] if item["name"] == "Ler a Bíblia")

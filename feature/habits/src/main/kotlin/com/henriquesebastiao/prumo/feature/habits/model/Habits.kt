@@ -4,6 +4,7 @@ import com.henriquesebastiao.prumo.core.model.Wire
 import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.YearMonth
 
 /** The module's id on the server (`/api/v1/modules`, the Home's summaries). */
@@ -25,10 +26,55 @@ enum class Measure(override val wire: String) : Wire {
     Quantity("quantity"),
 }
 
+/**
+ * How a frequency schedules (H2, D48 of the server): fixed dates ([Daily], [Weekdays],
+ * [MonthDays], [MonthWeekday]) or [PerPeriod]. [Weekly] is only what older servers sent; the app
+ * reads it as [PerPeriod] weekly and never sends it.
+ */
 enum class FrequencyKind(override val wire: String) : Wire {
     Daily("daily"),
     Weekly("weekly"),
     Weekdays("weekdays"),
+    MonthDays("month_days"),
+    MonthWeekday("month_weekday"),
+    PerPeriod("per_period"),
+    ;
+
+    companion object {
+        /** What the editor offers. */
+        val Editable = listOf(Daily, Weekdays, MonthDays, MonthWeekday, PerPeriod)
+    }
+}
+
+/** The window of [FrequencyKind.PerPeriod], with the most times it takes. */
+enum class Period(override val wire: String, val days: Int) : Wire {
+    Week("week", 7),
+    Fortnight("fortnight", 14),
+    Month("month", 28),
+}
+
+/** How often a frequency comes back (`cadence` of the server): filters and labels. */
+enum class Cadence(override val wire: String) : Wire {
+    Daily("daily"),
+    Weekly("weekly"),
+    Fortnightly("fortnightly"),
+    Monthly("monthly"),
+    Longer("longer"),
+}
+
+/** The unit of the streaks (H4): days, sparse dates, or the period of `per_period`. */
+enum class StreakUnit(override val wire: String) : Wire {
+    Day("day"),
+    Occurrence("occurrence"),
+    Week("week"),
+    Fortnight("fortnight"),
+    Month("month"),
+}
+
+/** Why a `per_period` habit rose to the day (H9). */
+enum class Promotion(override val wire: String) : Wire {
+    PreferredDay("preferred_day"),
+    DueSoon("due_soon"),
 }
 
 /** H2: a version of the frequency already over, the one in force, or one that starts later. */
@@ -84,21 +130,29 @@ val HABIT_ICONS = listOf(
     "moon", "sun", "trophy",
 )
 
-/** H6: days met this week over what the week asks. */
-data class WeekProgress(val done: Int, val target: Int)
+/** H6: the `per_period` period in progress, from a reference day. */
+data class PeriodProgress(
+    val period: Period,
+    val startsOn: LocalDate,
+    val endsOn: LocalDate,
+    val done: Int,
+    val target: Int,
+    val daysLeft: Int,
+    /** H2a: out of the rate; breaks no streak. */
+    val neutral: Boolean,
+)
 
-/** What today asks of a habit to practice: its day, or the week in progress. */
+/** What today asks of a habit to practice: its day, or the period in progress. */
 data class TodayState(val scheduled: Boolean, val done: Boolean, val value: Int?)
 
-/** A version of the frequency (H2): [weekdays] in `weekdays`, [timesPerWeek] in `weekly`. */
+/** A version of the frequency (H2): [rule] holds the fields of its kind. */
 data class Frequency(
     val id: String,
     val validFrom: LocalDate,
     val validUntil: LocalDate?,
     val state: FrequencyState,
-    val kind: FrequencyKind,
-    val timesPerWeek: Int?,
-    val weekdays: List<DayOfWeek>,
+    val rule: FrequencyInput,
+    val cadence: Cadence,
 )
 
 /** Schema `HabitRead`: the fields of the other kind come null. */
@@ -113,15 +167,20 @@ data class Habit(
     val targetValue: Int?,
     val unit: String?,
     val archived: Boolean,
+    /** Wall-clock time in the user's zone (H10), or null. */
+    val timeOfDay: LocalTime?,
+    val position: Int,
     val frequency: Frequency?,
     val paused: Boolean,
     /** H5: rounded; null with nothing scheduled. */
     val ratePercent: Int?,
     val currentStreak: Int?,
     val bestStreak: Int?,
-    /** The unit of the streaks: weeks in `weekly`, else days. */
-    val streakInWeeks: Boolean,
-    val week: WeekProgress?,
+    val streakUnit: StreakUnit,
+    /** H6, in `per_period`. */
+    val period: PeriodProgress?,
+    /** H6a: the next day that asks something; null under an open pause. */
+    val nextDue: LocalDate?,
     val today: TodayState?,
     val cleanSince: Instant?,
     val cleanDays: Int?,
@@ -161,26 +220,83 @@ data class HabitRef(
     val measure: Measure?,
     val targetValue: Int?,
     val unit: String?,
+    val timeOfDay: LocalTime? = null,
 )
 
-/** Schema `HabitTodayItem`: [settled] is today met, or the week already met. */
-data class TodayItem(
+/** Schema `HabitDayItem`: a habit of a day (H9), with why a period rose to it. */
+data class DayItem(
     val habit: HabitRef,
     val done: Boolean,
     val value: Int?,
-    val week: WeekProgress?,
+    /** The day or the period already met. */
     val settled: Boolean,
+    /** Open with a time already past (only today). */
+    val late: Boolean = false,
+    val period: PeriodProgress? = null,
+    val promoted: Promotion? = null,
+    val dueInDays: Int? = null,
 )
 
-/** Schema `HabitsToday`. */
-data class HabitsToday(val today: LocalDate, val items: List<TodayItem>, val done: Int, val scheduled: Int)
+/** A habit to quit in the day, with its days without (H7). */
+data class QuitItem(val id: String, val name: String, val color: HabitColor, val icon: String, val cleanDays: Int)
 
-/** What the frequency fields send. */
+/** Schema `HabitsDay` (H9): the sections come grouped and ordered by the server (H10). */
+data class HabitsDay(
+    val on: LocalDate,
+    val today: LocalDate,
+    /** The user's wall-clock time, only when [on] is today. */
+    val now: LocalTime?,
+    val done: Int,
+    val scheduled: Int,
+    val timeline: List<DayItem>,
+    val untimed: List<DayItem>,
+    val period: List<DayItem>,
+    val doneItems: List<DayItem>,
+    val quit: List<QuitItem>,
+) {
+    val isToday: Boolean get() = on == today
+
+    /** Every habit of the day: what "Marcar hábitos" searches. */
+    val all: List<DayItem> get() = timeline + untimed + period + doneItems
+
+    val open: Int get() = timeline.size + untimed.size
+}
+
+/**
+ * A frequency's fields (H2): the version read from the server, or what the editor sends. Only the
+ * fields of [kind] matter.
+ */
 data class FrequencyInput(
-    val kind: FrequencyKind,
-    val timesPerWeek: Int? = null,
-    val weekdays: List<DayOfWeek> = emptyList(),
-)
+    val kind: FrequencyKind = FrequencyKind.Daily,
+    val weekdays: Set<DayOfWeek> = DayOfWeek.entries.take(WORKDAYS).toSet(),
+    val everyNWeeks: Int = 1,
+    val monthDays: Set<Int> = setOf(1),
+    val monthLastDay: Boolean = false,
+    val everyNMonths: Int = 1,
+    /** 1 to 4, or [LAST]. */
+    val weekOfMonth: Int = 1,
+    val weekday: DayOfWeek = DayOfWeek.SUNDAY,
+    val times: Int = DEFAULT_TIMES,
+    val period: Period = Period.Week,
+    /** A weekday's wire (0–6) in weeks and fortnights, a day (1–31) in months. */
+    val preferredDay: Int? = null,
+) {
+    /** Enough to send: a weekday, or a day of the month. */
+    val valid: Boolean
+        get() = when (kind) {
+            FrequencyKind.Weekdays -> weekdays.isNotEmpty()
+            FrequencyKind.MonthDays -> monthDays.isNotEmpty() || monthLastDay
+            else -> true
+        }
+
+    companion object {
+        const val LAST = -1
+        const val DEFAULT_TIMES = 3
+        const val MAX_EVERY_WEEKS = 52
+        const val MAX_EVERY_MONTHS = 12
+        private const val WORKDAYS = 5
+    }
+}
 
 /** What the habit form sends; the kind and the measure only on a new habit. */
 data class HabitInput(
@@ -193,6 +309,7 @@ data class HabitInput(
     val targetValue: Int? = null,
     val unit: String? = null,
     val frequency: FrequencyInput? = null,
+    val timeOfDay: LocalTime? = null,
 )
 
 /** The API's weekday: 0 is Monday … 6 is Sunday. */

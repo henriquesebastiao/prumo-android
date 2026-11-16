@@ -1,0 +1,183 @@
+{
+  "on": "2026-11-17",
+  "today": "2026-11-17",
+  "now": "14:30",
+  "done": 1,
+  "scheduled": 6,
+  "timeline": [
+    {
+      "habit": {
+        "id": "01a1968d-3900-7014-9b93-8e23a4658e6d",
+        "name": "Alongar",
+        "color": "teal",
+        "icon": "heart-pulse",
+        "measure": "check",
+        "target_value": null,
+        "unit": null,
+        "time_of_day": "07:00"
+      },
+      "done": false,
+      "value": null,
+      "week": null,
+      "settled": false,
+      "late": true,
+      "period": null,
+      "promoted": null,
+      "due_in_days": null
+    },
+    {
+      "habit": {
+        "id": "01a1968d-3901-7261-bf70-1c3e68ed9c8d",
+        "name": "Regar as plantas",
+        "color": "green",
+        "icon": "sun",
+        "measure": "check",
+        "target_value": null,
+        "unit": null,
+        "time_of_day": "18:00"
+      },
+      "done": false,
+      "value": null,
+      "week": null,
+      "settled": false,
+      "late": false,
+      "period": null,
+      "promoted": null,
+      "due_in_days": null
+    }
+  ],
+  "untimed": [
+    {
+      "habit": {
+        "id": "01a05c69-4d08-7152-a17e-4c7faf58aecb",
+        "name": "Tarefa do mês",
+        "color": "green",
+        "icon": "sparkles",
+        "measure": "check",
+        "target_value": null,
+        "unit": null,
+        "time_of_day": null
+      },
+      "done": false,
+      "value": null,
+      "week": null,
+      "settled": false,
+      "late": false,
+      "period": {
+        "period": "month",
+        "starts_on": "2026-11-01",
+        "ends_on": "2026-11-30",
+        "done": 0,
+        "target": 1,
+        "days_left": 14,
+        "neutral": false
+      },
+      "promoted": "preferred_day",
+      "due_in_days": null
+    },
+    {
+      "habit": {
+        "id": "01a13f01-1d00-7387-b46e-e99d6d4fce4f",
+        "name": "Anki",
+        "color": "blue",
+        "icon": "graduation-cap",
+        "measure": "check",
+        "target_value": null,
+        "unit": null,
+        "time_of_day": null
+      },
+      "done": false,
+      "value": null,
+      "week": null,
+      "settled": false,
+      "late": false,
+      "period": null,
+      "promoted": null,
+      "due_in_days": null
+    },
+    {
+      "habit": {
+        "id": "01a13f01-1d01-7277-b1a5-de02f0f381a0",
+        "name": "Beber água",
+        "color": "cyan",
+        "icon": "droplet",
+        "measure": "quantity",
+        "target_value": 2000,
+        "unit": "ml",
+        "time_of_day": null
+      },
+      "done": false,
+      "value": 1250,
+      "week": null,
+      "settled": false,
+      "late": false,
+      "period": null,
+      "promoted": null,
+      "due_in_days": null
+    }
+  ],
+  "period": [
+    {
+      "habit": {
+        "id": "01a10b81-8500-764e-aed8-901bcf04415d",
+        "name": "Academia",
+        "color": "orange",
+        "icon": "dumbbell",
+        "measure": "check",
+        "target_value": null,
+        "unit": null,
+        "time_of_day": null
+      },
+      "done": false,
+      "value": null,
+      "week": {
+        "done": 1,
+        "target": 3
+      },
+      "settled": false,
+      "late": false,
+      "period": {
+        "period": "week",
+        "starts_on": "2026-11-16",
+        "ends_on": "2026-11-22",
+        "done": 1,
+        "target": 3,
+        "days_left": 6,
+        "neutral": false
+      },
+      "promoted": null,
+      "due_in_days": null
+    }
+  ],
+  "done_items": [
+    {
+      "habit": {
+        "id": "01a05c69-4d00-7156-9e81-3a8c553ca517",
+        "name": "Ler a Bíblia",
+        "color": "amber",
+        "icon": "book-open",
+        "measure": "check",
+        "target_value": null,
+        "unit": null,
+        "time_of_day": "05:15"
+      },
+      "done": true,
+      "value": 1,
+      "week": null,
+      "settled": true,
+      "late": false,
+      "period": null,
+      "promoted": null,
+      "due_in_days": null
+    }
+  ],
+  "quit": [
+    {
+      "id": "01a05c69-4d0c-730a-886b-91bf2c4249be",
+      "name": "Redes sociais antes de dormir",
+      "color": "red",
+      "icon": "smartphone",
+      "clean_days": 8
+    }
+  ]
+}

@@ -99,6 +99,49 @@ fun WeekdayChips(
     }
 }
 
+/**
+ * The days of a month, 1 to 31, in rows of seven toggle buttons (a habit's days of the month).
+ * Each one reads as "dia N" and whether it's on.
+ */
+@Composable
+fun MonthDayChips(selected: Set<Int>, onToggle: (Int) -> Unit, modifier: Modifier = Modifier) {
+    Column(modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+        for (week in MONTH_WEEKS) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+                week.forEach { day ->
+                    ToggleButton(
+                        checked = day in selected,
+                        onCheckedChange = { onToggle(day) },
+                        colors = ToggleButtonDefaults.colors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                        ),
+                        contentPadding = PaddingValues(horizontal = 2.dp),
+                        modifier = Modifier.weight(1f).heightIn(min = 48.dp),
+                    ) {
+                        Text(
+                            day.toString(),
+                            maxLines = 1,
+                            textAlign = TextAlign.Center,
+                            style = PrumoType.dataSmall,
+                            autoSize = TextAutoSize.StepBased(
+                                minFontSize = 10.sp,
+                                maxFontSize = 14.sp,
+                                stepSize = 1.sp,
+                            ),
+                        )
+                    }
+                }
+                // The last row keeps the width of the others.
+                repeat(DAYS_IN_WEEK - week.size) { Box(Modifier.weight(1f)) }
+            }
+        }
+    }
+}
+
+private const val DAYS_IN_MONTH = 31
+private const val DAYS_IN_WEEK = 7
+private val MONTH_WEEKS = (1..DAYS_IN_MONTH).toList().chunked(DAYS_IN_WEEK)
+
 /** One day of a [DayStrip]: its [tone] (null for a day without goals) and what it reads as. */
 data class StripDay(
     val date: LocalDate,
@@ -211,6 +254,17 @@ private fun WeekdayChipsPreview() {
         Surface {
             var days by remember { mutableStateOf(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY)) }
             WeekdayChips(days, { day -> days = if (day in days) days - day else days + day }, Modifier.padding(16.dp))
+        }
+    }
+}
+
+@PhonePreviews
+@Composable
+private fun MonthDayChipsPreview() {
+    PrumoTheme(dynamicColor = false) {
+        Surface {
+            var days by remember { mutableStateOf(setOf(5, 20)) }
+            MonthDayChips(days, { day -> days = if (day in days) days - day else days + day }, Modifier.padding(16.dp))
         }
     }
 }

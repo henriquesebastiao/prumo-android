@@ -1,6 +1,5 @@
 package com.henriquesebastiao.prumo.system.settings
 
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,26 +15,16 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.henriquesebastiao.prumo.R
@@ -46,6 +35,7 @@ import com.henriquesebastiao.prumo.core.designsystem.component.IconAvatar
 import com.henriquesebastiao.prumo.core.designsystem.component.PhonePreviews
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoIcons
 import com.henriquesebastiao.prumo.core.designsystem.component.PrumoTopBar
+import com.henriquesebastiao.prumo.core.designsystem.component.ReorderableColumn
 import com.henriquesebastiao.prumo.core.designsystem.component.RowAction
 import com.henriquesebastiao.prumo.core.designsystem.theme.ListStyle
 import com.henriquesebastiao.prumo.core.designsystem.theme.ModuleTheme
@@ -110,117 +100,29 @@ private fun ReorderableModules(
     onEnabled: (String, Boolean) -> Unit,
     onReorder: (List<String>) -> Unit,
 ) {
-    var order by remember(items) { mutableStateOf(items.map { it.id }) }
-    var dragging by remember { mutableStateOf<String?>(null) }
-    var offset by remember { mutableFloatStateOf(0f) }
-    var rowHeight by remember { mutableIntStateOf(1) }
     val byId = items.associateBy { it.id }
-    val style = ListStyle.Segmented
-    val moveUp = stringResource(R.string.modules_move_up)
-    val moveDown = stringResource(R.string.modules_move_down)
-
-    fun move(id: String, by: Int) {
-        val from = order.indexOf(id)
-        val to = from + by
-        if (from < 0 || to !in order.indices) return
-        order = order.toMutableList().apply { add(to, removeAt(from)) }
-    }
-
-    Column(verticalArrangement = Arrangement.spacedBy(style.gap)) {
-        order.forEachIndexed { index, id ->
-            val item = byId[id] ?: return@forEachIndexed
-            // The key keeps each row (and its drag gesture) with its module while the order changes
-            // under the finger; without it the gesture moved to another row and never ended.
-            key(id) {
-                val isDragging = dragging == id
-                val name = stringResource(item.feature.nameRes)
-                val handle = Modifier.pointerInput(id) {
-                    detectDragGestures(
-                        onDragStart = {
-                            dragging = id
-                            offset = 0f
-                        },
-                        onDragEnd = {
-                            dragging = null
-                            offset = 0f
-                            onReorder(order)
-                        },
-                        onDragCancel = {
-                            dragging = null
-                            offset = 0f
-                        },
-                    ) { change, amount ->
-                        change.consume()
-                        offset += amount.y
-                        val step = rowHeight + style.gap.toPx()
-                        if (offset > step / 2) {
-                            move(id, 1)
-                            offset -= step
-                        } else if (offset < -step / 2) {
-                            move(id, -1)
-                            offset += step
-                        }
-                    }
+    ReorderableColumn(
+        keys = items.map { it.id },
+        onReorder = onReorder,
+        label = { id -> byId[id]?.let { stringResource(it.feature.nameRes) }.orEmpty() },
+    ) { id, handle ->
+        val item = byId.getValue(id)
+        GroupedRow(
+            title = stringResource(item.feature.nameRes),
+            action = RowAction.Static {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+                ) {
+                    Switch(checked = item.enabled, onCheckedChange = { onEnabled(id, it) })
+                    handle()
                 }
-                GroupedListItem(
-                    GroupedRow(
-                        title = name,
-                        action = RowAction.Static {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-                            ) {
-                                Switch(checked = item.enabled, onCheckedChange = { onEnabled(id, it) })
-                                Icon(
-                                    painterResource(PrumoIcons.DragIndicator),
-                                    contentDescription = stringResource(R.string.modules_drag, name),
-                                    modifier = handle.size(40.dp).padding(Spacing.sm),
-                                )
-                            }
-                        },
-                        summary = stringResource(
-                            if (item.enabled) item.feature.descriptionRes else R.string.modules_disabled,
-                        ),
-                        leading = {
-                            ModuleTheme(item.feature.seed) { IconAvatar(item.feature.icon) }
-                        },
-                    ),
-                    index = index,
-                    count = order.size,
-                    style = style,
-                    modifier = Modifier
-                        .zIndex(if (isDragging) 1f else 0f)
-                        .onSizeChanged { rowHeight = it.height }
-                        .graphicsLayer { translationY = if (isDragging) offset else 0f }
-                        .then(
-                            if (isDragging) {
-                                Modifier.shadow(DRAG_ELEVATION, style.shapeOf(index, order.size))
-                            } else {
-                                Modifier
-                            },
-                        )
-                        .semantics {
-                            contentDescription = name
-                            customActions = listOf(
-                                CustomAccessibilityAction(moveUp) {
-                                    move(id, -1)
-                                    onReorder(order)
-                                    true
-                                },
-                                CustomAccessibilityAction(moveDown) {
-                                    move(id, 1)
-                                    onReorder(order)
-                                    true
-                                },
-                            )
-                        },
-                )
-            }
-        }
+            },
+            summary = stringResource(if (item.enabled) item.feature.descriptionRes else R.string.modules_disabled),
+            leading = { ModuleTheme(item.feature.seed) { IconAvatar(item.feature.icon) } },
+        )
     }
 }
-
-private val DRAG_ELEVATION = 6.dp
 
 @PhonePreviews
 @Composable

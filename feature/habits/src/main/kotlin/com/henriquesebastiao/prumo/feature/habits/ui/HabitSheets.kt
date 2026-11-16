@@ -70,9 +70,7 @@ data class SheetUiState(
     val context: HabitsContext = HabitsContext(),
     // Frequency
     val frequencyId: String? = null,
-    val kind: FrequencyKind = FrequencyKind.Daily,
-    val timesPerWeek: Int = HabitEditorUiState.DEFAULT_TIMES,
-    val weekdays: Set<DayOfWeek> = DayOfWeek.entries.take(HabitEditorUiState.WORKDAYS).toSet(),
+    val rule: FrequencyInput = FrequencyInput(),
     val validFrom: LocalDate = LocalDate.of(2026, 11, 17),
     // Pause
     val startsOn: LocalDate = LocalDate.of(2026, 11, 17),
@@ -143,9 +141,7 @@ class HabitSheetViewModel @Inject constructor(
                     state.copy(
                         loading = false,
                         habit = detail.habit,
-                        kind = editing.kind,
-                        timesPerWeek = editing.timesPerWeek ?: state.timesPerWeek,
-                        weekdays = editing.weekdays.toSet().ifEmpty { state.weekdays },
+                        rule = editing.rule,
                         validFrom = editing.validFrom,
                     )
                 }
@@ -153,13 +149,7 @@ class HabitSheetViewModel @Inject constructor(
         }
     }
 
-    fun onKind(kind: FrequencyKind) = mutableState.update { it.copy(kind = kind, saveError = null) }
-
-    fun onTimes(times: Int) = mutableState.update { it.copy(timesPerWeek = times.coerceIn(1, DAYS_IN_WEEK)) }
-
-    fun onWeekday(day: DayOfWeek) = mutableState.update {
-        it.copy(weekdays = if (day in it.weekdays) it.weekdays - day else it.weekdays + day, saveError = null)
-    }
+    fun onRule(rule: FrequencyInput) = mutableState.update { it.copy(rule = rule, saveError = null) }
 
     fun onValidFrom(date: LocalDate) = mutableState.update { it.copy(validFrom = date, saveError = null) }
 
@@ -181,7 +171,7 @@ class HabitSheetViewModel @Inject constructor(
 
     fun saveFrequency() {
         val state = mutableState.value
-        val input = FrequencyInput(state.kind, state.timesPerWeek, state.weekdays.toList())
+        val input = state.rule
         val id = state.frequencyId
         send {
             if (id ==
@@ -224,10 +214,6 @@ class HabitSheetViewModel @Inject constructor(
                 is Outcome.Failed -> mutableState.update { it.copy(saving = false, saveError = outcome.error) }
             }
         }
-    }
-
-    private companion object {
-        const val DAYS_IN_WEEK = 7
     }
 }
 
@@ -294,21 +280,13 @@ internal fun FrequencySheet(
     HabitSheetHost(onDismiss, viewModel, { viewModel.start(it, habitId, frequencyId = frequencyId) }) { state ->
         FrequencyContent(
             state,
-            FrequencyEvents(
-                viewModel::onKind,
-                viewModel::onTimes,
-                viewModel::onWeekday,
-                viewModel::onValidFrom,
-                viewModel::saveFrequency,
-            ),
+            FrequencyEvents(viewModel::onRule, viewModel::onValidFrom, viewModel::saveFrequency),
         )
     }
 }
 
 internal class FrequencyEvents(
-    val onKind: (FrequencyKind) -> Unit,
-    val onTimes: (Int) -> Unit,
-    val onWeekday: (DayOfWeek) -> Unit,
+    val onRule: (FrequencyInput) -> Unit,
     val onValidFrom: (LocalDate) -> Unit,
     val onSave: () -> Unit,
 )
@@ -321,16 +299,9 @@ internal fun FrequencyContent(state: SheetUiState, events: FrequencyEvents) {
         stringResource(if (editing) R.string.habits_frequency_edit else R.string.habits_frequency_new),
         state,
         events.onSave,
-        canSave = state.kind != FrequencyKind.Weekdays || state.weekdays.isNotEmpty(),
+        canSave = state.rule.valid,
     ) {
-        ChoiceGroup(options = FrequencyKind.entries, selected = state.kind, label = {
-            it.label()
-        }, onSelect = events.onKind)
-        when (state.kind) {
-            FrequencyKind.Weekly -> TimesStepper(state.timesPerWeek, events.onTimes)
-            FrequencyKind.Weekdays -> WeekdayChips(state.weekdays, events.onWeekday)
-            FrequencyKind.Daily -> Unit
-        }
+        FrequencyFields(state.rule, events.onRule)
         if (!editing) {
             DateField(
                 value = state.validFrom,

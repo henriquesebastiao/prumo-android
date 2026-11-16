@@ -39,7 +39,13 @@ import com.henriquesebastiao.prumo.system.settings.SettingsRoute
  * same screens come back.
  */
 @Composable
-fun PrumoApp(session: SessionState, registry: ModuleRegistry, modifier: Modifier = Modifier) {
+fun PrumoApp(
+    session: SessionState,
+    registry: ModuleRegistry,
+    modifier: Modifier = Modifier,
+    launchAction: String? = null,
+    onLaunchActionOpened: () -> Unit = {},
+) {
     val main = rememberNavBackStack(Home)
     var signInAgain by rememberSaveable { mutableStateOf(false) }
     var dialogDismissed by rememberSaveable { mutableStateOf(false) }
@@ -54,7 +60,14 @@ fun PrumoApp(session: SessionState, registry: ModuleRegistry, modifier: Modifier
     when (session) {
         SessionState.Loading -> Unit
 
-        is SessionState.SignedIn -> MainNavigation(main, registry, onSignIn = {}, modifier = modifier)
+        is SessionState.SignedIn -> MainNavigation(
+            main,
+            registry,
+            onSignIn = {},
+            launchAction = launchAction,
+            onLaunchActionOpened = onLaunchActionOpened,
+            modifier = modifier,
+        )
 
         is SessionState.SignedOut -> if (session.reason == SignOutReason.Expired && !signInAgain) {
             MainNavigation(main, registry, onSignIn = { signInAgain = true }, modifier = modifier)
@@ -107,7 +120,11 @@ private fun MainNavigation(
     registry: ModuleRegistry,
     onSignIn: () -> Unit,
     modifier: Modifier = Modifier,
+    launchAction: String? = null,
+    onLaunchActionOpened: () -> Unit = {},
 ) {
+    // A shortcut of the app's icon opens its sheet over the Home: back to the Home first.
+    LaunchedEffect(launchAction) { if (launchAction != null) stack.resetTo(Home) }
     val navigator = remember(stack) {
         object : Navigator {
             override fun navigate(key: NavKey) {
@@ -144,6 +161,8 @@ private fun MainNavigation(
                     onSettings = { stack.add(Settings) },
                     onOrganizeModules = { stack.add(ModulesSettings) },
                     onSignIn = onSignIn,
+                    launchAction = launchAction,
+                    onLaunchActionOpened = onLaunchActionOpened,
                 )
             }
             entry<Settings> { SettingsRoute(settings) }

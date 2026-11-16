@@ -9,7 +9,7 @@ import com.henriquesebastiao.prumo.feature.habits.model.FrequencyInput
 import com.henriquesebastiao.prumo.feature.habits.model.Habit
 import com.henriquesebastiao.prumo.feature.habits.model.HabitDetail
 import com.henriquesebastiao.prumo.feature.habits.model.HabitInput
-import com.henriquesebastiao.prumo.feature.habits.model.HabitsToday
+import com.henriquesebastiao.prumo.feature.habits.model.HabitsDay
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
@@ -30,7 +30,8 @@ class FakeHabitsRepository : HabitsRepository {
         expired++
     }
 
-    var today: HabitsToday = HabitsPreview.today
+    var day: HabitsDay = HabitsPreview.day
+    val days = mutableListOf<LocalDate?>()
     var habits: List<Habit> = HabitsPreview.habits
     var details: Map<String, HabitDetail> = mapOf(
         HabitsPreview.bible.id to HabitsPreview.bibleDetail,
@@ -53,7 +54,12 @@ class FakeHabitsRepository : HabitsRepository {
         return Outcome.Ok(result)
     }
 
-    override suspend fun today() = read { today }
+    override suspend fun day(on: LocalDate?) = read {
+        days += on
+        day
+    }
+
+    override suspend fun reorder(ids: List<String>) = write("order $ids") { }
 
     override suspend fun habits(filter: ArchivedFilter) = read {
         filters += filter

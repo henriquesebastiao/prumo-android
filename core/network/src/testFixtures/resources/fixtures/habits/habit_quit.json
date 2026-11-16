@@ -1,5 +1,5 @@
 {
-  "id": "01a05c69-4d03-75d8-8fc5-9c570d03af1e",
+  "id": "01a05c69-4d0c-730a-886b-91bf2c4249be",
   "name": "Redes sociais antes de dormir",
   "kind": "quit",
   "color": "red",
@@ -9,6 +9,8 @@
   "target_value": null,
   "unit": null,
   "archived_at": null,
+  "time_of_day": null,
+  "position": 4,
   "frequency": null,
   "paused": false,
   "rate_percent": null,
@@ -16,36 +18,38 @@
   "best_streak": null,
   "streak_unit": null,
   "week": null,
+  "period": null,
+  "next_due": null,
   "today": null,
   "clean_since": "2026-11-09T02:30:00Z",
   "clean_days": 8,
   "best_clean_days": 42,
   "relapses_30d": 1,
-  "created_at": "2026-09-01T10:00:00.004067Z",
-  "updated_at": "2026-09-01T10:00:00.004071Z",
+  "created_at": "2026-09-01T10:00:00.012789Z",
+  "updated_at": "2026-09-01T10:00:00.012793Z",
   "frequencies": [],
   "pauses": [],
   "relapses": [
     {
-      "id": "01a1ea8e-f67d-73d4-8f93-60989db6c355",
+      "id": "01a1ea8e-f6b8-716b-9cdc-55d1cfe1e700",
       "occurred_at": "2026-11-09T02:30:00Z",
       "note": "Domingo entediado.",
-      "created_at": "2026-11-17T17:30:00.190046Z",
-      "updated_at": "2026-11-17T17:30:00.190050Z"
+      "created_at": "2026-11-17T17:30:00.248969Z",
+      "updated_at": "2026-11-17T17:30:00.248973Z"
     },
     {
-      "id": "01a1ea8e-f67c-7736-b94d-4d7523dbd1ed",
+      "id": "01a1ea8e-f6b7-73ee-97d0-c82d52b8516d",
       "occurred_at": "2026-10-04T01:30:00Z",
       "note": "Noite de prova, fiquei ansioso.",
-      "created_at": "2026-11-17T17:30:00.189093Z",
-      "updated_at": "2026-11-17T17:30:00.189097Z"
+      "created_at": "2026-11-17T17:30:00.247832Z",
+      "updated_at": "2026-11-17T17:30:00.247837Z"
     },
     {
-      "id": "01a1ea8e-f67a-70a5-a62b-e76bed2070cd",
+      "id": "01a1ea8e-f6b5-7594-92ff-0b9aade60950",
       "occurred_at": "2026-09-13T02:00:00Z",
       "note": null,
-      "created_at": "2026-11-17T17:30:00.187504Z",
-      "updated_at": "2026-11-17T17:30:00.187508Z"
+      "created_at": "2026-11-17T17:30:00.246057Z",
+      "updated_at": "2026-11-17T17:30:00.246062Z"
     }
   ]
 }

@@ -1,9 +1,12 @@
 package com.henriquesebastiao.prumo.feature.habits.ui
 
+import com.henriquesebastiao.prumo.feature.habits.model.Cadence
 import com.henriquesebastiao.prumo.feature.habits.model.CalendarDay
 import com.henriquesebastiao.prumo.feature.habits.model.CalendarMonth
+import com.henriquesebastiao.prumo.feature.habits.model.DayItem
 import com.henriquesebastiao.prumo.feature.habits.model.DayState
 import com.henriquesebastiao.prumo.feature.habits.model.Frequency
+import com.henriquesebastiao.prumo.feature.habits.model.FrequencyInput
 import com.henriquesebastiao.prumo.feature.habits.model.FrequencyKind
 import com.henriquesebastiao.prumo.feature.habits.model.FrequencyState
 import com.henriquesebastiao.prumo.feature.habits.model.Habit
@@ -11,30 +14,28 @@ import com.henriquesebastiao.prumo.feature.habits.model.HabitColor
 import com.henriquesebastiao.prumo.feature.habits.model.HabitDetail
 import com.henriquesebastiao.prumo.feature.habits.model.HabitKind
 import com.henriquesebastiao.prumo.feature.habits.model.HabitRef
-import com.henriquesebastiao.prumo.feature.habits.model.HabitsToday
+import com.henriquesebastiao.prumo.feature.habits.model.HabitsDay
 import com.henriquesebastiao.prumo.feature.habits.model.Measure
 import com.henriquesebastiao.prumo.feature.habits.model.Pause
+import com.henriquesebastiao.prumo.feature.habits.model.Period
+import com.henriquesebastiao.prumo.feature.habits.model.PeriodProgress
+import com.henriquesebastiao.prumo.feature.habits.model.Promotion
+import com.henriquesebastiao.prumo.feature.habits.model.QuitItem
 import com.henriquesebastiao.prumo.feature.habits.model.Relapse
-import com.henriquesebastiao.prumo.feature.habits.model.TodayItem
+import com.henriquesebastiao.prumo.feature.habits.model.StreakUnit
 import com.henriquesebastiao.prumo.feature.habits.model.TodayState
-import com.henriquesebastiao.prumo.feature.habits.model.WeekProgress
 import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.YearMonth
 
 /** Hábitos as the demo server has it on 17/11/2026 (backend/scripts/e2e_server.py), for previews and tests. */
 internal object HabitsPreview {
     private val day17 = LocalDate.of(2026, 11, 17)
 
-    private fun frequency(
-        id: String,
-        from: LocalDate,
-        kind: FrequencyKind,
-        times: Int? = null,
-        days: List<DayOfWeek> = emptyList(),
-        state: FrequencyState = FrequencyState.Current,
-    ) = Frequency(id, from, null, state, kind, times, days)
+    private fun frequency(id: String, from: LocalDate, rule: FrequencyInput, cadence: Cadence) =
+        Frequency(id, from, null, FrequencyState.Current, rule, cadence)
 
     @Suppress("LongParameterList")
     private fun build(
@@ -49,41 +50,45 @@ internal object HabitsPreview {
         measure: Measure = Measure.Check,
         target: Int? = null,
         unit: String? = null,
-        week: WeekProgress? = null,
         value: Int? = null,
+        time: LocalTime? = null,
+        unitOfStreak: StreakUnit = StreakUnit.Day,
+        period: PeriodProgress? = null,
+        nextDue: LocalDate? = day17,
     ) = Habit(
         id = id, name = name, kind = HabitKind.Build, color = color, icon = icon, startedOn = frequency.validFrom,
-        measure = measure, targetValue = target, unit = unit, archived = false, frequency = frequency, paused = false,
-        ratePercent = rate, currentStreak = streak, bestStreak = best,
-        streakInWeeks =
-            frequency.kind == FrequencyKind.Weekly,
-        week = week, today = TodayState(true, false, value), cleanSince = null, cleanDays = null, bestCleanDays = null,
-        relapses30d = null,
+        measure = measure, targetValue = target, unit = unit, archived = false, timeOfDay = time, position = 0,
+        frequency = frequency, paused = false, ratePercent = rate, currentStreak = streak, bestStreak = best,
+        streakUnit = unitOfStreak, period = period, nextDue = nextDue, today = TodayState(true, false, value),
+        cleanSince = null, cleanDays = null, bestCleanDays = null, relapses30d = null,
     )
+
+    private val gymWeek =
+        PeriodProgress(Period.Week, LocalDate.of(2026, 11, 16), LocalDate.of(2026, 11, 22), 1, 3, 6, false)
 
     val gym = build(
         "h-gym", "Academia", HabitColor.Orange, "dumbbell",
         frequency(
             "f-gym",
             LocalDate.of(2026, 10, 5),
-            FrequencyKind.Weekly,
-            times = 3,
+            FrequencyInput(kind = FrequencyKind.PerPeriod, times = 3, period = Period.Week),
+            Cadence.Weekly,
         ),
-        75, 3, 3, week = WeekProgress(1, 3),
+        75, 3, 3, unitOfStreak = StreakUnit.Week, period = gymWeek,
     )
     val anki = build(
         "h-anki",
         "Anki",
         HabitColor.Blue,
         "graduation-cap",
-        frequency("f-anki", LocalDate.of(2026, 11, 1), FrequencyKind.Weekdays, days = DayOfWeek.entries.take(5)),
+        frequency("f-anki", LocalDate.of(2026, 11, 1), FrequencyInput(kind = FrequencyKind.Weekdays), Cadence.Weekly),
         83,
         1,
         9,
     )
     val water = build(
         "h-water", "Beber água", HabitColor.Cyan, "droplet",
-        frequency("f-water", LocalDate.of(2026, 10, 15), FrequencyKind.Daily), 69, 1, 3,
+        frequency("f-water", LocalDate.of(2026, 10, 15), FrequencyInput(), Cadence.Daily), 69, 1, 3,
         measure = Measure.Quantity, target = 2000, unit = "ml", value = 1250,
     )
     val bible = build(
@@ -91,34 +96,83 @@ internal object HabitsPreview {
         "Ler a Bíblia",
         HabitColor.Amber,
         "book-open",
-        frequency("f-bible", LocalDate.of(2026, 9, 1), FrequencyKind.Daily),
+        frequency("f-bible", LocalDate.of(2026, 9, 1), FrequencyInput(), Cadence.Daily),
         100,
-        40,
-        40,
+        41,
+        41,
+        time = LocalTime.of(5, 15),
+        nextDue = LocalDate.of(2026, 11, 18),
+    )
+    val stretch = build(
+        "h-stretch", "Alongar", HabitColor.Teal, "heart-pulse",
+        frequency("f-stretch", LocalDate.of(2026, 11, 1), FrequencyInput(), Cadence.Daily), 94, 6, 9,
+        time = LocalTime.of(7, 0),
+    )
+    val sheets = build(
+        "h-sheets", "Trocar roupa de cama", HabitColor.Pink, "moon",
+        frequency(
+            "f-sheets",
+            LocalDate.of(2026, 10, 10),
+            FrequencyInput(kind = FrequencyKind.Weekdays, weekdays = setOf(DayOfWeek.SATURDAY), everyNWeeks = 2),
+            Cadence.Fortnightly,
+        ),
+        100, 3, 3, unitOfStreak = StreakUnit.Occurrence, nextDue = LocalDate.of(2026, 11, 21),
+    )
+    val chore = build(
+        "h-chore", "Tarefa do mês", HabitColor.Green, "sparkles",
+        frequency(
+            "f-chore",
+            LocalDate.of(2026, 9, 1),
+            FrequencyInput(kind = FrequencyKind.PerPeriod, times = 1, period = Period.Month, preferredDay = 15),
+            Cadence.Monthly,
+        ),
+        100, 2, 2, unitOfStreak = StreakUnit.Month,
+        period = PeriodProgress(Period.Month, LocalDate.of(2026, 11, 1), LocalDate.of(2026, 11, 30), 0, 1, 14, false),
     )
     val social = Habit(
         id = "h-social", name = "Redes sociais antes de dormir", kind = HabitKind.Quit, color = HabitColor.Red,
         icon = "smartphone", startedOn = LocalDate.of(2026, 8, 1), measure = null, targetValue = null, unit = null,
-        archived = false, frequency = null, paused = false, ratePercent = null, currentStreak = null, bestStreak = null,
-        streakInWeeks = false, week = null, today = null, cleanSince = Instant.parse("2026-11-09T02:30:00Z"),
-        cleanDays = 8, bestCleanDays = 42, relapses30d = 1,
+        archived = false, timeOfDay = null, position = 9, frequency = null, paused = false, ratePercent = null,
+        currentStreak = null, bestStreak = null, streakUnit = StreakUnit.Day, period = null, nextDue = null,
+        today = null, cleanSince = Instant.parse("2026-11-09T02:30:00Z"), cleanDays = 8, bestCleanDays = 42,
+        relapses30d = 1,
     )
 
-    val habits = listOf(gym, anki, water, bible, social)
+    val habits = listOf(bible, stretch, chore, gym, anki, water, sheets, social)
 
-    private fun ref(habit: Habit) =
-        HabitRef(habit.id, habit.name, habit.color, habit.icon, habit.measure, habit.targetValue, habit.unit)
+    private fun ref(habit: Habit) = HabitRef(
+        habit.id,
+        habit.name,
+        habit.color,
+        habit.icon,
+        habit.measure,
+        habit.targetValue,
+        habit.unit,
+        habit.timeOfDay,
+    )
 
-    val today = HabitsToday(
+    val day = HabitsDay(
+        on = day17,
         today = day17,
-        items = listOf(
-            TodayItem(ref(gym), done = false, value = null, week = WeekProgress(1, 3), settled = false),
-            TodayItem(ref(anki), done = false, value = null, week = null, settled = false),
-            TodayItem(ref(water), done = false, value = 1250, week = null, settled = false),
-            TodayItem(ref(bible), done = true, value = 1, week = null, settled = true),
-        ),
+        now = LocalTime.of(14, 30),
         done = 1,
-        scheduled = 4,
+        scheduled = 5,
+        timeline = listOf(DayItem(ref(stretch), done = false, value = null, settled = false, late = true)),
+        untimed = listOf(
+            DayItem(
+                ref(chore),
+                done = false,
+                value = null,
+                settled = false,
+                period = chore.period,
+                promoted = Promotion.PreferredDay,
+            ),
+            DayItem(ref(anki), done = false, value = null, settled = false),
+            DayItem(ref(water), done = false, value = 1250, settled = false),
+        ),
+        period = listOf(DayItem(ref(gym), done = false, value = null, settled = false, period = gymWeek)),
+        doneItems = listOf(DayItem(ref(bible), done = true, value = 1, settled = true)),
+        quit = listOf(QuitItem(social.id, social.name, social.color, social.icon, 8)),
     )
 
     val bibleDetail = HabitDetail(
@@ -158,5 +212,5 @@ internal object HabitsPreview {
     val todayEvents = TodayEvents({}, { _, _ -> }, {}, {})
     val listEvents = ListEvents({}, {}, {}, {})
     val detailEvents = HabitDetailEvents({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
-    val editorEvents = HabitEditorEvents({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
+    val editorEvents = HabitEditorEvents({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
 }

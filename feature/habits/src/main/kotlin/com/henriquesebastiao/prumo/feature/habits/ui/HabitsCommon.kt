@@ -11,6 +11,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.henriquesebastiao.prumo.core.designsystem.component.CalendarDayStatus
@@ -25,12 +26,19 @@ import com.henriquesebastiao.prumo.core.model.Preferences
 import com.henriquesebastiao.prumo.core.ui.errorText
 import com.henriquesebastiao.prumo.feature.habits.HabitsFeature
 import com.henriquesebastiao.prumo.feature.habits.R
+import com.henriquesebastiao.prumo.feature.habits.model.Cadence
 import com.henriquesebastiao.prumo.feature.habits.model.DayState
 import com.henriquesebastiao.prumo.feature.habits.model.Frequency
+import com.henriquesebastiao.prumo.feature.habits.model.FrequencyInput
 import com.henriquesebastiao.prumo.feature.habits.model.FrequencyKind
 import com.henriquesebastiao.prumo.feature.habits.model.HabitColor
 import com.henriquesebastiao.prumo.feature.habits.model.HabitRef
+import com.henriquesebastiao.prumo.feature.habits.model.Period
+import com.henriquesebastiao.prumo.feature.habits.model.PeriodProgress
+import com.henriquesebastiao.prumo.feature.habits.model.StreakUnit
+import com.henriquesebastiao.prumo.feature.habits.model.weekdayOf
 import java.io.Serializable
+import java.text.Normalizer
 import java.time.Clock
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -76,49 +84,203 @@ internal fun HabitColor.label(): String = stringResource(
 internal fun FrequencyKind.label(): String = stringResource(
     when (this) {
         FrequencyKind.Daily -> R.string.habits_freq_kind_daily
-        FrequencyKind.Weekly -> R.string.habits_freq_kind_weekly
         FrequencyKind.Weekdays -> R.string.habits_freq_kind_weekdays
+        FrequencyKind.MonthDays -> R.string.habits_freq_kind_month_days
+        FrequencyKind.MonthWeekday -> R.string.habits_freq_kind_month_weekday
+        FrequencyKind.PerPeriod, FrequencyKind.Weekly -> R.string.habits_freq_kind_per_period
     },
 )
 
-/** "Todo dia", "3× por semana", "Dias úteis", "Seg, Qua e Sex" (as the web's). */
 @Composable
-internal fun frequencyText(kind: FrequencyKind, timesPerWeek: Int?, weekdays: List<DayOfWeek>): String = when (kind) {
+@ReadOnlyComposable
+internal fun Period.label(): String = stringResource(
+    when (this) {
+        Period.Week -> R.string.habits_period_week
+        Period.Fortnight -> R.string.habits_period_fortnight
+        Period.Month -> R.string.habits_period_month
+    },
+)
+
+@Composable
+@ReadOnlyComposable
+internal fun Cadence.label(): String = stringResource(
+    when (this) {
+        Cadence.Daily -> R.string.habits_cadence_daily
+        Cadence.Weekly -> R.string.habits_cadence_weekly
+        Cadence.Fortnightly -> R.string.habits_cadence_fortnightly
+        Cadence.Monthly -> R.string.habits_cadence_monthly
+        Cadence.Longer -> R.string.habits_cadence_longer
+    },
+)
+
+/** "sábado". */
+@Composable
+@ReadOnlyComposable
+internal fun weekdayName(day: DayOfWeek): String = stringArrayResource(R.array.habits_weekday_names)[day.value - 1]
+
+/** "1º", "Última": the Nth of a weekday, in its gender (sábado and domingo are masculine). */
+@Composable
+@ReadOnlyComposable
+internal fun nthText(weekOfMonth: Int, weekday: DayOfWeek): String {
+    val masculine = weekday == DayOfWeek.SATURDAY || weekday == DayOfWeek.SUNDAY
+    val names = stringArrayResource(if (masculine) R.array.habits_nth_m else R.array.habits_nth_f)
+    return names[if (weekOfMonth == FrequencyInput.LAST) names.lastIndex else weekOfMonth - 1]
+}
+
+@Composable
+@ReadOnlyComposable
+private fun listText(names: List<String>): String = when {
+    names.size > 1 -> stringResource(R.string.habits_freq_list, names.dropLast(1).joinToString(", "), names.last())
+    else -> names.firstOrNull().orEmpty()
+}
+
+@Composable
+private fun weekdaysText(weekdays: Set<DayOfWeek>): String {
+    val workdays = weekdays == DayOfWeek.entries.take(WORKDAYS).toSet()
+    return when {
+        weekdays.size == DayOfWeek.entries.size -> stringResource(R.string.habits_freq_daily)
+        workdays -> stringResource(R.string.habits_freq_workdays)
+        weekdays.size == 1 -> weekdayName(weekdays.first())
+        else -> listText(weekdays.sortedBy { it.value }.map { weekdayShort(it) })
+    }
+}
+
+@Composable
+@ReadOnlyComposable
+private fun every(text: String, n: Int, months: Boolean): String = when {
+    n <= 1 -> text
+
+    !months && n == 2 -> stringResource(
+        R.string.habits_freq_joined,
+        stringResource(R.string.habits_freq_fortnightly),
+        text,
+    )
+
+    else -> stringResource(
+        R.string.habits_freq_joined,
+        stringResource(if (months) R.string.habits_freq_every_months else R.string.habits_freq_every_weeks, n),
+        text,
+    )
+}
+
+/**
+ * The frequency in words, as the web's: "Todo dia", "Seg, Qua e Sex", "Quinzenal · sábado",
+ * "Dia 5", "A cada 3 meses · Dia 5", "1º domingo do mês", "1× por mês · de preferência dia 15".
+ */
+@Composable
+internal fun frequencyText(rule: FrequencyInput): String = when (rule.kind) {
     FrequencyKind.Daily -> stringResource(R.string.habits_freq_daily)
 
-    FrequencyKind.Weekly -> stringResource(R.string.habits_freq_weekly, timesPerWeek ?: 1)
+    FrequencyKind.Weekdays -> every(weekdaysText(rule.weekdays), rule.everyNWeeks, months = false)
 
-    FrequencyKind.Weekdays -> {
-        val workdays = weekdays.toSet() == DayOfWeek.entries.take(WORKDAYS).toSet()
-        val names = weekdays.sortedBy { it.value }.map { weekdayShortName(it) }
-        when {
-            workdays -> stringResource(R.string.habits_freq_workdays)
+    FrequencyKind.MonthDays -> {
+        val days = rule.monthDays.sorted().map { it.toString() } +
+            listOfNotNull(stringResource(R.string.habits_freq_last_day).takeIf { rule.monthLastDay })
+        val text = if (rule.monthDays.isEmpty()) {
+            stringResource(R.string.habits_freq_last_day_of_month)
+        } else {
+            pluralStringResource(R.plurals.habits_freq_month_days, days.size, listText(days))
+        }
+        every(text, rule.everyNMonths, months = true)
+    }
 
-            names.size > 1 -> stringResource(
-                R.string.habits_freq_list,
-                names.dropLast(1).joinToString(", "),
-                names.last(),
-            )
+    FrequencyKind.MonthWeekday -> every(
+        stringResource(
+            R.string.habits_freq_month_weekday,
+            nthText(rule.weekOfMonth, rule.weekday),
+            weekdayName(rule.weekday),
+        ),
+        rule.everyNMonths,
+        months = true,
+    )
 
-            else -> names.firstOrNull().orEmpty()
+    FrequencyKind.PerPeriod, FrequencyKind.Weekly -> {
+        val text = stringResource(
+            when (rule.period) {
+                Period.Week -> R.string.habits_freq_per_week
+                Period.Fortnight -> R.string.habits_freq_per_fortnight
+                Period.Month -> R.string.habits_freq_per_month
+            },
+            rule.times,
+        )
+        val preferred = rule.preferredDay
+        if (preferred == null) {
+            text
+        } else {
+            val day = if (rule.period == Period.Month) {
+                stringResource(R.string.habits_freq_day_of_month, preferred)
+            } else {
+                weekdayName(weekdayOf(preferred))
+            }
+            stringResource(R.string.habits_freq_joined, text, stringResource(R.string.habits_freq_preferred, day))
         }
     }
 }
 
 @Composable
-internal fun frequencyText(frequency: Frequency): String =
-    frequencyText(frequency.kind, frequency.timesPerWeek, frequency.weekdays)
-
-@Composable
-private fun weekdayShortName(day: DayOfWeek): String = weekdayShort(day)
+internal fun frequencyText(frequency: Frequency): String = frequencyText(frequency.rule)
 
 private const val WORKDAYS = 5
 
-/** "12 dias", "3 semanas". */
+/** "1 de 2 nesta quinzena · faltam 5 dias". */
 @Composable
 @ReadOnlyComposable
-internal fun streakText(value: Int, weeks: Boolean): String =
-    pluralStringResource(if (weeks) R.plurals.habits_weeks else R.plurals.habits_days, value, value)
+internal fun periodText(period: PeriodProgress): String {
+    val progress = stringResource(
+        when (period.period) {
+            Period.Week -> R.string.habits_progress_week
+            Period.Fortnight -> R.string.habits_progress_fortnight
+            Period.Month -> R.string.habits_progress_month
+        },
+        period.done,
+        period.target,
+    )
+    if (period.done >= period.target) return progress
+    val left = if (period.daysLeft <= 1) {
+        stringResource(R.string.habits_ends_today)
+    } else {
+        pluralStringResource(R.plurals.habits_days_left, period.daysLeft, period.daysLeft)
+    }
+    return stringResource(R.string.habits_freq_joined, progress, left)
+}
+
+/** "12 dias", "3 semanas", "4 vezes", "2 meses". */
+@Composable
+@ReadOnlyComposable
+internal fun streakText(value: Int, unit: StreakUnit): String = pluralStringResource(
+    when (unit) {
+        StreakUnit.Day -> R.plurals.habits_days
+        StreakUnit.Occurrence -> R.plurals.habits_occurrences
+        StreakUnit.Week -> R.plurals.habits_weeks
+        StreakUnit.Fortnight -> R.plurals.habits_fortnights
+        StreakUnit.Month -> R.plurals.habits_months
+    },
+    value,
+    value,
+)
+
+/** The window of the rate (H5), from the unit of the streak. */
+@Composable
+@ReadOnlyComposable
+internal fun rateWindow(unit: StreakUnit): String = stringResource(
+    when (unit) {
+        StreakUnit.Day -> R.string.habits_rate_window_day
+        StreakUnit.Occurrence -> R.string.habits_rate_window_occurrence
+        StreakUnit.Week -> R.string.habits_rate_window_week
+        StreakUnit.Fortnight -> R.string.habits_rate_window_fortnight
+        StreakUnit.Month -> R.string.habits_rate_window_month
+    },
+)
+
+/** "sáb, 28/11". */
+@Composable
+internal fun dueText(day: LocalDate): String = "${weekdayShort(day.dayOfWeek).lowercase()}, ${Formats.shortDate(day)}"
+
+/** A name without accents nor case, for searching ("agua" finds "Beber água"). */
+internal fun searchable(text: String): String =
+    Normalizer.normalize(text, Normalizer.Form.NFD).replace(DIACRITICS, "").lowercase().trim()
+
+private val DIACRITICS = Regex("\\p{Mn}+")
 
 @Composable
 @ReadOnlyComposable
@@ -260,6 +422,8 @@ internal fun habitsErrorText(error: AppError): String = when ((error as? AppErro
     FREQUENCY_DATE_TAKEN -> stringResource(R.string.habits_error_frequency_date_taken)
     "habits.pause_overlap" -> stringResource(R.string.habits_error_pause_overlap)
     INVALID_MEASURE -> stringResource(R.string.habits_error_invalid_measure)
+    TIMES_EXCEED_PERIOD -> stringResource(R.string.habits_error_times_exceed_period)
+    PREFERRED_DAY_MISMATCH -> stringResource(R.string.habits_error_preferred_day_mismatch)
     else -> errorText(error)
 }
 
@@ -285,3 +449,5 @@ internal fun AppError.isFieldError(): Boolean =
 private const val FREQUENCY_LOCKED = "habits.frequency_locked"
 private const val FREQUENCY_DATE_TAKEN = "habits.frequency_date_taken"
 private const val INVALID_MEASURE = "habits.invalid_measure"
+private const val TIMES_EXCEED_PERIOD = "habits.times_exceed_period"
+private const val PREFERRED_DAY_MISMATCH = "habits.preferred_day_mismatch"
