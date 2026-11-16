@@ -27,7 +27,7 @@ class OnboardingViewModelsTest {
         vm.test()
         assertNull(vm.state.value.found)
 
-        server.answer = { ServerCheck.Found("https://$it", "0.1.0", 84) }
+        server.answer = { ServerCheck.Found("https://$it", "0.2.0", 84) }
         vm.onAddressChange("prumo.minhacasa.net")
         assertNull("typing again clears the result", vm.state.value.check)
         vm.test()

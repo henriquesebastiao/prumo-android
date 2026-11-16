@@ -2,31 +2,31 @@
   "items": [
     {
       "id": "finance",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "enabled": true,
       "position": 0
     },
     {
       "id": "garage",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "enabled": true,
       "position": 1
     },
     {
       "id": "reading",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "enabled": true,
       "position": 2
     },
     {
       "id": "studies",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "enabled": true,
       "position": 3
     },
     {
       "id": "habits",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "enabled": true,
       "position": 4
     }

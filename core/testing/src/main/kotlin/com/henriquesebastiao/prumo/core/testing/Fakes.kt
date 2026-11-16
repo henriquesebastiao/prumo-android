@@ -82,9 +82,9 @@ class FakeAccountRepository(
     /** Makes every call fail with this error, as a server that went away. */
     var failure: AppError? = null
     var modules = listOf(
-        InstalledModule("finance", "0.1.0", true, 0),
-        InstalledModule("garage", "0.1.0", true, 1),
-        InstalledModule("reading", "0.1.0", true, 2),
+        InstalledModule("finance", "0.2.0", true, 0),
+        InstalledModule("garage", "0.2.0", true, 1),
+        InstalledModule("reading", "0.2.0", true, 2),
     )
     var sessions = listOf(
         DeviceSession("1", SessionClient.App, "Pixel 9", true, Instant.EPOCH, Instant.MAX),
@@ -161,7 +161,7 @@ class FakeDataExportRepository(var result: ExportResult = ExportResult.Saved) : 
 
 class FakeServerRepository(
     var answer: (String) -> ServerCheck = {
-        ServerCheck.Found("http://$it", "0.1.0", 42)
+        ServerCheck.Found("http://$it", "0.2.0", 42)
     },
 ) : ServerRepository {
     val checked = mutableListOf<String>()

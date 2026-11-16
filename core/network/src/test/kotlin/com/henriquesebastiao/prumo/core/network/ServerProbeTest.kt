@@ -47,9 +47,9 @@ class ServerProbeTest {
     @Test
     fun aServerWithoutItsDatabaseIsTold() = runTest {
         server.enqueue(
-            response(503, """{"service":"prumo","status":"degraded","database":"unavailable","version":"0.1.0"}"""),
+            response(503, """{"service":"prumo","status":"degraded","database":"unavailable","version":"0.2.0"}"""),
         )
-        assertEquals(ServerCheck.DatabaseDown(baseUrl, "0.1.0"), probe.check(baseUrl))
+        assertEquals(ServerCheck.DatabaseDown(baseUrl, "0.2.0"), probe.check(baseUrl))
     }
 
     @Test
